@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1978551D720192008E46AB /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE1978541D720192008E46AB /* Sulcus.framework */; };
 		DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */; };
 		DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */; };
 		DEDE0DB11D7172E900965CFD /* LexisDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = DEDE0DA31D7172E900965CFD /* LexisDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE1978541D720192008E46AB /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
 		DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LexisDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDE0DA31D7172E900965CFD /* LexisDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LexisDatabase.h; sourceTree = "<group>"; };
 		DEDE0DA41D7172E900965CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE1978551D720192008E46AB /* Sulcus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				DEDE0DC11D717ABF00965CFD /* LatinDictionary.txt */,
+				DE1978541D720192008E46AB /* Sulcus.framework */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -354,6 +358,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LexisDatabase/Resources",
+				);
 				INFOPLIST_FILE = LexisDatabase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -375,6 +383,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LexisDatabase/Resources",
+				);
 				INFOPLIST_FILE = LexisDatabase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

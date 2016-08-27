@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Sulcus
 
 //The Lexis Engine is reponsible for reading through the Dictionary text file
 //And extracting meaningful information from it, for the purpose of
@@ -51,7 +52,19 @@ extension LexisEngine
         guard let url = Bundle.main.url(forResource: resourceName, withExtension: "txt")
         else
         {
+            LOG.error("Failed to load resource \(resourceName)")
             return nil
         }
+        
+        do
+        {
+            return try String(contentsOf: url)
+        }
+        catch
+        {
+            LOG.error("Failed to load String from URL: \(url) : \(error)")
+        }
+        
+        return nil
     }
 }
