@@ -12,6 +12,7 @@
 		DE4808251D7208DC002CBF5D /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; };
 		DE4808271D720938002CBF5D /* Sulcus.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE48082B1D720B51002CBF5D /* LatinDictionary.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEDE0DC11D717ABF00965CFD /* LatinDictionary.txt */; };
+		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */; };
 		DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */; };
 		DEDE0DB11D7172E900965CFD /* LexisDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = DEDE0DA31D7172E900965CFD /* LexisDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		DE1978561D720269008E46AB /* LexisEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisEngineTests.swift; sourceTree = "<group>"; };
 		DE4808231D7208DC002CBF5D /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
+		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LexisDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDE0DA31D7172E900965CFD /* LexisDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LexisDatabase.h; sourceTree = "<group>"; };
 		DEDE0DA41D7172E900965CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE652D491D723C7400F1B52A /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				DE652D4A1D723C8B00F1B52A /* Strings+.swift */,
+			);
+			name = Text;
+			sourceTree = "<group>";
+		};
 		DE8681A21D72052700D9CE74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +119,7 @@
 		DEDE0DA21D7172E900965CFD /* LexisDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				DE652D491D723C7400F1B52A /* Text */,
 				DEDE0DC01D717A9F00965CFD /* Resources */,
 				DEDE0DA31D7172E900965CFD /* LexisDatabase.h */,
 				DEDE0DA41D7172E900965CFD /* Info.plist */,
@@ -247,6 +258,7 @@
 				DEDE0DBD1D71757500965CFD /* LexisDatabase.swift in Sources */,
 				DEDE0DC41D718D8F00965CFD /* LexisEngine.swift in Sources */,
 				DEDE0DBF1D71758B00965CFD /* LexisWord.swift in Sources */,
+				DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

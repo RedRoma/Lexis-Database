@@ -30,6 +30,13 @@ class LexisEngineTests: XCTestCase
         let text = LexisEngine.instance.readTextFile()
         XCTAssertNotNil(text)
         XCTAssertFalse(text!.isEmpty)
+        
+        text!.forEachLine() { line in
+            
+            let wordCode = (line.text =~ LexisEngine.Regex.dictionaryCode)
+            print("Line #\(line.number), Code: \(wordCode.first!)")
+
+        }
     }
     
 }

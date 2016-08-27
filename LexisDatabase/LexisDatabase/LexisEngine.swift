@@ -9,9 +9,11 @@
 import Foundation
 import Sulcus
 
-//The Lexis Engine is reponsible for reading through the Dictionary text file
-//And extracting meaningful information from it, for the purpose of
-//Storing representing in a LexisWord data structure
+/**
+     The Lexis Engine is reponsible for reading through the Dictionary text file
+     And extracting meaningful information from it, for the purpose of
+     Storing representing in a LexisWord data structure
+ */
 public class LexisEngine
 {
     
@@ -26,14 +28,14 @@ public class LexisEngine
     
 }
 
-private extension LexisEngine
+extension LexisEngine
 {
     
     struct Regex
     {
         
         static let wordType = "(TRANS|V|N|ADJ|ADV|CONJ)"
-        static let dictionaryCode = "\\[(\\w+)\\]"
+        static let dictionaryCode = "(?<=\\[)([A-Z]{5})(?=\\])"
         static let definitionPhrase = "(?<=:: )(.*)"
     }
     
@@ -69,5 +71,28 @@ extension LexisEngine
         
         return nil
     }
+
+}
+
+//MARK: Regex syntax
+infix operator =~
+
+func =~ (string: String, pattern: String) -> [String]
+{
+    let regex: NSRegularExpression
     
+    do
+    {
+        regex = try NSRegularExpression(pattern: pattern, options: [])
+    }
+    catch
+    {
+        LOG.error("Pattern is not valid regex: \(error)")
+        return []
+    }
+    
+    let nsString = string as NSString
+    let results = regex.matches(in: string, options: [], range: NSMakeRange(0, nsString.length))
+    
+    return results.map() { return nsString.substring(with: $0.range) }
 }
