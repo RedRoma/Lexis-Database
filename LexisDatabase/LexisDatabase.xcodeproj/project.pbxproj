@@ -13,6 +13,7 @@
 		DEDE0DBD1D71757500965CFD /* LexisDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DBC1D71757500965CFD /* LexisDatabase.swift */; };
 		DEDE0DBF1D71758B00965CFD /* LexisWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DBE1D71758B00965CFD /* LexisWord.swift */; };
 		DEDE0DC21D717ABF00965CFD /* LatinDictionary.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEDE0DC11D717ABF00965CFD /* LatinDictionary.txt */; };
+		DEDE0DC41D718D8F00965CFD /* LexisEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DC31D718D8F00965CFD /* LexisEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		DEDE0DBC1D71757500965CFD /* LexisDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisDatabase.swift; sourceTree = "<group>"; };
 		DEDE0DBE1D71758B00965CFD /* LexisWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisWord.swift; sourceTree = "<group>"; };
 		DEDE0DC11D717ABF00965CFD /* LatinDictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LatinDictionary.txt; sourceTree = "<group>"; };
+		DEDE0DC31D718D8F00965CFD /* LexisEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				DEDE0DA41D7172E900965CFD /* Info.plist */,
 				DEDE0DBC1D71757500965CFD /* LexisDatabase.swift */,
 				DEDE0DBE1D71758B00965CFD /* LexisWord.swift */,
+				DEDE0DC31D718D8F00965CFD /* LexisEngine.swift */,
 			);
 			path = LexisDatabase;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEDE0DBD1D71757500965CFD /* LexisDatabase.swift in Sources */,
+				DEDE0DC41D718D8F00965CFD /* LexisEngine.swift in Sources */,
 				DEDE0DBF1D71758B00965CFD /* LexisWord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
