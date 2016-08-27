@@ -15,7 +15,7 @@ import Sulcus
 public class LexisEngine
 {
     
-    public let instance = LexisEngine()
+    public static let instance = LexisEngine()
     
     private init()
     {
@@ -47,9 +47,11 @@ extension LexisEngine
     func readTextFile() -> String?
     {
         
+        let bundle = Bundle(for: LexisEngine.self)
+        
         let resourceName = "LatinDictionary"
         
-        guard let url = Bundle.main.url(forResource: resourceName, withExtension: "txt")
+        guard let url = bundle.url(forResource: resourceName, withExtension: "txt")
         else
         {
             LOG.error("Failed to load resource \(resourceName)")
@@ -67,4 +69,5 @@ extension LexisEngine
         
         return nil
     }
+    
 }

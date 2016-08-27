@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "ECCB8EE6AE2BDB70BBD5500E1F381C6ACBBE5C34",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "ECCB8EE6AE2BDB70BBD5500E1F381C6ACBBE5C34" : 9223372036854775807,
+    "727464C5DEAA962D1C46D2A8D89A7189891A8E08" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CAB5D221-2113-47AB-9655-035D1DAD2712",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "ECCB8EE6AE2BDB70BBD5500E1F381C6ACBBE5C34" : "Lexis-Database\/",
+    "727464C5DEAA962D1C46D2A8D89A7189891A8E08" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LexisCommandLine",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LexisCommandLine\/LexisCommandLine.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RedRoma\/Lexis.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "727464C5DEAA962D1C46D2A8D89A7189891A8E08"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RedRoma\/Lexis-Database.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ECCB8EE6AE2BDB70BBD5500E1F381C6ACBBE5C34"
+    }
+  ]
+}
