@@ -8,33 +8,52 @@
 
 import Foundation
 
-enum WordType {
-    case verb
-    case noun
-    case adjective
-    case adverb
-    case preposition
-    case personalPronoun
+enum Conjugation {
+    case First
+    case Second
+    case Third
+    case Fourth
 }
 
 enum VerbType {
-    case transitive
-    case intransitive
+    case Transitive
+    case Intransitive
+    case Impersonal
+    case Deponent
 }
 
 enum Gender {
-    case male
-    case female
-    case neuter
+    case Male
+    case Female
+    case Neuter
 }
 
-enum Declension {
-    case first, second, third, fourth, fifth
+enum Declension: String {
+    case First = "Nominative"
+    case Second = "Genitive"
+    case Third = "Dative"
+    case Fourth = "Accusative"
+    case Fifth = "Ablative"
+}
+
+enum PronounType: String {
+    case Reflexive
+    case Personal
+}
+
+
+enum WordType {
+    case Verb(Conjugation, VerbType)
+    case Noun(Declension, Gender)
+    case Adjective
+    case Adverb
+    case Preposition(Declension)
+    case PersonalPronoun(Declension, PronounType?)
 }
 
 enum Number {
-    case singular
-    case plural
+    case Singular
+    case Plural
 }
 
 struct Definition {
@@ -47,7 +66,7 @@ struct LexisWord {
 
     let primary: String = ""
     let alternativeWords: [String] = []
-    let wordType: WordType = .noun
+    let wordType: WordType
     let definitions: [Definition] = []
     
     
