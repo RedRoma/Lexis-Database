@@ -14,7 +14,7 @@ import Sulcus
      And extracting meaningful information from it, for the purpose of
      Storing representing in a LexisWord data structure
  */
-public class LexisEngine
+internal class LexisEngine
 {
     
     public static let instance = LexisEngine()
@@ -24,6 +24,10 @@ public class LexisEngine
         
     }
     
+    private func initialize()
+    {
+        
+    }
     
     
 }
@@ -33,10 +37,35 @@ extension LexisEngine
     
     struct Regex
     {
+        /**
+            Matches the actual Latin Words.
+            For example, Veritate.
+        */
+        static let wordList = "(?<=#)(.*?)(?=\\s{2,})"
         
-        static let wordType = "(TRANS|V|N|ADJ|ADV|CONJ)"
+        /**
+            Searches for the word's modifiers that tell what the function
+            of the word is. For example, Verb, Noun, etc.
+            It also finds secondary modifiers, like gender, and verb transitivity.
+        */
+        static let wordModifiers = "(?<= )(INTRANS|TRANS|ADJ|ADV|CONJ|PREP|ACC|INTERJ|V|N|F|M|PRON PERS)(?= )"
+        
+        /**
+            Matches the dictionary code. This code includes information on the word's origin and use.
+        */
         static let dictionaryCode = "(?<=\\[)([A-Z]{5})(?=\\])"
-        static let definitionPhrase = "(?<=:: )(.*)"
+        
+        /**
+            Matches the English portion of the word. This phrase includes the entire string term,
+            which may include multiple definitions and terms.
+        */
+        static let definitionTerms = "(?<=:: )(.*)"
+        
+        /**
+            Matches the Verb or Noun's declension. It includes the entire english phrase,
+            for example, "1st", "2nd", etc.
+        */
+        static let declension = "(?<=[NV] \\()([1-4][a-z]{2})(?=\\))"
     }
     
 }
