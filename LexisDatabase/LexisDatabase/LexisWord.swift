@@ -8,16 +8,36 @@
 
 import Foundation
 
-enum LexisWordType {
+enum WordType {
     case verb
     case noun
     case adjective
     case adverb
     case preposition
+    case personalPronoun
 }
 
+enum VerbType {
+    case transitive
+    case intransitive
+}
 
-struct LexisDefinition {
+enum Gender {
+    case male
+    case female
+    case neuter
+}
+
+enum Declension {
+    case first, second, third, fourth, fifth
+}
+
+enum Number {
+    case singular
+    case plural
+}
+
+struct Definition {
     let terms: [String] = []
 }
 
@@ -27,8 +47,8 @@ struct LexisWord {
 
     let primary: String = ""
     let alternativeWords: [String] = []
-    let wordType: LexisWordType = .noun
-    let definitions: [LexisDefinition] = []
+    let wordType: WordType = .noun
+    let definitions: [Definition] = []
     
     
 }

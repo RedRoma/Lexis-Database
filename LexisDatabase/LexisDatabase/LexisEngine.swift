@@ -64,6 +64,8 @@ extension LexisEngine
         /**
             Matches the Verb or Noun's declension. It includes the entire english phrase,
             for example, "1st", "2nd", etc.
+            
+            This also matches for a Verb's Conjugation.
         */
         static let declension = "(?<=[NV] \\()([1-4][a-z]{2})(?=\\))"
     }
