@@ -70,7 +70,18 @@ struct LexisWord
         For instance, a noun will have its nominative and genitive forms.
     */
     let forms: [String]
+    
+    /**
+        Determines a word's type: `[Noun, Verb, Adjective, etc]`.
+    */
     let wordType: WordType
+    
+    /**
+        This represent a Word's separate definitions. Although each `Definition` object may have different words,
+        they all essentially represent the same meaning.
+     
+        Whereas a different `Definition` object represents a different meaning.
+    */
     let definitions: [Definition] = []
     
 }
