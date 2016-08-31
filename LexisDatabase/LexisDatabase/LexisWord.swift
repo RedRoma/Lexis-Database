@@ -31,6 +31,7 @@ enum Gender
     case Male
     case Female
     case Neuter
+    case Unknown
 }
 
 enum Declension

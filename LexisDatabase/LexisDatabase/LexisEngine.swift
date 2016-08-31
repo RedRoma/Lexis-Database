@@ -140,60 +140,45 @@ extension LexisEngine
         guard line.notEmpty else { return nil }
         
         let wordModifiers = line =~ Regex.wordModifiers
-        let conjugationOrDeclension = line =~ Regex.declension
-        
-        
-        //Verbs
-        if wordModifiers.contains(Keywords.verb),
-           let conjugationText = conjugationOrDeclension.first
-        {
-            let conjugation = getConjugation(from: conjugationText)
-            
-            if wordModifiers.contains(Keywords.intransitive)
-            {
-                return WordType.Verb(conjugation, .Intransitive)
-            }
-            else if wordModifiers.contains(Keywords.transitive)
-            {
-                return WordType.Verb(conjugation, .Transitive)
-            }
-            else if wordModifiers.contains(Keywords.deponent)
-            {
-                return WordType.Verb(conjugation, .Deponent)
-            }
-            else if wordModifiers.contains(Keywords.impersonal)
-            {
-                return WordType.Verb(conjugation, .Impersonal)
-            }
-            else
-            {
-                LOG.warn("Undetected Verb Type: \(wordModifiers)")
-            }
-        }
-        
-        
-        
-        //Adjectives
-        if wordModifiers.contains(Keywords.adjective)
+        func warnIfMoreThanOneModifier()
         {
             if wordModifiers.count > 1
             {
                 LOG.warn("Adjective has more than one modifier: \(line)")
             }
-            
+        }
+        
+        
+        let conjugationOrDeclension = line =~ Regex.declension
+        
+        //Verbs
+        if isVerb(wordModifiers: wordModifiers)
+        {
+            let wordType = getVerbType(fromLine: line, withModifiers: wordModifiers)
+            warnIfVerbIsUnconjugated(wordType, line: line)
+            return wordType
+        }
+        
+        
+        //Adjectives
+        if isAdjective(wordModifiers: wordModifiers)
+        {
+            warnIfMoreThanOneModifier()
             return WordType.Adjective
         }
         
         //Adverbs
-        if wordModifiers.contains(Keywords.adverb)
+        if isAdverb(wordModifiers: wordModifiers)
         {
+            warnIfMoreThanOneModifier()
             return WordType.Adverb
         }
         
         //Prepositions
-        if wordModifiers.contains(Keywords.preposition), let declensionText = wordModifiers.second
+        if isPreposition(wordModifiers: wordModifiers),
+           let declensionText = wordModifiers.second
         {
-            let declension = getDeclension(fromPreposition: declensionText)
+            let declension = getDeclensionForNoun(from: declensionText)
             return WordType.Preposition(declension)
         }
         
@@ -204,26 +189,11 @@ extension LexisEngine
         }
         
         //Lastly, nouns
-        if wordModifiers.contains(Keywords.noun), let declensionText = conjugationOrDeclension.first
+        if isNoun(wordModifiers: wordModifiers)
         {
-            let declension = getDeclension(from: declensionText)
-            
-            if wordModifiers.contains(Keywords.masculine)
-            {
-                return WordType.Noun(declension, .Male)
-            }
-            else if wordModifiers.contains(Keywords.feminine)
-            {
-                return WordType.Noun(declension, .Female)
-            }
-            else if wordModifiers.contains(Keywords.neuter)
-            {
-                return WordType.Noun(declension, .Neuter)
-            }
-            else
-            {
-                LOG.warn("Noun is missing gender: \(line)")
-            }
+            let nounType = getNounType(fromLine: line, withModifiers: wordModifiers)
+            warnIfNounIsUndeclined(nounType, line: line)
+            return nounType
         }
         
         print("Could not extract word: \(line)")
@@ -231,8 +201,95 @@ extension LexisEngine
         return nil
     }
     
-    func getConjugation(from text: String) -> Conjugation
+    func warnIfNounIsUndeclined(_ wordType: WordType, line: String)
     {
+        if case let WordType.Noun(declension, gender) = wordType
+        {
+            if declension == .Undeclined
+            {
+                LOG.warn("Noun is Undeclined: \(line)")
+            }
+        }
+    }
+    
+    func warnIfVerbIsUnconjugated(_ wordType: WordType, line: String)
+    {
+        if case let WordType.Verb(conjugation, verbType) = wordType
+        {
+            if conjugation == .Unconjugated
+            {
+                LOG.warn("Verb is Unconjugated: \(line)")
+            }
+        }
+    }
+    
+    
+}
+
+
+//MARK: Word Type Detection
+extension LexisEngine
+{
+    
+    func getVerbType(fromLine line: String, withModifiers modifiers: [String]) -> WordType
+    {
+        let conjugationResults = line =~ Regex.declension
+        let conjugationText = conjugationResults.first
+        let conjugation = getConjugation(from: conjugationText)
+        
+        if modifiers.contains(Keywords.intransitive)
+        {
+            return WordType.Verb(conjugation, .Intransitive)
+        }
+        else if modifiers.contains(Keywords.transitive)
+        {
+            return WordType.Verb(conjugation, .Transitive)
+        }
+        else if modifiers.contains(Keywords.deponent)
+        {
+            return WordType.Verb(conjugation, .Deponent)
+        }
+        else if modifiers.contains(Keywords.impersonal)
+        {
+            return WordType.Verb(conjugation, .Impersonal)
+        }
+        else
+        {
+            LOG.warn("Undetected Verb Type: \(modifiers)")
+            return WordType.Verb(conjugation, .Uknown)
+        }
+    }
+    
+    func getNounType(fromLine line: String, withModifiers modifiers: [String]) -> WordType
+    {
+        let declensionResults = line =~ Regex.declension
+        let declensionText = declensionResults.first
+        let declension = getDeclensionForNoun(from: declensionText)
+        
+        if modifiers.contains(Keywords.masculine)
+        {
+            return WordType.Noun(declension, .Male)
+        }
+        else if modifiers.contains(Keywords.feminine)
+        {
+            return WordType.Noun(declension, .Female)
+        }
+        else if modifiers.contains(Keywords.neuter)
+        {
+            return WordType.Noun(declension, .Neuter)
+        }
+        else
+        {
+            LOG.warn("Noun is missing gender: \(line)")
+            return WordType.Noun(declension, .Unknown)
+        }
+    }
+    
+    func getConjugation(from text: String?) -> Conjugation
+    {
+        
+        guard let text = text else { return Conjugation.Unconjugated }
+        
         switch text
         {
             case "1st" : return Conjugation.First
@@ -243,9 +300,11 @@ extension LexisEngine
         }
     }
     
-    func getDeclension(from text: String) -> Declension
+    func getDeclensionForNoun(from declensionText: String?) -> Declension
     {
-        switch text
+        guard let declensionText = declensionText else { return .Undeclined }
+        
+        switch declensionText
         {
             case "1st" : return .Nominative
             case "2nd" : return .Genitive
@@ -258,9 +317,9 @@ extension LexisEngine
         }
     }
     
-    func getDeclension(fromPreposition text: String) -> Declension
+    func getDeclensionForPreposition(from preposition: String) -> Declension
     {
-        switch text
+        switch preposition
         {
             case "ACC" : return .Accusative
             case "GEN" : return .Genitive
@@ -269,6 +328,32 @@ extension LexisEngine
         }
     }
 
+    
+    
+    func isVerb(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.verb)
+    }
+    
+    func isNoun(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.noun)
+    }
+    
+    func isPreposition(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.preposition)
+    }
+    
+    func isAdjective(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.adjective)
+    }
+    
+    func isAdverb(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.adverb)
+    }
 }
 
 
