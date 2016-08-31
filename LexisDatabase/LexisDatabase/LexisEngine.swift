@@ -142,49 +142,31 @@ extension LexisEngine
         let wordModifiers = line =~ Regex.wordModifiers
         let conjugationOrDeclension = line =~ Regex.declension
         
-        let verbKeyword = "V"
-        let transitiveKeyword = "TRANS"
-        let intransitiveKeyword = "INTRANS"
-        let deponentKeyword = "DEP"
-        let impersonalKeyword = "IMPERS"
-        
-        let nounKeyword = "N"
-        let adjectiveKeyword = "ADJ"
-        let feminineKeyword = "F"
-        let masculineKeyword = "M"
-        let neuterKeyword = "N"
-        
-        let prepositionKeyword = "PREP"
-        let accusativeKeyword = "ACC"
-        
-        let interjectionKeyword = "INTERJ"
-        
-        
         
         //Verbs
-        if wordModifiers.contains(verbKeyword),
-           let conjugationText = conjugationOrDeclension.first,
-           let conjugation = getConjugation(from: conjugationText)
+        if wordModifiers.contains(Keywords.verb),
+           let conjugationText = conjugationOrDeclension.first
         {
+            let conjugation = getConjugation(from: conjugationText)
             
-            if wordModifiers.contains(intransitiveKeyword)
+            if wordModifiers.contains(Keywords.intransitive)
             {
                 return WordType.Verb(conjugation, .Intransitive)
             }
-            else if wordModifiers.contains(transitiveKeyword)
+            else if wordModifiers.contains(Keywords.transitive)
             {
                 return WordType.Verb(conjugation, .Transitive)
             }
-            else if wordModifiers.contains(deponentKeyword)
+            else if wordModifiers.contains(Keywords.deponent)
             {
                 return WordType.Verb(conjugation, .Deponent)
             }
-            else if wordModifiers.contains(impersonalKeyword)
+            else if wordModifiers.contains(Keywords.impersonal)
             {
                 return WordType.Verb(conjugation, .Impersonal)
             }
             else
-            {
+            {   
                 LOG.warn("Undetected Verb Type: \(wordModifiers)")
             }
         }
@@ -192,7 +174,7 @@ extension LexisEngine
         
         
         //Adjectives
-        if wordModifiers.contains(adjectiveKeyword)
+        if wordModifiers.contains(Keywords.adjective)
         {
             if wordModifiers.count > 1
             {
@@ -202,35 +184,39 @@ extension LexisEngine
             return WordType.Adjective
         }
         
-        //Prepositions
-        if wordModifiers.contains(prepositionKeyword),
-           let declensionText = wordModifiers.second,
-           let declension = getDeclension(fromPreposition: declensionText)
+        //Adverbs
+        if wordModifiers.contains(Keywords.adverb)
         {
+            return WordType.Adverb
+        }
+        
+        //Prepositions
+        if wordModifiers.contains(Keywords.preposition), let declensionText = wordModifiers.second
+        {
+            let declension = getDeclension(fromPreposition: declensionText)
             return WordType.Preposition(declension)
         }
         
         //Interjections
-        if wordModifiers.contains(interjectionKeyword)
+        if wordModifiers.contains(Keywords.interjection)
         {
             return WordType.Interjection
         }
         
         //Lastly, nouns
-        if wordModifiers.contains(nounKeyword),
-           let declensionText = conjugationOrDeclension.first,
-           let declension = getDeclension(from: declensionText)
+        if wordModifiers.contains(Keywords.noun), let declensionText = conjugationOrDeclension.first
         {
+            let declension = getDeclension(from: declensionText)
             
-            if wordModifiers.contains(masculineKeyword)
+            if wordModifiers.contains(Keywords.masculine)
             {
                 return WordType.Noun(declension, .Male)
             }
-            else if wordModifiers.contains(feminineKeyword)
+            else if wordModifiers.contains(Keywords.feminine)
             {
                 return WordType.Noun(declension, .Female)
             }
-            else if wordModifiers.contains(neuterKeyword)
+            else if wordModifiers.contains(Keywords.neuter)
             {
                 return WordType.Noun(declension, .Neuter)
             }
@@ -240,11 +226,12 @@ extension LexisEngine
             }
         }
         
+        print("Could not extract word: \(line)")
         
         return nil
     }
     
-    func getConjugation(from text: String) -> Conjugation?
+    func getConjugation(from text: String) -> Conjugation
     {
         switch text
         {
@@ -252,11 +239,11 @@ extension LexisEngine
             case "2nd" : return Conjugation.Second
             case "3rd" : return Conjugation.Third
             case "4th" : return Conjugation.Fourth
-            default:     return nil
+            default:     return Conjugation.Unconjugated
         }
     }
     
-    func getDeclension(from text: String) -> Declension?
+    func getDeclension(from text: String) -> Declension
     {
         switch text
         {
@@ -267,19 +254,43 @@ extension LexisEngine
             case "5th" : return .Ablative
             case "6th" : return .Vocative
             case "7th" : return .Locative
-            default :    return nil
+            default :    return .Undeclined
         }
     }
     
-    func getDeclension(fromPreposition text: String) -> Declension?
+    func getDeclension(fromPreposition text: String) -> Declension
     {
         switch text
         {
             case "ACC" : return .Accusative
             case "GEN" : return .Genitive
             case "ABL" : return .Ablative
-            default : return nil
+            default :    return .Undeclined
         }
     }
 
+}
+
+
+//MARK: Dictionary keywords
+private class Keywords
+{
+    static let verb = "V"
+    static let transitive = "TRANS"
+    static let intransitive = "INTRANS"
+    static let deponent = "DEP"
+    static let impersonal = "IMPERS"
+    
+    static let adverb = "ADV"
+    
+    static let noun = "N"
+    static let adjective = "ADJ"
+    static let feminine = "F"
+    static let masculine = "M"
+    static let neuter = "N"
+    
+    static let preposition = "PREP"
+    static let accusative = "ACC"
+    
+    static let interjection = "INTERJ"
 }
