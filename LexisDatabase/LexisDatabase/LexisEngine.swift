@@ -166,7 +166,7 @@ extension LexisEngine
                 return WordType.Verb(conjugation, .Impersonal)
             }
             else
-            {   
+            {
                 LOG.warn("Undetected Verb Type: \(wordModifiers)")
             }
         }
