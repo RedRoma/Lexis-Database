@@ -51,6 +51,7 @@ enum WordType {
     case Adverb
     case Preposition(Declension)
     case PersonalPronoun(Declension, PronounType?)
+    case Interjection
 }
 
 enum Number {
