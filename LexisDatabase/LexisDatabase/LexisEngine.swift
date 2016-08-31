@@ -19,61 +19,59 @@ internal class LexisEngine
     
     public static let instance = LexisEngine()
     
+    private var isInitialized = false
+    
     private init()
     {
         
     }
     
-    private func initialize()
+    func initialize()
     {
+        guard !isInitialized else { return }
+    
+        let allWords = readAllWords()
         
+        saveInTheDatabase(words: allWords)
     }
     
-    
-}
-
-extension LexisEngine
-{
-    
-    struct Regex
+    private func readAllWords() -> [LexisWord]
     {
-        /**
-            Matches the actual Latin Words.
-            For example, Veritate.
-        */
-        static let wordList = "(?<=#)(.*?)(?=\\s{2,})"
         
-        /**
-            Searches for the word's modifiers that tell what the function
-            of the word is. For example, Verb, Noun, etc.
-            It also finds secondary modifiers, like gender, and verb transitivity.
-        */
-        static let wordModifiers = "(?<= )(INTRANS|TRANS|ADJ|ADV|CONJ|PREP|ACC|INTERJ|V|N|F|M|PRON PERS|REFLEX|NOM|ACC|ABL|DAT|GEN|DEP)(?= )"
+        //Read the text file
+        //Iterate line by line
+        //Parse out the words list
+        //Parse out the word modifiers
+        //Parse out the dictionary code
+        //Parse out the dictionary Terms
+        //For each line, assemnble a LexisWord object from the parsed out words
+        guard let file = readTextFile()
+        else
+        {
+            LOG.error("Could not load Latin Dictionary text file")
+            return []
+        }
         
-        /**
-            Matches the dictionary code. This code includes information on the word's origin and use.
-        */
-        static let dictionaryCode = "(?<=\\[)([A-Z]{5})(?=\\])"
+        var words: [LexisWord] = []
         
-        /**
-            Matches the English portion of the word. This phrase includes the entire string term,
-            which may include multiple definitions and terms.
-        */
-        static let definitionTerms = "(?<=:: )(.*)"
+        let saveToArray: (LexisWord) -> () = { word in
+            words.append(word)
+        }
         
-        /**
-            Matches the Verb or Noun's declension. It includes the entire english phrase,
-            for example, "1st", "2nd", etc.
-            
-            This also matches for a Verb's Conjugation.
-        */
-        static let declension = "(?<=[NV] \\()([1-4][a-z]{2})(?=\\))"
+        file.processEachLine(mapper: self.mapLineToWord, processor: saveToArray)
+        
+        return words
+    }
+    
+    private func saveInTheDatabase(words: [LexisWord])
+    {
+        //Save this into Realm directly, or use a protocol to abstract that part away
     }
     
 }
 
 
-//MARK: Loading the text file
+//MARK: Text Processing
 extension LexisEngine
 {
     
@@ -102,28 +100,34 @@ extension LexisEngine
         
         return nil
     }
-
-}
-
-//MARK: Regex syntax
-infix operator =~
-
-func =~ (string: String, pattern: String) -> [String]
-{
-    let regex: NSRegularExpression
     
-    do
+    
+    func mapLineToWord(line: String) -> LexisWord?
     {
-        regex = try NSRegularExpression(pattern: pattern, options: [])
-    }
-    catch
-    {
-        LOG.error("Pattern is not valid regex: \(error)")
-        return []
+        guard line.notEmpty else { return nil }
+        
+        let words = extractWordsFrom(line: line)
+        
+        print(words)
+        
+        return nil
     }
     
-    let nsString = string as NSString
-    let results = regex.matches(in: string, options: [], range: NSMakeRange(0, nsString.length))
-    
-    return results.map() { return nsString.substring(with: $0.range) }
+    func extractWordsFrom(line: String) -> [String]
+    {
+        guard line.notEmpty else { return [] }
+        
+        let matches = line =~ Regex.wordList
+        
+        guard let match = matches.first
+        else
+        {
+            LOG.warn("No Words found in Line: \(line)")
+            return []
+        }
+        
+       return match.components(separatedBy: ", ")
+
+    }
+
 }

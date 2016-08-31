@@ -25,7 +25,7 @@ class LexisEngineTests: XCTestCase
         super.tearDown()
     }
 
-    func testDictionaryCanLoad()
+    func testDictionaryFileCanLoad()
     {
         let text = LexisEngine.instance.readTextFile()
         XCTAssertNotNil(text)
@@ -33,10 +33,15 @@ class LexisEngineTests: XCTestCase
         
         text!.forEachLine() { line in
             
-            let wordCode = (line.text =~ LexisEngine.Regex.dictionaryCode)
+            let wordCode = (line.text =~ Regex.dictionaryCode)
             print("Line #\(line.number), Code: \(wordCode.first!)")
 
         }
+    }
+    
+    func testInitialize()
+    {
+        LexisEngine.instance.initialize()
     }
     
 }

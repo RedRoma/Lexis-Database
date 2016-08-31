@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1978561D720269008E46AB /* LexisEngineTests.swift */; };
+		DE405ACF1D76494100C16B46 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE405ACE1D76494100C16B46 /* Regex.swift */; };
 		DE4808241D7208DC002CBF5D /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; };
 		DE4808251D7208DC002CBF5D /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; };
 		DE4808271D720938002CBF5D /* Sulcus.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		DE1978561D720269008E46AB /* LexisEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisEngineTests.swift; sourceTree = "<group>"; };
+		DE405ACE1D76494100C16B46 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		DE4808231D7208DC002CBF5D /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LexisDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				DE652D4A1D723C8B00F1B52A /* Strings+.swift */,
+				DE405ACE1D76494100C16B46 /* Regex.swift */,
 			);
 			name = Text;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEDE0DBD1D71757500965CFD /* LexisDatabase.swift in Sources */,
+				DE405ACF1D76494100C16B46 /* Regex.swift in Sources */,
 				DEDE0DC41D718D8F00965CFD /* LexisEngine.swift in Sources */,
 				DEDE0DBF1D71758B00965CFD /* LexisWord.swift in Sources */,
 				DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */,

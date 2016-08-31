@@ -11,7 +11,12 @@ import Foundation
 extension String
 {
     
+    var notEmpty: Bool {
+        return !isEmpty
+    }
+    
     typealias Expression = ((number: Int, text: String)) -> ()
+    
     
     func forEachLine(_ expression: Expression)
     {
@@ -20,6 +25,21 @@ extension String
         self.enumerateLines() { string, someBoolean in
             lineNumber += 1
             expression((number: lineNumber , text: string))
+        }
+    }
+    
+    /**
+        This functional approach runs
+     */
+    func processEachLine<T>(mapper: @escaping (String) -> (T?), processor: @escaping (T) -> ())
+    {
+        self.enumerateLines() { line, someBoolean in
+            
+            if let object = mapper(line)
+            {
+                processor(object)
+            }
+            
         }
     }
 }

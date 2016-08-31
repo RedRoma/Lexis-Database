@@ -28,12 +28,14 @@ enum Gender {
     case Neuter
 }
 
-enum Declension: String {
-    case First = "Nominative"
-    case Second = "Genitive"
-    case Third = "Dative"
-    case Fourth = "Accusative"
-    case Fifth = "Ablative"
+enum Declension {
+    case Nominative
+    case Genitive
+    case Accusative
+    case Dative
+    case Ablative
+    case Vocative
+    case Locative
 }
 
 enum PronounType: String {
@@ -61,13 +63,14 @@ struct Definition {
 }
 
 //This is the primary Datastructure representing a Latin word in Lexis.
-struct LexisWord {
-    
-
-    let primary: String = ""
-    let alternativeWords: [String] = []
+struct LexisWord
+{
+    /**
+        A Word's forms represnts the different parts to a Latin vocabulary entry.
+        For instance, a noun will have its nominative and genitive forms.
+    */
+    let forms: [String]
     let wordType: WordType
     let definitions: [Definition] = []
-    
     
 }
