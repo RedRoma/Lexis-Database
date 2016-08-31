@@ -13,6 +13,7 @@ enum Conjugation {
     case Second
     case Third
     case Fourth
+    case Unconjugated
 }
 
 enum VerbType {
@@ -20,6 +21,7 @@ enum VerbType {
     case Intransitive
     case Impersonal
     case Deponent
+    case Uknown
 }
 
 enum Gender {
@@ -36,6 +38,7 @@ enum Declension {
     case Ablative
     case Vocative
     case Locative
+    case Undeclined
 }
 
 enum PronounType: String {
@@ -64,7 +67,7 @@ struct Definition {
 }
 
 //This is the primary Datastructure representing a Latin word in Lexis.
-struct LexisWord
+struct LexisWord: CustomStringConvertible
 {
     /**
         A Word's forms represnts the different parts to a Latin vocabulary entry.
@@ -84,5 +87,10 @@ struct LexisWord
         Whereas a different `Definition` object represents a different meaning.
     */
     let definitions: [Definition] = []
+    
+    public var description: String
+    {
+        return "\(forms) \(wordType) : \(definitions)"
+    }
     
 }
