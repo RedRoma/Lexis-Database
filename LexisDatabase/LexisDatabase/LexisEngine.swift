@@ -147,9 +147,7 @@ extension LexisEngine
                 LOG.warn("Adjective has more than one modifier: \(line)")
             }
         }
-        
-        
-        let conjugationOrDeclension = line =~ Regex.declension
+
         
         //Verbs
         if isVerb(wordModifiers: wordModifiers)
@@ -183,9 +181,15 @@ extension LexisEngine
         }
         
         //Interjections
-        if wordModifiers.contains(Keywords.interjection)
+        if isInterjection(wordModifiers: wordModifiers)
         {
             return WordType.Interjection
+        }
+        
+        //Conjugations
+        if isConjugation(wordModifiers: wordModifiers)
+        {
+            return WordType.Conjugation
         }
         
         //Lastly, nouns
@@ -219,6 +223,11 @@ extension LexisEngine
             if conjugation == .Unconjugated
             {
                 LOG.warn("Verb is Unconjugated: \(line)")
+            }
+            
+            if conjugation == .Irregular
+            {
+                LOG.info("Verb is Irregular: \(line)")
             }
         }
     }
@@ -255,7 +264,7 @@ extension LexisEngine
         }
         else
         {
-            LOG.warn("Undetected Verb Type: \(modifiers)")
+            LOG.warn("Uknown Verb Type: \(line)")
             return WordType.Verb(conjugation, .Uknown)
         }
     }
@@ -296,7 +305,7 @@ extension LexisEngine
             case "2nd" : return Conjugation.Second
             case "3rd" : return Conjugation.Third
             case "4th" : return Conjugation.Fourth
-            default:     return Conjugation.Unconjugated
+            default:     return Conjugation.Irregular
         }
     }
     
@@ -354,6 +363,16 @@ extension LexisEngine
     {
         return wordModifiers.contains(Keywords.adverb)
     }
+    
+    func isConjugation(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.conjugation)
+    }
+    
+    func isInterjection(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.interjection)
+    }
 }
 
 
@@ -378,4 +397,5 @@ private class Keywords
     static let accusative = "ACC"
     
     static let interjection = "INTERJ"
+    static let conjugation = "CONJ"
 }

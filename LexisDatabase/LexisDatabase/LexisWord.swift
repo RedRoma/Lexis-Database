@@ -14,6 +14,7 @@ enum Conjugation
     case Second
     case Third
     case Fourth
+    case Irregular
     case Unconjugated
 }
 
@@ -62,6 +63,8 @@ enum WordType
     case Preposition(Declension)
     case PersonalPronoun(Declension, PronounType?)
     case Interjection
+    case Conjugation
+    case Pronoun
 }
 
 enum Number
