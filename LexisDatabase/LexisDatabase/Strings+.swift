@@ -31,11 +31,13 @@ extension String
     /**
         This functional approach runs
      */
-    func processEachLine<T>(mapper: @escaping (String) -> (T?), processor: @escaping (T) -> ())
+    func processEachLine<T>(mapper: @escaping (String, Int) -> (T?), processor: @escaping (T) -> ())
     {
+        var lineNumber = 0
         self.enumerateLines() { line, someBoolean in
             
-            if let object = mapper(line)
+            lineNumber += 1
+            if let object = mapper(line, lineNumber)
             {
                 processor(object)
             }
