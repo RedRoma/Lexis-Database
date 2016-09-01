@@ -22,7 +22,7 @@ struct Regex
      of the word is. For example, Verb, Noun, etc.
      It also finds secondary modifiers, like gender, and verb transitivity.
      */
-    static let wordModifiers = "(?<= )(INTRANS|TRANS|ADJ|ADV|CONJ|PREP|ACC|INTERJ|V|N|F|M|PRON PERS|REFLEX|NOM|ACC|ABL|DAT|GEN|DEP)(?= )"
+    static let wordModifiers = "(?<= )(INTRANS|TRANS|ADJ|ADV|CONJ|PREP|ACC|INTERJ|V|N|F|M|PRON|PERS|REFLEX|NOM|ACC|ABL|DAT|GEN|DEP|SEMIDEP)(?= )"
     
     /**
      Matches the dictionary code. This code includes information on the word's origin and use.
