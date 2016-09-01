@@ -21,4 +21,23 @@ extension Array
         
         return nil
     }
+    
+}
+
+extension Array where Element: Equatable
+{
+    
+    
+    func containsMultiple(_ elements: Element...) -> Bool
+    {
+        for element in elements
+        {
+            if !self.contains(element)
+            {
+                return false
+            }
+        }
+        
+        return true
+    }
 }
