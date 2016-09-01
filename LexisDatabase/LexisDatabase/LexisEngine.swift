@@ -215,7 +215,7 @@ extension LexisEngine
         //Numbers
         if isNumber(wordModifiers: wordModifiers)
         {
-            return WordType.Number
+            return WordType.Numeral
         }
         
         LOG.warn("Could not extract word: \(line)")
@@ -283,6 +283,10 @@ extension LexisEngine
         else if modifiers.contains(Keywords.impersonal)
         {
             return WordType.Verb(conjugation, .Impersonal)
+        }
+        else if modifiers.contains(Keywords.perfectDefinite)
+        {
+            return WordType.Verb(conjugation, .PerfectDefinite)
         }
         else
         {
@@ -423,6 +427,7 @@ private class Keywords
     static let semiDeponent = "SEMIDEP"
     static let impersonal = "IMPERS"
     static let reflexive = "REFLEX"
+    static let perfectDefinite = "PERFDEF"
     
     static let adverb = "ADV"
     

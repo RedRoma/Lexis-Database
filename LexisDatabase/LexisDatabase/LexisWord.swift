@@ -25,6 +25,7 @@ enum VerbType
     case Impersonal
     case Deponent
     case SemiDeponent
+    case PerfectDefinite
     case Uknown
 }
 
@@ -66,7 +67,7 @@ enum WordType
     case Interjection
     case Conjugation
     case Pronoun
-    case Number
+    case Numeral
 }
 
 enum Number
