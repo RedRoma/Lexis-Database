@@ -1,4 +1,4 @@
-//
+ //
 //  LexisEngine.swift
 //  LexisDatabase
 //
@@ -60,6 +60,7 @@ internal class LexisEngine
         
         file.processEachLine(mapper: self.mapLineToWord, processor: saveToArray)
         
+        LOG.info("Finished compiling a list of \(words.count) words")
         return words
     }
     
@@ -102,15 +103,15 @@ extension LexisEngine
     }
     
     
-    func mapLineToWord(line: String) -> LexisWord?
+    func mapLineToWord(line: String, at lineNumber: Int) -> LexisWord?
     {
         guard line.notEmpty else { return nil }
         
         let forms = extractWords(from: line)
-        guard let wordType = extractWordType(from: line)
+        guard let wordType = extractWordType(from: line, at: lineNumber)
         else
         {
-            LOG.warn("Could not extact word type from: \(line)")
+            LOG.warn("Could not extact word type at line #\(lineNumber)")
             return nil
         }
         
@@ -135,7 +136,7 @@ extension LexisEngine
 
     }
     
-    func extractWordType(from line: String) -> WordType?
+    func extractWordType(from line: String, at lineNumber: Int) -> WordType?
     {
         guard line.notEmpty else { return nil }
         
@@ -192,7 +193,18 @@ extension LexisEngine
             return WordType.Conjugation
         }
         
-        //Lastly, nouns
+        if isPronoun(wordModifiers: wordModifiers)
+        {
+            return WordType.Pronoun
+        }
+        
+        //Personal Pronouns
+        if isPersonalPronoun(wordModifiers: wordModifiers)
+        {
+            return WordType.PersonalPronoun
+        }
+        
+        //Nouns
         if isNoun(wordModifiers: wordModifiers)
         {
             let nounType = getNounType(fromLine: line, withModifiers: wordModifiers)
@@ -200,7 +212,13 @@ extension LexisEngine
             return nounType
         }
         
-        print("Could not extract word: \(line)")
+        //Numbers
+        if isNumber(wordModifiers: wordModifiers)
+        {
+            return WordType.Number
+        }
+        
+        LOG.warn("Could not extract word: \(line)")
         
         return nil
     }
@@ -211,7 +229,7 @@ extension LexisEngine
         {
             if declension == .Undeclined
             {
-                LOG.warn("Noun is Undeclined: \(line)")
+                LOG.info("Noun is Undeclined: \(line)")
             }
         }
     }
@@ -222,12 +240,12 @@ extension LexisEngine
         {
             if conjugation == .Unconjugated
             {
-                LOG.warn("Verb is Unconjugated: \(line)")
+                LOG.info("Verb is Unconjugated: \(line)")
             }
             
             if conjugation == .Irregular
             {
-                LOG.info("Verb is Irregular: \(line)")
+                LOG.warn("Verb is Irregular: \(line)")
             }
         }
     }
@@ -258,13 +276,17 @@ extension LexisEngine
         {
             return WordType.Verb(conjugation, .Deponent)
         }
+        else if modifiers.contains(Keywords.semiDeponent)
+        {
+            return WordType.Verb(conjugation, .SemiDeponent)
+        }
         else if modifiers.contains(Keywords.impersonal)
         {
             return WordType.Verb(conjugation, .Impersonal)
         }
         else
         {
-            LOG.warn("Uknown Verb Type: \(line)")
+            LOG.info("Uknown Verb Type: \(line)")
             return WordType.Verb(conjugation, .Uknown)
         }
     }
@@ -297,7 +319,7 @@ extension LexisEngine
     func getConjugation(from text: String?) -> Conjugation
     {
         
-        guard let text = text else { return Conjugation.Unconjugated }
+        guard let text = text else { return Conjugation.Irregular }
         
         switch text
         {
@@ -373,6 +395,21 @@ extension LexisEngine
     {
         return wordModifiers.contains(Keywords.interjection)
     }
+    
+    func isPronoun(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.pronoun)
+    }
+    
+    func isPersonalPronoun(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.containsMultiple(Keywords.personal, Keywords.pronoun)
+    }
+    
+    func isNumber(wordModifiers: [String]) -> Bool
+    {
+        return wordModifiers.contains(Keywords.number)
+    }
 }
 
 
@@ -383,7 +420,9 @@ private class Keywords
     static let transitive = "TRANS"
     static let intransitive = "INTRANS"
     static let deponent = "DEP"
+    static let semiDeponent = "SEMIDEP"
     static let impersonal = "IMPERS"
+    static let reflexive = "REFLEX"
     
     static let adverb = "ADV"
     
@@ -398,4 +437,9 @@ private class Keywords
     
     static let interjection = "INTERJ"
     static let conjugation = "CONJ"
+    
+    static let pronoun = "PRON"
+    static let personal = "PERS"
+    
+    static let number = "NUM"
 }
