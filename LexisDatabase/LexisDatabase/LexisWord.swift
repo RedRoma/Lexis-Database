@@ -24,6 +24,7 @@ enum VerbType
     case Intransitive
     case Impersonal
     case Deponent
+    case SemiDeponent
     case Uknown
 }
 
@@ -61,10 +62,11 @@ enum WordType
     case Adjective
     case Adverb
     case Preposition(Declension)
-    case PersonalPronoun(Declension, PronounType?)
+    case PersonalPronoun
     case Interjection
     case Conjugation
     case Pronoun
+    case Number
 }
 
 enum Number
