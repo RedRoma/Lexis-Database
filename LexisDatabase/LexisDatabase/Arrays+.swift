@@ -22,6 +22,11 @@ extension Array
         return nil
     }
     
+    var notEmpty: Bool
+    {
+        return !isEmpty
+    }
+    
 }
 
 extension Array where Element: Equatable
