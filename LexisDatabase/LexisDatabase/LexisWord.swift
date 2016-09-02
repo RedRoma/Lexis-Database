@@ -76,9 +76,9 @@ public enum Number
     case Plural
 }
 
-public struct Definition
+public struct LexisDefinition
 {
-    public let terms: [String] = []
+    public let terms: [String]
 }
 
 //This is the primary Datastructure representing a Latin word in Lexis.
@@ -101,7 +101,7 @@ public struct LexisWord: CustomStringConvertible
      
         Whereas a different `Definition` object represents a different meaning.
     */
-    public let definitions: [Definition]
+    public let definitions: [LexisDefinition]
     
     public var description: String
     {

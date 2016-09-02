@@ -44,4 +44,9 @@ extension String
             
         }
     }
+    
+    func withCharacterRemoved(character: Character) -> String
+    {
+        return self.replacingOccurrences(of: "\(character)", with: "")
+    }
 }

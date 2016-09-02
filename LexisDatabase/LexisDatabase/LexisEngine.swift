@@ -148,7 +148,7 @@ extension LexisEngine
  //MARK: Extract Word Definitions
  extension LexisEngine
  {
-    func extractDefinitions(from line: String) -> [Definition]
+    func extractDefinitions(from line: String) -> [LexisDefinition]
     {
         let matches = line =~ Regex.definitionTerms
         
@@ -167,6 +167,7 @@ extension LexisEngine
         }
         
         let distinctDefinitions = splitDefinitionsByMeaning(definitions: definitionString)
+                                     .filter({$0.notEmpty})
         
         guard distinctDefinitions.notEmpty
         else
@@ -175,9 +176,16 @@ extension LexisEngine
             return []
         }
         
+        return distinctDefinitions
+//            .map() { $0.withCharacterRemoved(character: "(") }
+//            .map() { $0.withCharacterRemoved(character: ")") }
+            .map() { def in
+                
+            let individualWords = def.components(separatedBy: ",")
+            LOG.info("Parsed \(individualWords.count) from definitions: \(def)")
+            return LexisDefinition(terms: individualWords)
+        }
         
-        
-        return []
     }
     
     func splitDefinitionsByMeaning(definitions: String) -> [String]
