@@ -21,6 +21,7 @@ internal class LexisEngine
     
     private var isInitialized = false
     
+    
     private init()
     {
         
@@ -35,7 +36,7 @@ internal class LexisEngine
         saveInTheDatabase(words: allWords)
     }
     
-    private func readAllWords() -> [LexisWord]
+    func readAllWords() -> [LexisWord]
     {
         
         //Read the text file
@@ -54,11 +55,11 @@ internal class LexisEngine
         
         var words: [LexisWord] = []
         
-        let saveToArray: (LexisWord) -> () = { word in
+        let collectInArray: (LexisWord) -> () = { word in
             words.append(word)
         }
         
-        file.processEachLine(mapper: self.mapLineToWord, processor: saveToArray)
+        file.processEachLine(mapper: self.mapLineToWord, processor: collectInArray)
         
         LOG.info("Finished compiling a list of \(words.count) words")
         return words
@@ -67,6 +68,11 @@ internal class LexisEngine
     private func saveInTheDatabase(words: [LexisWord])
     {
         //Save this into Realm directly, or use a protocol to abstract that part away
+    }
+    
+    private func saveInTheDatabase(word: LexisWord)
+    {
+        
     }
     
 }
@@ -115,7 +121,9 @@ extension LexisEngine
             return nil
         }
         
-        return LexisWord(forms: forms, wordType: wordType)
+        let definitions = extractDefinitions(from: line)
+        
+        return LexisWord(forms: forms, wordType: wordType, definitions: definitions)
         
     }
     
@@ -135,7 +143,22 @@ extension LexisEngine
        return match.components(separatedBy: ", ")
 
     }
-    
+ }
+ 
+ //MARK: Extract Word Definitions
+ extension LexisEngine
+ {
+    func extractDefinitions(from line: String) -> [Definition]
+    {
+        
+        
+        return []
+    }
+ }
+ 
+ //MARK: Extract Word Type
+ extension LexisEngine
+ {
     func extractWordType(from line: String, at lineNumber: Int) -> WordType?
     {
         guard line.notEmpty else { return nil }

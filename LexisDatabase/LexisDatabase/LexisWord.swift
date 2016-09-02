@@ -82,7 +82,7 @@ struct Definition
 }
 
 //This is the primary Datastructure representing a Latin word in Lexis.
-struct LexisWord: CustomStringConvertible
+public struct LexisWord: CustomStringConvertible
 {
     /**
         A Word's forms represnts the different parts to a Latin vocabulary entry.
@@ -101,7 +101,7 @@ struct LexisWord: CustomStringConvertible
      
         Whereas a different `Definition` object represents a different meaning.
     */
-    let definitions: [Definition] = []
+    let definitions: [Definition]
     
     public var description: String
     {
