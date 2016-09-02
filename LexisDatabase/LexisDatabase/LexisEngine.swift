@@ -150,9 +150,39 @@ extension LexisEngine
  {
     func extractDefinitions(from line: String) -> [Definition]
     {
+        let matches = line =~ Regex.definitionTerms
+        
+        guard matches.notEmpty
+        else
+        {
+            LOG.warn("No word definitions found for: \(line)")
+            return []
+        }
+        
+        guard let definitionString = matches.first, matches.count == 1
+        else
+        {
+            LOG.warn("Definition extraction expected 1 result but got \(matches.count) instead, for line: \(line)")
+            return []
+        }
+        
+        let distinctDefinitions = splitDefinitionsByMeaning(definitions: definitionString)
+        
+        guard distinctDefinitions.notEmpty
+        else
+        {
+            LOG.warn("Did not find any definitions for: \(line)")
+            return []
+        }
+        
         
         
         return []
+    }
+    
+    func splitDefinitionsByMeaning(definitions: String) -> [String]
+    {
+        return definitions.components(separatedBy: ";")
     }
  }
  
