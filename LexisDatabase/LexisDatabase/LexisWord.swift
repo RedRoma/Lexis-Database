@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Conjugation
+public enum Conjugation
 {
     case First
     case Second
@@ -18,7 +18,7 @@ enum Conjugation
     case Unconjugated
 }
 
-enum VerbType
+public enum VerbType
 {
     case Transitive
     case Intransitive
@@ -29,7 +29,7 @@ enum VerbType
     case Uknown
 }
 
-enum Gender
+public enum Gender
 {
     case Male
     case Female
@@ -37,7 +37,7 @@ enum Gender
     case Unknown
 }
 
-enum Declension
+public enum Declension
 {
     case Nominative
     case Genitive
@@ -49,14 +49,14 @@ enum Declension
     case Undeclined
 }
 
-enum PronounType: String
+public enum PronounType: String
 {
     case Reflexive
     case Personal
 }
 
 
-enum WordType
+public enum WordType
 {
     case Verb(Conjugation, VerbType)
     case Noun(Declension, Gender)
@@ -70,13 +70,13 @@ enum WordType
     case Numeral
 }
 
-enum Number
+public enum Number
 {
     case Singular
     case Plural
 }
 
-struct Definition
+public struct Definition
 {
     let terms: [String] = []
 }
