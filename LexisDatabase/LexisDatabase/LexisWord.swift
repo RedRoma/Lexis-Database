@@ -78,7 +78,7 @@ public enum Number
 
 public struct Definition
 {
-    let terms: [String] = []
+    public let terms: [String] = []
 }
 
 //This is the primary Datastructure representing a Latin word in Lexis.
@@ -88,12 +88,12 @@ public struct LexisWord: CustomStringConvertible
         A Word's forms represnts the different parts to a Latin vocabulary entry.
         For instance, a noun will have its nominative and genitive forms.
     */
-    let forms: [String]
+    public let forms: [String]
     
     /**
         Determines a word's type: `[Noun, Verb, Adjective, etc]`.
     */
-    let wordType: WordType
+    public let wordType: WordType
     
     /**
         This represent a Word's separate definitions. Although each `Definition` object may have different words,
@@ -101,7 +101,7 @@ public struct LexisWord: CustomStringConvertible
      
         Whereas a different `Definition` object represents a different meaning.
     */
-    let definitions: [Definition]
+    public let definitions: [Definition]
     
     public var description: String
     {
