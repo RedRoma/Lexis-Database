@@ -28,7 +28,7 @@ class LexisEngineTests: XCTestCase
         super.tearDown()
     }
 
-    func testDictionaryFileCanLoad()
+    func testReadDictionaryFile()
     {
         let text = LexisEngine.instance.readTextFile()
         XCTAssertNotNil(text)
@@ -54,4 +54,37 @@ class LexisEngineTests: XCTestCase
         XCTAssert(words.count > 10_000)
     }
     
+    
+    func testMapLineToWord()
+    {
+        let line = Data.randomLine
+        let lineNumber = try! randomInteger(from: 10, to: 1000)
+        
+        let result = instance.mapLineToWord(line: line, at: lineNumber)
+        XCTAssertNotNil(result)
+        XCTAssert(result!.definitions.notEmpty)
+        XCTAssert(result!.forms.notEmpty)
+        
+    }
+    
+    func testExtractWords()
+    {
+        var words: [String] = []
+        
+        let totalWords = try! randomInteger(from: 10, to: 100)
+        
+        for _ in (1...totalWords)
+        {
+            words.append(alphabeticalString())
+        }
+        
+        var testWord = words.joined(separator: ", ")
+        //These extra additionas are necessary to match the dictionary format.
+        //Otherwise the regex won't match.
+        testWord = "#" + testWord + "   "
+        
+        let result = instance.extractWords(from: testWord)
+        XCTAssertEqual(result, words)
+        
+    }
 }

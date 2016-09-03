@@ -61,3 +61,42 @@ func stringWithNumbers(from: Int, to: Int) -> String
     }
     return result
 }
+
+func alphabeticalString(ofSize size: Int = try! randomInteger(from: 5, to: 15)) -> String
+{
+    guard size > 0 else { return "" }
+    
+    
+    var string = ""
+    
+    var index: Int
+    {
+        return try! randomInteger(from: 0, to: alphabeticalCharacters.count - 1)
+    }
+    
+
+    for _ in (1...size)
+    {
+        string.append(alphabeticalCharacters[index])
+    }
+    
+    return string
+}
+
+private var alphabeticalCharacters: [String]
+{
+    var characters: [String] = []
+    
+    let beginScalar = "a".unicodeScalars.first!.value
+    let endScalar = "z".unicodeScalars.first!.value
+    
+    for char in (beginScalar...endScalar)
+    {
+        guard let unicode = UnicodeScalar.init(char) else { continue }
+        let character = String(unicode)
+        characters.append(character)
+    }
+    
+    return characters
+}
+
