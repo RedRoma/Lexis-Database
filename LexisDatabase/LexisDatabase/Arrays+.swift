@@ -44,6 +44,16 @@ extension Array where Element: Equatable
         
         return true
     }
+    
+    func allMatch(shouldMatch: (Element) -> (Bool)) -> Bool
+    {
+        return self.filter(shouldMatch).count == count
+    }
+    
+    func anyMatch(shouldMatch: (Element) -> (Bool)) -> Bool
+    {
+        return self.filter(shouldMatch).count > 1
+    }
 }
 
 
