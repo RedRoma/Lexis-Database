@@ -13,6 +13,8 @@ import XCTest
 class LexisEngineTests: XCTestCase
 {
     
+    let instance = LexisEngine.instance
+    
     override func setUp()
     {
         super.setUp()
@@ -36,6 +38,20 @@ class LexisEngineTests: XCTestCase
     func testInitialize()
     {
         XCTAssertNotNil(LexisEngine.instance)
+    }
+    
+    func testGetAllWords()
+    {
+        let words = instance.getAllWords()
+        XCTAssert(words.notEmpty)
+        XCTAssert(words.count > 10_000)
+    }
+    
+    func testReadAllWords()
+    {
+        let words = instance.readAllWords(fromDictionary: Data.dictionary)
+        XCTAssert(words.notEmpty)
+        XCTAssert(words.count > 10_000)
     }
     
 }
