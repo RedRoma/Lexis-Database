@@ -18,8 +18,8 @@ class WordTypeTests: XCTestCase
     
     override func setUp()
     {
-        left = randomWordType
-        right = randomWordType
+        left = Data.randomWordType
+        right = Data.randomWordType
     }
     
     func testEquals()
@@ -33,7 +33,7 @@ class WordTypeTests: XCTestCase
     {
         while right == left
         {
-            right = randomWordType
+            right = Data.randomWordType
         }
         
         XCTAssertFalse(right == left)
@@ -45,32 +45,7 @@ class WordTypeTests: XCTestCase
         XCTAssertEqual(left.hashValue, right.hashValue)
     }
     
-    var randomWordType: WordType
-    {
-        let index = randomInteger(from: 0, to: 10)
-        
-        switch index
-        {
-            case 0 :
-                return WordType.Adjective
-            case 1:
-                return .Adjective
-            case 2:
-                return WordType.Conjunction
-            case 3:
-                return WordType.Interjection
-            case 4:
-                return WordType.Noun(Declension.Vocative, .Neuter)
-            case 5:
-                return WordType.Numeral
-            case 6:
-                return WordType.PersonalPronoun
-            case 7:
-                return WordType.Preposition(Declension.Ablative)
-            default:
-                return WordType.Verb(Conjugation.First, .Transitive)
-        }
-    }
+    
 }
 
 class DefinitionTests: XCTestCase
@@ -126,5 +101,63 @@ class DefinitionTests: XCTestCase
         let second = copy.hashValue
         XCTAssertEqual(first, second)
         XCTAssertTrue(first == second)
+    }
+}
+
+class LexisWordTests: XCTestCase
+{
+    
+    private var forms: [String] = []
+    private var wordType: WordType! = nil
+    private var definitions: [LexisDefinition] = []
+    
+    
+    private var randomForms: [String] { return arrayOfSize(valueGenerator: alphabeticalStringOfAnySize) }
+    private var randomDefintions: [LexisDefinition]
+    {
+        let generator: () -> (LexisDefinition) =
+        {
+            let terms = self.randomForms
+            return LexisDefinition(terms: terms)
+        }
+        
+        return arrayOfSize(valueGenerator: generator)
+    }
+    
+    private var word: LexisWord! = nil
+    
+    override func setUp()
+    {
+        forms = randomForms
+        wordType = Data.randomWordType
+        definitions = randomDefintions
+        
+        word = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+    }
+    
+    
+    func testEquality()
+    {
+        let shallowCopy = word
+        XCTAssertEqual(shallowCopy, word)
+        XCTAssertTrue(shallowCopy == word)
+        
+        let deepCopy = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+        XCTAssertEqual(deepCopy, word)
+        XCTAssertTrue(deepCopy == word)
+        
+    }
+    
+    func testEqualityWhenDifferent()
+    {
+        let differentForms = LexisWord(forms: randomForms, wordType: wordType, definitions: definitions)
+        XCTAssertTrue(differentForms != word)
+        
+        let differentWordType = LexisWord(forms: forms, wordType: Data.randomWordType, definitions: definitions)
+        XCTAssertTrue(differentWordType != word)
+        
+        let differentDefinitions = LexisWord(forms: forms, wordType: wordType, definitions: randomDefintions)
+        XCTAssertTrue(differentDefinitions != word)
+        
     }
 }

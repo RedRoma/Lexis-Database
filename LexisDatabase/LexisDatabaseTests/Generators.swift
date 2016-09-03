@@ -20,6 +20,33 @@ struct Data
         let randomLineNumber = try! randomInteger(from: 1, to: 30_000)
         return lines[randomLineNumber]
     }
+    
+    static var randomWordType: WordType
+    {
+        let index = randomInteger(from: 0, to: 10)
+        
+        switch index
+        {
+        case 0 :
+            return WordType.Adjective
+        case 1:
+            return .Adjective
+        case 2:
+            return WordType.Conjunction
+        case 3:
+            return WordType.Interjection
+        case 4:
+            return WordType.Noun(Declension.Vocative, .Neuter)
+        case 5:
+            return WordType.Numeral
+        case 6:
+            return WordType.PersonalPronoun
+        case 7:
+            return WordType.Preposition(Declension.Ablative)
+        default:
+            return WordType.Verb(Conjugation.First, .Transitive)
+        }
+    }
 }
 
 enum BadArgument: Error
