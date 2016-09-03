@@ -59,15 +59,17 @@ extension String
     /**
         Determiens whether the String contains all of the provided substrings.
     */
-    func containsAll(_ strings: String...) -> Bool
+    func containsAll(_ strings: [String]) -> Bool
     {
+        guard strings.notEmpty else { return false }
+        
         return strings
             .filter() { self.contains($0) }
             .count == strings.count
 
     }
     
-    func doesNotContain(anyOf strings: String...) -> Bool
+    func doesNotContain(anyOf strings: [String]) -> Bool
     {
         return strings
             .filter() { self.contains($0) }

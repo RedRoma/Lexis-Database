@@ -179,7 +179,7 @@ extension LexisEngine
         return distinctDefinitions
             .map() { def in
                 
-                if def.doesNotContain(anyOf: "(", ")")
+                if def.doesNotContain(anyOf: ["(", ")"])
                 {
                     let individualWords = def.components(separatedBy: ",")
                     LOG.info("Parsed \(individualWords.count) from definitions: \(def)")

@@ -68,6 +68,24 @@ class Strings_Test: XCTestCase
         
     }
     
+    func testWithCharacterRemoved()
+    {
+        let randomCharacter = "@" as Character
+        let testString = self.testString + "\(randomCharacter)"
+        
+        let result = testString.withCharacterRemoved(character: randomCharacter)
+        XCTAssertEqual(result, self.testString)
+    }
+    
+    func testContainsAll()
+    {
+        let array = arrayOfNumbers(from: 10, to: 1000)
+        let numberString = stringWithNumbers(from: array.first!, to: array.last!)
+        
+        let stringArray = array.map(String.init)
+        XCTAssertTrue(numberString.containsAll(stringArray))
+    }
+    
     
     private func createString(withNumberOfLines lines: Int) -> String
     {
@@ -88,5 +106,27 @@ class Strings_Test: XCTestCase
         }
         
         return string
+    }
+    
+    private func arrayOfNumbers(from: Int, to: Int) -> [Int]
+    {
+        var array: [Int] = []
+        
+        for number in (from...to)
+        {
+            array.append(number)
+        }
+        
+        return array
+    }
+    
+    private func stringWithNumbers(from: Int, to: Int) -> String
+    {
+        var result = ""
+        for number in (from...to)
+        {
+            result += "\(number)"
+        }
+        return result
     }
 }
