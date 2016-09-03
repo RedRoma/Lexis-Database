@@ -7,7 +7,13 @@
 //
 
 import Foundation
+@testable import LexisDatabase
 
+struct Data
+{
+    static let dictionary = LexisEngine.instance.readTextFile()!
+    static let words = LexisEngine.instance.getAllWords()
+}
 
 func arrayOfNumbers(from: Int, to: Int) -> [Int]
 {

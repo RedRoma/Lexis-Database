@@ -20,25 +20,28 @@ internal class LexisEngine
     
     public static let instance = LexisEngine()
     
-    private var isInitialized = false
     
     private var dictionary: String? = nil
-    private var allWords: [LexisWord] = []
     
     private init()
     {
+        initialize()
     }
     
     func getAllWords() -> [LexisWord]
     {
-        initialize()
-        return allWords
+        guard let dictionary = self.dictionary
+        else
+        {
+            LOG.error("Could not read the Latin Dictionary file")
+            return []
+        }
+        
+        return readAllWords(fromDictionary: dictionary)
     }
     
     func initialize()
     {
-        guard !isInitialized else { return }
-        
         guard let dictionaryFile = self.readTextFile()
         else
         {
@@ -46,9 +49,7 @@ internal class LexisEngine
             return
         }
     
-        allWords = readAllWords(fromDictionary: dictionaryFile)
         dictionary = dictionaryFile
-        isInitialized = true
     }
     
     func readAllWords(fromDictionary file: String) -> [LexisWord]

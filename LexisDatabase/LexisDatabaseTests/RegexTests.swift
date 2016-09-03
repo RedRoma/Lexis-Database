@@ -19,6 +19,9 @@ class RegexTests: XCTestCase
         
     }
     
-    
+    func testOperator()
+    {
+        
+    }
     
 }
