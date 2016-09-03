@@ -9,7 +9,7 @@
 import XCTest
 @testable import LexisDatabase
 
-class Arrays_Test: XCTestCase
+class Arrays_Plus_Test: XCTestCase
 {
     
     let numbers = arrayOfNumbers(from: 1, to: 1000)

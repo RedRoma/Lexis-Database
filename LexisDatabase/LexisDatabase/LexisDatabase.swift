@@ -17,7 +17,7 @@ public class LexisDatabase
     /**
         An in-memory store of all of the Lexis Words.
     */
-    public static let words: [LexisWord] = LexisEngine.instance.readAllWords()
+    public static let words: [LexisWord] = LexisEngine.instance.getAllWords()
     
     
     public static func findWord(withTerm term: String) -> [LexisWord]

@@ -9,7 +9,7 @@
 import XCTest
 @testable import LexisDatabase
 
-class Strings_Test: XCTestCase
+class Strings_Plus_Test: XCTestCase
 {
 
     private var dictionary: String!

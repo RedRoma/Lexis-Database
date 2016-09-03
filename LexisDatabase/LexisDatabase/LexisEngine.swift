@@ -11,8 +11,9 @@ import Sulcus
 
 /**
      The Lexis Engine is reponsible for reading through the Dictionary text file
-     And extracting meaningful information from it, for the purpose of
-     Storing representing in a LexisWord data structure
+     And extracting `LexisWord` representations from them.
+  
+     > It is not responsible for persistence of those words.
  */
 internal class LexisEngine
 {
@@ -21,22 +22,36 @@ internal class LexisEngine
     
     private var isInitialized = false
     
+    private var dictionary: String? = nil
+    private var allWords: [LexisWord] = []
     
     private init()
     {
-        
+    }
+    
+    func getAllWords() -> [LexisWord]
+    {
+        initialize()
+        return allWords
     }
     
     func initialize()
     {
         guard !isInitialized else { return }
-    
-        let allWords = readAllWords()
         
-        saveInTheDatabase(words: allWords)
+        guard let dictionaryFile = self.readTextFile()
+        else
+        {
+            LOG.error("Could not load Latin Dictionary text file")
+            return
+        }
+    
+        allWords = readAllWords(fromDictionary: dictionaryFile)
+        dictionary = dictionaryFile
+        isInitialized = true
     }
     
-    func readAllWords() -> [LexisWord]
+    func readAllWords(fromDictionary file: String) -> [LexisWord]
     {
         
         //Read the text file
@@ -46,12 +61,6 @@ internal class LexisEngine
         //Parse out the dictionary code
         //Parse out the dictionary Terms
         //For each line, assemnble a LexisWord object from the parsed out words
-        guard let file = readTextFile()
-        else
-        {
-            LOG.error("Could not load Latin Dictionary text file")
-            return []
-        }
         
         var words: [LexisWord] = []
         
@@ -65,15 +74,6 @@ internal class LexisEngine
         return words
     }
     
-    private func saveInTheDatabase(words: [LexisWord])
-    {
-        //Save this into Realm directly, or use a protocol to abstract that part away
-    }
-    
-    private func saveInTheDatabase(word: LexisWord)
-    {
-        
-    }
     
 }
 
