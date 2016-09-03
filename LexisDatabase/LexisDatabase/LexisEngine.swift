@@ -177,13 +177,19 @@ extension LexisEngine
         }
         
         return distinctDefinitions
-//            .map() { $0.withCharacterRemoved(character: "(") }
-//            .map() { $0.withCharacterRemoved(character: ")") }
             .map() { def in
                 
-            let individualWords = def.components(separatedBy: ",")
-            LOG.info("Parsed \(individualWords.count) from definitions: \(def)")
-            return LexisDefinition(terms: individualWords)
+                if def.doesNotContain(anyOf: "(", ")")
+                {
+                    let individualWords = def.components(separatedBy: ",")
+                    LOG.info("Parsed \(individualWords.count) from definitions: \(def)")
+                    
+                    return LexisDefinition(terms: individualWords)
+                }
+                else
+                {
+                   return LexisDefinition(terms: [def])
+                }
         }
         
     }

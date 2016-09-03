@@ -49,4 +49,22 @@ extension String
     {
         return self.replacingOccurrences(of: "\(character)", with: "")
     }
+    
+    /**
+        Determiens whether the String contains all of the provided substrings.
+    */
+    func containsAll(_ strings: String...) -> Bool
+    {
+        return strings
+            .filter() { self.contains($0) }
+            .count == strings.count
+
+    }
+    
+    func doesNotContain(anyOf strings: String...) -> Bool
+    {
+        return strings
+            .filter() { self.contains($0) }
+            .isEmpty
+    }
 }
