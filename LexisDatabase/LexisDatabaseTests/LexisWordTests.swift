@@ -40,6 +40,11 @@ class WordTypeTests: XCTestCase
     }
     
     
+    func testHashCode()
+    {
+        XCTAssertEqual(left.hashValue, right.hashValue)
+    }
+    
     var randomWordType: WordType
     {
         let index = randomInteger(from: 0, to: 10)
@@ -65,5 +70,61 @@ class WordTypeTests: XCTestCase
             default:
                 return WordType.Verb(Conjugation.First, .Transitive)
         }
+    }
+}
+
+class DefinitionTests: XCTestCase
+{
+    
+    private var terms: [String] = arrayOfSize(valueGenerator: alphabeticalStringOfAnySize)
+    
+    private var definition: LexisDefinition!
+    
+    override func setUp()
+    {
+        definition = LexisDefinition(terms: terms)
+    }
+    
+    func testEquatable()
+    {
+        let secondDefinition = LexisDefinition(terms: terms)
+        XCTAssertTrue(secondDefinition == definition)
+        XCTAssertEqual(secondDefinition, definition)
+    }
+    
+    func testEquatableWhenDifferent()
+    {
+        let otherTerms = arrayOfSize(valueGenerator: alphabeticalStringOfAnySize)
+        let otherDefinition = LexisDefinition(terms: otherTerms)
+        
+        XCTAssertFalse(otherDefinition == definition)
+        XCTAssertNotEqual(otherDefinition, definition)
+    }
+    
+    func testHashCodeOfSameObject()
+    {
+        let first = definition.hashValue
+        let second = definition.hashValue
+        XCTAssertEqual(first, second)
+    }
+    
+    func testHashCodeOfDifferentDefinitions()
+    {
+        let otherTerms = arrayOfSize(valueGenerator: alphabeticalStringOfAnySize)
+        let otherDefinition = LexisDefinition(terms: otherTerms)
+        
+        let first = definition.hashValue
+        let second = otherDefinition.hashValue
+        XCTAssertNotEqual(first, second)
+    }
+    
+    func testHashCodeOfDifferentInstanceButSameObject()
+    {
+        let copy = LexisDefinition(terms: terms)
+        
+        let first = definition.hashValue
+        let second = copy.hashValue
+        XCTAssertEqual(first, second)
+        XCTAssertTrue(first == second)
     }
 }

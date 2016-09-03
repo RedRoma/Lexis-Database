@@ -54,6 +54,21 @@ func arrayOfNumbers(from: Int, to: Int) -> [Int]
     return array
 }
 
+func arrayOfSize<T>(size: Int = randomInteger(from: 5, to: 20), valueGenerator: () -> (T)) -> [T]
+{
+    var array: [T] = []
+    
+    guard size > 0 else { return array }
+    
+    for _ in (1...size)
+    {
+        let nextValue = valueGenerator()
+        array.append(nextValue)
+    }
+
+    return array
+}
+
 func stringWithNumbers(from: Int, to: Int) -> String
 {
     var result = ""
@@ -64,7 +79,13 @@ func stringWithNumbers(from: Int, to: Int) -> String
     return result
 }
 
-func alphabeticalString(ofSize size: Int = try! randomInteger(from: 5, to: 15)) -> String
+func alphabeticalStringOfAnySize() -> String
+{
+    let size = randomInteger(from: 5, to: 200)
+    return alphabeticalString(ofSize: size)
+}
+
+func alphabeticalString(ofSize size: Int = randomInteger(from: 5, to: 15)) -> String
 {
     guard size > 0 else { return "" }
     
