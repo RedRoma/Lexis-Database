@@ -86,6 +86,14 @@ class Strings_Test: XCTestCase
         XCTAssertTrue(numberString.containsAll(stringArray))
     }
     
+    func testDoesNotContainsAnyOf()
+    {
+        let numbers = arrayOfNumbers(from: 1, to: 9)
+        let numbersAsString = numbers.map(String.init).joined()
+        let modifiedString = numbersAsString + testString + numbersAsString
+        
+        XCTAssertFalse(modifiedString.doesNotContain(anyOf: numbers.map(String.init)))
+    }
     
     private func createString(withNumberOfLines lines: Int) -> String
     {
