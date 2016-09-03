@@ -18,6 +18,8 @@
 		DE4808271D720938002CBF5D /* Sulcus.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE48082B1D720B51002CBF5D /* LatinDictionary.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEDE0DC11D717ABF00965CFD /* LatinDictionary.txt */; };
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
+		DEA7E4861D7B493A009CAE25 /* LexisPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */; };
+		DEA7E4881D7B4A74009CAE25 /* MemoryPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */; };
 		DEBEFE7B1D76BBF0008A525D /* Arrays+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */; };
 		DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */; };
 		DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */; };
@@ -59,6 +61,8 @@
 		DE405ACE1D76494100C16B46 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		DE4808231D7208DC002CBF5D /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
+		DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisPersistence.swift; sourceTree = "<group>"; };
+		DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPersistence.swift; sourceTree = "<group>"; };
 		DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Arrays+.swift"; sourceTree = "<group>"; };
 		DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LexisDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDE0DA31D7172E900965CFD /* LexisDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LexisDatabase.h; sourceTree = "<group>"; };
@@ -121,6 +125,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DEA7E4841D7B4924009CAE25 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */,
+				DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */,
+			);
+			name = Persistence;
+			sourceTree = "<group>";
+		};
 		DEDE0D961D7172E900965CFD = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +158,7 @@
 			children = (
 				DE652D491D723C7400F1B52A /* Text */,
 				DEDE0DC01D717A9F00965CFD /* Resources */,
+				DEA7E4841D7B4924009CAE25 /* Persistence */,
 				DEDE0DA31D7172E900965CFD /* LexisDatabase.h */,
 				DEDE0DA41D7172E900965CFD /* Info.plist */,
 				DEDE0DBC1D71757500965CFD /* LexisDatabase.swift */,
@@ -281,6 +295,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEA7E4881D7B4A74009CAE25 /* MemoryPersistence.swift in Sources */,
+				DEA7E4861D7B493A009CAE25 /* LexisPersistence.swift in Sources */,
 				DEDE0DBD1D71757500965CFD /* LexisDatabase.swift in Sources */,
 				DEBEFE7B1D76BBF0008A525D /* Arrays+.swift in Sources */,
 				DE405ACF1D76494100C16B46 /* Regex.swift in Sources */,
