@@ -257,7 +257,7 @@ extension LexisEngine
         //Conjugations
         if isConjugation(wordModifiers: wordModifiers)
         {
-            return WordType.Conjugation
+            return WordType.Conjunction
         }
         
         if isPronoun(wordModifiers: wordModifiers)

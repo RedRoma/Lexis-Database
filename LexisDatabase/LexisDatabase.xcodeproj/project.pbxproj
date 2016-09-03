@@ -20,6 +20,7 @@
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DEA7E4861D7B493A009CAE25 /* LexisPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */; };
 		DEA7E4881D7B4A74009CAE25 /* MemoryPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */; };
+		DEA7E48A1D7B5B6B009CAE25 /* LexisWordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */; };
 		DEBEFE7B1D76BBF0008A525D /* Arrays+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */; };
 		DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */; };
 		DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */; };
@@ -63,6 +64,7 @@
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisPersistence.swift; sourceTree = "<group>"; };
 		DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPersistence.swift; sourceTree = "<group>"; };
+		DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisWordTests.swift; sourceTree = "<group>"; };
 		DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Arrays+.swift"; sourceTree = "<group>"; };
 		DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LexisDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDE0DA31D7172E900965CFD /* LexisDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LexisDatabase.h; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				DE1978561D720269008E46AB /* LexisEngineTests.swift */,
 				DEDE0DB01D7172E900965CFD /* Info.plist */,
 				DE156DCB1D7A9B0B00123A04 /* Generators.swift */,
+				DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */,
 			);
 			path = LexisDatabaseTests;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */,
 				DE156DCE1D7B381300123A04 /* RegexTests.swift in Sources */,
 				DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */,
+				DEA7E48A1D7B5B6B009CAE25 /* LexisWordTests.swift in Sources */,
 				DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */,
 				DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */,
 				DE156DCC1D7A9B0B00123A04 /* Generators.swift in Sources */,

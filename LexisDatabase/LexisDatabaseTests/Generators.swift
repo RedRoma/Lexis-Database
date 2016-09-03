@@ -27,17 +27,19 @@ enum BadArgument: Error
     case InvalidRange
 }
 
-func randomInteger(from: Int, to: Int) throws -> Int
+func randomInteger(from: Int, to: Int) -> Int
 {
-    guard from < to else { throw BadArgument.InvalidRange }
+    //Adjusting in case a range is passed in reverse
+    let lowerBound = from < to ? from : to
+    let upperBound = to > from ? to : from
     
-    let difference = to - from
+    let difference = upperBound - lowerBound
     
     let randomNumber = Int(arc4random_uniform(UInt32(difference)))
     
-    let result = from + randomNumber
+    let result = lowerBound + randomNumber
     
-    return result <= to ? result : to
+    return result <= upperBound ? result : upperBound
 }
 
 func arrayOfNumbers(from: Int, to: Int) -> [Int]
