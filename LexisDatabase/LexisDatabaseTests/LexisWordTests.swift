@@ -160,4 +160,21 @@ class LexisWordTests: XCTestCase
         XCTAssertTrue(differentDefinitions != word)
         
     }
+    
+    func testHashCodeWhenSame()
+    {
+        let copy = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+        let first = word.hashValue
+        let second = copy.hashValue
+        XCTAssertEqual(first, second)
+    }
+    
+    func testHashCodeWhenDifferent()
+    {
+        let other = LexisWord(forms: randomForms, wordType: Data.randomWordType, definitions: randomDefintions)
+        let first = word.hashValue
+        let second = other.hashValue
+        
+        XCTAssertNotEqual(first, second)
+    }
 }
