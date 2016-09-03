@@ -11,8 +11,14 @@ import Foundation
 extension String
 {
     
-    var notEmpty: Bool {
+    var notEmpty: Bool
+    {
         return !isEmpty
+    }
+    
+    static func isNotEmpty(string: String) -> Bool
+    {
+        return string.notEmpty
     }
     
     typealias Expression = ((number: Int, text: String)) -> ()

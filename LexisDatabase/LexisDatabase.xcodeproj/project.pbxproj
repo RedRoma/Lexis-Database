@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC71D7A90FF00123A04 /* Strings+Test.swift */; };
 		DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1978561D720269008E46AB /* LexisEngineTests.swift */; };
 		DE405ACF1D76494100C16B46 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE405ACE1D76494100C16B46 /* Regex.swift */; };
 		DE4808241D7208DC002CBF5D /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; };
@@ -47,6 +48,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DE156DC71D7A90FF00123A04 /* Strings+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Test.swift"; sourceTree = "<group>"; };
 		DE1978561D720269008E46AB /* LexisEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisEngineTests.swift; sourceTree = "<group>"; };
 		DE405ACE1D76494100C16B46 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		DE4808231D7208DC002CBF5D /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE156DC61D7A90EB00123A04 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				DE156DC71D7A90FF00123A04 /* Strings+Test.swift */,
+			);
+			name = Text;
+			sourceTree = "<group>";
+		};
 		DE652D491D723C7400F1B52A /* Text */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 		DEDE0DAD1D7172E900965CFD /* LexisDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				DE156DC61D7A90EB00123A04 /* Text */,
 				DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */,
 				DEDE0DB01D7172E900965CFD /* Info.plist */,
 				DE1978561D720269008E46AB /* LexisEngineTests.swift */,
@@ -274,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */,
 				DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */,
 				DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */,
 			);
