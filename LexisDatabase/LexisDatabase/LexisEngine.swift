@@ -474,7 +474,7 @@ extension LexisEngine
     
     func isPersonalPronoun(wordModifiers: [String]) -> Bool
     {
-        return wordModifiers.containsMultiple(Keywords.personal, Keywords.pronoun)
+        return wordModifiers.containsMultiple([Keywords.personal, Keywords.pronoun])
     }
     
     func isNumber(wordModifiers: [String]) -> Bool

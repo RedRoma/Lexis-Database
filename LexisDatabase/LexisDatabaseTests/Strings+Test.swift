@@ -116,25 +116,5 @@ class Strings_Test: XCTestCase
         return string
     }
     
-    private func arrayOfNumbers(from: Int, to: Int) -> [Int]
-    {
-        var array: [Int] = []
-        
-        for number in (from...to)
-        {
-            array.append(number)
-        }
-        
-        return array
-    }
-    
-    private func stringWithNumbers(from: Int, to: Int) -> String
-    {
-        var result = ""
-        for number in (from...to)
-        {
-            result += "\(number)"
-        }
-        return result
-    }
+   
 }

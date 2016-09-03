@@ -33,7 +33,7 @@ extension Array where Element: Equatable
 {
     
     
-    func containsMultiple(_ elements: Element...) -> Bool
+    func containsMultiple(_ elements: [Element]) -> Bool
     {
         for element in elements
         {

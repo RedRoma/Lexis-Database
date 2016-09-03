@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC71D7A90FF00123A04 /* Strings+Test.swift */; };
+		DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */; };
+		DE156DCC1D7A9B0B00123A04 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DCB1D7A9B0B00123A04 /* Generators.swift */; };
 		DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1978561D720269008E46AB /* LexisEngineTests.swift */; };
 		DE405ACF1D76494100C16B46 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE405ACE1D76494100C16B46 /* Regex.swift */; };
 		DE4808241D7208DC002CBF5D /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		DE156DC71D7A90FF00123A04 /* Strings+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Test.swift"; sourceTree = "<group>"; };
+		DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Arrays+Test.swift"; sourceTree = "<group>"; };
+		DE156DCB1D7A9B0B00123A04 /* Generators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generators.swift; sourceTree = "<group>"; };
 		DE1978561D720269008E46AB /* LexisEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisEngineTests.swift; sourceTree = "<group>"; };
 		DE405ACE1D76494100C16B46 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		DE4808231D7208DC002CBF5D /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				DE156DC71D7A90FF00123A04 /* Strings+Test.swift */,
+				DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */,
 			);
 			name = Text;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 				DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */,
 				DEDE0DB01D7172E900965CFD /* Info.plist */,
 				DE1978561D720269008E46AB /* LexisEngineTests.swift */,
+				DE156DCB1D7A9B0B00123A04 /* Generators.swift */,
 			);
 			path = LexisDatabaseTests;
 			sourceTree = "<group>";
@@ -286,8 +292,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */,
+				DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */,
 				DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */,
 				DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */,
+				DE156DCC1D7A9B0B00123A04 /* Generators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
