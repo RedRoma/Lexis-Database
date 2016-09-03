@@ -40,7 +40,7 @@ internal class LexisEngine
         return readAllWords(fromDictionary: dictionary)
     }
     
-    func initialize()
+    private func initialize()
     {
         guard let dictionaryFile = self.readTextFile()
         else
@@ -74,7 +74,6 @@ internal class LexisEngine
         LOG.info("Finished compiling a list of \(words.count) words")
         return words
     }
-    
     
 }
 

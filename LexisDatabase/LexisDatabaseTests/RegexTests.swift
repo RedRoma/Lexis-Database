@@ -13,15 +13,19 @@ import XCTest
 class RegexTests: XCTestCase
 {
     
+    var randomLine: String!
     
     override func setUp()
     {
-        
+        randomLine = Data.randomLine
     }
+    
     
     func testOperator()
     {
-        
+        let results = randomLine =~ Regex.dictionaryCode
+    
+        XCTAssert(results.notEmpty)
     }
     
 }

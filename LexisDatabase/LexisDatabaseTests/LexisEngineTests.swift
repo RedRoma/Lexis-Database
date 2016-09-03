@@ -35,7 +35,7 @@ class LexisEngineTests: XCTestCase
     
     func testInitialize()
     {
-        LexisEngine.instance.initialize()
+        XCTAssertNotNil(LexisEngine.instance)
     }
     
 }
