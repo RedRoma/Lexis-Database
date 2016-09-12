@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyGenerator
 import Foundation
 import XCTest
 @testable import LexisDatabase
@@ -42,16 +43,27 @@ class WordTypeTests: XCTestCase
     
     func testHashCode()
     {
+        right = left
         XCTAssertEqual(left.hashValue, right.hashValue)
     }
     
+    func testHashCodeWhenDifferent()
+    {
+        while right == left
+        {
+            right = Data.randomWordType
+        }
+        
+        //Technically, two values can have the same hash code, but this should not happen on a small enum
+        XCTAssertNotEqual(right.hashValue, left.hashValue)
+    }
     
 }
 
 class DefinitionTests: XCTestCase
 {
     
-    private var terms: [String] = arrayOfSize(valueGenerator: alphabeticalStringOfAnySize)
+    private var terms: [String] = AlchemyGenerator.array() { return AlchemyGenerator.Strings.alphabetic }
     
     private var definition: LexisDefinition!
     
@@ -69,7 +81,7 @@ class DefinitionTests: XCTestCase
     
     func testEquatableWhenDifferent()
     {
-        let otherTerms = arrayOfSize(valueGenerator: alphabeticalStringOfAnySize)
+        let otherTerms = AlchemyGenerator.Arrays.ofString
         let otherDefinition = LexisDefinition(terms: otherTerms)
         
         XCTAssertFalse(otherDefinition == definition)
@@ -85,7 +97,7 @@ class DefinitionTests: XCTestCase
     
     func testHashCodeOfDifferentDefinitions()
     {
-        let otherTerms = arrayOfSize(valueGenerator: alphabeticalStringOfAnySize)
+        let otherTerms = AlchemyGenerator.Arrays.ofAlphabeticString
         let otherDefinition = LexisDefinition(terms: otherTerms)
         
         let first = definition.hashValue
@@ -112,7 +124,7 @@ class LexisWordTests: XCTestCase
     private var definitions: [LexisDefinition] = []
     
     
-    private var randomForms: [String] { return arrayOfSize(valueGenerator: alphabeticalStringOfAnySize) }
+    private var randomForms: [String] { return AlchemyGenerator.Arrays.ofAlphabeticString }
     private var randomDefintions: [LexisDefinition]
     {
         let generator: () -> (LexisDefinition) =
@@ -121,7 +133,7 @@ class LexisWordTests: XCTestCase
             return LexisDefinition(terms: terms)
         }
         
-        return arrayOfSize(valueGenerator: generator)
+        return AlchemyGenerator.array(withCreator: generator)
     }
     
     private var word: LexisWord! = nil

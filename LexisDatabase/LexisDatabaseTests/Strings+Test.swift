@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyGenerator
 import XCTest
 @testable import LexisDatabase
 
@@ -79,16 +80,15 @@ class Strings_Plus_Test: XCTestCase
     
     func testContainsAll()
     {
-        let array = arrayOfNumbers(from: 10, to: 1000)
-        let numberString = stringWithNumbers(from: array.first!, to: array.last!)
+        let words = AlchemyGenerator.Arrays.ofAlphabeticString
+        let subWords = Array(words[0...words.count/2])
         
-        let stringArray = array.map(String.init)
-        XCTAssertTrue(numberString.containsAll(stringArray))
+        XCTAssertTrue(words.containsMultiple(subWords))
     }
     
     func testDoesNotContainsAnyOf()
     {
-        let numbers = arrayOfNumbers(from: 1, to: 9)
+        let numbers = AlchemyGenerator.array() { return AlchemyGenerator.integer(from: 1, to: 9) }
         let numbersAsString = numbers.map(String.init).joined()
         let modifiedString = numbersAsString + testString + numbersAsString
         

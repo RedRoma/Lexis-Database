@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyGenerator
 import Foundation
 @testable import LexisDatabase
 
@@ -17,136 +18,47 @@ struct Data
     
     static var randomLine: String
     {
-        let randomLineNumber = try! randomInteger(from: 1, to: 30_000)
+        let randomLineNumber = AlchemyGenerator.integer(from: 1, to: 30_000)
         return lines[randomLineNumber]
     }
     
     static var randomWordType: WordType
     {
-        let index = randomInteger(from: 0, to: 10)
+        let index = AlchemyGenerator.integer(from: 0, to: 10)
         
         switch index
         {
-        case 0 :
-            return WordType.Adjective
-        case 1:
-            return .Adjective
-        case 2:
-            return WordType.Conjunction
-        case 3:
-            return WordType.Interjection
-        case 4:
-            return WordType.Noun(Declension.Vocative, .Neuter)
-        case 5:
-            return WordType.Numeral
-        case 6:
-            return WordType.PersonalPronoun
-        case 7:
-            return WordType.Preposition(Declension.Ablative)
-        default:
-            return WordType.Verb(Conjugation.First, .Transitive)
+            case 0 :
+                return WordType.Adjective
+            case 1:
+                return .Adjective
+            case 2:
+                return WordType.Conjunction
+            case 3:
+                return WordType.Interjection
+            case 4:
+                return WordType.Noun(Declension.Vocative, .Neuter)
+            case 5:
+                return WordType.Numeral
+            case 6:
+                return WordType.PersonalPronoun
+            case 7:
+                return WordType.Preposition(Declension.Ablative)
+            default:
+                return WordType.Verb(Conjugation.First, .Transitive)
         }
     }
+    
 }
 
-enum BadArgument: Error
+func allIntegers(from: Int, to: Int) -> [Int]
 {
-    case InvalidRange
-}
-
-func randomInteger(from: Int, to: Int) -> Int
-{
-    //Adjusting in case a range is passed in reverse
-    let lowerBound = from < to ? from : to
-    let upperBound = to > from ? to : from
+    var array = [Int]()
     
-    let difference = upperBound - lowerBound
-    
-    let randomNumber = Int(arc4random_uniform(UInt32(difference)))
-    
-    let result = lowerBound + randomNumber
-    
-    return result <= upperBound ? result : upperBound
-}
-
-func arrayOfNumbers(from: Int, to: Int) -> [Int]
-{
-    var array: [Int] = []
-    
-    for number in (from...to)
+    for i in (from...to)
     {
-        array.append(number)
+        array.append(i)
     }
     
     return array
 }
-
-func arrayOfSize<T>(size: Int = randomInteger(from: 5, to: 20), valueGenerator: () -> (T)) -> [T]
-{
-    var array: [T] = []
-    
-    guard size > 0 else { return array }
-    
-    for _ in (1...size)
-    {
-        let nextValue = valueGenerator()
-        array.append(nextValue)
-    }
-
-    return array
-}
-
-func stringWithNumbers(from: Int, to: Int) -> String
-{
-    var result = ""
-    for number in (from...to)
-    {
-        result += "\(number)"
-    }
-    return result
-}
-
-func alphabeticalStringOfAnySize() -> String
-{
-    let size = randomInteger(from: 5, to: 200)
-    return alphabeticalString(ofSize: size)
-}
-
-func alphabeticalString(ofSize size: Int = randomInteger(from: 5, to: 15)) -> String
-{
-    guard size > 0 else { return "" }
-    
-    
-    var string = ""
-    
-    var index: Int
-    {
-        return try! randomInteger(from: 0, to: alphabeticalCharacters.count - 1)
-    }
-    
-
-    for _ in (1...size)
-    {
-        string.append(alphabeticalCharacters[index])
-    }
-    
-    return string
-}
-
-private var alphabeticalCharacters: [String]
-{
-    var characters: [String] = []
-    
-    let beginScalar = "a".unicodeScalars.first!.value
-    let endScalar = "z".unicodeScalars.first!.value
-    
-    for char in (beginScalar...endScalar)
-    {
-        guard let unicode = UnicodeScalar.init(char) else { continue }
-        let character = String(unicode)
-        characters.append(character)
-    }
-    
-    return characters
-}
-

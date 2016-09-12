@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyGenerator
 import Sulcus
 import XCTest
 @testable import LexisDatabase
@@ -58,7 +59,7 @@ class LexisEngineTests: XCTestCase
     func testMapLineToWord()
     {
         let line = Data.randomLine
-        let lineNumber = try! randomInteger(from: 10, to: 1000)
+        let lineNumber = AlchemyGenerator.integer(from: 10, to: 1000)
         
         let result = instance.mapLineToWord(line: line, at: lineNumber)
         XCTAssertNotNil(result)
@@ -69,14 +70,9 @@ class LexisEngineTests: XCTestCase
     
     func testExtractWords()
     {
-        var words: [String] = []
         
-        let totalWords = try! randomInteger(from: 10, to: 100)
-        
-        for _ in (1...totalWords)
-        {
-            words.append(alphabeticalString())
-        }
+        let totalWords = AlchemyGenerator.integer(from: 10, to: 100)
+        let words = AlchemyGenerator.array(ofSize: totalWords) { AlchemyGenerator.Strings.alphabetic }
         
         var testWord = words.joined(separator: ", ")
         //These extra additionas are necessary to match the dictionary format.

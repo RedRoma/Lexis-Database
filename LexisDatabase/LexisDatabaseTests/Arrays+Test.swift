@@ -6,13 +6,14 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyGenerator
 import XCTest
 @testable import LexisDatabase
 
 class Arrays_Plus_Test: XCTestCase
 {
     
-    let numbers = arrayOfNumbers(from: 1, to: 1000)
+    let numbers = allIntegers(from: 1, to: 1000)
     
     override func setUp()
     {
@@ -36,7 +37,7 @@ class Arrays_Plus_Test: XCTestCase
     
     func testContainsMultiple()
     {
-        let subArray = arrayOfNumbers(from: 10, to: 500)
+        let subArray = AlchemyGenerator.array() { return AlchemyGenerator.integer(from: 10, to: 500) }
         XCTAssertTrue(numbers.containsMultiple(subArray))
     }
     
