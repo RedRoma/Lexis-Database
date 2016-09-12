@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Sulcus
 
 class MemoryPersistence: LexisPersistence
 {
@@ -45,8 +45,10 @@ class MemoryPersistence: LexisPersistence
     {
         guard term.notEmpty, words.notEmpty else { return [] }
         
-        return words.filter() {
-            $0.forms.anyMatch() { form in form.contains(term) }
+        return words.filter()
+        {
+            let match = $0.forms.anyMatch() { form in form.contains(term) }
+            return match
         }
     }
     

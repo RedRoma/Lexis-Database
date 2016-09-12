@@ -16,6 +16,11 @@ struct Data
     static let words = LexisEngine.instance.getAllWords()
     static let lines = Data.dictionary.components(separatedBy: "\n").filter(String.isNotEmpty)
     
+    static var randomWord: LexisWord
+    {
+        return words.anyElement!
+    }
+    
     static var randomLine: String
     {
         let randomLineNumber = AlchemyGenerator.integer(from: 1, to: 30_000)

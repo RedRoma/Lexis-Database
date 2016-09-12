@@ -23,6 +23,7 @@
 		DEBD168C1D86394F00E5C4DD /* Sulcus.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DEBD16911D863B8A00E5C4DD /* AlchemyGenerator.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DEBD16901D863B8A00E5C4DD /* AlchemyGenerator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DEBD16921D863B8E00E5C4DD /* AlchemyGenerator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEBD16901D863B8A00E5C4DD /* AlchemyGenerator.framework */; };
+		DEBD16951D86818D00E5C4DD /* MemoryPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD16941D86818D00E5C4DD /* MemoryPersistenceTests.swift */; };
 		DEBEFE7B1D76BBF0008A525D /* Arrays+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */; };
 		DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */; };
 		DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */; };
@@ -69,6 +70,7 @@
 		DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPersistence.swift; sourceTree = "<group>"; };
 		DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisWordTests.swift; sourceTree = "<group>"; };
 		DEBD16901D863B8A00E5C4DD /* AlchemyGenerator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlchemyGenerator.framework; sourceTree = "<group>"; };
+		DEBD16941D86818D00E5C4DD /* MemoryPersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPersistenceTests.swift; sourceTree = "<group>"; };
 		DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Arrays+.swift"; sourceTree = "<group>"; };
 		DEDE0DA01D7172E900965CFD /* LexisDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LexisDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDE0DA31D7172E900965CFD /* LexisDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LexisDatabase.h; sourceTree = "<group>"; };
@@ -142,6 +144,14 @@
 			name = Persistence;
 			sourceTree = "<group>";
 		};
+		DEBD16931D86818200E5C4DD /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				DEBD16941D86818D00E5C4DD /* MemoryPersistenceTests.swift */,
+			);
+			name = Persistence;
+			sourceTree = "<group>";
+		};
 		DEDE0D961D7172E900965CFD = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +189,7 @@
 		DEDE0DAD1D7172E900965CFD /* LexisDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				DEBD16931D86818200E5C4DD /* Persistence */,
 				DE156DC61D7A90EB00123A04 /* Text */,
 				DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */,
 				DE1978561D720269008E46AB /* LexisEngineTests.swift */,
@@ -319,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEBD16951D86818D00E5C4DD /* MemoryPersistenceTests.swift in Sources */,
 				DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */,
 				DE156DCE1D7B381300123A04 /* RegexTests.swift in Sources */,
 				DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */,

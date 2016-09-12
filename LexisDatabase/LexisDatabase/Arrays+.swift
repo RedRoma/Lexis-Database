@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyGenerator
 import Foundation
 
 
@@ -25,6 +26,14 @@ extension Array
     var notEmpty: Bool
     {
         return !isEmpty
+    }
+    
+    var anyElement: Element?
+    {
+        guard notEmpty else { return nil }
+        
+        let randomIndex = AlchemyGenerator.integer(from: 0, to: count - 1)
+        return self[randomIndex]
     }
     
 }
@@ -52,7 +61,7 @@ extension Array where Element: Equatable
     
     func anyMatch(shouldMatch: (Element) -> (Bool)) -> Bool
     {
-        return self.filter(shouldMatch).count > 1
+        return self.filter(shouldMatch).count >= 1
     }
 }
 
