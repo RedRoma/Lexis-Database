@@ -24,7 +24,7 @@ extension String
     typealias Expression = ((number: Int, text: String)) -> ()
     
     
-    func forEachLine(_ expression: Expression)
+    func forEachLine(_ expression: @escaping Expression)
     {
         var lineNumber = 0
         //Unsure what that second Boolean argument is for.
