@@ -13,6 +13,7 @@
 		DE156DCE1D7B381300123A04 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DCD1D7B381300123A04 /* RegexTests.swift */; };
 		DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1978561D720269008E46AB /* LexisEngineTests.swift */; };
 		DE3129EB1D8BCC040007692F /* LexisWord+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3129EA1D8BCC040007692F /* LexisWord+Description.swift */; };
+		DE3129ED1D8BD27B0007692F /* LexisWordDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3129EC1D8BD27B0007692F /* LexisWordDescriptionTests.swift */; };
 		DE405ACF1D76494100C16B46 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE405ACE1D76494100C16B46 /* Regex.swift */; };
 		DE4808241D7208DC002CBF5D /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; };
 		DE4808251D7208DC002CBF5D /* Sulcus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4808231D7208DC002CBF5D /* Sulcus.framework */; };
@@ -65,6 +66,7 @@
 		DE156DCD1D7B381300123A04 /* RegexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		DE1978561D720269008E46AB /* LexisEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisEngineTests.swift; sourceTree = "<group>"; };
 		DE3129EA1D8BCC040007692F /* LexisWord+Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+Description.swift"; sourceTree = "<group>"; };
+		DE3129EC1D8BD27B0007692F /* LexisWordDescriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisWordDescriptionTests.swift; sourceTree = "<group>"; };
 		DE405ACE1D76494100C16B46 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		DE4808231D7208DC002CBF5D /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				DEDE0DB01D7172E900965CFD /* Info.plist */,
 				DE156DCB1D7A9B0B00123A04 /* Generators.swift */,
 				DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */,
+				DE3129EC1D8BD27B0007692F /* LexisWordDescriptionTests.swift */,
 			);
 			path = LexisDatabaseTests;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEBD16951D86818D00E5C4DD /* MemoryPersistenceTests.swift in Sources */,
+				DE3129ED1D8BD27B0007692F /* LexisWordDescriptionTests.swift in Sources */,
 				DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */,
 				DE156DCE1D7B381300123A04 /* RegexTests.swift in Sources */,
 				DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */,

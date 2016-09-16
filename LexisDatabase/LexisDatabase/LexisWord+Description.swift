@@ -31,21 +31,81 @@ public enum Age: String
     
     public static func from(dictionaryCode code: String) -> Age?
     {
-        switch code
-        {
-            case "X" : return .X
-            case "A" : return .A
-            case "B" : return .B
-            case "C" : return .C
-            case "D" : return .D
-            case "E" : return .E
-            case "F" : return .F
-            case "H" : return .H
-            default :
-                LOG.warn("Unknown Dictionary code for Age: \(code)")
-                return nil
-        }
+        let ages: [String: Age] =
+        [
+            "X": .X,
+            "A": .A,
+            "B": .B,
+            "C": .C,
+            "D": .D,
+            "E": .E,
+            "F": .F,
+            "H": .H
+        ]
         
+        if let age = ages[code]
+        {
+            return age
+        }
+        else
+        {
+            LOG.warn("Unknown Dictionary code for Age: \(code)")
+            return nil
+        }
+    }
+}
+
+/**
+    The Subject Area represents the discipline in which the word is used,
+    for example, in medical fields, or in agriculture.
+ */
+public enum SubjectArea: String
+{
+    case X = "All areas"
+    case A = "Agriculture, Flora, Fauna, Land, Equipment, Rural"
+    case B = "Biological, Medical, Body Parts"
+    case D = "Drama, Music, Theatre, Art, Painting, Sculpture"
+    case E = "Ecclesiastic, Biblical, Religious"
+    case G = "Grammar, Retoric, Logic, Literature, Schools"
+    case L = "Legal, Goverment, Tax, Financial, Political, Titles"
+    case P = "Poetic"
+    case S = "Science, Philosophy, Mathematics, Units/Measurements"
+    case T = "Technical, Architecture, Topography, Surveying"
+    case W = "Warn, Military, Naval, Ships, Armor"
+    case Y = "Muthology"
+
+    public var parts: [String]
+    {
+        return self.rawValue.components(separatedBy: ", ")
+    }
+    
+    public static func from(dictionaryCode code: String) -> SubjectArea?
+    {
+        let subjectAreas: [String: SubjectArea] =
+        [
+            "X": .X,
+            "A": .A,
+            "B": .B,
+            "D": .D,
+            "E": .E,
+            "G": .G,
+            "L": .L,
+            "P": .P,
+            "S": .S,
+            "T": .T,
+            "W": .W,
+            "Y": .Y
+        ]
+        
+        if let subjectArea = subjectAreas[code]
+        {
+            return subjectArea
+        }
+        else
+        {
+            LOG.warn("Could not find a suitable subject area for dictionary code: \(code)")
+            return nil
+        }
     }
 }
 

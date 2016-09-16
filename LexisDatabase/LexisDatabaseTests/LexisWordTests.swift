@@ -196,27 +196,3 @@ class LexisWordTests: XCTestCase
         XCTAssertNotEqual(first, second)
     }
 }
-
-extension LexisWordTests
-{
-    func testAgeEnum()
-    {
-        let possibleAges = "X,A,B,C,D,E,F,G,H".components(separatedBy: ",")
-        
-        let randomCode = possibleAges.anyElement!
-        
-        let age = Age.from(dictionaryCode: randomCode)
-        
-        XCTAssertNotNil(age)
-        print(age!)
-    }
-    
-    func testAgeEnumWithInvalidValue()
-    {
-        let impossibleAges = "1,2,3,4,T,Y,R,E,V,N".components(separatedBy: ",")
-        let randomCode = impossibleAges.anyElement!
-        
-        let age = Age.from(dictionaryCode: randomCode)
-        XCTAssert(randomCode == nil, "Expected nil Age")
-    }
-}
