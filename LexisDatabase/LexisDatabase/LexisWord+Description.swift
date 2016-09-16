@@ -32,7 +32,7 @@ public enum Age: String
     
     public static func from(dictionaryCode code: String) -> Age?
     {
-        let ages: [String: Age] =
+        let codes: [String: Age] =
         [
             "X": .X,
             "A": .A,
@@ -45,7 +45,7 @@ public enum Age: String
             "H": .H
         ]
         
-        if let age = ages[code]
+        if let age = codes[code]
         {
             return age
         }
@@ -83,7 +83,7 @@ public enum SubjectArea: String
     
     public static func from(dictionaryCode code: String) -> SubjectArea?
     {
-        let subjectAreas: [String: SubjectArea] =
+        let codes: [String: SubjectArea] =
         [
             "X": .X,
             "A": .A,
@@ -99,7 +99,7 @@ public enum SubjectArea: String
             "Y": .Y
         ]
         
-        if let subjectArea = subjectAreas[code]
+        if let subjectArea = codes[code]
         {
             return subjectArea
         }
@@ -137,7 +137,7 @@ public enum GeographicalArea: String
     case U = "Eastern Europe"
     
     
-    static func from(dictionaryCode code: String) -> GeographicalArea?
+    public static func from(dictionaryCode code: String) -> GeographicalArea?
     {
         let codes: [String: GeographicalArea] =
         [
@@ -168,6 +168,52 @@ public enum GeographicalArea: String
         else
         {
             LOG.warn("Could not load geographical area from code: \(code)")
+            return nil
+        }
+    }
+}
+
+/**
+    Frequency is an indication of the relative frequency for a word.
+    This code also applies differently to inflections.
+    If there were several matches to an input word,
+    this key may be used to sort teh output, or exclude rate interpretations.
+ */
+public enum Frequency: String
+{
+    case X = "Unknown"
+    case A = "Very frequenetly; Used in all Elmentary Latin books. Definitely top 1000 words"
+    case B = "Frequent, next top 2000 words"
+    case C = "Common; For dictionary, in the top 10,000 words"
+    case D = "Lesser; For dictionary, in top 20,1000 words"
+    case E = "Uncommon; 2 or 3 citations"
+    case I = "Inscription; The only citation is scripture"
+    case M = "Grafitti; Presently not used much"
+    case N = "Pliny; Things that appear only in the Pliny Natural History"
+    
+    public static func from(dictionaryCode code: String) -> Frequency?
+    {
+        
+        let codes: [String: Frequency] =
+        [
+            "X": .X,
+            "A": .A,
+            "B": .B,
+            "C": .C,
+            "D": .D,
+            "E": .E,
+            "I": .I,
+            "M": .M,
+            "N": .N
+        ]
+        
+        if let frequency = codes[code]
+        {
+            return frequency
+        }
+        else
+        {
+            LOG.warn("Failed to determine frequency from dictionary code: \(code)")
             return nil
         }
     }
