@@ -27,6 +27,7 @@ public enum Age: String
     case D = "Late, post-classical period (300-500 AD)"
     case E = "Later; Latin not in use during Classical times (600-1000 AD) Christian"
     case F = "In use throughout the Medieval period (1600-1800 AD)"
+    case G = "In use during the Scholarly/Scientific period (1600-1800 AD)"
     case H = "Modern; Coined recently; words for new things (1900 AD onwards)"
     
     public static func from(dictionaryCode code: String) -> Age?
@@ -40,6 +41,7 @@ public enum Age: String
             "D": .D,
             "E": .E,
             "F": .F,
+            "G": .G,
             "H": .H
         ]
         

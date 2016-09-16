@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyGenerator
 import Foundation
 @testable import LexisDatabase
 import XCTest
@@ -35,11 +36,21 @@ class LexisWordDescriptionTests: XCTestCase
     
     func testSubjectAreaEnum()
     {
-        let possibleAreas = "X,A,B,D,E,G,K,P,S,T,W,Y".components(separatedBy: ",")
+        let possibleAreas = "X,A,B,D,E,G,K,L,P,S,T,W,Y".components(separatedBy: ",")
         let randomCode = possibleAreas.anyElement!
         
         let subjectArea = SubjectArea.from(dictionaryCode: randomCode)
         XCTAssertNotNil(subjectArea)
         print(subjectArea!)
+    }
+    
+    func testSubjectAreaEnumWithInvalidValue()
+    {
+        let impossibleCodes = "1,2,3,4,5,6,7,8,9,0,Q,R,K,Z".components(separatedBy: ",")
+        let randomCode = impossibleCodes.anyElement!
+        
+        let subject = SubjectArea.from(dictionaryCode: randomCode)
+        XCTAssertNil(subject)
+        XCTAssertTrue(subject == nil, "Expected subject to be nil with unknown code: \(randomCode)")
     }
 }
