@@ -112,6 +112,67 @@ public enum SubjectArea: String
 }
 
 
+/**
+    The Geographical Area represents where in the world the word was commonly used.
+ */
+public enum GeographicalArea: String
+{
+    case X = "All area"
+    case A = "Africa"
+    case B = "Britain"
+    case C = "China"
+    case D = "Scandinavia"
+    case E = "Egypt"
+    case F = "France/Gaul"
+    case G = "Germany"
+    case H = "Greece"
+    case I = "Italy, Rome"
+    case J = "India"
+    case K = "Balkans"
+    case N = "Netherlands"
+    case P = "Persia"
+    case Q = "Near East"
+    case R = "Russia"
+    case S = "Spain"
+    case U = "Eastern Europe"
+    
+    
+    static func from(dictionaryCode code: String) -> GeographicalArea?
+    {
+        let codes: [String: GeographicalArea] =
+        [
+            "X": .X,
+            "A": .A,
+            "B": .B,
+            "C": .C,
+            "D": .D,
+            "E": .E,
+            "F": .F,
+            "G": .G,
+            "H": .H,
+            "I": .I,
+            "J": .J,
+            "K": .K,
+            "N": .N,
+            "P": .P,
+            "Q": .Q,
+            "R": .R,
+            "S": .S,
+            "U": .U
+        ]
+        
+        if let geographicalArea = codes[code]
+        {
+            return geographicalArea
+        }
+        else
+        {
+            LOG.warn("Could not load geographical area from code: \(code)")
+            return nil
+        }
+    }
+}
+
 //MARK: Functions for extracting descriptions from dictionary codes.
 extension LexisWord
 {
