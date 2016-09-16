@@ -165,7 +165,13 @@ class LexisWordTests: XCTestCase
         let differentForms = LexisWord(forms: randomForms, wordType: wordType, definitions: definitions)
         XCTAssertTrue(differentForms != word)
         
-        let differentWordType = LexisWord(forms: forms, wordType: Data.randomWordType, definitions: definitions)
+        var differentWordType = LexisWord(forms: forms, wordType: Data.randomWordType, definitions: definitions)
+        
+        while differentWordType == word
+        {
+            differentWordType = LexisWord(forms: forms, wordType: Data.randomWordType, definitions: definitions)
+        }
+        
         XCTAssertTrue(differentWordType != word)
         
         let differentDefinitions = LexisWord(forms: forms, wordType: wordType, definitions: randomDefintions)
@@ -188,5 +194,29 @@ class LexisWordTests: XCTestCase
         let second = other.hashValue
         
         XCTAssertNotEqual(first, second)
+    }
+}
+
+extension LexisWordTests
+{
+    func testAgeEnum()
+    {
+        let possibleAges = "X,A,B,C,D,E,F,G,H".components(separatedBy: ",")
+        
+        let randomCode = possibleAges.anyElement!
+        
+        let age = Age.from(dictionaryCode: randomCode)
+        
+        XCTAssertNotNil(age)
+        print(age!)
+    }
+    
+    func testAgeEnumWithInvalidValue()
+    {
+        let impossibleAges = "1,2,3,4,T,Y,R,E,V,N".components(separatedBy: ",")
+        let randomCode = impossibleAges.anyElement!
+        
+        let age = Age.from(dictionaryCode: randomCode)
+        XCTAssert(randomCode == nil, "Expected nil Age")
     }
 }
