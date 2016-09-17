@@ -52,9 +52,14 @@ public class LexisDefinition: NSObject, NSCoding
     }
 }
 
-public func ==(lhs: LexisDefinition, rhs: LexisDefinition) -> Bool
+public func ==(left: LexisDefinition, right: LexisDefinition) -> Bool
 {
-    return lhs.terms == rhs.terms
+    return left.terms == right.terms
+}
+
+public func !=(left: LexisDefinition, right: LexisDefinition) -> Bool
+{
+    return !(left == right)
 }
 
 extension LexisDefinition
@@ -162,6 +167,29 @@ public func ==(lhs: LexisWord, rhs: LexisWord) -> Bool
     
     return true
 }
+
+public func ==(left: [LexisDefinition], right: [LexisDefinition]) -> Bool
+{
+    guard left.count == right.count else { return false }
+    
+    for (index, leftValue) in left.enumerated()
+    {
+        let rightValue = right[index]
+        
+        if rightValue != leftValue
+        {
+            return false
+        }
+    }
+    
+    return true
+}
+
+public func !=(left: [LexisDefinition], right: [LexisDefinition]) -> Bool
+{
+    return !(left == right)
+}
+
 
 extension LexisWord
 {

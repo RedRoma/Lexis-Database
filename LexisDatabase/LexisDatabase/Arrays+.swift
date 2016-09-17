@@ -65,8 +65,3 @@ extension Array where Element: Equatable
     }
 }
 
-
-//func ==<Element: Equatable>(lhs: [Element], rhs: [Element]) -> Bool
-//{
-//    return lhs == rhs
-//}
