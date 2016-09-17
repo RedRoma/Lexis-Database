@@ -78,6 +78,11 @@ struct Generators
     {
         return Source.sources.anyElement!
     }
+    
+    static var randomSupplementalInformation: LexisWord.SupplementalInformation
+    {
+        return LexisWord.SupplementalInformation(age: randomAge, subjectArea: randomSubject, geographicalArea: randomGeography, frequency: randomFrequency, source: randomSource)
+    }
 }
 
 func allIntegers(from: Int, to: Int) -> [Int]
