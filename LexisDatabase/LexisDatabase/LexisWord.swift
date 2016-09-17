@@ -16,6 +16,9 @@ public enum Conjugation: String
     case Fourth
     case Irregular
     case Unconjugated
+    
+    
+    public var name: String { return self.rawValue }
 }
 
 public enum VerbType: String
@@ -27,6 +30,8 @@ public enum VerbType: String
     case SemiDeponent
     case PerfectDefinite
     case Uknown
+    
+    public var name: String { return self.rawValue }
 }
 
 public enum Gender: String
@@ -35,6 +40,8 @@ public enum Gender: String
     case Female
     case Neuter
     case Unknown
+    
+    public var name: String { return self.rawValue }
 }
 
 public enum Declension: String
@@ -47,12 +54,16 @@ public enum Declension: String
     case Vocative
     case Locative
     case Undeclined
+    
+    public var name: String { return self.rawValue }
 }
 
 public enum PronounType: String
 {
     case Reflexive
     case Personal
+    
+    public var name: String { return self.rawValue }
 }
 
 
@@ -68,6 +79,44 @@ public enum WordType: Equatable, Hashable
     case Preposition(Declension)
     case Pronoun
     case Verb(Conjugation, VerbType)
+    
+    public var name: String
+    {
+        switch self
+        {
+            case .Adjective :
+                return "Adjective"
+           
+            case .Adverb :
+                return "Adverb"
+            
+            case .Conjunction :
+                return "Conjunction"
+          
+            case .Interjection :
+                return "Interjection"
+            
+            case let .Noun(declension, gender) :
+                return "Noun - \(gender.name), \(declension.name)"
+            
+            case .Numeral : return "Numeral"
+           
+            case .PersonalPronoun :
+                return "Personal Pronoun"
+           
+            case let .Preposition(declension) :
+                return "Preposition - \(declension.name)"
+            
+            case .Pronoun :
+                return "Pronoun"
+          
+            case let .Verb(conjugation, verbType):
+                return "Verb - \(conjugation.name, verbType.name)"
+           
+            default:
+                return ""
+        }
+    }
 }
 
 public func ==(lhs: WordType, rhs: WordType) -> Bool
