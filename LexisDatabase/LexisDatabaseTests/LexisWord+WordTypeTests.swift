@@ -73,7 +73,6 @@ class LexisWord_WordTypeTests: XCTestCase
     func testDataSerialization()
     {
         let data = left.asData
-        
         let copy = WordType.from(data: data)
         
         XCTAssertTrue(copy == left)

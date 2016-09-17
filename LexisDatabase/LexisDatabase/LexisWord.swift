@@ -24,6 +24,11 @@ public class LexisDefinition: NSObject, NSCoding
 {
     public let terms: [String]
     
+    public override var description: String
+    {
+        return "LexisDefinition - \(terms)"
+    }
+    
     public init(terms: [String])
     {
         self.terms = terms
@@ -46,9 +51,11 @@ public class LexisDefinition: NSObject, NSCoding
         encoder.encode(terms, forKey: "terms")
     }
     
-    public override var description: String
+    public override func isEqual(_ object: Any?) -> Bool
     {
-        return "LexisDefinition - \(terms)"
+        guard let other = object as? LexisDefinition else { return false }
+        
+        return self == other
     }
 }
 
@@ -102,13 +109,19 @@ public class LexisWord: NSObject, NSCoding
     */
     public let definitions: [LexisDefinition]
     
+    override public var description: String
+    {
+        return "\(forms) \(wordType) : [\(definitions)]"
+    }
+    
+    
+    
     public init(forms: [String], wordType: WordType, definitions: [LexisDefinition])
     {
         self.forms = forms
         self.wordType = wordType
         self.definitions = definitions
     }
-    
 
     public convenience required init?(coder encoder: NSCoder)
     {
@@ -132,11 +145,12 @@ public class LexisWord: NSObject, NSCoding
         decoder.encode(definitions, forKey: Keys.definintions)
     }
     
-    override public var description: String
+    public override func isEqual(_ object: Any?) -> Bool
     {
-        return "\(forms) \(wordType) : [\(definitions)]"
+        guard let other = object as? LexisWord else { return false }
+        
+        return self == other
     }
-    
     
     class Keys
     {

@@ -62,6 +62,13 @@ public extension LexisWord
             encoder.encode(self.source.code, forKey: Keys.source)
         }
         
+        public override func isEqual(_ object: Any?) -> Bool
+        {
+            guard let other = object as? SupplementalInformation else { return false }
+            
+            return self == other
+        }
+        
         public override var description: String
         {
             return "[\(age.code)\(subjectArea.code)\(geographicalArea.code)\(frequency.code)\(source.code)]"

@@ -41,33 +41,4 @@ class MemoryPersistence: LexisPersistence
         words = words.filter() { $0 != word }
     }
     
-    func searchForWords(inWordList term: String) -> [LexisWord]
-    {
-        guard term.notEmpty, words.notEmpty else { return [] }
-        
-        return words.filter()
-        {
-            let match = $0.forms.anyMatch() { form in form.contains(term) }
-            return match
-        }
-    }
-    
-    func searchForWords(inDefinition term: String) -> [LexisWord]
-    {
-        guard term.notEmpty, words.notEmpty else { return [] }
-        
-        return words.filter()
-        { word in
-            
-            word.definitions.anyMatch()
-            { definitions in
-                
-                definitions.terms.anyMatch()
-                { term in
-                    
-                    term.contains(term)
-                }
-            }
-        }
-    }
 }

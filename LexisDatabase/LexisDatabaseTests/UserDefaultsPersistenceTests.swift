@@ -1,8 +1,8 @@
 //
-//  MemoryPersistenceTests.swift
+//  UserDefaultsPersistenceTests.swift
 //  LexisDatabase
 //
-//  Created by Wellington Moreno on 9/11/16.
+//  Created by Wellington Moreno on 9/17/16.
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
@@ -11,20 +11,26 @@ import Foundation
 @testable import LexisDatabase
 import XCTest
 
-class MemoryPersistenceTests: XCTestCase
+class UserDefaultsPersistenceTests: XCTestCase
 {
-    
     var word = Generators.randomWord
     var words: [LexisWord] = []
     
-    var instance: LexisPersistence!
+    var instance: UserDefaultsPersistence!
     
     override func setUp()
     {
         word = Generators.randomWord
         words = AlchemyGenerator.array() { Generators.randomWord }
         
-        instance = MemoryPersistence()
+        instance = UserDefaultsPersistence.instance
+        instance.synchronize = true
+        instance.removeAll()
+    }
+    
+    override func tearDown()
+    {
+        instance.removeAll()
     }
     
     func testSave()
@@ -37,8 +43,18 @@ class MemoryPersistenceTests: XCTestCase
         try! instance.save(words: words)
     }
     
+    func testRemoveAll()
+    {
+        try! instance.save(words: words)
+        instance.removeAll()
+        
+        let stored = instance.getAllWords()
+        XCTAssertTrue(stored.isEmpty)
+    }
+    
     func testGetAllWordsWhenEmpty()
     {
+        instance.removeAll()
         let result = instance.getAllWords()
         XCTAssertTrue(result.isEmpty)
     }
