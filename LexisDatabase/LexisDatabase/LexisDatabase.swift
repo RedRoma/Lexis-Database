@@ -22,34 +22,48 @@ public class LexisDatabase
     /**
         The Persistence Layer
      */
-    private let database: LexisPersistence = MemoryPersistence()
+    private let memory: LexisPersistence = MemoryPersistence()
+    private let persisted: LexisPersistence = UserDefaultsPersistence.instance!
     
     private init()
     {
-        let words = LexisEngine.instance.getAllWords()
+        var words = persisted.getAllWords()
+        
+        if words.isEmpty
+        {
+            words = LexisEngine.instance.getAllWords()
+            do
+            {
+                try persisted.save(words: words)
+            }
+            catch
+            {
+                LOG.error("Failed to persist Lexis Words: \(error)")
+            }
+        }
+        
         LOG.info("Loaded \(words.count) words")
         
         do
         {
-            try database.save(words: words)
+            try memory.save(words: words)
             LOG.info("Persisted words in database")
         }
         catch let ex
         {
-            LOG.error("Failed to persist words in Database: \(ex)")
+            LOG.error("Failed to save words in memory: \(ex)")
         }
     }
     
 
     public var anyWord: LexisWord
     {
-        return database.getAllWords().anyElement!
+        return memory.getAllWords().anyElement!
     }
     
     public func findWord(withTerm term: String) -> [LexisWord]
     {
-        
-        return database.searchForWords(inWordList: term)
+        return memory.searchForWords(inWordList: term)
     }
     
 }
