@@ -51,7 +51,7 @@ public enum Age: String
         return Array(codes.keys)
     }
     
-    public var description: String { return self.rawValue }
+    public var code: String { return self.rawValue }
     
     //MARK: Functions
     internal static func from(dictionaryCode code: String) -> Age?
@@ -113,7 +113,7 @@ public enum SubjectArea: String
         return self.rawValue.components(separatedBy: ", ")
     }
     
-    public var description: String { return self.rawValue }
+    public var code: String { return self.rawValue }
     
     
     //MARK: Functions
@@ -184,7 +184,7 @@ public enum GeographicalArea: String
     
     internal static var possibleCodes: [String] { return Array(codes.keys) }
     
-    public var description: String { return self.rawValue }
+    public var code: String { return self.rawValue }
     
     //MARK: Functions
     internal static func from(dictionaryCode code: String) -> GeographicalArea?
@@ -254,7 +254,7 @@ public enum Frequency: String
         }
     }
     
-    public var description: String { return self.rawValue }
+    public var code: String { return self.rawValue }
 }
 
 /**
@@ -324,7 +324,7 @@ public enum Source: String
     
     internal static var possibleCodes: [String] { return Array(codes.keys) }
     
-    public var description: String { return self.rawValue }
+    public var code: String { return self.rawValue }
     
     
     //MARK: Functions
@@ -342,11 +342,4 @@ public enum Source: String
         }
     }
     
-}
-
-//MARK: Functions for extracting descriptions from dictionary codes.
-extension LexisWord
-{
-    
-
 }
