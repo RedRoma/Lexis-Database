@@ -20,6 +20,7 @@
 		DE48082B1D720B51002CBF5D /* LatinDictionary.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEDE0DC11D717ABF00965CFD /* LatinDictionary.txt */; };
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DE7B309F1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */; };
+		DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */; };
 		DEA7E4861D7B493A009CAE25 /* LexisPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */; };
 		DEA7E4881D7B4A74009CAE25 /* MemoryPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */; };
 		DEA7E48A1D7B5B6B009CAE25 /* LexisWordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */; };
@@ -72,6 +73,7 @@
 		DE4808231D7208DC002CBF5D /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformation.swift"; sourceTree = "<group>"; };
+		DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformationTests.swift"; sourceTree = "<group>"; };
 		DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisPersistence.swift; sourceTree = "<group>"; };
 		DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPersistence.swift; sourceTree = "<group>"; };
 		DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisWordTests.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				DE156DCB1D7A9B0B00123A04 /* Generators.swift */,
 				DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */,
 				DE3129EC1D8BD27B0007692F /* LexisWordDescriptionTests.swift */,
+				DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */,
 			);
 			path = LexisDatabaseTests;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				DE3129ED1D8BD27B0007692F /* LexisWordDescriptionTests.swift in Sources */,
 				DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */,
 				DE156DCE1D7B381300123A04 /* RegexTests.swift in Sources */,
+				DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */,
 				DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */,
 				DEA7E48A1D7B5B6B009CAE25 /* LexisWordTests.swift in Sources */,
 				DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */,

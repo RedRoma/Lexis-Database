@@ -50,7 +50,7 @@ class LexisEngineTests: XCTestCase
     
     func testReadAllWords()
     {
-        let words = instance.readAllWords(fromDictionary: Data.dictionary)
+        let words = instance.readAllWords(fromDictionary: Generators.dictionary)
         XCTAssert(words.notEmpty)
         XCTAssert(words.count > 10_000)
     }
@@ -58,7 +58,7 @@ class LexisEngineTests: XCTestCase
     
     func testMapLineToWord()
     {
-        let line = Data.randomLine
+        let line = Generators.randomLine
         let lineNumber = AlchemyGenerator.integer(from: 10, to: 1000)
         
         let result = instance.mapLineToWord(line: line, at: lineNumber)

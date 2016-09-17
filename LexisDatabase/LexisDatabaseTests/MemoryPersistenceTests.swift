@@ -14,15 +14,15 @@ import XCTest
 class MemoryPersistenceTests: XCTestCase
 {
     
-    var word = Data.randomWord
+    var word = Generators.randomWord
     var words: [LexisWord] = []
     
     var instance: MemoryPersistence!
     
     override func setUp()
     {
-        word = Data.randomWord
-        words = AlchemyGenerator.array() { Data.randomWord }
+        word = Generators.randomWord
+        words = AlchemyGenerator.array() { Generators.randomWord }
         
         instance = MemoryPersistence()
     }

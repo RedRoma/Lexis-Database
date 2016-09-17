@@ -10,11 +10,11 @@ import AlchemyGenerator
 import Foundation
 @testable import LexisDatabase
 
-struct Data
+struct Generators
 {
     static let dictionary = LexisEngine.instance.readTextFile()!
     static let words = LexisEngine.instance.getAllWords()
-    static let lines = Data.dictionary.components(separatedBy: "\n").filter(String.isNotEmpty)
+    static let lines = Generators.dictionary.components(separatedBy: "\n").filter(String.isNotEmpty)
     
     static var randomWord: LexisWord
     {

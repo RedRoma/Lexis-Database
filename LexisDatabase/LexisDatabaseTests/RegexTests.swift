@@ -17,7 +17,7 @@ class RegexTests: XCTestCase
     
     override func setUp()
     {
-        randomLine = Data.randomLine
+        randomLine = Generators.randomLine
     }
     
     

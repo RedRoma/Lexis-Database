@@ -19,8 +19,8 @@ class WordTypeTests: XCTestCase
     
     override func setUp()
     {
-        left = Data.randomWordType
-        right = Data.randomWordType
+        left = Generators.randomWordType
+        right = Generators.randomWordType
     }
     
     func testEquals()
@@ -34,7 +34,7 @@ class WordTypeTests: XCTestCase
     {
         while right == left
         {
-            right = Data.randomWordType
+            right = Generators.randomWordType
         }
         
         XCTAssertFalse(right == left)
@@ -51,7 +51,7 @@ class WordTypeTests: XCTestCase
     {
         while right == left
         {
-            right = Data.randomWordType
+            right = Generators.randomWordType
         }
         
         //Technically, two values can have the same hash code, but this should not happen on a small enum
@@ -141,7 +141,7 @@ class LexisWordTests: XCTestCase
     override func setUp()
     {
         forms = randomForms
-        wordType = Data.randomWordType
+        wordType = Generators.randomWordType
         definitions = randomDefintions
         
         word = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
@@ -165,11 +165,11 @@ class LexisWordTests: XCTestCase
         let differentForms = LexisWord(forms: randomForms, wordType: wordType, definitions: definitions)
         XCTAssertTrue(differentForms != word)
         
-        var differentWordType = LexisWord(forms: forms, wordType: Data.randomWordType, definitions: definitions)
+        var differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions)
         
         while differentWordType == word
         {
-            differentWordType = LexisWord(forms: forms, wordType: Data.randomWordType, definitions: definitions)
+            differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions)
         }
         
         XCTAssertTrue(differentWordType != word)
@@ -189,7 +189,7 @@ class LexisWordTests: XCTestCase
     
     func testHashCodeWhenDifferent()
     {
-        let other = LexisWord(forms: randomForms, wordType: Data.randomWordType, definitions: randomDefintions)
+        let other = LexisWord(forms: randomForms, wordType: Generators.randomWordType, definitions: randomDefintions)
         let first = word.hashValue
         let second = other.hashValue
         
