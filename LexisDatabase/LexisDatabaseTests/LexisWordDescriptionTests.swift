@@ -15,8 +15,7 @@ class LexisWordDescriptionTests: XCTestCase
 {
     func testAgeEnum()
     {
-        let possibleAges = "X,A,B,C,D,E,F,G,H".components(separatedBy: ",")
-        
+        let possibleAges = Age.possibleCodes
         let randomCode = AlchemyGenerator.stringFromList(possibleAges)
         
         let age = Age.from(dictionaryCode: randomCode)
@@ -27,16 +26,16 @@ class LexisWordDescriptionTests: XCTestCase
     
     func testAgeEnumWithInvalidValue()
     {
-        let impossibleAges = "1,2,3,4,T,Y,R,E,V,N".components(separatedBy: ",")
-        let randomCode = AlchemyGenerator.stringFromList(impossibleAges)
+        let possibleAges = Age.possibleCodes
+        let impossibleCode = stringNotInList(possibleAges)
         
-        let age = Age.from(dictionaryCode: randomCode)
+        let age = Age.from(dictionaryCode: impossibleCode)
         XCTAssert(age == nil, "Expected nil Age")
     }
     
     func testSubjectAreaEnum()
     {
-        let possibleAreas = "X,A,B,D,E,G,K,L,P,S,T,W,Y".components(separatedBy: ",")
+        let possibleAreas = SubjectArea.possibleCodes
         let randomCode = AlchemyGenerator.stringFromList(possibleAreas)
         
         let subjectArea = SubjectArea.from(dictionaryCode: randomCode)
@@ -46,18 +45,17 @@ class LexisWordDescriptionTests: XCTestCase
     
     func testSubjectAreaEnumWithInvalidValue()
     {
-        let impossibleCodes = "1,2,3,4,5,6,7,8,9,0,Q,R,K,Z".components(separatedBy: ",")
-        let randomCode = AlchemyGenerator.stringFromList(impossibleCodes)
+        let possibleAreas = SubjectArea.possibleCodes
+        let impossibleCode = stringNotInList(possibleAreas)
         
-        let subject = SubjectArea.from(dictionaryCode: randomCode)
+        let subject = SubjectArea.from(dictionaryCode: impossibleCode)
         XCTAssertNil(subject)
-        XCTAssertTrue(subject == nil, "Expected subject to be nil with unknown code: \(randomCode)")
+        XCTAssertTrue(subject == nil, "Expected subject to be nil with unknown code: \(impossibleCode)")
     }
     
     func  testGeographicalAreaEnum()
     {
-        let possibleGeographies = "A,B,C,D,E,F,G,H,I,J,K,N,P,Q,R,S,U,X".components(separatedBy: ",")
-        
+        let possibleGeographies = GeographicalArea.possibleCodes
         let randomCode = AlchemyGenerator.stringFromList(possibleGeographies)
         
         let geographicalArea = GeographicalArea.from(dictionaryCode: randomCode)
@@ -67,10 +65,40 @@ class LexisWordDescriptionTests: XCTestCase
     
     func testGeographicalAreaAnumWithInvalidValue()
     {
-        let impossibleCodes = "1,2,3,4,5,6,7,8,9,0,T,U".components(separatedBy: ",")
-        let randomCode = AlchemyGenerator.stringFromList(impossibleCodes)
+        let possibleGeographies = GeographicalArea.possibleCodes
+        let impossibleCode = stringNotInList(possibleGeographies)
         
-        let geographicalArea = GeographicalArea.from(dictionaryCode: randomCode)
+        let geographicalArea = GeographicalArea.from(dictionaryCode: impossibleCode)
         XCTAssertTrue(geographicalArea == nil)
+    }
+    
+    func testFrequencyEnum()
+    {
+        let possibleFrequencies = Frequency.possibleCodes
+        let randomCode = AlchemyGenerator.stringFromList(possibleFrequencies)
+        
+        let frequency = Frequency.from(dictionaryCode: randomCode)
+        XCTAssertFalse(frequency == nil)
+    }
+    
+    func testFrequencyEnumWithInvalidCode()
+    {
+        let possibleFrequencies = Frequency.possibleCodes
+        let impossibleCode = stringNotInList(possibleFrequencies)
+        
+        let frequency = Frequency.from(dictionaryCode: impossibleCode)
+        XCTAssertTrue(frequency == nil)
+    }
+    
+    fileprivate func stringNotInList(_ strings: [String]) -> String
+    {
+        var character = AlchemyGenerator.alphanumericString(ofSize: 1)
+        
+        while strings.contains(character)
+        {
+            character = AlchemyGenerator.alphanumericString(ofSize: 1)
+        }
+        
+        return character
     }
 }

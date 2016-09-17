@@ -31,20 +31,31 @@ public enum Age: String
     case G = "In use during the Scholarly/Scientific period (1600-1800 AD)"
     case H = "Modern; Coined recently; words for new things (1900 AD onwards)"
     
+    
+    //MARK: Variables
+    internal static let codes: [String: Age] =
+    [
+        "X": .X,
+        "A": .A,
+        "B": .B,
+        "C": .C,
+        "D": .D,
+        "E": .E,
+        "F": .F,
+        "G": .G,
+        "H": .H
+    ]
+    
+    internal static var possibleCodes: [String]
+    {
+        return Array(codes.keys)
+    }
+    
+    public var description: String { return self.rawValue }
+    
+    //MARK: Functions
     internal static func from(dictionaryCode code: String) -> Age?
     {
-        let codes: [String: Age] =
-        [
-            "X": .X,
-            "A": .A,
-            "B": .B,
-            "C": .C,
-            "D": .D,
-            "E": .E,
-            "F": .F,
-            "G": .G,
-            "H": .H
-        ]
         
         if let age = codes[code]
         {
@@ -56,9 +67,6 @@ public enum Age: String
             return nil
         }
     }
-    
-    public var description: String { return self.rawValue }
-    
     
 }
 
@@ -81,6 +89,25 @@ public enum SubjectArea: String
     case W = "Warn, Military, Naval, Ships, Armor"
     case Y = "Muthology"
 
+    //MARK: Variables
+    internal static let codes: [String: SubjectArea] =
+    [
+        "X": .X,
+        "A": .A,
+        "B": .B,
+        "D": .D,
+        "E": .E,
+        "G": .G,
+        "L": .L,
+        "P": .P,
+        "S": .S,
+        "T": .T,
+        "W": .W,
+        "Y": .Y
+    ]
+    
+    internal static var possibleCodes: [String] { return Array(codes.keys) }
+    
     public var parts: [String]
     {
         return self.rawValue.components(separatedBy: ", ")
@@ -88,23 +115,11 @@ public enum SubjectArea: String
     
     public var description: String { return self.rawValue }
     
+    
+    //MARK: Functions
     internal static func from(dictionaryCode code: String) -> SubjectArea?
     {
-        let codes: [String: SubjectArea] =
-        [
-            "X": .X,
-            "A": .A,
-            "B": .B,
-            "D": .D,
-            "E": .E,
-            "G": .G,
-            "L": .L,
-            "P": .P,
-            "S": .S,
-            "T": .T,
-            "W": .W,
-            "Y": .Y
-        ]
+        
         
         if let subjectArea = codes[code]
         {
@@ -143,30 +158,37 @@ public enum GeographicalArea: String
     case S = "Spain"
     case U = "Eastern Europe"
     
+    //MARK: Variables
     
+    internal static let codes: [String: GeographicalArea] =
+    [
+        "X": .X,
+        "A": .A,
+        "B": .B,
+        "C": .C,
+        "D": .D,
+        "E": .E,
+        "F": .F,
+        "G": .G,
+        "H": .H,
+        "I": .I,
+        "J": .J,
+        "K": .K,
+        "N": .N,
+        "P": .P,
+        "Q": .Q,
+        "R": .R,
+        "S": .S,
+        "U": .U
+    ]
+    
+    internal static var possibleCodes: [String] { return Array(codes.keys) }
+    
+    public var description: String { return self.rawValue }
+    
+    //MARK: Functions
     internal static func from(dictionaryCode code: String) -> GeographicalArea?
     {
-        let codes: [String: GeographicalArea] =
-        [
-            "X": .X,
-            "A": .A,
-            "B": .B,
-            "C": .C,
-            "D": .D,
-            "E": .E,
-            "F": .F,
-            "G": .G,
-            "H": .H,
-            "I": .I,
-            "J": .J,
-            "K": .K,
-            "N": .N,
-            "P": .P,
-            "Q": .Q,
-            "R": .R,
-            "S": .S,
-            "U": .U
-        ]
         
         if let geographicalArea = codes[code]
         {
@@ -179,7 +201,6 @@ public enum GeographicalArea: String
         }
     }
     
-    public var description: String { return self.rawValue }
 }
 
 /**
@@ -200,21 +221,27 @@ public enum Frequency: String
     case M = "Grafitti; Presently not used much"
     case N = "Pliny; Things that appear only in the Pliny Natural History"
     
+    
+    internal static let codes: [String: Frequency] =
+    [
+        "X": .X,
+        "A": .A,
+        "B": .B,
+        "C": .C,
+        "D": .D,
+        "E": .E,
+        "I": .I,
+        "M": .M,
+        "N": .N
+    ]
+    
+    internal static var possibleCodes: [String]
+    {
+        return Array(codes.keys)
+    }
+    
     internal static func from(dictionaryCode code: String) -> Frequency?
     {
-        
-        let codes: [String: Frequency] =
-        [
-            "X": .X,
-            "A": .A,
-            "B": .B,
-            "C": .C,
-            "D": .D,
-            "E": .E,
-            "I": .I,
-            "M": .M,
-            "N": .N
-        ]
         
         if let frequency = codes[code]
         {
@@ -264,38 +291,46 @@ public enum Source: String
     case W = "My personal guess"
     case Y,Z = "No Dictionary Reference"
     
+    //MARK: Variables
+    internal static   let codes: [String: Source] =
+    [
+        "A": .A,
+        "B": .B,
+        "C": .C,
+        "D": .D,
+        "E": .E,
+        "F": .F,
+        "G": .G,
+        "H": .H,
+        "I": .I,
+        "J": .J,
+        "K": .K,
+        "L": .L,
+        "M": .M,
+        "N": .N,
+        "O": .O,
+        "P": .P,
+        "Q": .Q,
+        "R": .R,
+        "S": .S,
+        "T": .T,
+        "U": .U,
+        "V": .V,
+        "W": .W,
+        "X": .X,
+        "Y": .Y,
+        "Z": .Z
+    ]
+    
+    internal static var possibleCodes: [String] { return Array(codes.keys) }
+    
+    public var description: String { return self.rawValue }
+    
+    
+    //MARK: Functions
     internal static func from(dictionaryCode code: String) -> Source?
     {
-        let codes: [String: Source] =
-        [
-            "A": .A,
-            "B": .B,
-            "C": .C,
-            "D": .D,
-            "E": .E,
-            "F": .F,
-            "G": .G,
-            "H": .H,
-            "I": .I,
-            "J": .J,
-            "K": .K,
-            "L": .L,
-            "M": .M,
-            "N": .N,
-            "O": .O,
-            "P": .P,
-            "Q": .Q,
-            "R": .R,
-            "S": .S,
-            "T": .T,
-            "U": .U,
-            "V": .V,
-            "W": .W,
-            "X": .X,
-            "Y": .Y,
-            "Z": .Z
-        ]
-        
+      
         if let source = codes[code]
         {
             return source
@@ -309,7 +344,6 @@ public enum Source: String
     }
     
     
-    public var description: String { return self.rawValue }
 }
 
 //MARK: Functions for extracting descriptions from dictionary codes.
