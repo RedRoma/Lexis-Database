@@ -145,42 +145,64 @@ public enum WordType: Equatable, Hashable
     case Pronoun
     case Verb(Conjugation, VerbType)
     
-    public var name: String
+    public var asJSON: NSDictionary
     {
+        let wordType = NSMutableDictionary()
+        let wordTypeKey = "wordType"
+        
         switch self
         {
             case .Adjective :
-                return "Adjective"
+                wordType[wordTypeKey] = "Adjective"
            
             case .Adverb :
-                return "Adverb"
+                wordType[wordTypeKey] = "Adverb"
             
             case .Conjunction :
-                return "Conjunction"
+                wordType[wordTypeKey] = "Conjunction"
           
             case .Interjection :
-                return "Interjection"
+                wordType[wordTypeKey] = "Interjection"
             
             case let .Noun(declension, gender) :
-                return "Noun - \(gender.name), \(declension.name)"
+                wordType[wordTypeKey] = "Noun"
+                wordType["gender"] = gender.name
+                wordType["declension"] = declension.name
             
-            case .Numeral : return "Numeral"
+            case .Numeral :
+                wordType[wordTypeKey] = "Numeral"
            
             case .PersonalPronoun :
-                return "Personal Pronoun"
+                wordType[wordTypeKey] = "PersonalPronoun"
            
             case let .Preposition(declension) :
-                return "Preposition - \(declension.name)"
+                wordType[wordTypeKey] = "Preposition"
+                wordType["declension"] = declension.name
             
             case .Pronoun :
-                return "Pronoun"
+                wordType[wordTypeKey] = "Pronoun"
           
             case let .Verb(conjugation, verbType):
-                return "Verb - \(conjugation.name, verbType.name)"
-           
-            default:
-                return ""
+                wordType[wordTypeKey] = "Verb"
+                wordType["conjugation"] = conjugation.name
+                wordType["verbType"] = verbType.name
         }
+        
+        return wordType
+    }
+    
+    public var description: String
+    {
+        guard let data = try? JSONSerialization.data(withJSONObject: asJSON, options: [])
+        else
+        {
+            LOG.warn("Failed to serialize as JSON: \(asJSON)")
+            return ""
+        }
+        
+        let jsonString = String.init(data: data, encoding: .utf8)
+        
+        return jsonString ?? ""
     }
 }
 

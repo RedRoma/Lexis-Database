@@ -58,6 +58,18 @@ class WordTypeTests: XCTestCase
         XCTAssertNotEqual(right.hashValue, left.hashValue)
     }
     
+    func testAsJSON()
+    {
+        var json = WordType.Adjective.asJSON
+        var data = try! JSONSerialization.data(withJSONObject: json, options: [])
+        
+        json = WordType.Adverb.asJSON
+        data = try! JSONSerialization.data(withJSONObject: json, options: [])
+        
+        json = WordType.Noun(Declension.Accusative, Gender.Female).asJSON
+        data = try! JSONSerialization.data(withJSONObject: json, options: [])
+    }
+    
 }
 
 class DefinitionTests: XCTestCase
