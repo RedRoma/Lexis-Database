@@ -60,7 +60,7 @@ public enum Age: String
     /** A short description of the Dictionary code */
     public var description: String
     {
-        return Age.descriptions[self]!
+        return Age.descriptions[self] ?? "Uknown"
     }
     
     
@@ -132,7 +132,10 @@ public enum SubjectArea: String
     
     public var code: String { return self.rawValue }
     
-    public var description: String { return SubjectArea.descriptions[self]! }
+    public var description: String
+    {
+        return SubjectArea.descriptions[self] ?? "Uknown"
+    }
     
     public var descriptionParts: [String]
     {
@@ -161,68 +164,71 @@ public enum SubjectArea: String
  */
 public enum GeographicalArea: String
 {
-    case X = "All area"
-    case A = "Africa"
-    case B = "Britain"
-    case C = "China"
-    case D = "Scandinavia"
-    case E = "Egypt"
-    case F = "France/Gaul"
-    case G = "Germany"
-    case H = "Greece"
-    case I = "Italy, Rome"
-    case J = "India"
-    case K = "Balkans"
-    case N = "Netherlands"
-    case P = "Persia"
-    case Q = "Near East"
-    case R = "Russia"
-    case S = "Spain"
-    case U = "Eastern Europe"
+    case X
+    case A
+    case B
+    case C
+    case D
+    case E
+    case F
+    case G
+    case H
+    case I
+    case J
+    case K
+    case N
+    case P
+    case Q
+    case R
+    case S
+    case U
     
     //MARK: Variables
     
-    internal static let codeMappings: [String: GeographicalArea] =
+    internal static let descriptions: [GeographicalArea: String] =
     [
-        "X": .X,
-        "A": .A,
-        "B": .B,
-        "C": .C,
-        "D": .D,
-        "E": .E,
-        "F": .F,
-        "G": .G,
-        "H": .H,
-        "I": .I,
-        "J": .J,
-        "K": .K,
-        "N": .N,
-        "P": .P,
-        "Q": .Q,
-        "R": .R,
-        "S": .S,
-        "U": .U
+        .X: "All area",
+        .A: "Africa",
+        .B: "Britain",
+        .C: "China",
+        .D: "Scandinavia",
+        .E: "Egypt",
+        .F: "France/Gaul",
+        .G: "Germany",
+        .H: "Greece",
+        .I: "Italy, Rome",
+        .J: "India",
+        .K: "Balkans",
+        .N: "Netherlands",
+        .P: "Persia",
+        .Q: "Near East",
+        .R: "Russia",
+        .S: "Spain",
+        .U: "Eastern Europe"
     ]
     
-    internal static var codes: [String]
+    public static var codes: [String]
     {
-        return Array(codeMappings.keys)
+        return geophraphies.map() { $0.code }
     }
     
-    internal static var geophraphies: [GeographicalArea]
-    {
-        return Array(Set(codeMappings.values))
-    }
+    public static let geophraphies: [GeographicalArea] = [.X, .A, .B, .C, .D, .E, .F, .G, .H, .I, .J, .K, .N, .P, .Q, .R, .S, .U]
     
     public var code: String { return self.rawValue }
+    
+    public var description: String
+    {
+        return GeographicalArea.descriptions[self] ?? "Uknown"
+    }
+    
     
     //MARK: Functions
     
     /** Load a GeographicalArea from a String dictionary code */
-    internal static func from(dictionaryCode code: String) -> GeographicalArea?
+    public static func from(dictionaryCode code: String) -> GeographicalArea?
     {
         
-        if let geographicalArea = codeMappings[code]
+        if let geographicalArea = GeographicalArea(rawValue: code)
         {
             return geographicalArea
         }
@@ -276,7 +282,10 @@ public enum Frequency: String
     
     public var code: String { return self.rawValue }
     
-    public var description: String { return Frequency.descriptions[self]! }
+    public var description: String
+    {
+        return Frequency.descriptions[self] ?? "Uknown"
+    }
     
     internal static func from(dictionaryCode code: String) -> Frequency?
     {
@@ -364,7 +373,10 @@ public enum Source: String
     
     public var code: String { return self.rawValue }
     
-    public var description: String { return Source.descriptions[self] ?? "No Dictionary Source" }
+    public var description: String
+    {
+        return Source.descriptions[self] ?? "No Dictionary Source"
+    }
     
     
     //MARK: Functions

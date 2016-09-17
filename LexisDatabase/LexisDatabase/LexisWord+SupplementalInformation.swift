@@ -62,6 +62,17 @@ public extension LexisWord
             aCoder.encode(self.source.code, forKey: Keys.source)
         }
         
+        public override var description: String
+        {
+            return "[\(age.code)\(subjectArea.code)\(geographicalArea.code)\(frequency.code)\(source.code)]"
+        }
+        
+        public override var hashValue: Int
+        {
+            return description.hashValue
+        }
+        
+        //Used for NSCoding
         private class Keys
         {
             static let age = "age"
@@ -70,11 +81,13 @@ public extension LexisWord
             static let frequency = "frequency"
             static let source = "source"
         }
-        
-        public override var description: String
-        {
-            return "[\(age.code)\(subjectArea.code)\(geographicalArea.code)\(frequency.code)\(source.code)]"
-        }
     }
     
+}
+
+
+public func ==(left: LexisWord.SupplementalInformation, right: LexisWord.SupplementalInformation) -> Bool
+{
+    //Description is a quick and simple way to test equality
+    return left.description == right.description
 }

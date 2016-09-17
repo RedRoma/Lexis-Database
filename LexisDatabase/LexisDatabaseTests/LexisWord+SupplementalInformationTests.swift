@@ -14,31 +14,46 @@ import XCTest
 class LexisWord_SupplementalInformationTests: XCTestCase
 {
     
-    private var information: SupplementalInformation!
+    private var instance: SupplementalInformation!
     
     override func setUp()
     {
-        information = Generators.randomSupplementalInformation
+        instance = Generators.randomSupplementalInformation
     }
     
     func testEncoding()
     {
-        let data = NSKeyedArchiver.archivedData(withRootObject: information)
-        XCTAssertFalse(data == nil)
+        let data = NSKeyedArchiver.archivedData(withRootObject: instance)
         XCTAssertFalse(data.isEmpty)
         
-        let extracted = NSKeyedUnarchiver.unarchiveObject(with: data) as! LexisWord.SupplementalInformation
+        let extracted: SupplementalInformation! = NSKeyedUnarchiver.unarchiveObject(with: data) as! LexisWord.SupplementalInformation
         
-        XCTAssertEqual(extracted, information)
+        XCTAssertTrue(extracted == instance)
     }
     
     func testDecoding()
     {
-        let archive = NSKeyedArchiver.archivedData(withRootObject: information)
+        let archive = NSKeyedArchiver.archivedData(withRootObject: instance)
         
-        let result = NSKeyedUnarchiver.unarchiveObject(with: archive) as? SupplementalInformation
+        let result: SupplementalInformation! = NSKeyedUnarchiver.unarchiveObject(with: archive) as? SupplementalInformation
         XCTAssertFalse(result == nil)
     
-        XCTAssertEqual(result, information)
+        XCTAssertTrue(result == instance)
+    }
+    
+    func testEqualsFunction()
+    {
+        let archive = NSKeyedArchiver.archivedData(withRootObject: instance)
+        
+        let copy = NSKeyedUnarchiver.unarchiveObject(with: archive) as! SupplementalInformation
+        
+        XCTAssertTrue(copy == instance)
+    }
+    
+    func testEqualsFunctionWhenNotEquals()
+    {
+        let other = Generators.randomSupplementalInformation
+        
+        XCTAssertFalse(other == instance)
     }
 }
