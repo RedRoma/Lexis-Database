@@ -47,15 +47,17 @@ public enum Age: String
     
     
     //MARK: Variables
-    internal static var codes: [String]
+    public static var codes: [String]
     {
         return ages.map() { $0.code }
     }
     
-    internal static let ages: [Age] = [.X, .A, .B, .C, .D, .E, .F, .G, .H]
+    public static let ages: [Age] = [.X, .A, .B, .C, .D, .E, .F, .G, .H]
     
+    /** The corresponding dictionary code as a String */
     public var code: String { return self.rawValue }
     
+    /** A short description of the Dictionary code */
     public var description: String
     {
         return Age.descriptions[self]!
@@ -63,7 +65,11 @@ public enum Age: String
     
     
     //MARK: Functions
-    internal static func from(dictionaryCode code: String) -> Age?
+    
+    /**
+        Load an Age from a String dictionary code representation.
+    */
+    public static func from(dictionaryCode code: String) -> Age?
     {
         
         if let age = Age(rawValue: code)
@@ -116,23 +122,25 @@ public enum SubjectArea: String
         .Y: "Muthology"
     ]
     
-    internal static var codes: [String]
+    public static var codes: [String]
     {
         return areas.map() { $0.code }
     }
     
-    internal static let areas: [SubjectArea] = [.X, .A, .B, .D, .E, .G, .L, .P, .S, .T, .W, .Y]
+    public static let areas: [SubjectArea] = [.X, .A, .B, .D, .E, .G, .L, .P, .S, .T, .W, .Y]
     
-    public var parts: [String]
-    {
-        return self.rawValue.components(separatedBy: ", ")
-    }
     
     public var code: String { return self.rawValue }
     
+    public var description: String { return SubjectArea.descriptions[self]! }
+    
+    public var descriptionParts: [String]
+    {
+        return self.description.components(separatedBy: ", ")
+    }
     
     //MARK: Functions
-    internal static func from(dictionaryCode code: String) -> SubjectArea?
+    public static func from(dictionaryCode code: String) -> SubjectArea?
     {
         
         if let subjectArea = SubjectArea(rawValue: code)
@@ -209,6 +217,8 @@ public enum GeographicalArea: String
     public var code: String { return self.rawValue }
     
     //MARK: Functions
+    
+    /** Load a GeographicalArea from a String dictionary code */
     internal static func from(dictionaryCode code: String) -> GeographicalArea?
     {
         
@@ -233,44 +243,45 @@ public enum GeographicalArea: String
  */
 public enum Frequency: String
 {
-    case X = "Unknown"
-    case A = "Very frequenetly; Used in all Elmentary Latin books. Definitely top 1000 words"
-    case B = "Frequent, next top 2000 words"
-    case C = "Common; For dictionary, in the top 10,000 words"
-    case D = "Lesser; For dictionary, in top 20,1000 words"
-    case E = "Uncommon; 2 or 3 citations"
-    case I = "Inscription; The only citation is scripture"
-    case M = "Grafitti; Presently not used much"
-    case N = "Pliny; Things that appear only in the Pliny Natural History"
+    case X
+    case A
+    case B
+    case C
+    case D
+    case E
+    case I
+    case M
+    case N
     
     
-    internal static let codeMappings: [String: Frequency] =
+    internal static let descriptions: [Frequency: String] =
     [
-        "X": .X,
-        "A": .A,
-        "B": .B,
-        "C": .C,
-        "D": .D,
-        "E": .E,
-        "I": .I,
-        "M": .M,
-        "N": .N
+        .X: "Unknown",
+        .A: "Very frequenetly; Used in all Elmentary Latin books. Definitely top 1000 words",
+        .B: "Frequent, next top 2000 words",
+        .C: "Common; For dictionary, in the top 10,000 words",
+        .D: "Lesser; For dictionary, in top 20,1000 words",
+        .E: "Uncommon; 2 or 3 citations",
+        .I: "Inscription; The only citation is scripture",
+        .M: "Grafitti; Presently not used much",
+        .N: "Pliny; Things that appear only in the Pliny Natural History",
     ]
+    
+    internal static let frequencies: [Frequency] = [.X, .A, .B, .C, .D, .E, .I, .M, .N]
     
     internal static var codes: [String]
     {
-        return Array(codeMappings.keys)
+        return frequencies.map() { $0.code }
     }
     
-    internal static var frequencies: [Frequency]
-    {
-        return Array(Set(codeMappings.values))
-    }
+    public var code: String { return self.rawValue }
+    
+    public var description: String { return Frequency.descriptions[self]! }
     
     internal static func from(dictionaryCode code: String) -> Frequency?
     {
         
-        if let frequency = codeMappings[code]
+        if let frequency = Frequency(rawValue: code)
         {
             return frequency
         }
@@ -281,7 +292,6 @@ public enum Frequency: String
         }
     }
     
-    public var code: String { return self.rawValue }
 }
 
 /**
@@ -290,83 +300,78 @@ public enum Frequency: String
  */
 public enum Source: String
 {
-    
-    
-    case X = "General or unknown"
+    case X
     case A
-    case B = "C.H.Beeson, A Primer of Medieval Latin, 1925 (Bee)"
-    case C = "Charles Beard, Cassell's Latin Dictionary 1892 (CAS)"
-    case D = "J.N.Adams, Latin Sexual Vocabulary, 1982 (Sex)"
-    case E = "L.F.Stelten, Dictionary of Eccles. Latin, 1995 (Ecc)"
-    case F = "Roy J. Deferrari, Dictionary of St. Thomas Aquinas, 1960 (DeF)"
-    case G = "Gildersleeve + Lodge, Latin Grammar 1895 (G+L)"
-    case H = "Collatinus Dictionary by Yves Ouvrard"
-    case I = "Leverett, F.P., Lexicon of the Latin Language, Boston 1845"
+    case B
+    case C
+    case D
+    case E
+    case F
+    case G
+    case H
+    case I
     case J
-    case K = "Calepnus Novus, modern Latin, by Guy Licoppe (Cal)"
-    case L = "Lewis, C.S., Elementary Latin Dictionary 1891"
-    case M = "Latham, Revised Medieval Word List, 1980"
-    case N = "Lynn Nelso, Wordlist"
-    case O = "Oxford Latin Dictionary, 1982 (OLD)"
-    case P = "Souter, A Glossary of Later Latin to 600 A.D., Oxford 1949"
-    case Q = "Other, cited or unspecified dictionaries"
-    case R = "Plater & White, A Grammar of the Vulgate, Oxford 1926"
-    case S = "Lewis and Short, A Latin Dictionary, 1870 (L+S)"
-    case T = "Found in a translation -- no dictionary reference"
-    case U = "Du Cange"
-    case V = "Vademecum in opus Saxonis - Franz Blatt (Saxo)"
-    case W = "My personal guess"
-    case Y,Z = "No Dictionary Reference"
+    case K
+    case L
+    case M
+    case N
+    case O
+    case P
+    case Q
+    case R
+    case S
+    case T
+    case U
+    case V
+    case W
+    case Y
+    case Z
     
     //MARK: Variables
-    internal static let codeMappings: [String: Source] =
+    
+    internal static let descriptions: [Source: String] =
     [
-        "A": .A,
-        "B": .B,
-        "C": .C,
-        "D": .D,
-        "E": .E,
-        "F": .F,
-        "G": .G,
-        "H": .H,
-        "I": .I,
-        "J": .J,
-        "K": .K,
-        "L": .L,
-        "M": .M,
-        "N": .N,
-        "O": .O,
-        "P": .P,
-        "Q": .Q,
-        "R": .R,
-        "S": .S,
-        "T": .T,
-        "U": .U,
-        "V": .V,
-        "W": .W,
-        "X": .X,
-        "Y": .Y,
-        "Z": .Z
+        .X: "General or unknown",
+        .B: "C.H.Beeson, A Primer of Medieval Latin, 1925 (Bee)",
+        .C: "Charles Beard, Cassell's Latin Dictionary 1892 (CAS)",
+        .D: "J.N.Adams, Latin Sexual Vocabulary, 1982 (Sex)",
+        .E: "L.F.Stelten, Dictionary of Eccles. Latin, 1995 (Ecc)",
+        .F: "Roy J. Deferrari, Dictionary of St. Thomas Aquinas, 1960 (DeF)",
+        .G: "Gildersleeve + Lodge, Latin Grammar 1895 (G+L)",
+        .H: "Collatinus Dictionary by Yves Ouvrard",
+        .I: "Leverett, F.P., Lexicon of the Latin Language, Boston 1845",
+        .K: "Calepnus Novus, modern Latin, by Guy Licoppe (Cal)",
+        .L: "Lewis, C.S., Elementary Latin Dictionary 1891",
+        .M: "Latham, Revised Medieval Word List, 1980",
+        .N: "Lynn Nelso, Wordlist",
+        .O: "Oxford Latin Dictionary, 1982 (OLD)",
+        .P: "Souter, A Glossary of Later Latin to 600 A.D., Oxford 1949",
+        .Q: "Other, cited or unspecified dictionaries",
+        .R: "Plater & White, A Grammar of the Vulgate, Oxford 1926",
+        .S: "Lewis and Short, A Latin Dictionary, 1870 (L+S)",
+        .T: "Found in a translation -- no dictionary reference",
+        .U: "Du Cange",
+        .V: "Vademecum in opus Saxonis - Franz Blatt (Saxo)",
+        .W: "My personal guess"
     ]
     
-    internal static var codes: [String]
+    public static var codes: [String]
     {
-        return Array(codeMappings.keys)
+        return sources.map() { $0.code }
     }
     
-    internal static var sources: [Source]
-    {
-        return Array(Set(codeMappings.values))
-    }
+    public static let sources: [Source] = [.X, .A, .B, .C, .D, .E, .F, .G, .H, .I, .J, .K, .L, .M, .N, .O, .P, .Q, .R, .S, .T, .U, .V, .W, .Y, .Z]
     
     public var code: String { return self.rawValue }
     
+    public var description: String { return Source.descriptions[self] ?? "No Dictionary Source" }
+    
     
     //MARK: Functions
-    internal static func from(dictionaryCode code: String) -> Source?
+    public static func from(dictionaryCode code: String) -> Source?
     {
       
-        if let source = codeMappings[code]
+        if let source = Source(rawValue: code)
         {
             return source
         }
