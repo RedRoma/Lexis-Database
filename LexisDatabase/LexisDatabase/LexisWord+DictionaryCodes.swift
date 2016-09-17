@@ -9,10 +9,6 @@
 import Foundation
 import Sulcus
 
-public extension LexisWord
-{
-    
-}
 
 
 /**
