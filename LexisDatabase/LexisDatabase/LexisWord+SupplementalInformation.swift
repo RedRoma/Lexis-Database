@@ -10,6 +10,8 @@ import Foundation
 import Sulcus
 
 
+internal typealias SupplementalInformation = LexisWord.SupplementalInformation
+
 //MARK: Supplemental Information and Functions for extracting descriptions from dictionary codes.
 public extension LexisWord
 {
@@ -30,17 +32,17 @@ public extension LexisWord
             self.source = source
         }
         
-        public convenience required init?(coder decoder: NSCoder)
+        public convenience required init?(coder aDecoder: NSCoder)
         {
-            guard let ageString = decoder.decodeObject(forKey: Keys.age) as? String,
+            guard let ageString = aDecoder.decodeObject(forKey: Keys.age) as? String,
                 let age = Age.from(dictionaryCode: ageString),
-                let subjectAreaString = decoder.decodeObject(forKey: Keys.subjectArea) as? String,
+                let subjectAreaString = aDecoder.decodeObject(forKey: Keys.subjectArea) as? String,
                 let subjectArea = SubjectArea.from(dictionaryCode: subjectAreaString),
-                let geographicalAreaString = decoder.decodeObject(forKey: Keys.geopgraphicalArea) as? String,
+                let geographicalAreaString = aDecoder.decodeObject(forKey: Keys.geopgraphicalArea) as? String,
                 let geographicalArea = GeographicalArea.from(dictionaryCode: geographicalAreaString),
-                let frequencyString = decoder.decodeObject(forKey: Keys.frequency) as? String,
+                let frequencyString = aDecoder.decodeObject(forKey: Keys.frequency) as? String,
                 let frequency = Frequency.from(dictionaryCode: frequencyString),
-                let sourceString = decoder.decodeObject(forKey: Keys.source) as? String,
+                let sourceString = aDecoder.decodeObject(forKey: Keys.source) as? String,
                 let source = Source.from(dictionaryCode: sourceString)
                 else
             {
@@ -51,13 +53,13 @@ public extension LexisWord
             self.init(age: age, subjectArea: subjectArea, geographicalArea: geographicalArea, frequency: frequency, source: source)
         }
         
-        public func encode(with encoder: NSCoder)
+        public func encode(with aCoder: NSCoder)
         {
-            encoder.encode(self.age.code, forKey: Keys.age)
-            encoder.encode(self.subjectArea.code, forKey: Keys.subjectArea)
-            encoder.encode(self.geographicalArea, forKey: Keys.geopgraphicalArea)
-            encoder.encode(self.frequency.code, forKey: Keys.frequency)
-            encoder.encode(self.source.code, forKey: Keys.source)
+            aCoder.encode(self.age.code, forKey: Keys.age)
+            aCoder.encode(self.subjectArea.code, forKey: Keys.subjectArea)
+            aCoder.encode(self.geographicalArea.code, forKey: Keys.geopgraphicalArea)
+            aCoder.encode(self.frequency.code, forKey: Keys.frequency)
+            aCoder.encode(self.source.code, forKey: Keys.source)
         }
         
         private class Keys
@@ -67,6 +69,11 @@ public extension LexisWord
             static let geopgraphicalArea = "geographical_location"
             static let frequency = "frequency"
             static let source = "source"
+        }
+        
+        public override var description: String
+        {
+            return "[\(age.code)\(subjectArea.code)\(geographicalArea.code)\(frequency.code)\(source.code)]"
         }
     }
     

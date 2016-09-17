@@ -21,49 +21,52 @@ import Sulcus
  */
 public enum Age: String
 {
+
+    case X
+    case A
+    case B
+    case C
+    case D
+    case E
+    case F
+    case G
+    case H
     
-    case X = "In use throughout the ages/unknown"
-    case A = "Archaic; Very early forms, obsolete by classical times"
-    case B = "Early Latin, pre-classical, used for effect and poetry"
-    case C = "Classical; limited to classical (-150 BC - 200 AD)"
-    case D = "Late, post-classical period (300-500 AD)"
-    case E = "Later; Latin not in use during Classical times (600-1000 AD) Christian"
-    case F = "In use throughout the Medieval period (1600-1800 AD)"
-    case G = "In use during the Scholarly/Scientific period (1600-1800 AD)"
-    case H = "Modern; Coined recently; words for new things (1900 AD onwards)"
+    internal static let descriptions: [Age: String] =
+    [
+        .X: "In use throughout the ages/unknown",
+        .A: "Archaic; Very early forms, obsolete by classical times",
+        .B: "Early Latin, pre-classical, used for effect and poetry",
+        .C: "Classical; limited to classical (-150 BC - 200 AD)",
+        .D: "Late, post-classical period (300-500 AD)",
+        .E: "Later; Latin not in use during Classical times (600-1000 AD) Christian",
+        .F: "In use throughout the Medieval period (1600-1800 AD)",
+        .G: "In use during the Scholarly/Scientific period (1600-1800 AD)",
+        .H: "Modern; Coined recently; words for new things (1900 AD onwards)"
+    ]
     
     
     //MARK: Variables
-    internal static let codeMappings: [String: Age] =
-    [
-        "X": .X,
-        "A": .A,
-        "B": .B,
-        "C": .C,
-        "D": .D,
-        "E": .E,
-        "F": .F,
-        "G": .G,
-        "H": .H
-    ]
-    
     internal static var codes: [String]
     {
-        return Array(codeMappings.keys)
+        return ages.map() { $0.code }
     }
     
-    internal static var ages: [Age]
-    {
-        return Array(Set(codeMappings.values))
-    }
+    internal static let ages: [Age] = [.X, .A, .B, .C, .D, .E, .F, .G, .H]
     
     public var code: String { return self.rawValue }
+    
+    public var description: String
+    {
+        return Age.descriptions[self]!
+    }
+    
     
     //MARK: Functions
     internal static func from(dictionaryCode code: String) -> Age?
     {
         
-        if let age = codeMappings[code]
+        if let age = Age(rawValue: code)
         {
             return age
         }
@@ -82,45 +85,43 @@ public enum Age: String
  */
 public enum SubjectArea: String
 {
-    case X = "All areas"
-    case A = "Agriculture, Flora, Fauna, Land, Equipment, Rural"
-    case B = "Biological, Medical, Body Parts"
-    case D = "Drama, Music, Theatre, Art, Painting, Sculpture"
-    case E = "Ecclesiastic, Biblical, Religious"
-    case G = "Grammar, Retoric, Logic, Literature, Schools"
-    case L = "Legal, Goverment, Tax, Financial, Political, Titles"
-    case P = "Poetic"
-    case S = "Science, Philosophy, Mathematics, Units/Measurements"
-    case T = "Technical, Architecture, Topography, Surveying"
-    case W = "Warn, Military, Naval, Ships, Armor"
-    case Y = "Muthology"
+    case X
+    case A
+    case B
+    case D
+    case E
+    case G
+    case L
+    case P
+    case S
+    case T
+    case W
+    case Y
 
     //MARK: Variables
-    internal static let codeMappings: [String: SubjectArea] =
+    
+    internal static let descriptions: [SubjectArea: String] =
     [
-        "X": .X,
-        "A": .A,
-        "B": .B,
-        "D": .D,
-        "E": .E,
-        "G": .G,
-        "L": .L,
-        "P": .P,
-        "S": .S,
-        "T": .T,
-        "W": .W,
-        "Y": .Y
+        .X: "All areas",
+        .A: "Agriculture, Flora, Fauna, Land, Equipment, Rural",
+        .B: "Biological, Medical, Body Parts",
+        .D: "Drama, Music, Theatre, Art, Painting, Sculpture",
+        .E: "Ecclesiastic, Biblical, Religious",
+        .G: "Grammar, Retoric, Logic, Literature, Schools",
+        .L: "Legal, Goverment, Tax, Financial, Political, Titles",
+        .P: "Poetic",
+        .S: "Science, Philosophy, Mathematics, Units/Measurements",
+        .T: "Technical, Architecture, Topography, Surveying",
+        .W: "Warn, Military, Naval, Ships, Armor",
+        .Y: "Muthology"
     ]
     
     internal static var codes: [String]
     {
-        return Array(codeMappings.keys)
+        return areas.map() { $0.code }
     }
     
-    internal static var areas: [SubjectArea]
-    {
-        return Array(Set(codeMappings.values))
-    }
+    internal static let areas: [SubjectArea] = [.X, .A, .B, .D, .E, .G, .L, .P, .S, .T, .W, .Y]
     
     public var parts: [String]
     {
@@ -134,7 +135,7 @@ public enum SubjectArea: String
     internal static func from(dictionaryCode code: String) -> SubjectArea?
     {
         
-        if let subjectArea = codeMappings[code]
+        if let subjectArea = SubjectArea(rawValue: code)
         {
             return subjectArea
         }

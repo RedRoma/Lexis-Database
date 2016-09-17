@@ -79,9 +79,9 @@ struct Generators
         return Source.sources.anyElement!
     }
     
-    static var randomSupplementalInformation: LexisWord.SupplementalInformation
+    static var randomSupplementalInformation: SupplementalInformation
     {
-        return LexisWord.SupplementalInformation(age: randomAge, subjectArea: randomSubject, geographicalArea: randomGeography, frequency: randomFrequency, source: randomSource)
+        return SupplementalInformation(age: randomAge, subjectArea: randomSubject, geographicalArea: randomGeography, frequency: randomFrequency, source: randomSource)
     }
 }
 
