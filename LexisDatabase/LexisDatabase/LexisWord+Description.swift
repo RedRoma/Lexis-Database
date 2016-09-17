@@ -55,6 +55,8 @@ public enum Age: String
             return nil
         }
     }
+    
+    public var description: String { return self.rawValue }
 }
 
 /**
@@ -80,6 +82,8 @@ public enum SubjectArea: String
     {
         return self.rawValue.components(separatedBy: ", ")
     }
+    
+    public var description: String { return self.rawValue }
     
     public static func from(dictionaryCode code: String) -> SubjectArea?
     {
@@ -171,6 +175,8 @@ public enum GeographicalArea: String
             return nil
         }
     }
+    
+    public var description: String { return self.rawValue }
 }
 
 /**
@@ -217,6 +223,46 @@ public enum Frequency: String
             return nil
         }
     }
+    
+    public var description: String { return self.rawValue }
+}
+
+/**
+    The source of the word is the Dictionary or Grammar the word's
+    definition and information was procured from.
+ */
+public enum Source: String
+{
+    
+    
+    case X = "General or unknown"
+    case A
+    case B = "C.H.Beeson, A Primer of Medieval Latin, 1925 (Bee)"
+    case C = "Charles Beard, Cassell's Latin Dictionary 1892 (CAS)"
+    case D = "J.N.Adams, Latin Sexual Vocabulary, 1982 (Sex)"
+    case E = "L.F.Stelten, Dictionary of Eccles. Latin, 1995 (Ecc)"
+    case F = "Roy J. Deferrari, Dictionary of St. Thomas Aquinas, 1960 (DeF)"
+    case G = "Gildersleeve + Lodge, Latin Grammar 1895 (G+L)"
+    case H = "Collatinus Dictionary by Yves Ouvrard"
+    case I = "Leverett, F.P., Lexicon of the Latin Language, Boston 1845"
+    case J
+    case K = "Calepnus Novus, modern Latin, by Guy Licoppe (Cal)"
+    case L = "Lewis, C.S., Elementary Latin Dictionary 1891"
+    case M = "Latham, Revised Medieval Word List, 1980"
+    case N = "Lynn Nelso, Wordlist"
+    case O = "Oxford Latin Dictionary, 1982 (OLD)"
+    case P = "Souter, A Glossary of Later Latin to 600 A.D., Oxford 1949"
+    case Q = "Other, cited or unspecified dictionaries"
+    case R = "Plater & White, A Grammar of the Vulgate, Oxford 1926"
+    case S = "Lewis and Short, A Latin Dictionary, 1870 (L+S)"
+    case T = "Found in a translation -- no dictionary reference"
+    case U = "Du Cange"
+    case V = "Vademecum in opus Saxonis - Franz Blatt (Saxo)"
+    case W = "My personal guess"
+    case Y,Z = "No Dictionary Reference"
+    
+    
+    public var description: String { return self.rawValue }
 }
 
 //MARK: Functions for extracting descriptions from dictionary codes.
