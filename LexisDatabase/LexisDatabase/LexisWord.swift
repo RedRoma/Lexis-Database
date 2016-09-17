@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Conjugation
+public enum Conjugation: String
 {
     case First
     case Second
@@ -18,7 +18,7 @@ public enum Conjugation
     case Unconjugated
 }
 
-public enum VerbType
+public enum VerbType: String
 {
     case Transitive
     case Intransitive
@@ -29,7 +29,7 @@ public enum VerbType
     case Uknown
 }
 
-public enum Gender
+public enum Gender: String
 {
     case Male
     case Female
@@ -37,7 +37,7 @@ public enum Gender
     case Unknown
 }
 
-public enum Declension
+public enum Declension: String
 {
     case Nominative
     case Genitive
@@ -49,7 +49,7 @@ public enum Declension
     case Undeclined
 }
 
-public enum PronounType
+public enum PronounType: String
 {
     case Reflexive
     case Personal
