@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Sulcus
 
 public enum Conjugation: String
 {
@@ -181,9 +182,32 @@ public enum Number
 //MARK: LexisDefinition
 //===================================
 
-public struct LexisDefinition: Equatable, Hashable
+public class LexisDefinition: NSObject, NSCoding
 {
     public let terms: [String]
+    
+    public init(terms: [String])
+    {
+        self.terms = terms
+    }
+    
+    public required convenience init?(coder aDecoder: NSCoder)
+    {
+        guard let terms = aDecoder.decodeObject(forKey: "terms") as? [String]
+        else
+        {
+            LOG.warn("Failed to decode terms from NSCoder")
+            return nil
+        }
+        
+        self.init(terms: terms)
+    }
+    
+    public func encode(with aCoder: NSCoder)
+    {
+        aCoder.encode(terms, forKey: "terms")
+    }
+    
 }
 
 public func ==(lhs: LexisDefinition, rhs: LexisDefinition) -> Bool
@@ -193,7 +217,7 @@ public func ==(lhs: LexisDefinition, rhs: LexisDefinition) -> Bool
 
 extension LexisDefinition
 {
-    public var hashValue: Int
+    override public var hashValue: Int
     {
         return terms.joined().hashValue
     }

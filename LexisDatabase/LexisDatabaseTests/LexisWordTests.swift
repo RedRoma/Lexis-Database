@@ -114,6 +114,15 @@ class DefinitionTests: XCTestCase
         XCTAssertEqual(first, second)
         XCTAssertTrue(first == second)
     }
+    
+    func testCoding()
+    {
+        let data = NSKeyedArchiver.archivedData(withRootObject: definition)
+        
+        let extracted: LexisDefinition! = NSKeyedUnarchiver.unarchiveObject(with: data) as? LexisDefinition
+        
+        XCTAssertTrue(extracted == definition)
+    }
 }
 
 class LexisWordTests: XCTestCase
