@@ -54,6 +54,10 @@ struct Generators
         }
     }
     
+    static var randomAge: Age
+    {
+        return Age.possibleAges.anyElement!
+    }
 }
 
 func allIntegers(from: Int, to: Int) -> [Int]
