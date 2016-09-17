@@ -20,6 +20,7 @@ public extension LexisWord
  */
 public enum Age: String
 {
+    
     case X = "In use throughout the ages/unknown"
     case A = "Archaic; Very early forms, obsolete by classical times"
     case B = "Early Latin, pre-classical, used for effect and poetry"
@@ -30,7 +31,7 @@ public enum Age: String
     case G = "In use during the Scholarly/Scientific period (1600-1800 AD)"
     case H = "Modern; Coined recently; words for new things (1900 AD onwards)"
     
-    public static func from(dictionaryCode code: String) -> Age?
+    internal static func from(dictionaryCode code: String) -> Age?
     {
         let codes: [String: Age] =
         [
@@ -57,6 +58,8 @@ public enum Age: String
     }
     
     public var description: String { return self.rawValue }
+    
+    
 }
 
 /**
@@ -85,7 +88,7 @@ public enum SubjectArea: String
     
     public var description: String { return self.rawValue }
     
-    public static func from(dictionaryCode code: String) -> SubjectArea?
+    internal static func from(dictionaryCode code: String) -> SubjectArea?
     {
         let codes: [String: SubjectArea] =
         [
@@ -141,7 +144,7 @@ public enum GeographicalArea: String
     case U = "Eastern Europe"
     
     
-    public static func from(dictionaryCode code: String) -> GeographicalArea?
+    internal static func from(dictionaryCode code: String) -> GeographicalArea?
     {
         let codes: [String: GeographicalArea] =
         [
@@ -197,7 +200,7 @@ public enum Frequency: String
     case M = "Grafitti; Presently not used much"
     case N = "Pliny; Things that appear only in the Pliny Natural History"
     
-    public static func from(dictionaryCode code: String) -> Frequency?
+    internal static func from(dictionaryCode code: String) -> Frequency?
     {
         
         let codes: [String: Frequency] =
@@ -260,6 +263,50 @@ public enum Source: String
     case V = "Vademecum in opus Saxonis - Franz Blatt (Saxo)"
     case W = "My personal guess"
     case Y,Z = "No Dictionary Reference"
+    
+    internal static func from(dictionaryCode code: String) -> Source?
+    {
+        let codes: [String: Source] =
+        [
+            "A": .A,
+            "B": .B,
+            "C": .C,
+            "D": .D,
+            "E": .E,
+            "F": .F,
+            "G": .G,
+            "H": .H,
+            "I": .I,
+            "J": .J,
+            "K": .K,
+            "L": .L,
+            "M": .M,
+            "N": .N,
+            "O": .O,
+            "P": .P,
+            "Q": .Q,
+            "R": .R,
+            "S": .S,
+            "T": .T,
+            "U": .U,
+            "V": .V,
+            "W": .W,
+            "X": .X,
+            "Y": .Y,
+            "Z": .Z
+        ]
+        
+        if let source = codes[code]
+        {
+            return source
+        }
+        else
+        {
+            LOG.warn("Could not find a Source for dictionary code: \(code)")
+            return nil
+        }
+        
+    }
     
     
     public var description: String { return self.rawValue }
