@@ -90,6 +90,24 @@ class LexisWordDescriptionTests: XCTestCase
         XCTAssertTrue(frequency == nil)
     }
     
+    func testSourceEnum()
+    {
+        let possibleSources = Source.possibleCodes
+        let randomSource = AlchemyGenerator.stringFromList(possibleSources)
+        
+        let source = Source.from(dictionaryCode: randomSource)
+        XCTAssertFalse(source == nil)
+    }
+    
+    func testSourceEnumWithInvalidCode()
+    {
+        let possibleSource = Source.possibleCodes
+        let impossibleCode = stringNotInList(possibleSource)
+        
+        let source = Source.from(dictionaryCode: impossibleCode)
+        XCTAssertTrue(source == nil)
+    }
+    
     fileprivate func stringNotInList(_ strings: [String]) -> String
     {
         var character = AlchemyGenerator.alphanumericString(ofSize: 1)
