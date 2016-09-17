@@ -10,6 +10,11 @@ import Foundation
 import Sulcus
 
 
+/**
+    This file represents the information discussed in Whitaker's [documentation](http://archives.nd.edu/whitaker/wordsdoc.htm#DICTIONARY).
+    This file provides clean Swift representation of the codes reference there.
+ */
+
 
 /**
     The Age represents a Words' Age and in what time-period it was used.
