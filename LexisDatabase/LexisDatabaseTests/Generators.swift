@@ -60,8 +60,23 @@ struct Generators
     }
     
     static var randomSubject: SubjectArea
-        {
+    {
         return SubjectArea.areas.anyElement!
+    }
+    
+    static var randomGeography: GeographicalArea
+    {
+        return GeographicalArea.geophraphies.anyElement!
+    }
+    
+    static var randomFrequency: Frequency
+    {
+        return Frequency.frequencies.anyElement!
+    }
+    
+    static var randomSource: Source
+    {
+        return Source.sources.anyElement!
     }
 }
 
