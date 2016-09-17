@@ -272,6 +272,10 @@ public class LexisDefinition: NSObject, NSCoding
         encoder.encode(terms, forKey: "terms")
     }
     
+    public override var description: String
+    {
+        return "LexisDefinition - \(terms)"
+    }
 }
 
 public func ==(lhs: LexisDefinition, rhs: LexisDefinition) -> Bool

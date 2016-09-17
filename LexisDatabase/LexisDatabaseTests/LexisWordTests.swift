@@ -76,7 +76,6 @@ class DefinitionTests: XCTestCase
     {
         let secondDefinition = LexisDefinition(terms: terms)
         XCTAssertTrue(secondDefinition == definition)
-        XCTAssertEqual(secondDefinition, definition)
     }
     
     func testEquatableWhenDifferent()
@@ -85,14 +84,13 @@ class DefinitionTests: XCTestCase
         let otherDefinition = LexisDefinition(terms: otherTerms)
         
         XCTAssertFalse(otherDefinition == definition)
-        XCTAssertNotEqual(otherDefinition, definition)
     }
     
     func testHashCodeOfSameObject()
     {
         let first = definition.hashValue
         let second = definition.hashValue
-        XCTAssertEqual(first, second)
+        XCTAssertTrue(first == second)
     }
     
     func testHashCodeOfDifferentDefinitions()
@@ -102,7 +100,7 @@ class DefinitionTests: XCTestCase
         
         let first = definition.hashValue
         let second = otherDefinition.hashValue
-        XCTAssertNotEqual(first, second)
+        XCTAssertFalse(first == second)
     }
     
     func testHashCodeOfDifferentInstanceButSameObject()
@@ -111,7 +109,6 @@ class DefinitionTests: XCTestCase
         
         let first = definition.hashValue
         let second = copy.hashValue
-        XCTAssertEqual(first, second)
         XCTAssertTrue(first == second)
     }
     
@@ -160,11 +157,9 @@ class LexisWordTests: XCTestCase
     func testEquality()
     {
         let shallowCopy = word
-        XCTAssertEqual(shallowCopy, word)
         XCTAssertTrue(shallowCopy == word)
         
         let deepCopy = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
-        XCTAssertEqual(deepCopy, word)
         XCTAssertTrue(deepCopy == word)
         
     }
@@ -193,7 +188,7 @@ class LexisWordTests: XCTestCase
         let copy = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
         let first = word.hashValue
         let second = copy.hashValue
-        XCTAssertEqual(first, second)
+        XCTAssertTrue(first == second)
     }
     
     func testHashCodeWhenDifferent()
@@ -202,6 +197,6 @@ class LexisWordTests: XCTestCase
         let first = word.hashValue
         let second = other.hashValue
         
-        XCTAssertNotEqual(first, second)
+        XCTAssertFalse(first == second)
     }
 }
