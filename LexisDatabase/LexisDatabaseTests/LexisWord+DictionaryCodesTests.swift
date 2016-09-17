@@ -15,7 +15,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
 {
     func testAgeEnum()
     {
-        let possibleAges = Age.possibleCodes
+        let possibleAges = Age.codes
         let randomCode = AlchemyGenerator.stringFromList(possibleAges)
         
         let age = Age.from(dictionaryCode: randomCode)
@@ -26,7 +26,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testAgeEnumWithInvalidValue()
     {
-        let possibleAges = Age.possibleCodes
+        let possibleAges = Age.codes
         let impossibleCode = stringNotInList(possibleAges)
         
         let age = Age.from(dictionaryCode: impossibleCode)
@@ -35,7 +35,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testSubjectAreaEnum()
     {
-        let possibleAreas = SubjectArea.possibleCodes
+        let possibleAreas = SubjectArea.codes
         let randomCode = AlchemyGenerator.stringFromList(possibleAreas)
         
         let subjectArea = SubjectArea.from(dictionaryCode: randomCode)
@@ -45,7 +45,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testSubjectAreaEnumWithInvalidValue()
     {
-        let possibleAreas = SubjectArea.possibleCodes
+        let possibleAreas = SubjectArea.codes
         let impossibleCode = stringNotInList(possibleAreas)
         
         let subject = SubjectArea.from(dictionaryCode: impossibleCode)
@@ -55,7 +55,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func  testGeographicalAreaEnum()
     {
-        let possibleGeographies = GeographicalArea.possibleCodes
+        let possibleGeographies = GeographicalArea.codes
         let randomCode = AlchemyGenerator.stringFromList(possibleGeographies)
         
         let geographicalArea = GeographicalArea.from(dictionaryCode: randomCode)
@@ -65,7 +65,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testGeographicalAreaAnumWithInvalidValue()
     {
-        let possibleGeographies = GeographicalArea.possibleCodes
+        let possibleGeographies = GeographicalArea.codes
         let impossibleCode = stringNotInList(possibleGeographies)
         
         let geographicalArea = GeographicalArea.from(dictionaryCode: impossibleCode)
@@ -74,7 +74,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testFrequencyEnum()
     {
-        let possibleFrequencies = Frequency.possibleCodes
+        let possibleFrequencies = Frequency.codes
         let randomCode = AlchemyGenerator.stringFromList(possibleFrequencies)
         
         let frequency = Frequency.from(dictionaryCode: randomCode)
@@ -83,7 +83,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testFrequencyEnumWithInvalidCode()
     {
-        let possibleFrequencies = Frequency.possibleCodes
+        let possibleFrequencies = Frequency.codes
         let impossibleCode = stringNotInList(possibleFrequencies)
         
         let frequency = Frequency.from(dictionaryCode: impossibleCode)
@@ -92,7 +92,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testSourceEnum()
     {
-        let possibleSources = Source.possibleCodes
+        let possibleSources = Source.codes
         let randomSource = AlchemyGenerator.stringFromList(possibleSources)
         
         let source = Source.from(dictionaryCode: randomSource)
@@ -101,7 +101,7 @@ class LexisWord_DictionaryCodesTests: XCTestCase
     
     func testSourceEnumWithInvalidCode()
     {
-        let possibleSource = Source.possibleCodes
+        let possibleSource = Source.codes
         let impossibleCode = stringNotInList(possibleSource)
         
         let source = Source.from(dictionaryCode: impossibleCode)

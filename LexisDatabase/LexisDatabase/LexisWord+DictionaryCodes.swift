@@ -34,7 +34,7 @@ public enum Age: String
     
     
     //MARK: Variables
-    internal static let codes: [String: Age] =
+    internal static let codeMappings: [String: Age] =
     [
         "X": .X,
         "A": .A,
@@ -47,14 +47,14 @@ public enum Age: String
         "H": .H
     ]
     
-    internal static var possibleCodes: [String]
+    internal static var codes: [String]
     {
-        return Array(codes.keys)
+        return Array(codeMappings.keys)
     }
     
     internal static var ages: [Age]
     {
-        return Array(Set(codes.values))
+        return Array(Set(codeMappings.values))
     }
     
     public var code: String { return self.rawValue }
@@ -63,7 +63,7 @@ public enum Age: String
     internal static func from(dictionaryCode code: String) -> Age?
     {
         
-        if let age = codes[code]
+        if let age = codeMappings[code]
         {
             return age
         }
@@ -96,7 +96,7 @@ public enum SubjectArea: String
     case Y = "Muthology"
 
     //MARK: Variables
-    internal static let codes: [String: SubjectArea] =
+    internal static let codeMappings: [String: SubjectArea] =
     [
         "X": .X,
         "A": .A,
@@ -112,14 +112,14 @@ public enum SubjectArea: String
         "Y": .Y
     ]
     
-    internal static var possibleCodes: [String]
+    internal static var codes: [String]
     {
-        return Array(codes.keys)
+        return Array(codeMappings.keys)
     }
     
     internal static var areas: [SubjectArea]
     {
-        return Array(Set(codes.values))
+        return Array(Set(codeMappings.values))
     }
     
     public var parts: [String]
@@ -134,8 +134,7 @@ public enum SubjectArea: String
     internal static func from(dictionaryCode code: String) -> SubjectArea?
     {
         
-        
-        if let subjectArea = codes[code]
+        if let subjectArea = codeMappings[code]
         {
             return subjectArea
         }
@@ -174,7 +173,7 @@ public enum GeographicalArea: String
     
     //MARK: Variables
     
-    internal static let codes: [String: GeographicalArea] =
+    internal static let codeMappings: [String: GeographicalArea] =
     [
         "X": .X,
         "A": .A,
@@ -196,14 +195,14 @@ public enum GeographicalArea: String
         "U": .U
     ]
     
-    internal static var possibleCodes: [String]
+    internal static var codes: [String]
     {
-        return Array(codes.keys)
+        return Array(codeMappings.keys)
     }
     
     internal static var geophraphies: [GeographicalArea]
     {
-        return Array(Set(codes.values))
+        return Array(Set(codeMappings.values))
     }
     
     public var code: String { return self.rawValue }
@@ -212,7 +211,7 @@ public enum GeographicalArea: String
     internal static func from(dictionaryCode code: String) -> GeographicalArea?
     {
         
-        if let geographicalArea = codes[code]
+        if let geographicalArea = codeMappings[code]
         {
             return geographicalArea
         }
@@ -244,7 +243,7 @@ public enum Frequency: String
     case N = "Pliny; Things that appear only in the Pliny Natural History"
     
     
-    internal static let codes: [String: Frequency] =
+    internal static let codeMappings: [String: Frequency] =
     [
         "X": .X,
         "A": .A,
@@ -257,20 +256,20 @@ public enum Frequency: String
         "N": .N
     ]
     
-    internal static var possibleCodes: [String]
+    internal static var codes: [String]
     {
-        return Array(codes.keys)
+        return Array(codeMappings.keys)
     }
     
     internal static var frequencies: [Frequency]
     {
-        return Array(Set(codes.values))
+        return Array(Set(codeMappings.values))
     }
     
     internal static func from(dictionaryCode code: String) -> Frequency?
     {
         
-        if let frequency = codes[code]
+        if let frequency = codeMappings[code]
         {
             return frequency
         }
@@ -319,7 +318,7 @@ public enum Source: String
     case Y,Z = "No Dictionary Reference"
     
     //MARK: Variables
-    internal static   let codes: [String: Source] =
+    internal static let codeMappings: [String: Source] =
     [
         "A": .A,
         "B": .B,
@@ -349,14 +348,14 @@ public enum Source: String
         "Z": .Z
     ]
     
-    internal static var possibleCodes: [String]
+    internal static var codes: [String]
     {
-        return Array(codes.keys)
+        return Array(codeMappings.keys)
     }
     
     internal static var sources: [Source]
     {
-        return Array(Set(codes.values))
+        return Array(Set(codeMappings.values))
     }
     
     public var code: String { return self.rawValue }
@@ -366,7 +365,7 @@ public enum Source: String
     internal static func from(dictionaryCode code: String) -> Source?
     {
       
-        if let source = codes[code]
+        if let source = codeMappings[code]
         {
             return source
         }
