@@ -11,66 +11,6 @@ import Foundation
 import XCTest
 @testable import LexisDatabase
 
-class WordTypeTests: XCTestCase
-{
-    
-    var left: WordType!
-    var right: WordType!
-    
-    override func setUp()
-    {
-        left = Generators.randomWordType
-        right = Generators.randomWordType
-    }
-    
-    func testEquals()
-    {
-        right = left
-        XCTAssertTrue(right == left)
-    }
-    
-    
-    func testEqualsWhenDifferent()
-    {
-        while right == left
-        {
-            right = Generators.randomWordType
-        }
-        
-        XCTAssertFalse(right == left)
-    }
-    
-    
-    func testHashCode()
-    {
-        right = left
-        XCTAssertEqual(left.hashValue, right.hashValue)
-    }
-    
-    func testHashCodeWhenDifferent()
-    {
-        while right == left
-        {
-            right = Generators.randomWordType
-        }
-        
-        //Technically, two values can have the same hash code, but this should not happen on a small enum
-        XCTAssertNotEqual(right.hashValue, left.hashValue)
-    }
-    
-    func testAsJSON()
-    {
-        var json = WordType.Adjective.asJSON
-        var data = try! JSONSerialization.data(withJSONObject: json, options: [])
-        
-        json = WordType.Adverb.asJSON
-        data = try! JSONSerialization.data(withJSONObject: json, options: [])
-        
-        json = WordType.Noun(Declension.Accusative, Gender.Female).asJSON
-        data = try! JSONSerialization.data(withJSONObject: json, options: [])
-    }
-    
-}
 
 class DefinitionTests: XCTestCase
 {
