@@ -145,10 +145,12 @@ public enum WordType: Equatable, Hashable
     case Pronoun
     case Verb(Conjugation, VerbType)
     
+    private static let wordTypeKey = "wordType"
+    
     public var asJSON: NSDictionary
     {
         let wordType = NSMutableDictionary()
-        let wordTypeKey = "wordType"
+        let wordTypeKey = WordType.wordTypeKey
         
         switch self
         {
@@ -166,8 +168,8 @@ public enum WordType: Equatable, Hashable
             
             case let .Noun(declension, gender) :
                 wordType[wordTypeKey] = "Noun"
-                wordType["gender"] = gender.name
-                wordType["declension"] = declension.name
+                wordType[Keys.gender] = gender.name
+                wordType[Keys.declension] = declension.name
             
             case .Numeral :
                 wordType[wordTypeKey] = "Numeral"
@@ -177,18 +179,82 @@ public enum WordType: Equatable, Hashable
            
             case let .Preposition(declension) :
                 wordType[wordTypeKey] = "Preposition"
-                wordType["declension"] = declension.name
+                wordType[Keys.declension] = declension.name
             
             case .Pronoun :
                 wordType[wordTypeKey] = "Pronoun"
           
             case let .Verb(conjugation, verbType):
                 wordType[wordTypeKey] = "Verb"
-                wordType["conjugation"] = conjugation.name
-                wordType["verbType"] = verbType.name
+                wordType[Keys.conjugation] = conjugation.name
+                wordType[Keys.verbType] = verbType.name
         }
         
         return wordType
+    }
+    
+    public static func fromJSON(dictionary: NSDictionary) -> WordType?
+    {
+        let key = WordType.wordTypeKey
+        
+        guard let type = dictionary[key] as? String else { return nil }
+        
+        if type == "Adjective"
+        {
+            return .Adjective
+        }
+        
+        if type == "Adverb"
+        {
+            return .Adverb
+        }
+        
+        if type == "Conjunction"
+        {
+            return .Conjunction
+        }
+        
+        if type == "Noun",
+            let declensionString = dictionary[Keys.declension] as? String,
+            let declension = Declension.from(name: declensionString),
+            let genderString = dictionary[Keys.gender] as? String,
+            let gender = Gender.from(name: genderString)
+        {
+            return .Noun(declension, gender)
+        }
+        
+        if type == "Numeral"
+        {
+            return .Numeral
+        }
+        
+        if type == "PersonalPronoun"
+        {
+            return .PersonalPronoun
+        }
+        
+        if type == "Preposition",
+            let declensionString = dictionary[Keys.declension] as? String,
+            let declension = Declension.from(name: declensionString)
+        {
+            return .Preposition(declension)
+        }
+        
+        if type == "Pronoun"
+        {
+            return .Pronoun
+        }
+        
+        if type == "Verb",
+            let conjugationString = dictionary[Keys.conjugation] as? String,
+            let conjugation = Conjugation.from(name: conjugationString),
+            let verbTypeString = dictionary[Keys.verbType] as? String,
+            let verbType = VerbType.from(name: verbTypeString)
+        {
+            return .Verb(conjugation, verbType)
+        }
+        
+        return nil
     }
     
     public var description: String
@@ -203,6 +269,37 @@ public enum WordType: Equatable, Hashable
         let jsonString = String.init(data: data, encoding: .utf8)
         
         return jsonString ?? ""
+    }
+    
+    public var asData: Data
+    {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: self.asJSON, options: [])
+        {
+            return jsonData
+        }
+        
+        return Data()
+    }
+    
+    public static func from(data: Data) -> WordType?
+    {
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
+            let dictionary = jsonObject as? NSDictionary
+        else
+        {
+            LOG.warn("Failed to deserialize object from JSON")
+            return nil
+        }
+        
+        return WordType.fromJSON(dictionary: dictionary)
+    }
+    
+    private class Keys
+    {
+        static let declension = "declension"
+        static let gender = "gender"
+        static let conjugation = "conjugation"
+        static let verbType = "verbType"
     }
 }
 
