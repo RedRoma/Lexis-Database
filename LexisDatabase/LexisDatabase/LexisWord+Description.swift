@@ -51,6 +51,11 @@ public enum Age: String
         return Array(codes.keys)
     }
     
+    internal static var possibleAges: [Age]
+    {
+        return Array(Set(codes.values))
+    }
+    
     public var code: String { return self.rawValue }
     
     //MARK: Functions
@@ -106,7 +111,15 @@ public enum SubjectArea: String
         "Y": .Y
     ]
     
-    internal static var possibleCodes: [String] { return Array(codes.keys) }
+    internal static var possibleCodes: [String]
+    {
+        return Array(codes.keys)
+    }
+    
+    internal static var possibleSubjectAreas: [SubjectArea]
+    {
+        return Array(Set(codes.values))
+    }
     
     public var parts: [String]
     {
@@ -182,7 +195,15 @@ public enum GeographicalArea: String
         "U": .U
     ]
     
-    internal static var possibleCodes: [String] { return Array(codes.keys) }
+    internal static var possibleCodes: [String]
+    {
+        return Array(codes.keys)
+    }
+    
+    internal static var possibleGeophrapgies: [GeographicalArea]
+    {
+        return Array(Set(codes.values))
+    }
     
     public var code: String { return self.rawValue }
     
@@ -238,6 +259,11 @@ public enum Frequency: String
     internal static var possibleCodes: [String]
     {
         return Array(codes.keys)
+    }
+    
+    internal static var possibleFrequencies: [Frequency]
+    {
+        return Array(Set(codes.values))
     }
     
     internal static func from(dictionaryCode code: String) -> Frequency?
@@ -322,7 +348,15 @@ public enum Source: String
         "Z": .Z
     ]
     
-    internal static var possibleCodes: [String] { return Array(codes.keys) }
+    internal static var possibleCodes: [String]
+    {
+        return Array(codes.keys)
+    }
+    
+    internal static var possibleSources: [Source]
+    {
+        return Array(Set(codes.values))
+    }
     
     public var code: String { return self.rawValue }
     
