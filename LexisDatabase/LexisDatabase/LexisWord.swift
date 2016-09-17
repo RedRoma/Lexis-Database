@@ -63,6 +63,11 @@ extension LexisDefinition
     {
         return terms.joined().hashValue
     }
+    
+    public override var hash: Int
+    {
+        return hashValue
+    }
 }
 
 
@@ -150,7 +155,7 @@ public func ==(lhs: LexisWord, rhs: LexisWord) -> Bool
         return false
     }
     
-    if lhs.definitions == rhs.definitions
+    if lhs.definitions != rhs.definitions
     {
         return false
     }
@@ -158,16 +163,15 @@ public func ==(lhs: LexisWord, rhs: LexisWord) -> Bool
     return true
 }
 
-public func ==(left: [LexisDefinition], right: [LexisDefinition]) -> Bool
-{
-    return left.containsMultiple(right) && right.containsMultiple(left)
-}
-
-
 extension LexisWord
 {
     override public var hashValue: Int
     {
         return forms.joined().hashValue
+    }
+    
+    public override var hash: Int
+    {
+        return hashValue
     }
 }
