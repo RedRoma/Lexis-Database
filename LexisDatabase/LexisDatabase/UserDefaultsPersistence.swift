@@ -32,6 +32,7 @@ class UserDefaultsPersistence: LexisPersistence
         let data = NSKeyedArchiver.archivedData(withRootObject: words)
         defaults.set(data, forKey: key)
         
+        LOG.info("Persisting \(words.count) words in UserDefaults")
         if synchronize
         {
             defaults.synchronize()
@@ -61,12 +62,16 @@ class UserDefaultsPersistence: LexisPersistence
             return []
         }
         
+        LOG.info("Loaded \(words.count) words from UserDefaults")
+        
         return words
     }
 
     func removeAll()
     {
         defaults.set(nil, forKey: key)
+        
+        LOG.info("Clearing all words from UserDefaults")
         
         if synchronize
         {
