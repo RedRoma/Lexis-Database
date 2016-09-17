@@ -215,6 +215,11 @@ public enum WordType: Equatable, Hashable
             return .Conjunction
         }
         
+        if type == "Interjection"
+        {
+            return .Interjection
+        }
+        
         if type == "Noun",
             let declensionString = dictionary[Keys.declension] as? String,
             let declension = Declension.from(name: declensionString),

@@ -47,10 +47,17 @@ class UserDefaultsPersistence: LexisPersistence
             return []
         }
         
-        guard let words = NSKeyedUnarchiver.unarchiveObject(with: data) as? [LexisWord]
+        guard let wordsArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSArray
         else
         {
             LOG.info("Failed to unarchive LexisDatabase from Data")
+            return []
+        }
+        
+        guard let words = wordsArray as? [LexisWord]
+        else
+        {
+            LOG.warn("Failed to convert NSArray to [LexisWord]")
             return []
         }
         
@@ -59,7 +66,6 @@ class UserDefaultsPersistence: LexisPersistence
 
     func removeAll()
     {
-//        defaults.removeObject(forKey: key)
         defaults.set(nil, forKey: key)
         
         if synchronize

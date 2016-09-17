@@ -9,6 +9,7 @@
 import AlchemyGenerator
 import Foundation
 @testable import LexisDatabase
+import Sulcus
 import XCTest
 
 class UserDefaultsPersistenceTests: XCTestCase
@@ -17,6 +18,13 @@ class UserDefaultsPersistenceTests: XCTestCase
     var words: [LexisWord] = []
     
     var instance: UserDefaultsPersistence!
+    
+    
+    override class func setUp()
+    {
+        LOG.enable()
+        LOG.level = .info
+    }
     
     override func setUp()
     {
@@ -100,5 +108,14 @@ class UserDefaultsPersistenceTests: XCTestCase
         let results = instance.searchForWords(inDefinition: word.definitions.anyElement!.terms.anyElement!)
         
         XCTAssertTrue(results.isEmpty)
+    }
+    
+    func testSaveAllWords()
+    {
+        let allWords = Generators.words
+        try! instance.save(words: allWords)
+        
+        let result = instance.getAllWords()
+        XCTAssertTrue(result == allWords)
     }
 }
