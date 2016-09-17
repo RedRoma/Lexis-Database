@@ -32,17 +32,17 @@ public extension LexisWord
             self.source = source
         }
         
-        public convenience required init?(coder aDecoder: NSCoder)
+        public convenience required init?(coder decoder: NSCoder)
         {
-            guard let ageString = aDecoder.decodeObject(forKey: Keys.age) as? String,
+            guard let ageString = decoder.decodeObject(forKey: Keys.age) as? String,
                 let age = Age.from(dictionaryCode: ageString),
-                let subjectAreaString = aDecoder.decodeObject(forKey: Keys.subjectArea) as? String,
+                let subjectAreaString = decoder.decodeObject(forKey: Keys.subjectArea) as? String,
                 let subjectArea = SubjectArea.from(dictionaryCode: subjectAreaString),
-                let geographicalAreaString = aDecoder.decodeObject(forKey: Keys.geopgraphicalArea) as? String,
+                let geographicalAreaString = decoder.decodeObject(forKey: Keys.geopgraphicalArea) as? String,
                 let geographicalArea = GeographicalArea.from(dictionaryCode: geographicalAreaString),
-                let frequencyString = aDecoder.decodeObject(forKey: Keys.frequency) as? String,
+                let frequencyString = decoder.decodeObject(forKey: Keys.frequency) as? String,
                 let frequency = Frequency.from(dictionaryCode: frequencyString),
-                let sourceString = aDecoder.decodeObject(forKey: Keys.source) as? String,
+                let sourceString = decoder.decodeObject(forKey: Keys.source) as? String,
                 let source = Source.from(dictionaryCode: sourceString)
                 else
             {
@@ -53,13 +53,13 @@ public extension LexisWord
             self.init(age: age, subjectArea: subjectArea, geographicalArea: geographicalArea, frequency: frequency, source: source)
         }
         
-        public func encode(with aCoder: NSCoder)
+        public func encode(with encoder: NSCoder)
         {
-            aCoder.encode(self.age.code, forKey: Keys.age)
-            aCoder.encode(self.subjectArea.code, forKey: Keys.subjectArea)
-            aCoder.encode(self.geographicalArea.code, forKey: Keys.geopgraphicalArea)
-            aCoder.encode(self.frequency.code, forKey: Keys.frequency)
-            aCoder.encode(self.source.code, forKey: Keys.source)
+            encoder.encode(self.age.code, forKey: Keys.age)
+            encoder.encode(self.subjectArea.code, forKey: Keys.subjectArea)
+            encoder.encode(self.geographicalArea.code, forKey: Keys.geopgraphicalArea)
+            encoder.encode(self.frequency.code, forKey: Keys.frequency)
+            encoder.encode(self.source.code, forKey: Keys.source)
         }
         
         public override var description: String

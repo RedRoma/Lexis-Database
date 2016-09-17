@@ -18,8 +18,20 @@ public enum Conjugation: String
     case Irregular
     case Unconjugated
     
-    
     public var name: String { return self.rawValue }
+    
+    public static func from(name: String) -> Conjugation?
+    {
+        if let conjugation = Conjugation(rawValue: name)
+        {
+            return conjugation
+        }
+        else
+        {
+            LOG.warn("Failed to find Conjugation with name: \(name)")
+            return nil
+        }
+    }
 }
 
 public enum VerbType: String
@@ -33,6 +45,19 @@ public enum VerbType: String
     case Uknown
     
     public var name: String { return self.rawValue }
+    
+    public static func from(name: String) -> VerbType?
+    {
+        if let verbType = VerbType(rawValue: name)
+        {
+            return verbType
+        }
+        else
+        {
+            LOG.warn("Failed to decode Verb Type from name: \(name)")
+            return nil
+        }
+    }
 }
 
 public enum Gender: String
@@ -43,6 +68,19 @@ public enum Gender: String
     case Unknown
     
     public var name: String { return self.rawValue }
+    
+    public static func from(name: String) -> Gender?
+    {
+        if let gender = Gender(rawValue: name)
+        {
+            return gender
+        }
+        else
+        {
+            LOG.warn("Failed to decode Gender from name: \(name)")
+            return nil
+        }
+    }
 }
 
 public enum Declension: String
@@ -57,6 +95,19 @@ public enum Declension: String
     case Undeclined
     
     public var name: String { return self.rawValue }
+    
+    public static func from(name: String) -> Declension?
+    {
+        if let declension = Declension(rawValue: name)
+        {
+            return declension
+        }
+        else
+        {
+            LOG.warn("Failed to decode Declension from name: \(name)")
+            return nil
+        }
+    }
 }
 
 public enum PronounType: String
@@ -65,6 +116,19 @@ public enum PronounType: String
     case Personal
     
     public var name: String { return self.rawValue }
+    
+    public static func from(name: String) -> PronounType?
+    {
+        if let pronounType = PronounType(rawValue: name)
+        {
+            return pronounType
+        }
+        else
+        {
+            LOG.warn("Failed to decode PronounType from name: \(name)")
+            return nil
+        }
+    }
 }
 
 
@@ -191,9 +255,9 @@ public class LexisDefinition: NSObject, NSCoding
         self.terms = terms
     }
     
-    public required convenience init?(coder aDecoder: NSCoder)
+    public required convenience init?(coder decoder: NSCoder)
     {
-        guard let terms = aDecoder.decodeObject(forKey: "terms") as? [String]
+        guard let terms = decoder.decodeObject(forKey: "terms") as? [String]
         else
         {
             LOG.warn("Failed to decode terms from NSCoder")
@@ -203,9 +267,9 @@ public class LexisDefinition: NSObject, NSCoding
         self.init(terms: terms)
     }
     
-    public func encode(with aCoder: NSCoder)
+    public func encode(with encoder: NSCoder)
     {
-        aCoder.encode(terms, forKey: "terms")
+        encoder.encode(terms, forKey: "terms")
     }
     
 }
@@ -229,7 +293,7 @@ extension LexisDefinition
 //===================================
 
 //This is the primary Datastructure representing a Latin word in Lexis.
-public struct LexisWord: CustomStringConvertible, Equatable, Hashable
+public class LexisWord: NSObject, NSCoding
 {
     /**
         A Word's forms represnts the different parts to a Latin vocabulary entry.
@@ -250,9 +314,46 @@ public struct LexisWord: CustomStringConvertible, Equatable, Hashable
     */
     public let definitions: [LexisDefinition]
     
-    public var description: String
+    public init(forms: [String], wordType: WordType, definitions: [LexisDefinition])
+    {
+        self.forms = forms
+        self.wordType = wordType
+        self.definitions = definitions
+    }
+    
+
+    public convenience required init?(coder aDecoder: NSCoder)
+    {
+        guard let forms = aDecoder.decodeObject(forKey: Keys.forms) as? [String],
+                let wordType = aDecoder.decodeObject(forKey: Keys.wordType) as? WordType,
+                let definitions = aDecoder.decodeObject(forKey: Keys.definintions) as? [LexisDefinition]
+        else
+        {
+            LOG.warn("Failed to decode LexisWord")
+            return nil
+        }
+        
+        self.init(forms: forms, wordType: wordType, definitions: definitions)
+    }
+    
+    public func encode(with aCoder: NSCoder)
+    {
+        aCoder.encode(forms, forKey: Keys.forms)
+        aCoder.encode(wordType, forKey: Keys.wordType)
+        aCoder.encode(definitions, forKey: Keys.definintions)
+    }
+    
+    override public var description: String
     {
         return "\(forms) \(wordType) : [\(definitions)]"
+    }
+    
+    
+    class Keys
+    {
+        static let forms = "forms"
+        static let wordType = "word_type"
+        static let definintions = "definitions"
     }
     
 }
@@ -281,7 +382,7 @@ public func ==(lhs: LexisWord, rhs: LexisWord) -> Bool
 
 extension LexisWord
 {
-    public var hashValue: Int
+    override public var hashValue: Int
     {
         return forms.joined().hashValue
     }
