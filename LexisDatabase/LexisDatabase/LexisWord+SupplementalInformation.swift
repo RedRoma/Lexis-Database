@@ -30,7 +30,7 @@ public extension LexisWord
             self.source = source
         }
         
-        public required init?(coder decoder: NSCoder)
+        public convenience required init?(coder decoder: NSCoder)
         {
             guard let ageString = decoder.decodeObject(forKey: Keys.age) as? String,
                 let age = Age.from(dictionaryCode: ageString),
@@ -48,11 +48,7 @@ public extension LexisWord
                 return nil
             }
             
-            self.age = age
-            self.subjectArea = subjectArea
-            self.geographicalArea = geographicalArea
-            self.frequency = frequency
-            self.source = source
+            self.init(age: age, subjectArea: subjectArea, geographicalArea: geographicalArea, frequency: frequency, source: source)
         }
         
         public func encode(with encoder: NSCoder)
