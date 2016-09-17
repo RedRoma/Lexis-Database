@@ -100,12 +100,12 @@ public class LexisWord: NSObject, NSCoding
     }
     
 
-    public convenience required init?(coder aDecoder: NSCoder)
+    public convenience required init?(coder encoder: NSCoder)
     {
-        guard let forms = aDecoder.decodeObject(forKey: Keys.forms) as? [String],
-                let wordTypeDictionary = aDecoder.decodeObject(forKey: Keys.wordType) as? NSDictionary,
+        guard let forms = encoder.decodeObject(forKey: Keys.forms) as? [String],
+                let wordTypeDictionary = encoder.decodeObject(forKey: Keys.wordType) as? NSDictionary,
                 let wordType = WordType.fromJSON(dictionary: wordTypeDictionary),
-                let definitions = aDecoder.decodeObject(forKey: Keys.definintions) as? [LexisDefinition]
+                let definitions = encoder.decodeObject(forKey: Keys.definintions) as? [LexisDefinition]
         else
         {
             LOG.warn("Failed to decode LexisWord")
@@ -115,11 +115,11 @@ public class LexisWord: NSObject, NSCoding
         self.init(forms: forms, wordType: wordType, definitions: definitions)
     }
     
-    public func encode(with aCoder: NSCoder)
+    public func encode(with decoder: NSCoder)
     {
-        aCoder.encode(forms, forKey: Keys.forms)
-        aCoder.encode(wordType.asJSON, forKey: Keys.wordType)
-        aCoder.encode(definitions, forKey: Keys.definintions)
+        decoder.encode(forms, forKey: Keys.forms)
+        decoder.encode(wordType.asJSON, forKey: Keys.wordType)
+        decoder.encode(definitions, forKey: Keys.definintions)
     }
     
     override public var description: String
@@ -150,12 +150,17 @@ public func ==(lhs: LexisWord, rhs: LexisWord) -> Bool
         return false
     }
     
-    if lhs.definitions != rhs.definitions
+    if lhs.definitions == rhs.definitions
     {
         return false
     }
     
     return true
+}
+
+public func ==(left: [LexisDefinition], right: [LexisDefinition]) -> Bool
+{
+    return left.containsMultiple(right) && right.containsMultiple(left)
 }
 
 
