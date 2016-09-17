@@ -199,4 +199,15 @@ class LexisWordTests: XCTestCase
         
         XCTAssertFalse(first == second)
     }
+    
+    
+    func testNSCoding()
+    {
+        let data = NSKeyedArchiver.archivedData(withRootObject: word)
+        XCTAssertFalse(data.isEmpty)
+        
+        let extracted: LexisWord! = NSKeyedUnarchiver.unarchiveObject(with: data) as? LexisWord
+        
+        XCTAssertTrue(extracted == word)
+    }
 }
