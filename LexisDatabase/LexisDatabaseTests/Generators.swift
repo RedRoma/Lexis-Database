@@ -56,7 +56,12 @@ struct Generators
     
     static var randomAge: Age
     {
-        return Age.possibleAges.anyElement!
+        return Age.ages.anyElement!
+    }
+    
+    static var randomSubject: SubjectArea
+        {
+        return SubjectArea.areas.anyElement!
     }
 }
 

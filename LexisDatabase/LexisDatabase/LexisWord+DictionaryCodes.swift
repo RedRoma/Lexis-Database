@@ -52,7 +52,7 @@ public enum Age: String
         return Array(codes.keys)
     }
     
-    internal static var possibleAges: [Age]
+    internal static var ages: [Age]
     {
         return Array(Set(codes.values))
     }
@@ -117,7 +117,7 @@ public enum SubjectArea: String
         return Array(codes.keys)
     }
     
-    internal static var possibleSubjectAreas: [SubjectArea]
+    internal static var areas: [SubjectArea]
     {
         return Array(Set(codes.values))
     }
@@ -201,7 +201,7 @@ public enum GeographicalArea: String
         return Array(codes.keys)
     }
     
-    internal static var possibleGeophrapgies: [GeographicalArea]
+    internal static var geophraphies: [GeographicalArea]
     {
         return Array(Set(codes.values))
     }
@@ -262,7 +262,7 @@ public enum Frequency: String
         return Array(codes.keys)
     }
     
-    internal static var possibleFrequencies: [Frequency]
+    internal static var frequencies: [Frequency]
     {
         return Array(Set(codes.values))
     }
@@ -354,7 +354,7 @@ public enum Source: String
         return Array(codes.keys)
     }
     
-    internal static var possibleSources: [Source]
+    internal static var sources: [Source]
     {
         return Array(Set(codes.values))
     }
