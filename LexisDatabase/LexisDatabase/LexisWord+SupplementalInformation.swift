@@ -79,6 +79,13 @@ public extension LexisWord
             return description.hashValue
         }
         
+        public var humanReadableDescription: String
+        {
+            var synopsis = age.description + "in "  + subjectArea.description
+            
+            return synopsis
+        }
+        
         //Used for NSCoding
         private class Keys
         {
