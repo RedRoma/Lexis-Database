@@ -19,10 +19,8 @@ class UserDefaultsPersistence: LexisPersistence
     private init?()
     {
         key = "\(suite).Persistence"
-        guard let defaults = UserDefaults(suiteName: suite)
-        else { return nil }
-        
-        self.defaults = defaults
+
+        self.defaults = UserDefaults.standard
     }
     
     static let instance = UserDefaultsPersistence()
