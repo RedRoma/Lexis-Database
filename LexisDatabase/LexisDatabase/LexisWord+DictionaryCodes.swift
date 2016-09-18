@@ -119,7 +119,7 @@ public enum SubjectArea: String
         .S: "Science, Philosophy, Mathematics, Units/Measurements",
         .T: "Technical, Architecture, Topography, Surveying",
         .W: "Warn, Military, Naval, Ships, Armor",
-        .Y: "Muthology"
+        .Y: "Mythology"
     ]
     
     public static var codes: [String]
@@ -187,7 +187,7 @@ public enum GeographicalArea: String
     
     internal static let descriptions: [GeographicalArea: String] =
     [
-        .X: "All area",
+        .X: "All areas",
         .A: "Africa",
         .B: "Britain",
         .C: "China",
