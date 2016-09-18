@@ -33,6 +33,8 @@ public class LexisDatabase
     
     public func initialize()
     {
+        guard !isInitialized else { return }
+        
         LOG.debug("Initializing LexisDatabase")
         
         var words = persisted.getAllWords()
