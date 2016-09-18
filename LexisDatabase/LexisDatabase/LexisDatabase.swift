@@ -24,8 +24,14 @@ public class LexisDatabase
      */
     private let memory: LexisPersistence = MemoryPersistence()
     private let persisted: LexisPersistence = UserDefaultsPersistence.instance!
+    private dynamic var isInitialized = false
     
     private init()
+    {
+        
+    }
+    
+    public func initialize()
     {
         LOG.debug("Initializing LexisDatabase")
         
@@ -60,16 +66,27 @@ public class LexisDatabase
         {
             LOG.error("Failed to save words in memory: \(ex)")
         }
+        
+        isInitialized = true
     }
-    
 
     public var anyWord: LexisWord
     {
+        if !isInitialized
+        {
+            initialize()
+        }
+        
         return memory.getAllWords().anyElement!
     }
     
     public func findWord(withTerm term: String) -> [LexisWord]
     {
+        if !isInitialized
+        {
+            initialize()
+        }
+        
         return memory.searchForWords(inWordList: term)
     }
     
