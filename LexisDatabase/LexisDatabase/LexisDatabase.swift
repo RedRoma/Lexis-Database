@@ -24,7 +24,7 @@ public class LexisDatabase
      */
     private let memory: LexisPersistence = MemoryPersistence()
     private let persisted: LexisPersistence = UserDefaultsPersistence.instance!
-    private dynamic var initialized = false
+    private var initialized = false
     
     private init()
     {
