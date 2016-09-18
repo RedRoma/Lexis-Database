@@ -71,7 +71,7 @@ internal class LexisEngine
         
         file.processEachLine(mapper: self.mapLineToWord, processor: collectInArray)
         
-        LOG.info("Finished compiling a list of \(words.count) words")
+        LOG.debug("Finished compiling a list of \(words.count) words")
         return words
     }
     
@@ -117,7 +117,7 @@ extension LexisEngine
         guard let wordType = extractWordType(from: line, at: lineNumber)
         else
         {
-            LOG.warn("Could not extact word type at line #\(lineNumber)")
+            LOG.info("Could not extact word type at line #\(lineNumber)")
             return nil
         }
         
@@ -182,7 +182,6 @@ extension LexisEngine
                 if def.doesNotContain(anyOf: ["(", ")"])
                 {
                     let individualWords = def.components(separatedBy: ",")
-                    LOG.info("Parsed \(individualWords.count) from definitions: \(def)")
                     
                     return LexisDefinition(terms: individualWords)
                 }
@@ -285,7 +284,7 @@ extension LexisEngine
             return WordType.Numeral
         }
         
-        LOG.warn("Could not extract word: \(line)")
+        LOG.info("Could not extract word: \(line)")
         
         return nil
     }
@@ -296,7 +295,7 @@ extension LexisEngine
         {
             if declension == .Undeclined
             {
-                LOG.info("Noun is Undeclined: \(line)")
+                LOG.debug("Noun is Undeclined: \(line)")
             }
         }
     }
@@ -307,12 +306,12 @@ extension LexisEngine
         {
             if conjugation == .Unconjugated
             {
-                LOG.info("Verb is Unconjugated: \(line)")
+                LOG.debug("Verb is Unconjugated: \(line)")
             }
             
             if conjugation == .Irregular
             {
-                LOG.warn("Verb is Irregular: \(line)")
+                LOG.debug("Verb is Irregular: \(line)")
             }
         }
     }
@@ -382,7 +381,7 @@ extension LexisEngine
         }
         else
         {
-            LOG.warn("Noun is missing gender: \(line)")
+            LOG.info("Noun is missing gender: \(line)")
             return WordType.Noun(declension, .Unknown)
         }
     }
