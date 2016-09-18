@@ -27,14 +27,21 @@ public class LexisDatabase
     
     private init()
     {
+        LOG.debug("Initializing LexisDatabase")
+        
         var words = persisted.getAllWords()
         
         if words.isEmpty
         {
+            LOG.debug("No words found persisted. Recreating cache.")
+            
             words = LexisEngine.instance.getAllWords()
+            
+            LOG.debug("Retrieved \(words.count) words")
             do
             {
                 try persisted.save(words: words)
+                LOG.debug("Persisted \(words.count) words")
             }
             catch
             {
@@ -47,7 +54,7 @@ public class LexisDatabase
         do
         {
             try memory.save(words: words)
-            LOG.info("Persisted words in database")
+            LOG.info("Stored \(words.count) words in memory")
         }
         catch let ex
         {
