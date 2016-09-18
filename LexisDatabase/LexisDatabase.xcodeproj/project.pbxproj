@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE0BE9701D8F01D400872F0B /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0BE96F1D8F01D400872F0B /* Functions.swift */; };
 		DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC71D7A90FF00123A04 /* Strings+Test.swift */; };
 		DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */; };
 		DE156DCC1D7A9B0B00123A04 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DCB1D7A9B0B00123A04 /* Generators.swift */; };
@@ -66,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DE0BE96F1D8F01D400872F0B /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		DE156DC71D7A90FF00123A04 /* Strings+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Test.swift"; sourceTree = "<group>"; };
 		DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Arrays+Test.swift"; sourceTree = "<group>"; };
 		DE156DCB1D7A9B0B00123A04 /* Generators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generators.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				DE3129EC1D8BD27B0007692F /* LexisWord+DictionaryCodesTests.swift */,
 				DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */,
 				DE4DA0A51D8D6518003183F4 /* LexisWord+WordTypeTests.swift */,
+				DE0BE96F1D8F01D400872F0B /* Functions.swift */,
 			);
 			path = LexisDatabaseTests;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */,
 				DE156DCE1D7B381300123A04 /* RegexTests.swift in Sources */,
 				DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */,
+				DE0BE9701D8F01D400872F0B /* Functions.swift in Sources */,
 				DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */,
 				DEA7E48A1D7B5B6B009CAE25 /* LexisWordTests.swift in Sources */,
 				DE4DA0A61D8D6518003183F4 /* LexisWord+WordTypeTests.swift in Sources */,

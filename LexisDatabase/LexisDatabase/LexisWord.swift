@@ -87,7 +87,7 @@ extension LexisDefinition
 //MARK: LexisWord
 //===================================
 
-//This is the primary Datastructure representing a Latin word in Lexis.
+//This is the primary Data Structure representing a Latin word in Lexis.
 public class LexisWord: NSObject, NSCoding
 {
     /**
@@ -113,8 +113,6 @@ public class LexisWord: NSObject, NSCoding
     {
         return "\(forms) \(wordType) : [\(definitions)]"
     }
-    
-    
     
     public init(forms: [String], wordType: WordType, definitions: [LexisDefinition])
     {

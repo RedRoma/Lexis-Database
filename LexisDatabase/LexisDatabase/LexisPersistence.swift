@@ -85,4 +85,19 @@ extension LexisPersistence
             }
         }
     }
+    
+    func searchForWords(startingWith term: String) -> [LexisWord]
+    {
+        guard term.notEmpty else { return [] }
+        
+        let words = getAllWords()
+        guard words.notEmpty else { return [] }
+        
+        return words.filter()
+        { word in
+            
+            //Keep words where it's forms begin with the search term.
+            word.forms.anyMatch(shouldMatch: { $0.hasPrefix(term) })
+        }
+    }
 }

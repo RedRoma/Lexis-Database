@@ -110,6 +110,20 @@ class UserDefaultsPersistenceTests: XCTestCase
         XCTAssertTrue(results.isEmpty)
     }
     
+    func testSearchForWordsStartingWith()
+    {
+        try! instance.save(words: words)
+        
+        word = words.anyElement!
+        
+        let searchTerm = Functions.half(ofString: word.forms.anyElement!)
+        
+        let results = instance.searchForWords(startingWith: searchTerm)
+        
+        XCTAssertFalse(results.isEmpty)
+        XCTAssertTrue(results.contains(word))
+    }
+    
     func testSaveAllWords()
     {
         let allWords = Generators.words
@@ -118,4 +132,5 @@ class UserDefaultsPersistenceTests: XCTestCase
         let result = instance.getAllWords()
         XCTAssertTrue(result == allWords)
     }
+
 }

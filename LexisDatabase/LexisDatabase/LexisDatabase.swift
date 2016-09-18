@@ -22,9 +22,9 @@ public class LexisDatabase
     /**
         The Persistence Layer
      */
-    private let memory: LexisPersistence = MemoryPersistence()
-    private let persisted: LexisPersistence = UserDefaultsPersistence.instance!
-    private var initialized = false
+    fileprivate let memory: LexisPersistence = MemoryPersistence()
+    fileprivate let persisted: LexisPersistence = UserDefaultsPersistence.instance!
+    fileprivate var initialized = false
     
     private init()
     {
@@ -82,7 +82,15 @@ public class LexisDatabase
         return memory.getAllWords().anyElement!
     }
     
-    public func findWord(withTerm term: String) -> [LexisWord]
+   
+    
+}
+
+
+//MARK: Searching
+public extension LexisDatabase
+{
+    public func searchForms(withTerm term: String) -> [LexisWord]
     {
         if !initialized
         {
@@ -92,4 +100,23 @@ public class LexisDatabase
         return memory.searchForWords(inWordList: term)
     }
     
+    public func seaarchForms(startingWith term: String) -> [LexisWord]
+    {
+        if !initialized
+        {
+            initialize()
+        }
+        
+        return memory.searchForWords(startingWith: term)
+    }
+    
+    public func searchDefinitions(withTerm term: String) -> [LexisWord]
+    {
+        if !initialized
+        {
+            initialize()
+        }
+        
+        return memory.searchForWords(inDefinition: term)
+    }
 }
