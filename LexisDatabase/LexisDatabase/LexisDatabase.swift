@@ -34,6 +34,7 @@ public class LexisDatabase
     public func initialize()
     {
         guard !initialized else { return }
+        initialized = true
         
         LOG.debug("Initializing LexisDatabase")
         
@@ -69,7 +70,6 @@ public class LexisDatabase
             LOG.error("Failed to save words in memory: \(ex)")
         }
         
-        initialized = true
     }
 
     public var anyWord: LexisWord

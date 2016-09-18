@@ -9,7 +9,8 @@
 import XCTest
 @testable import LexisDatabase
 
-class LexisDatabaseTests: XCTestCase {
+class LexisDatabaseTests: XCTestCase
+{
     
     fileprivate let instance = LexisDatabase.instance
     
@@ -27,6 +28,14 @@ class LexisDatabaseTests: XCTestCase {
     func testInitialize()
     {
         instance.initialize()
+    }
+    
+    func testInitializeMultipleTimes()
+    {
+        for _ in 1...100
+        {
+            instance.initialize()
+        }
     }
     
 }

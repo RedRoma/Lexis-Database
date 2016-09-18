@@ -56,4 +56,11 @@ class LexisWord_SupplementalInformationTests: XCTestCase
         
         XCTAssertFalse(other == instance)
     }
+    
+    func testHumanReadableDescription()
+    {
+        let description = instance.humanReadableDescription
+        XCTAssertFalse(description.isEmpty)
+        print(description)
+    }
 }
