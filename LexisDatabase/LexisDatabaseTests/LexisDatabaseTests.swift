@@ -11,20 +11,22 @@ import XCTest
 
 class LexisDatabaseTests: XCTestCase {
     
-    override func setUp() {
+    fileprivate let instance = LexisDatabase.instance
+    
+    override func setUp()
+    {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown()
+    {
         super.tearDown()
     }
     
-    func testExample() {
-        
-        print("A test ran")
+
+    func testInitialize()
+    {
+        instance.initialize()
     }
-    
     
 }
