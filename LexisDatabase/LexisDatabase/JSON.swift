@@ -26,24 +26,40 @@ protocol JSONConvertible
         This static function creates an instance of the current class
         from the provided JSON.
      
-        - returns: An instance of this
+        - returns: An instance of this, if the conversion is successful, `nil` otherwise.
     */
     static func fromJSON(json: AnyObject) -> JSONConvertible?
 }
 
 
+/**
+    A `JSONSerializer` is responsible for converting objects into JSON Strings.
+    It is designed to only handle basic object types like `String, Number, Array, Dictionary`.
+*/
 protocol JSONSerializer
 {
+    /**
+        Convert the object into a JSON String.
+    */
     func toJSON(object: AnyObject) -> String?
     
+    /**
+        Create a Foundation Object class from the provided JSON String.
+    */
     func fromJSON(jsonString: String) -> AnyObject?
 }
 
 class JSONSerializationConverter: JSONSerializer
 {
     
+    private func isJSONCompatible(object: Any) -> Bool
+    {
+        return JSONSerialization.isValidJSONObject(object)
+    }
+    
     func toJSON(object: AnyObject) -> String?
     {
+        
         do
         {
             let data = try JSONSerialization.data(withJSONObject: object, options: [])
