@@ -20,7 +20,7 @@ protocol JSONConvertible
      
         - returns: `self` as JSON
     */
-    var asJSON: AnyObject { get }
+    func asJson(serializer: JSONSerializer) -> String?
     
     /**
         This static function creates an instance of the current class
@@ -28,7 +28,7 @@ protocol JSONConvertible
      
         - returns: An instance of this, if the conversion is successful, `nil` otherwise.
     */
-    static func fromJSON(json: AnyObject) -> JSONConvertible?
+    static func fromJSON(json: String, using serializer: JSONSerializer) -> JSONConvertible?
 }
 
 
@@ -41,23 +41,30 @@ protocol JSONSerializer
     /**
         Convert the object into a JSON String.
     */
-    func toJSON(object: AnyObject) -> String?
+    func toJSON(object: Any) -> String?
     
     /**
         Create a Foundation Object class from the provided JSON String.
     */
-    func fromJSON(jsonString: String) -> AnyObject?
+    func fromJSON(jsonString: String) -> Any?
 }
 
-class JSONSerializationConverter: JSONSerializer
+class BasicJSONSerializer: JSONSerializer
 {
+    
+    static let instance = BasicJSONSerializer()
+    
+    private init()
+    {
+        
+    }
     
     private func isJSONCompatible(object: Any) -> Bool
     {
         return JSONSerialization.isValidJSONObject(object)
     }
     
-    func toJSON(object: AnyObject) -> String?
+    func toJSON(object: Any) -> String?
     {
         
         do
@@ -81,7 +88,7 @@ class JSONSerializationConverter: JSONSerializer
         }
     }
     
-    func fromJSON(jsonString string: String) -> AnyObject?
+    func fromJSON(jsonString string: String) -> Any?
     {
         guard let data = string.data(using: .utf8)
         else
