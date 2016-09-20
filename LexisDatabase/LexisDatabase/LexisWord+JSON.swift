@@ -11,88 +11,80 @@ import Sulcus
 
 fileprivate class Keys
 {
-    static let age = "age"
-    static let subjectArea = "subject_area"
-    static let geographicalArea = "geographical_area"
-    static let frequency = "frequency"
-    static let source = "source"
+    static let forms = "forms"
+    static let wordType = "word_type"
+    static let definitions = "definitions"
 }
 
-//MARK: Supplemental Information
-extension SupplementalInformation: JSONConvertible
-{
 
-    
-    
-    func asJson(serializer: JSONSerializer) -> String?
+//MARK: LexisWord
+extension LexisWord: JSONConvertible
+{
+    func asJSON() -> Any?
     {
         var json = [String: Any]()
-
-        json[Keys.age] = self.age.code
-        json[Keys.subjectArea] = self.subjectArea.code
-        json[Keys.geographicalArea] = self.geographicalArea.code
-        json[Keys.frequency] = self.frequency.code
-        json[Keys.source] = self.source.code
         
-        let jsonString = serializer.toJSON(object: json)
-        return jsonString
+        json[Keys.forms] = (self.forms as NSArray)
+        json[Keys.wordType] = self.wordType.asJSON
+        
+        
+        let definitionsJSON = definitions.flatMap() { (definition: LexisDefinition) -> (Any?) in
+            return definition.asJSON()
+        }
+        
+        json[Keys.definitions] = definitionsJSON
+        
+        return json
     }
     
-    static func fromJSON(json: String, using serializer: JSONSerializer) -> JSONConvertible?
+    static func fromJSON(json: Any) -> JSONConvertible?
     {
-        guard let dictionary = serializer.fromJSON(jsonString: json) as? [String: Any]
+        guard let object = json as? [String: Any]
         else
         {
-            LOG.warn("Failed to deserialize json String as a Dictionary: \(json)")
+            LOG.error("Expecting Dictionary, instead: \(json)")
             return nil
         }
         
-        guard let ageCode = dictionary[Keys.age] as? String
+        guard let forms = object[Keys.forms] as? [String]
         else
         {
-            LOG.warn("Could not load age code from dictionary: \(dictionary)")
+            LOG.error("Missing word forms in JSON")
             return nil
         }
         
-        guard let subjectAreaCode = dictionary[Keys.subjectArea] as? String
+        guard let wordTypeJSON = object[Keys.wordType] as? NSDictionary
         else
         {
-            LOG.warn("Could not load subject area code from dictionary: \(dictionary)")
+            LOG.error("Missing word type in JSON: \(object)")
             return nil
         }
         
-        guard let geographicalAreaCode = dictionary[Keys.geographicalArea] as? String
+        guard let wordType = WordType.fromJSON(dictionary: wordTypeJSON)
         else
         {
-            LOG.warn("Could not load geographical area code from dictionary: \(dictionary)")
+            LOG.error("Failed to interpret Word Type from JSON: \(wordTypeJSON)")
             return nil
         }
         
-        guard let frequencyCode = dictionary[Keys.frequency] as? String
+        guard let definitionsJSON = object[Keys.definitions] as? NSArray
         else
         {
-            LOG.warn("Could not load frequency from Dictionary: \(dictionary)")
+            LOG.error("Missing defiinitions in JSONL \(object)")
             return nil
         }
         
-        guard let sourceCode = dictionary[Keys.source] as? String
+        guard let definitionObjects = definitionsJSON as? [NSDictionary]
         else
         {
-            LOG.warn("Could not load source code from dictionary: \(dictionary)")
+            LOG.error("Expecting definitions JSON to be an Array of Dictionaries, instead: \(definitionsJSON)")
             return nil
         }
         
-        guard let age = Age.from(dictionaryCode: ageCode),
-            let subjectArea = SubjectArea.from(dictionaryCode: subjectAreaCode),
-            let geographicalArea = GeographicalArea.from(dictionaryCode: geographicalAreaCode),
-            let frequency = Frequency.from(dictionaryCode: frequencyCode),
-            let source = Source.from(dictionaryCode: sourceCode)
-        else
-        {
-            LOG.warn("Could not interpret dictionary codes: \(dictionary)")
-            return nil
+        let definitions = definitionObjects.flatMap() { dictionary in
+            return LexisDefinition.fromJSON(json: dictionary) as? LexisDefinition
         }
         
-        return SupplementalInformation(age: age, subjectArea: subjectArea, geographicalArea: geographicalArea, frequency: frequency, source: source)
+        return LexisWord(forms: forms, wordType: wordType, definitions: definitions)
     }
 }

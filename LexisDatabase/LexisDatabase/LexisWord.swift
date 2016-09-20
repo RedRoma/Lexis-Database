@@ -150,7 +150,7 @@ public class LexisWord: NSObject, NSCoding
         return self == other
     }
     
-    class Keys
+    fileprivate class Keys
     {
         static let forms = "forms"
         static let wordType = "word_type"

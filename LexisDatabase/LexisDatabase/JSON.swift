@@ -20,7 +20,10 @@ protocol JSONConvertible
      
         - returns: `self` as JSON
     */
-    func asJson(serializer: JSONSerializer) -> String?
+    func asJSON() -> Any?
+    
+    func asJSONString(serializer: JSONSerializer) -> String?
+    
     
     /**
         This static function creates an instance of the current class
@@ -28,9 +31,34 @@ protocol JSONConvertible
      
         - returns: An instance of this, if the conversion is successful, `nil` otherwise.
     */
-    static func fromJSON(json: String, using serializer: JSONSerializer) -> JSONConvertible?
+    static func fromJSON(json: Any) -> JSONConvertible?
+    
+    static func fromJSONString(json: String, serializer: JSONSerializer) -> JSONConvertible?
 }
 
+
+extension JSONConvertible
+{
+    func asJSONString(serializer: JSONSerializer) -> String?
+    {
+        let json = self.asJSON()
+        
+        let jsonString = serializer.toJSON(object: json)
+        return jsonString
+    }
+    
+    static func fromJSONString(json: String, serializer: JSONSerializer) -> JSONConvertible?
+    {
+        guard let object = serializer.fromJSON(jsonString: json)
+        else
+        {
+            LOG.error("Failed to deserialize JSON as an Object: \(json)")
+            return nil
+        }
+        
+        return fromJSON(json: object)
+    }
+}
 
 /**
     A `JSONSerializer` is responsible for converting objects into JSON Strings.

@@ -14,25 +14,58 @@ fileprivate let key = "terms"
 extension LexisDefinition: JSONConvertible
 {
     
-    func asJson(serializer: JSONSerializer) -> String?
+    func asJSON() -> Any?
     {
         var dictionary: [String: Any] = [:]
         
-        guard let termsAsJson = serializer.toJSON(object: self.terms)
+        dictionary[key] = (self.terms as NSArray)
+        
+        return dictionary as NSDictionary
+    }
+    
+    func asJSONString(serializer: JSONSerializer) -> String?
+    {
+        guard let object = self.asJSON() as? [String: Any]
         else
         {
-            LOG.error("Failed to convert terms into a JSON String")
+            LOG.error("Failed to convert self into a JSON Object")
             return nil
         }
         
-        dictionary[key] = termsAsJson
-        
-        return serializer.toJSON(object: dictionary)
+        let jsonString = serializer.toJSON(object: object)
+        return jsonString
     }
     
-    static func fromJSON(json: String, using serializer: JSONSerializer) -> JSONConvertible?
+    static func fromJSON(json: Any) -> JSONConvertible?
     {
+        guard let object = json as? [String: Any]
+        else
+        {
+            LOG.error("Expected Dictionary json object, instead :\(json)")
+            return nil
+        }
         
+        let emptyDefinition = LexisDefinition(terms: [])
+        
+        guard let termsObject = object[key]
+            else
+        {
+            LOG.warn("Missing terms in JSON Object: \(object)")
+            return emptyDefinition
+        }
+        
+        guard let terms = termsObject as? [String]
+        else
+        {
+            LOG.warn("Expected terms to be a [String], but instead \(termsObject)")
+            return emptyDefinition
+        }
+        
+        return LexisDefinition(terms: terms)
+    }
+    
+    static func fromJSONString(json: String, serializer: JSONSerializer) -> JSONConvertible?
+    {
         guard let object = serializer.fromJSON(jsonString: json)
         else
         {
@@ -47,23 +80,6 @@ extension LexisDefinition: JSONConvertible
             return nil
         }
         
-        let emptyDefinition = LexisDefinition(terms: [])
-        
-        guard let termsObject = dictionary[key]
-        else
-        {
-            LOG.warn("Missing terms in JSON Dictionary: \(dictionary)")
-            return emptyDefinition
-        }
-        
-        guard let terms = termsObject as? [String]
-        else
-        {
-            LOG.warn("Expected terms to be a [String], but instead \(termsObject)")
-            return emptyDefinition
-        }
-        
-        return LexisDefinition(terms: terms)
-        
+        return fromJSON(json: dictionary)
     }
 }
