@@ -60,7 +60,7 @@ class LexisWord_WordTypeTests: XCTestCase
     
     func testAsJSON()
     {
-        var json = WordType.Adjective.asJSON
+        var json = WordType.Adjective.asJSON()!
         var data = try! JSONSerialization.data(withJSONObject: json, options: [])
         
         json = WordType.Adverb.asJSON
@@ -72,7 +72,7 @@ class LexisWord_WordTypeTests: XCTestCase
     
     func testDataSerialization()
     {
-        let data = left.asData
+        let data = left.asData!
         let copy = WordType.from(data: data)
         
         XCTAssertTrue(copy == left)
@@ -81,8 +81,15 @@ class LexisWord_WordTypeTests: XCTestCase
     
     func testJsonSerialization()
     {
-        let dictionary = left.asJSON
-        let copy = WordType.fromJSON(dictionary: dictionary)
+        let json = left.asJSON()
+        XCTAssertTrue(json is NSDictionary)
+        let dictionary = json as! NSDictionary
+        
+        let object = WordType.fromJSON(json: dictionary)
+        XCTAssertFalse(object == nil)
+        XCTAssertTrue(object is WordType)
+        
+        let copy = object as! WordType
         XCTAssertTrue(copy == left)
     }
 }
