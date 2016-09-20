@@ -41,6 +41,7 @@
 		DE4DF0BF1D910FE600C29CF4 /* Sulcus.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DE4DF0B01D910FE100C29CF4 /* Sulcus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE4DF0C01D910FE600C29CF4 /* SwiftExceptionCatcher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DE4DF0B11D910FE100C29CF4 /* SwiftExceptionCatcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE4DF0C41D91185800C29CF4 /* WordType+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0C21D91185800C29CF4 /* WordType+JSONTests.swift */; };
+		DE4DF0C81D911D8500C29CF4 /* LexisDefinition+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0C51D911BA200C29CF4 /* LexisDefinition+JSONTests.swift */; };
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DE7B309F1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */; };
 		DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */; };
@@ -110,6 +111,7 @@
 		DE4DF0B01D910FE100C29CF4 /* Sulcus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sulcus.framework; sourceTree = "<group>"; };
 		DE4DF0B11D910FE100C29CF4 /* SwiftExceptionCatcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftExceptionCatcher.framework; sourceTree = "<group>"; };
 		DE4DF0C21D91185800C29CF4 /* WordType+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WordType+JSONTests.swift"; sourceTree = "<group>"; };
+		DE4DF0C51D911BA200C29CF4 /* LexisDefinition+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisDefinition+JSONTests.swift"; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformation.swift"; sourceTree = "<group>"; };
 		DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformationTests.swift"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				DE4DF0C21D91185800C29CF4 /* WordType+JSONTests.swift */,
+				DE4DF0C51D911BA200C29CF4 /* LexisDefinition+JSONTests.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE4DF0C81D911D8500C29CF4 /* LexisDefinition+JSONTests.swift in Sources */,
 				DE4DF0C41D91185800C29CF4 /* WordType+JSONTests.swift in Sources */,
 				DEBD16951D86818D00E5C4DD /* MemoryPersistenceTests.swift in Sources */,
 				DE3129ED1D8BD27B0007692F /* LexisWord+DictionaryCodesTests.swift in Sources */,
@@ -579,7 +583,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tech.redroma.LexisDatabase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -606,7 +609,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tech.redroma.LexisDatabase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

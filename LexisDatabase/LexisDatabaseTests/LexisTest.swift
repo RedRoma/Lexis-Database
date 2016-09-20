@@ -51,4 +51,25 @@ class LexisTest: XCTestCase
         
     }
     
+    
+    func testAromaMessage()
+    {
+        func onError(ex: Error) {
+            print("Aroma message failed: \(ex)")
+        }
+        
+        func onDone() {
+            print("Aroma message was a success")
+        }
+        
+        for _ in 1...100
+        {
+            AromaClient.beginMessage(withTitle: "Testing")
+                .withPriority(.medium)
+                .send(onError: onError, onDone: onDone)
+            
+            AromaClient.sendMediumPriorityMessage(withTitle: "Testing")
+        }
+    }
+    
 }

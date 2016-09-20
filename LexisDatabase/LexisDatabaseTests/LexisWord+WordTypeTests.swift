@@ -7,6 +7,7 @@
 //
 
 import AlchemyGenerator
+import AromaSwiftClient
 import Foundation
 @testable import LexisDatabase
 import XCTest
@@ -67,4 +68,5 @@ class LexisWord_WordTypeTests: LexisTest
         XCTAssertTrue(copy == left)
     }
 
+    
 }
