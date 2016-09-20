@@ -13,6 +13,13 @@ import XCTest
 
 class LexisTest: XCTestCase
 {
+ 
+    override func setUp()
+    {
+        super.setUp()
+        continueAfterFailure = false
+    }
+    
     override class func setUp()
     {
         XCTestCase.setUp()

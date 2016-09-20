@@ -25,7 +25,7 @@ extension LexisWord: JSONConvertible
         var json = [String: Any]()
         
         json[Keys.forms] = (self.forms as NSArray)
-        json[Keys.wordType] = self.wordType.asJSON
+        json[Keys.wordType] = self.wordType.asJSON()
         
         
         let definitionsJSON = definitions.flatMap() { (definition: LexisDefinition) -> (Any?) in
