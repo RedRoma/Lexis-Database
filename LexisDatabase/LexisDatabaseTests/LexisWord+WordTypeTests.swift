@@ -11,7 +11,7 @@ import Foundation
 @testable import LexisDatabase
 import XCTest
 
-class LexisWord_WordTypeTests: XCTestCase
+class LexisWord_WordTypeTests: LexisTest
 {
     
     var left: WordType!
@@ -58,38 +58,13 @@ class LexisWord_WordTypeTests: XCTestCase
         XCTAssertNotEqual(right.hashValue, left.hashValue)
     }
     
-    func testAsJSON()
-    {
-        var json = WordType.Adjective.asJSON()!
-        var data = try! JSONSerialization.data(withJSONObject: json, options: [])
-        
-        json = WordType.Adverb.asJSON
-        data = try! JSONSerialization.data(withJSONObject: json, options: [])
-        
-        json = WordType.Noun(Declension.Accusative, Gender.Female).asJSON
-        data = try! JSONSerialization.data(withJSONObject: json, options: [])
-    }
-    
     func testDataSerialization()
     {
-        let data = left.asData!
+        let data: Data! = left.asData
+        XCTAssertFalse(data == nil)
         let copy = WordType.from(data: data)
         
         XCTAssertTrue(copy == left)
     }
 
-    
-    func testJsonSerialization()
-    {
-        let json = left.asJSON()
-        XCTAssertTrue(json is NSDictionary)
-        let dictionary = json as! NSDictionary
-        
-        let object = WordType.fromJSON(json: dictionary)
-        XCTAssertFalse(object == nil)
-        XCTAssertTrue(object is WordType)
-        
-        let copy = object as! WordType
-        XCTAssertTrue(copy == left)
-    }
 }

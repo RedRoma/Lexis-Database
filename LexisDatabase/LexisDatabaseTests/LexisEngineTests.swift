@@ -11,7 +11,7 @@ import Sulcus
 import XCTest
 @testable import LexisDatabase
 
-class LexisEngineTests: XCTestCase
+class LexisEngineTests: LexisTest
 {
     
     let instance = LexisEngine.instance

@@ -8,6 +8,7 @@
 
 import AromaSwiftClient
 import Foundation
+import Sulcus
 import XCTest
 
 class LexisTest: XCTestCase
@@ -15,8 +16,18 @@ class LexisTest: XCTestCase
     override class func setUp()
     {
         XCTestCase.setUp()
+        LOG.enable()
         
         AromaClient.TOKEN_ID = "d51c346a-d61e-41b0-9bcd-885572c1256a"
+        AromaClient.maxConcurrency = 2
+        
+        NSSetUncaughtExceptionHandler() { ex in
+            AromaClient.beginMessage(withTitle: "Tests Failed")
+                .addBody("Uncaught Exception").addLine(2)
+                .addBody("\(ex)")
+                .withPriority(.high)
+                .send()
+        }
     }
     
     override func recordFailure(withDescription description: String, inFile filePath: String, atLine lineNumber: UInt, expected: Bool)
@@ -29,7 +40,15 @@ class LexisTest: XCTestCase
             .addBody("In File: \(filePath)").addLine(2)
             .addBody("At Line #\(lineNumber)").addLine(2)
             .withPriority(.high)
-            .send()
+            .send(onError: {ex in
+                LOG.error("Failed to send message to Aroma: \(ex)")
+            }) {
+                let level = LOG.level
+                LOG.level = .info
+                LOG.info("Message sent to Aroma successfully")
+                LOG.level = level
+            }
+        
     }
     
 }

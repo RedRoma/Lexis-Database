@@ -12,7 +12,7 @@ import Foundation
 import Sulcus
 import XCTest
 
-class UserDefaultsPersistenceTests: XCTestCase
+class UserDefaultsPersistenceTests: LexisTest
 {
     var word = Generators.randomWord
     var words: [LexisWord] = []

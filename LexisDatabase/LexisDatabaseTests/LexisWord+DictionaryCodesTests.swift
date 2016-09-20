@@ -11,7 +11,7 @@ import Foundation
 @testable import LexisDatabase
 import XCTest
 
-class LexisWord_DictionaryCodesTests: XCTestCase
+class LexisWord_DictionaryCodesTests: LexisTest
 {
     func testAgeEnum()
     {

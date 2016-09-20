@@ -12,7 +12,7 @@ import XCTest
 @testable import LexisDatabase
 
 
-class LexisDefinitionTests: XCTestCase
+class LexisDefinitionTests: LexisTest
 {
     
     private var terms: [String] = AlchemyGenerator.array() { return AlchemyGenerator.Strings.alphabetic }

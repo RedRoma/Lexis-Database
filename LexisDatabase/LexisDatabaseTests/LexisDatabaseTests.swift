@@ -9,7 +9,7 @@
 import XCTest
 @testable import LexisDatabase
 
-class LexisDatabaseTests: XCTestCase
+class LexisDatabaseTests: LexisTest
 {
     
     fileprivate let instance = LexisDatabase.instance

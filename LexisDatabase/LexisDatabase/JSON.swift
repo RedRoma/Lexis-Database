@@ -41,7 +41,12 @@ extension JSONConvertible
 {
     func asJSONString(serializer: JSONSerializer) -> String?
     {
-        let json = self.asJSON()
+        guard let json = self.asJSON()
+        else
+        {
+            LOG.warn("Could not convert self to JSON: \(self)")
+            return nil
+        }
         
         let jsonString = serializer.toJSON(object: json)
         return jsonString
@@ -94,6 +99,13 @@ class BasicJSONSerializer: JSONSerializer
     
     func toJSON(object: Any) -> String?
     {
+     
+        guard isJSONCompatible(object: object)
+        else
+        {
+            LOG.warn("Not JSON Compatibile: \(object)")
+            return nil
+        }
         
         do
         {

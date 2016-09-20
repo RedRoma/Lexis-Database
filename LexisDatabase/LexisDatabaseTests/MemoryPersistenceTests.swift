@@ -11,7 +11,7 @@ import Foundation
 @testable import LexisDatabase
 import XCTest
 
-class MemoryPersistenceTests: XCTestCase
+class MemoryPersistenceTests: LexisTest
 {
     
     var word = Generators.randomWord

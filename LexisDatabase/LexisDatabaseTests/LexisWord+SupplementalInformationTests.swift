@@ -11,7 +11,7 @@ import Foundation
 @testable import LexisDatabase
 import XCTest
 
-class LexisWord_SupplementalInformationTests: XCTestCase
+class LexisWord_SupplementalInformationTests: LexisTest
 {
     
     private var instance: SupplementalInformation!
