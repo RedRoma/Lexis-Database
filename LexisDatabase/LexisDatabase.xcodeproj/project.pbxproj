@@ -13,6 +13,7 @@
 		DE156DCC1D7A9B0B00123A04 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DCB1D7A9B0B00123A04 /* Generators.swift */; };
 		DE156DCE1D7B381300123A04 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DCD1D7B381300123A04 /* RegexTests.swift */; };
 		DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1978561D720269008E46AB /* LexisEngineTests.swift */; };
+		DE1FBC5F1D90F3A300B683ED /* LexisWord+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1FBC5E1D90F3A300B683ED /* LexisWord+JSON.swift */; };
 		DE3129EB1D8BCC040007692F /* LexisWord+DictionaryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3129EA1D8BCC040007692F /* LexisWord+DictionaryCodes.swift */; };
 		DE3129ED1D8BD27B0007692F /* LexisWord+DictionaryCodesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3129EC1D8BD27B0007692F /* LexisWord+DictionaryCodesTests.swift */; };
 		DE405ACF1D76494100C16B46 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE405ACE1D76494100C16B46 /* Regex.swift */; };
@@ -75,6 +76,7 @@
 		DE156DCB1D7A9B0B00123A04 /* Generators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generators.swift; sourceTree = "<group>"; };
 		DE156DCD1D7B381300123A04 /* RegexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		DE1978561D720269008E46AB /* LexisEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexisEngineTests.swift; sourceTree = "<group>"; };
+		DE1FBC5E1D90F3A300B683ED /* LexisWord+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+JSON.swift"; sourceTree = "<group>"; };
 		DE3129EA1D8BCC040007692F /* LexisWord+DictionaryCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+DictionaryCodes.swift"; sourceTree = "<group>"; };
 		DE3129EC1D8BD27B0007692F /* LexisWord+DictionaryCodesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+DictionaryCodesTests.swift"; sourceTree = "<group>"; };
 		DE405ACE1D76494100C16B46 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				DE9E9EE91D902BD7004E4CD3 /* JSON.swift */,
 				DE9E9EEB1D9030F5004E4CD3 /* LexisDefinition+JSON.swift */,
+				DE1FBC5E1D90F3A300B683ED /* LexisWord+JSON.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				DE405ACF1D76494100C16B46 /* Regex.swift in Sources */,
 				DEDE0DC41D718D8F00965CFD /* LexisEngine.swift in Sources */,
 				DE3129EB1D8BCC040007692F /* LexisWord+DictionaryCodes.swift in Sources */,
+				DE1FBC5F1D90F3A300B683ED /* LexisWord+JSON.swift in Sources */,
 				DEDE0DBF1D71758B00965CFD /* LexisWord.swift in Sources */,
 				DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */,
 			);
