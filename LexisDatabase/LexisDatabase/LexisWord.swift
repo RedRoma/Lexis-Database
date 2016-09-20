@@ -121,12 +121,12 @@ public class LexisWord: NSObject, NSCoding
         self.definitions = definitions
     }
 
-    public convenience required init?(coder encoder: NSCoder)
+    public convenience required init?(coder decoder: NSCoder)
     {
-        guard let forms = encoder.decodeObject(forKey: Keys.forms) as? [String],
-                let wordTypeDictionary = encoder.decodeObject(forKey: Keys.wordType) as? NSDictionary,
-                let wordType = WordType.fromJSON(dictionary: wordTypeDictionary),
-                let definitions = encoder.decodeObject(forKey: Keys.definintions) as? [LexisDefinition]
+        guard let forms = decoder.decodeObject(forKey: Keys.forms) as? [String],
+                let wordTypeDictionary = decoder.decodeObject(forKey: Keys.wordType) as? NSDictionary,
+                let wordType = WordType.fromJSON(json: wordTypeDictionary) as? WordType,
+                let definitions = decoder.decodeObject(forKey: Keys.definintions) as? [LexisDefinition]
         else
         {
             LOG.warn("Failed to decode LexisWord")
@@ -136,11 +136,15 @@ public class LexisWord: NSObject, NSCoding
         self.init(forms: forms, wordType: wordType, definitions: definitions)
     }
     
-    public func encode(with decoder: NSCoder)
+    public func encode(with encoder: NSCoder)
     {
-        decoder.encode(forms, forKey: Keys.forms)
-        decoder.encode(wordType.asJSON, forKey: Keys.wordType)
-        decoder.encode(definitions, forKey: Keys.definintions)
+        encoder.encode(forms, forKey: Keys.forms)
+        encoder.encode(definitions, forKey: Keys.definintions)
+        
+        if let wordTypeObject = wordType.asJSON() as? NSDictionary
+        {
+            encoder.encode(wordTypeObject, forKey: Keys.wordType)
+        }
     }
     
     public override func isEqual(_ object: Any?) -> Bool

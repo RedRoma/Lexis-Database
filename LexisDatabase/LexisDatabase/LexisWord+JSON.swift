@@ -60,7 +60,7 @@ extension LexisWord: JSONConvertible
             return nil
         }
         
-        guard let wordType = WordType.fromJSON(dictionary: wordTypeJSON)
+        guard let wordType = WordType.fromJSON(json: wordTypeJSON) as? WordType
         else
         {
             LOG.error("Failed to interpret Word Type from JSON: \(wordTypeJSON)")
