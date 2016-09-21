@@ -123,7 +123,14 @@ extension LexisEngine
         
         let definitions = extractDefinitions(from: line)
         
-        return LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+        guard let supplementalInformation = getSupplementalInformation(fromLine: line)
+        else
+        {
+            LOG.warn("Failed to load Supplemental information for: \(line)")
+            return nil
+        }
+        
+        return LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInformation)
         
     }
     
@@ -482,6 +489,83 @@ extension LexisEngine
     }
 }
 
+ //MARK: Exctract dictionary codes
+ extension LexisEngine
+ {
+    func getSupplementalInformation(fromLine line: String) -> SupplementalInformation?
+    {
+        let dictionaryCodes = line =~ Regex.dictionaryCode
+        
+        guard dictionaryCodes.notEmpty
+        else
+        {
+            LOG.warn("No Dictionary codes found for line: \(line)")
+            return nil
+        }
+        
+        guard let codeString = dictionaryCodes.first
+        else
+        {
+            LOG.error("Dictionary Codes Regex turned up empty response: \(dictionaryCodes)")
+            return nil
+        }
+        
+        let codes = Array(codeString.characters).map() { String.init($0) }
+        
+        guard codes.count == 5
+        else
+        {
+            LOG.warn("Unepected number of dictionary codes: \(codes)")
+            return nil
+        }
+        
+        let ageCode = codes[0]
+        let subjectAreCode = codes[1]
+        let geographicalAreaCode = codes[2]
+        let frequencyCode = codes[3]
+        let sourceCode = codes[4]
+        
+        guard let age = Age.from(dictionaryCode: ageCode)
+        else
+        {
+            LOG.error("Uknown Age code: \(ageCode)")
+            return nil
+        }
+        
+        guard let subjectArea = SubjectArea.from(dictionaryCode: subjectAreCode)
+        else
+        {
+            LOG.error("Uknown Subject Area code: \(subjectAreCode)")
+            return nil
+        }
+        
+        guard let geographicalArea = GeographicalArea.from(dictionaryCode: geographicalAreaCode)
+        else
+        {
+            LOG.error("Uknown Geographical Area code")
+            return nil
+        }
+        
+        guard let frequency = Frequency.from(dictionaryCode: frequencyCode)
+        else
+        {
+            LOG.error("Uknown Frequency code: \(frequencyCode)")
+            return nil
+        }
+        
+        guard let source = Source.from(dictionaryCode: sourceCode)
+        else
+        {
+            LOG.error("Uknown Source code: \(sourceCode)")
+            return nil
+        }
+        
+        return SupplementalInformation(age: age, subjectArea: subjectArea, geographicalArea: geographicalArea, frequency: frequency, source: source)
+    }
+    
+    
+ }
+ 
 
 //MARK: Dictionary keywords
 private class Keywords

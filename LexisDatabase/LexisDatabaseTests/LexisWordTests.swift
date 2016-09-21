@@ -80,7 +80,7 @@ class LexisWordTests: XCTestCase
     private var forms: [String] = []
     private var wordType: WordType! = nil
     private var definitions: [LexisDefinition] = []
-    
+    private var supplementalInfo: SupplementalInformation!
     
     private var randomForms: [String] { return AlchemyGenerator.Arrays.ofAlphabeticString }
     private var randomDefintions: [LexisDefinition]
@@ -98,11 +98,11 @@ class LexisWordTests: XCTestCase
     
     override func setUp()
     {
-        forms = randomForms
-        wordType = Generators.randomWordType
-        definitions = randomDefintions
-        
-        word = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+        word =  Generators.randomWord
+        forms = word.forms
+        wordType = word.wordType
+        definitions = word.definitions
+        supplementalInfo = word.supplementalInformation
     }
     
     
@@ -111,33 +111,33 @@ class LexisWordTests: XCTestCase
         let shallowCopy = word
         XCTAssertTrue(shallowCopy == word)
         
-        let deepCopy = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+        let deepCopy = LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
         XCTAssertTrue(deepCopy == word)
         
     }
     
     func testEqualityWhenDifferent()
     {
-        let differentForms = LexisWord(forms: randomForms, wordType: wordType, definitions: definitions)
+        let differentForms = LexisWord(forms: randomForms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
         XCTAssertTrue(differentForms != word)
         
-        var differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions)
+        var differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions, supplementalInformation: supplementalInfo)
         
         while differentWordType == word
         {
-            differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions)
+            differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions, supplementalInformation: supplementalInfo)
         }
         
         XCTAssertTrue(differentWordType != word)
         
-        let differentDefinitions = LexisWord(forms: forms, wordType: wordType, definitions: randomDefintions)
+        let differentDefinitions = LexisWord(forms: forms, wordType: wordType, definitions: randomDefintions, supplementalInformation: supplementalInfo)
         XCTAssertTrue(differentDefinitions != word)
         
     }
     
     func testHashCodeWhenSame()
     {
-        let copy = LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+        let copy = LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
         let first = word.hashValue
         let second = copy.hashValue
         XCTAssertTrue(first == second)
@@ -145,7 +145,7 @@ class LexisWordTests: XCTestCase
     
     func testHashCodeWhenDifferent()
     {
-        let other = LexisWord(forms: randomForms, wordType: Generators.randomWordType, definitions: randomDefintions)
+        let other = LexisWord(forms: randomForms, wordType: Generators.randomWordType, definitions: randomDefintions, supplementalInformation: supplementalInfo)
         let first = word.hashValue
         let second = other.hashValue
         

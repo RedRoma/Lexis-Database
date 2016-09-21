@@ -109,16 +109,24 @@ public class LexisWord: NSObject, NSCoding
     */
     public let definitions: [LexisDefinition]
     
+    /**
+        This supplemental informations provides some additional back-story on a Latin word.
+        It lets the user know in what time period the word was used, how frequently,
+        and in what subject area.
+    */
+    public let supplementalInformation: SupplementalInformation
+    
     override public var description: String
     {
         return "\(forms) \(wordType) : [\(definitions)]"
     }
     
-    public init(forms: [String], wordType: WordType, definitions: [LexisDefinition])
+    public init(forms: [String], wordType: WordType, definitions: [LexisDefinition], supplementalInformation: SupplementalInformation)
     {
         self.forms = forms
         self.wordType = wordType
         self.definitions = definitions
+        self.supplementalInformation = supplementalInformation
     }
 
     public convenience required init?(coder decoder: NSCoder)
@@ -126,14 +134,15 @@ public class LexisWord: NSObject, NSCoding
         guard let forms = decoder.decodeObject(forKey: Keys.forms) as? [String],
                 let wordTypeDictionary = decoder.decodeObject(forKey: Keys.wordType) as? NSDictionary,
                 let wordType = WordType.fromJSON(json: wordTypeDictionary) as? WordType,
-                let definitions = decoder.decodeObject(forKey: Keys.definintions) as? [LexisDefinition]
+                let definitions = decoder.decodeObject(forKey: Keys.definintions) as? [LexisDefinition],
+                let supplementalInformation = decoder.decodeObject(forKey: Keys.supplementalInformation) as? SupplementalInformation
         else
         {
             LOG.warn("Failed to decode LexisWord")
             return nil
         }
         
-        self.init(forms: forms, wordType: wordType, definitions: definitions)
+        self.init(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInformation)
     }
     
     public func encode(with encoder: NSCoder)
@@ -145,6 +154,8 @@ public class LexisWord: NSObject, NSCoding
         {
             encoder.encode(wordTypeObject, forKey: Keys.wordType)
         }
+        
+        encoder.encode(supplementalInformation, forKey: Keys.supplementalInformation)
     }
     
     public override func isEqual(_ object: Any?) -> Bool
@@ -159,6 +170,7 @@ public class LexisWord: NSObject, NSCoding
         static let forms = "forms"
         static let wordType = "word_type"
         static let definintions = "definitions"
+        static let supplementalInformation = "supplemental_information"
     }
     
 }

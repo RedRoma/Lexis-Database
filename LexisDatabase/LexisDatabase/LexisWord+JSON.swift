@@ -14,6 +14,7 @@ fileprivate class Keys
     static let forms = "forms"
     static let wordType = "word_type"
     static let definitions = "definitions"
+    static let supplementalInformation = "supplemental_information"
 }
 
 
@@ -26,7 +27,7 @@ extension LexisWord: JSONConvertible
         
         json[Keys.forms] = (self.forms as NSArray)
         json[Keys.wordType] = self.wordType.asJSON()
-        
+        json[Keys.supplementalInformation] = self.supplementalInformation.asJSON()
         
         let definitionsJSON = definitions.flatMap() { (definition: LexisDefinition) -> (Any?) in
             return definition.asJSON()
@@ -70,7 +71,7 @@ extension LexisWord: JSONConvertible
         guard let definitionsJSON = object[Keys.definitions] as? NSArray
         else
         {
-            LOG.error("Missing defiinitions in JSONL \(object)")
+            LOG.error("Missing definitions in JSONL \(object)")
             return nil
         }
         
@@ -85,6 +86,21 @@ extension LexisWord: JSONConvertible
             return LexisDefinition.fromJSON(json: dictionary) as? LexisDefinition
         }
         
-        return LexisWord(forms: forms, wordType: wordType, definitions: definitions)
+        guard let supplementalInformationObject = object[Keys.supplementalInformation] as? NSDictionary
+        else
+        {
+            LOG.error("Missing Supplemental Information from JSON: \(json))")
+            return nil
+        }
+        
+        guard let supplementalInformation = SupplementalInformation.fromJSON(json: supplementalInformationObject) as? SupplementalInformation
+        else
+        {
+            LOG.error("Failed to interpret JSOn object as SupplementalInformation: \(supplementalInformationObject)")
+            return nil
+        }
+        
+        
+        return LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInformation)
     }
 }
