@@ -263,7 +263,7 @@ public enum Frequency: String
     internal static let descriptions: [Frequency: String] =
     [
         .X: "Unknown",
-        .A: "Very frequently, in all Elementary Latin books", // Definitely top 1000 words
+        .A: "Very frequently in all Elementary Latin books", // Definitely top 1000 words
         .B: "Frequently", // next top 2000 words
         .C: "Commonly", //in the top 10,000 words"
         .D: "Infrequently;", //in top 20,1000 words
