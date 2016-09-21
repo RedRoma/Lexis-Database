@@ -108,17 +108,17 @@ public enum SubjectArea: String
     
     internal static let descriptions: [SubjectArea: String] =
     [
-        .X: "All areas",
+        .X: "All Areas",
         .A: "Agriculture, Flora, Fauna, Land, Equipment, Rural",
-        .B: "Biological, Medical, Body Parts",
-        .D: "Drama, Music, Theatre, Art, Painting, Sculpture",
-        .E: "Ecclesiastic, Biblical, Religious",
+        .B: "Biology, Medicine, Human Anatomy",
+        .D: "Drama, Music, Theatre, Art, Paintings, Sculptures",
+        .E: "Ecclesiastics, The Bible, Religions",
         .G: "Grammar, Retoric, Logic, Literature, Schools",
-        .L: "Legal, Goverment, Tax, Financial, Political, Titles",
-        .P: "Poetic",
-        .S: "Science, Philosophy, Mathematics, Units/Measurements",
-        .T: "Technical, Architecture, Topography, Surveying",
-        .W: "Warn, Military, Naval, Ships, Armor",
+        .L: "Legal, Goverment, Tax, Job Titles, Political, and Financial Institutions",
+        .P: "Poetry",
+        .S: "Science, Philosophy, Mathematics, Units of Measurement",
+        .T: "Architecture, Topography, Surveying, Technology",
+        .W: "War, Military, Naval, Ships, Armor",
         .Y: "Mythology"
     ]
     
