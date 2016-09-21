@@ -69,7 +69,7 @@ class LexisTest: XCTestCase
             print("Aroma message was a success")
         }
         
-        for _ in 1...5000
+        for _ in 1...100
         {
             AromaClient.beginMessage(withTitle: "Testing")
                 .withPriority(.low)
