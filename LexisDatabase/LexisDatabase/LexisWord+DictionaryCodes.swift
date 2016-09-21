@@ -34,7 +34,7 @@ public enum Age: String
     
     internal static let descriptions: [Age: String] =
     [
-        .X: "Throughout the Ages/Unknown",
+        .X: "Throughout the Ages",
         .A: "Throughout the Archaic period; These very early forms were obsolete by Classical times",
         .B: "During the Early Latin, Pre-Classical period, for effect and poetry",
         .C: "Throughout the Classical Era (-150 BC - 200 AD)",
@@ -109,16 +109,16 @@ public enum SubjectArea: String
     internal static let descriptions: [SubjectArea: String] =
     [
         .X: "All Areas",
-        .A: "Agriculture, Flora, Fauna, Land, Equipment, Rural",
-        .B: "Biology, Medicine, Human Anatomy",
-        .D: "Drama, Music, Theatre, Art, Paintings, Sculptures",
-        .E: "Ecclesiastics, The Bible, Religions",
-        .G: "Grammar, Retoric, Logic, Literature, Schools",
+        .A: "Agriculture, Flora, Fauna, Land, Farm Equipment, and Rural",
+        .B: "Biology, Medicine, and Human Anatomy",
+        .D: "Drama, Music, Theatre, Art, Paintings, and Sculpture",
+        .E: "Ecclesiastics, The Bible, and Religion",
+        .G: "Grammar, Retoric, Logic, Literature, and Schools",
         .L: "Legal, Goverment, Tax, Job Titles, Political, and Financial Institutions",
         .P: "Poetry",
-        .S: "Science, Philosophy, Mathematics, Units of Measurement",
-        .T: "Architecture, Topography, Surveying, Technology",
-        .W: "War, Military, Naval, Ships, Armor",
+        .S: "Science, Philosophy, Mathematics, and Units of Measurement",
+        .T: "Architecture, Topography, Surveying, and Technology",
+        .W: "War, Military, Naval, Ships, and Armor",
         .Y: "Mythology"
     ]
     
