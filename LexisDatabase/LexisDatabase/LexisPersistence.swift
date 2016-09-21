@@ -78,9 +78,9 @@ extension LexisPersistence
             { definitions in
                 
                 definitions.terms.anyMatch()
-                { term in
+                { definition in
                     
-                    term.contains(term)
+                    definition.contains(term)
                 }
             }
         }
