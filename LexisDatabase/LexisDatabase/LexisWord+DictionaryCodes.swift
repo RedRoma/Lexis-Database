@@ -266,10 +266,10 @@ public enum Frequency: String
         .A: "Very frequently in all Elementary Latin books", // Definitely top 1000 words
         .B: "Frequently", // next top 2000 words
         .C: "Commonly", //in the top 10,000 words"
-        .D: "Infrequently;", //in top 20,1000 words
+        .D: "Infrequently", //in top 20,1000 words
         .E: "Uncommonly", //2 or 3 citations
         .I: "In Inscription", //The only citation is scripture
-        .M: "Rarely;", //Presently not used much
+        .M: "Rarely", //Presently not used much
         .N: "In the Pliny" //Things that appear only in the Pliny Natural History
     ]
     

@@ -61,9 +61,12 @@ class LexisWord_SupplementalInformationTests: LexisTest
     {
         for _ in 1...10
         {
+            instance = Generators.randomSupplementalInformation
             let description = instance.humanReadableDescription
             XCTAssertFalse(description.isEmpty)
             print(description)
+            print()
+            
         }
     }
 }
