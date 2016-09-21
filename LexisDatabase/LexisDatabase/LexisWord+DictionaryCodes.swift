@@ -34,9 +34,9 @@ public enum Age: String
     
     internal static let descriptions: [Age: String] =
     [
-        .X: "In use throughout the ages/unknown",
+        .X: "Throughout the ages/unknown",
         .A: "Archaic; Very early forms, obsolete by classical times",
-        .B: "Early Latin, pre-classical, used for effect and poetry",
+        .B: "Early Latin, pre-classical, for effect and poetry",
         .C: "Classical; limited to classical (-150 BC - 200 AD)",
         .D: "Late, post-classical period (300-500 AD)",
         .E: "Later; Latin not in use during Classical times (600-1000 AD) Christian",
@@ -263,14 +263,14 @@ public enum Frequency: String
     internal static let descriptions: [Frequency: String] =
     [
         .X: "Unknown",
-        .A: "Very frequenetly; Used in all Elmentary Latin books. Definitely top 1000 words",
-        .B: "Frequent, next top 2000 words",
-        .C: "Common; For dictionary, in the top 10,000 words",
-        .D: "Lesser; For dictionary, in top 20,1000 words",
-        .E: "Uncommon; 2 or 3 citations",
-        .I: "Inscription; The only citation is scripture",
-        .M: "Grafitti; Presently not used much",
-        .N: "Pliny; Things that appear only in the Pliny Natural History",
+        .A: "Very frequently, in all Elementary Latin books", // Definitely top 1000 words
+        .B: "Frequently", // next top 2000 words
+        .C: "Commonly", //in the top 10,000 words"
+        .D: "Infrequently;", //in top 20,1000 words
+        .E: "Uncommonly", //2 or 3 citations
+        .I: "In Inscription", //The only citation is scripture
+        .M: "Rarely;", //Presently not used much
+        .N: "In the Pliny" //Things that appear only in the Pliny Natural History
     ]
     
     internal static let frequencies: [Frequency] = [.X, .A, .B, .C, .D, .E, .I, .M, .N]
