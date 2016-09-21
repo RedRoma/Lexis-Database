@@ -34,15 +34,15 @@ public enum Age: String
     
     internal static let descriptions: [Age: String] =
     [
-        .X: "Throughout the ages/unknown",
-        .A: "Archaic; Very early forms, obsolete by classical times",
-        .B: "Early Latin, pre-classical, for effect and poetry",
-        .C: "Classical; limited to classical (-150 BC - 200 AD)",
-        .D: "Late, post-classical period (300-500 AD)",
-        .E: "Later; Latin not in use during Classical times (600-1000 AD) Christian",
-        .F: "In use throughout the Medieval period (1600-1800 AD)",
-        .G: "In use during the Scholarly/Scientific period (1600-1800 AD)",
-        .H: "Modern; Coined recently; words for new things (1900 AD onwards)"
+        .X: "Throughout the Ages/Unknown",
+        .A: "Throughout the Archaic period; These very early forms were obsolete by Classical times",
+        .B: "During the Early Latin, Pre-Classical period, for effect and poetry",
+        .C: "Throughout the Classical Era (-150 BC - 200 AD)",
+        .D: "During the Late, Post-Classical period (300-500 AD)",
+        .E: "Much later. This word was not in use during Classical times (600-1000 AD)",
+        .F: "Throughout the Medieval period (1600-1800 AD)",
+        .G: "During the Scholarly/Scientific period (1600-1800 AD)",
+        .H: "In Modern times; This word was coined recently, and is used for new ideas (1900 AD onwards)"
     ]
     
     
