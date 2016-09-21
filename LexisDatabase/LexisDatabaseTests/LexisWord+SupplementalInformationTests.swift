@@ -59,8 +59,11 @@ class LexisWord_SupplementalInformationTests: LexisTest
     
     func testHumanReadableDescription()
     {
-        let description = instance.humanReadableDescription
-        XCTAssertFalse(description.isEmpty)
-        print(description)
+        for _ in 1...10
+        {
+            let description = instance.humanReadableDescription
+            XCTAssertFalse(description.isEmpty)
+            print(description)
+        }
     }
 }
