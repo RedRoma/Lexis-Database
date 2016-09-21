@@ -81,7 +81,25 @@ public extension LexisWord
         
         public var humanReadableDescription: String
         {
-            var synopsis = age.description + "in "  + subjectArea.description
+            var synopsis = ""
+            
+            if self.frequency != .X
+            {
+                synopsis = "Used \(frequency.description.lowercasedFirstLetter()) \(age.description.lowercasedFirstLetter()). "
+            }
+            else
+            {
+                synopsis = "Used in \(geographicalArea.description) \(age.description.lowercasedFirstLetter()). "
+            }
+            
+            if self.subjectArea != .X
+            {
+                synopsis += "This word is primarily used in \(subjectArea.description)."
+            }
+            else
+            {
+                synopsis += "This word was used in all areas."
+            }
             
             return synopsis
         }
@@ -104,4 +122,25 @@ public func ==(left: LexisWord.SupplementalInformation, right: LexisWord.Supplem
 {
     //Description is a quick and simple way to test equality
     return left.description == right.description
+}
+
+
+//MARK: Strin manipulations
+fileprivate extension String
+{
+    func lowercasedFirstLetter() -> String
+    {
+        guard self.notEmpty else { return self }
+        
+        guard self.characters.count != 1 else { return self.lowercased() }
+        
+        let characters = Array(self.characters)
+        guard let firstCharacter = characters.first else { return self }
+        
+        let firstLetterLowercased = "\(firstCharacter)".lowercased()
+        
+        let substring = self.substring(from: self.index(after: startIndex))
+        
+        return firstLetterLowercased + substring
+    }
 }
