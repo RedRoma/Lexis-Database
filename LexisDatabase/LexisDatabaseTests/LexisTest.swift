@@ -69,9 +69,12 @@ class LexisTest: XCTestCase
             print("Aroma message was a success")
         }
         
-        AromaClient.beginMessage(withTitle: "Testing")
-            .withPriority(.low)
-            .send(onError: onError, onDone: onDone)
+        for _ in 1...5000
+        {
+            AromaClient.beginMessage(withTitle: "Testing")
+                .withPriority(.low)
+                .send(onError: onError, onDone: onDone)
+        }
     }
     
 }
