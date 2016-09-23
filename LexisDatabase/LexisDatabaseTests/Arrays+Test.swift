@@ -41,5 +41,48 @@ class Arrays_Plus_Test: XCTestCase
         XCTAssertTrue(numbers.containsMultiple(subArray))
     }
     
+    func testSplit()
+    {
+        let array = AlchemyGenerator.array(withCreator: AlchemyGenerator.positiveInteger)
+        let split = splitInTwo(array: array)
+        
+        let first = split[0]
+        let second = split[1]
+        
+        let result = array.split(into: 2)
+        XCTAssertTrue(result.count == 2)
+        
+        let firstResult = result[0]
+        let secondResult = result[1]
+        XCTAssertTrue(firstResult == first)
+        XCTAssertTrue(secondResult == second)
+        
+    }
     
+    func testSplitMoreThoroughly()
+    {
+        
+        for _ in 1...20
+        {
+            let splitCount = AlchemyGenerator.integer(from: 2, to: 10)
+            let numbers = AlchemyGenerator.array(withCreator: AlchemyGenerator.positiveInteger)
+            
+            let result = numbers.split(into: splitCount)
+            XCTAssertFalse(result.isEmpty)
+            XCTAssertTrue(result.count == splitCount)
+        }
+    }
+    
+    private func splitInTwo(array: [Int]) -> [[Int]]
+    {
+        
+        let start = 0
+        let mid = array.count / 2
+        let end = array.count
+        
+        let first = Array(array[start..<mid])
+        let second = Array(array[mid..<end])
+        
+        return [first, second]
+    }
 }

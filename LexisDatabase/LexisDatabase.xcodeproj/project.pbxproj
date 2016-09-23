@@ -167,14 +167,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DE156DC61D7A90EB00123A04 /* Text */ = {
+		DE156DC61D7A90EB00123A04 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				DE156DC71D7A90FF00123A04 /* Strings+Test.swift */,
 				DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */,
 				DE156DCD1D7B381300123A04 /* RegexTests.swift */,
 			);
-			name = Text;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		DE4DF0C11D91182C00C29CF4 /* JSON */ = {
@@ -188,14 +188,14 @@
 			name = JSON;
 			sourceTree = "<group>";
 		};
-		DE652D491D723C7400F1B52A /* Text */ = {
+		DE652D491D723C7400F1B52A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				DE652D4A1D723C8B00F1B52A /* Strings+.swift */,
 				DE405ACE1D76494100C16B46 /* Regex.swift */,
 				DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */,
 			);
-			name = Text;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		DE8681A21D72052700D9CE74 /* Frameworks */ = {
@@ -263,7 +263,7 @@
 		DEDE0DA21D7172E900965CFD /* LexisDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				DE652D491D723C7400F1B52A /* Text */,
+				DE652D491D723C7400F1B52A /* Extensions */,
 				DEDE0DC01D717A9F00965CFD /* Resources */,
 				DEA7E4841D7B4924009CAE25 /* Persistence */,
 				DE9E9EE81D902BB5004E4CD3 /* JSON */,
@@ -283,7 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				DEBD16931D86818200E5C4DD /* Persistence */,
-				DE156DC61D7A90EB00123A04 /* Text */,
+				DE156DC61D7A90EB00123A04 /* Extensions */,
 				DE4DF0C11D91182C00C29CF4 /* JSON */,
 				DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */,
 				DE1978561D720269008E46AB /* LexisEngineTests.swift */,

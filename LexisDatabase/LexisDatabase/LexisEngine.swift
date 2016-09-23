@@ -20,7 +20,6 @@ internal class LexisEngine
     
     public static let instance = LexisEngine()
     
-    
     private var dictionary: String? = nil
     
     private init()

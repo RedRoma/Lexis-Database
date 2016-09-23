@@ -65,3 +65,50 @@ extension Array where Element: Equatable
     }
 }
 
+extension Array
+{
+    
+    func split(into numberOfPieces: Int) -> [[Element]]
+    {
+        
+        guard numberOfPieces > 1 else { return [self] }
+        guard numberOfPieces < self.count else { return [self] }
+        
+        var pieces = [[Element]] ()
+        
+        let sizeOfEach = count/numberOfPieces
+        var start = 0
+        var end = sizeOfEach
+        
+        while start < count
+        {
+            if end >= count
+            {
+                end = count
+            }
+            
+            if start >= end
+            {
+                break
+            }
+            
+            let newArray = Array(self[start..<end])
+            
+            //If we have exceeded the number of pieces, add the reminaing elements to the last one
+            if pieces.count >= numberOfPieces
+            {
+                pieces[numberOfPieces-1] += newArray
+            }
+            else
+            {
+                pieces.append(newArray)
+            }
+            
+            start = end
+            end += sizeOfEach
+        }
+        
+        
+        return pieces
+    }
+}
