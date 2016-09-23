@@ -24,6 +24,11 @@ class LexisDatabaseTests: LexisTest
         super.tearDown()
     }
     
+    func testGetAllWords()
+    {
+        let _ = instance.anyWord
+    }
+    
 
     func testInitialize()
     {
