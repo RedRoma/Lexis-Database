@@ -130,7 +130,10 @@ class UserDefaultsPersistenceTests: LexisTest
         try! instance.save(words: allWords)
         
         let result = instance.getAllWords()
-        XCTAssertTrue(result == allWords)
+        
+        let expected = Set(allWords)
+        let resultSet = Set(result)
+        XCTAssertTrue(resultSet == expected)
     }
 
 }

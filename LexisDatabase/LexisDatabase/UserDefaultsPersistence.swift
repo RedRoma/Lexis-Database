@@ -17,6 +17,16 @@ class UserDefaultsPersistence: LexisPersistence
     private let serializer = BasicJSONSerializer.instance
     var synchronize = false
     
+    
+    /**
+     Asynchronous loading
+     */
+    private let async: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 4
+        return queue
+    }()
+    
     private init?()
     {
         key = "\(suite).Persistence"
@@ -75,12 +85,24 @@ class UserDefaultsPersistence: LexisPersistence
         
         LOG.info("Loaded \(words.count) words from UserDefaults")
         
-        let lexisWords = words.flatMap() { word in
-            return LexisWord.fromJSON(json: word) as? LexisWord
+        let pieces = words.split(into: 4)
+        var lexisWords = [LexisWord]()
+        
+        for words in pieces {
+            
+            async.addOperation() {
+                let convertedWords = words.flatMap() { dictionary in
+                    return (LexisWord.fromJSON(json: dictionary) as? LexisWord)
+                }
+                lexisWords += convertedWords
+            }
+            
         }
         
+        async.waitUntilAllOperationsAreFinished()
+        
         LOG.info("Converted \(lexisWords.count) words from \(words.count) in JSON Array")
-        return lexisWords
+        return (lexisWords as? [LexisWord]) ?? []
     }
 
     func removeAll()
