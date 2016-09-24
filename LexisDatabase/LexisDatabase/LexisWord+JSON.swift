@@ -113,7 +113,7 @@ public extension LexisWord
         return (self.asJSON() as? NSDictionary) ?? NSDictionary()
     }
     
-    fileprivate convenience init(other: LexisWord)
+    internal convenience init(other: LexisWord)
     {
         self.init(forms: other.forms, wordType: other.wordType, definitions: other.definitions, supplementalInformation: other.supplementalInformation)
     }

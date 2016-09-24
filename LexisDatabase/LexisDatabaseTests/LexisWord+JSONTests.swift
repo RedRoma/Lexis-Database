@@ -42,4 +42,37 @@ class LexisWord_JSONTests: LexisTest
         
     }
 
+    
+    func testCopyInitializer()
+    {
+        let new = LexisWord(other: word)
+        
+        XCTAssertTrue(new == word)
+        XCTAssertFalse(new === word)
+    }
+    
+    func testPublicJSONExport()
+    {
+        let json = word.json
+        
+        let expected = word.asJSON() as! NSDictionary
+        
+        XCTAssertEqual(json, expected)
+    }
+    
+    func testPublicJSONInitializer()
+    {
+        let json = word.asJSON() as! NSDictionary
+        
+        let copy = LexisWord(json: json)
+        XCTAssertTrue(copy == word)
+    }
+    
+    func testPublicJSONInitializerWithEmptyJSON()
+    {
+        let empty = NSDictionary()
+        
+        let copy = LexisWord(json: empty)
+        XCTAssertTrue(copy == nil)
+    }
 }
