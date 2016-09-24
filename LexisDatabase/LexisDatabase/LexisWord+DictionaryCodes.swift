@@ -108,7 +108,7 @@ public enum SubjectArea: String
     
     internal static let descriptions: [SubjectArea: String] =
     [
-        .X: "All Areas",
+        .X: "All Subject Areas",
         .A: "Agriculture, Flora, Fauna, Land, Farm Equipment, and Rural",
         .B: "Biology, Medicine, and Human Anatomy",
         .D: "Drama, Music, Theatre, Art, Paintings, and Sculpture",

@@ -98,7 +98,7 @@ public extension LexisWord
             }
             else
             {
-                synopsis += "This word was used in all areas."
+                synopsis += "This word was used in all subject areas."
             }
             
             return synopsis
