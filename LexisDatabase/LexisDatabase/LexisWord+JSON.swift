@@ -104,3 +104,29 @@ extension LexisWord: JSONConvertible
         return LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInformation)
     }
 }
+
+//MARK: Public JSON export
+public extension LexisWord
+{
+    public var json: NSDictionary
+    {
+        return (self.asJSON() as? NSDictionary) ?? NSDictionary()
+    }
+    
+    fileprivate convenience init(other: LexisWord)
+    {
+        self.init(forms: other.forms, wordType: other.wordType, definitions: other.definitions, supplementalInformation: other.supplementalInformation)
+    }
+    
+    public convenience init?(json: NSDictionary)
+    {
+        if let word = LexisWord.fromJSON(json: json) as? LexisWord
+        {
+            self.init(other: word)
+        }
+        else
+        {
+            return nil
+        }
+    }
+}
