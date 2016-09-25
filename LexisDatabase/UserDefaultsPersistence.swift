@@ -81,6 +81,7 @@ class UserDefaultsPersistence: LexisPersistence
                 let convertedWords = words.flatMap() { dictionary in
                     return (LexisWord.fromJSON(json: dictionary) as? LexisWord)
                 }
+                
                 lexisWords += convertedWords
             }
             
