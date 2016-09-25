@@ -24,7 +24,7 @@ public class LexisDatabase
      */
     fileprivate let memory: LexisPersistence = MemoryPersistence()
     
-    fileprivate var persisted = UserDefaultsPersistence.instance!
+    fileprivate var persisted = FilePersistence.instance
     
     fileprivate var initialized = false
     

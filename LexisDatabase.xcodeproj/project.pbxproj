@@ -30,6 +30,8 @@
 		DE49A2341D983C0300620411 /* SwiftExceptionCatcher.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE49A22A1D983BEC00620411 /* SwiftExceptionCatcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE49A2361D98468F00620411 /* SimpleUserDefaultsPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49A2351D98468F00620411 /* SimpleUserDefaultsPersistence.swift */; };
 		DE49A2381D9847B900620411 /* SimpleUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49A2371D9847B900620411 /* SimpleUserDefaultsTests.swift */; };
+		DE49A23A1D987AD300620411 /* FilePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49A2391D987AD300620411 /* FilePersistence.swift */; };
+		DE49A23C1D987C3400620411 /* FilePersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49A23B1D987C3400620411 /* FilePersistenceTests.swift */; };
 		DE4DA0A41D8D642F003183F4 /* LexisWord+WordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DA0A31D8D642F003183F4 /* LexisWord+WordType.swift */; };
 		DE4DA0A61D8D6518003183F4 /* LexisWord+WordTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DA0A51D8D6518003183F4 /* LexisWord+WordTypeTests.swift */; };
 		DE4DA0A81D8D7655003183F4 /* UserDefaultsPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DA0A71D8D7655003183F4 /* UserDefaultsPersistenceTests.swift */; };
@@ -105,6 +107,8 @@
 		DE49A22A1D983BEC00620411 /* SwiftExceptionCatcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftExceptionCatcher.framework; path = Carthage/Build/iOS/SwiftExceptionCatcher.framework; sourceTree = "<group>"; };
 		DE49A2351D98468F00620411 /* SimpleUserDefaultsPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleUserDefaultsPersistence.swift; sourceTree = "<group>"; };
 		DE49A2371D9847B900620411 /* SimpleUserDefaultsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleUserDefaultsTests.swift; sourceTree = "<group>"; };
+		DE49A2391D987AD300620411 /* FilePersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePersistence.swift; sourceTree = "<group>"; };
+		DE49A23B1D987C3400620411 /* FilePersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePersistenceTests.swift; sourceTree = "<group>"; };
 		DE4DA0A31D8D642F003183F4 /* LexisWord+WordType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+WordType.swift"; sourceTree = "<group>"; };
 		DE4DA0A51D8D6518003183F4 /* LexisWord+WordTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+WordTypeTests.swift"; sourceTree = "<group>"; };
 		DE4DA0A71D8D7655003183F4 /* UserDefaultsPersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistenceTests.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */,
 				DE4DA0A91D8D76BC003183F4 /* UserDefaultsPersistence.swift */,
 				DE49A2351D98468F00620411 /* SimpleUserDefaultsPersistence.swift */,
+				DE49A2391D987AD300620411 /* FilePersistence.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				DEBD16941D86818D00E5C4DD /* MemoryPersistenceTests.swift */,
 				DE4DA0A71D8D7655003183F4 /* UserDefaultsPersistenceTests.swift */,
 				DE49A2371D9847B900620411 /* SimpleUserDefaultsTests.swift */,
+				DE49A23B1D987C3400620411 /* FilePersistenceTests.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -419,6 +425,7 @@
 				DEDE0DBD1D71757500965CFD /* LexisDatabase.swift in Sources */,
 				DE4DA0AA1D8D76BC003183F4 /* UserDefaultsPersistence.swift in Sources */,
 				DEBEFE7B1D76BBF0008A525D /* Arrays+.swift in Sources */,
+				DE49A23A1D987AD300620411 /* FilePersistence.swift in Sources */,
 				DE7B309F1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift in Sources */,
 				DE9E9EEC1D9030F5004E4CD3 /* LexisDefinition+JSON.swift in Sources */,
 				DE405ACF1D76494100C16B46 /* Regex.swift in Sources */,
@@ -437,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE4DF0C81D911D8500C29CF4 /* LexisDefinition+JSONTests.swift in Sources */,
+				DE49A23C1D987C3400620411 /* FilePersistenceTests.swift in Sources */,
 				DE4DF0C41D91185800C29CF4 /* WordType+JSONTests.swift in Sources */,
 				DEBD16951D86818D00E5C4DD /* MemoryPersistenceTests.swift in Sources */,
 				DE3129ED1D8BD27B0007692F /* LexisWord+DictionaryCodesTests.swift in Sources */,
