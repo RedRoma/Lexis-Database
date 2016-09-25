@@ -23,12 +23,17 @@ public class LexisDatabase
         The Persistence Layer
      */
     fileprivate let memory: LexisPersistence = MemoryPersistence()
-    fileprivate let persisted: LexisPersistence = UserDefaultsPersistence.instance!
+    fileprivate let persisted: LexisPersistence =
+    {
+        let instance = UserDefaultsPersistence.instance!
+        instance.synchronize = true
+        return instance
+    }()
+    
     fileprivate var initialized = false
     
     private init()
     {
-        
     }
     
     public func initialize()
