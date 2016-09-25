@@ -21,9 +21,10 @@ class UserDefaultsPersistence: LexisPersistence
     /**
      Asynchronous loading
      */
+    private static let parallelism = 4
     private let async: OperationQueue = {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 4
+        queue.maxConcurrentOperationCount = UserDefaultsPersistence.parallelism
         return queue
     }()
     
@@ -40,13 +41,35 @@ class UserDefaultsPersistence: LexisPersistence
     {
         LOG.info("Saving \(words.count) words to UserDefaults")
         
-        let objects = words.flatMap() { word in
-            return word.asJSON() as? NSDictionary
+        let pieces = words.split(into: UserDefaultsPersistence.parallelism)
+        let serializedWords = NSMutableArray()
+        
+        LOG.debug("Serializing \(words.count) in \(UserDefaultsPersistence.parallelism) threads")
+        
+        
+        var complete = 0
+        var stillWorking: Bool { return complete < pieces.count }
+        
+        for piece in pieces {
+            
+            async.addOperation() {
+                
+                let convertedWords = piece.flatMap() { word in
+                    return word.asJSON() as? NSDictionary
+                }
+                
+                LOG.debug("Converted \(convertedWords.count) words")
+                serializedWords.addObjects(from: convertedWords)
+                complete += 1
+            }
+            
         }
         
-        defaults.set(NSArray.init(array: objects), forKey: key)
+        while stillWorking { }
         
-        LOG.info("Saved \(objects.count) words to UserDefaults")
+        defaults.set(serializedWords, forKey: key)
+        
+        LOG.info("Saved \(serializedWords.count) words to UserDefaults")
         
         if synchronize
         {
@@ -56,12 +79,16 @@ class UserDefaultsPersistence: LexisPersistence
     
     func getAllWords() -> [LexisWord]
     {
+        LOG.info("Loading Lexis Words")
+        
         guard let array = defaults.object(forKey: key) as? NSArray
         else
         {
             LOG.info("Failed to find LexisDatabase in UserDefaults")
             return []
         }
+        
+        LOG.info("Found \(array.count) words in UserDefaults")
         
         guard let words = array as? [NSDictionary]
         else
@@ -70,10 +97,13 @@ class UserDefaultsPersistence: LexisPersistence
             return []
         }
         
-        LOG.info("Loaded \(words.count) words from UserDefaults")
-        
-        let pieces = words.split(into: 6)
+        let pieces = words.split(into: UserDefaultsPersistence.parallelism)
         var lexisWords = [LexisWord]()
+        
+        LOG.debug("Converting objects in \(pieces.count) threads")
+        
+        var completed = 0
+        var stillWorking: Bool { return completed < pieces.count }
         
         for words in pieces {
             
@@ -83,11 +113,13 @@ class UserDefaultsPersistence: LexisPersistence
                 }
                 
                 lexisWords += convertedWords
+                LOG.debug("Converted \(convertedWords.count) words")
+                completed += 1
             }
             
         }
         
-        async.waitUntilAllOperationsAreFinished()
+        while stillWorking {}
         
         LOG.info("Converted \(lexisWords.count) words from \(words.count) in JSON Array")
         return (lexisWords as? [LexisWord]) ?? []

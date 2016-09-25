@@ -23,7 +23,7 @@ class UserDefaultsPersistenceTests: LexisTest
     override class func setUp()
     {
         LOG.enable()
-        LOG.level = .info
+        LOG.level = .debug
     }
     
     override func setUp()
@@ -127,12 +127,15 @@ class UserDefaultsPersistenceTests: LexisTest
     func testSaveAllWords()
     {
         let allWords = Generators.words
+        instance.synchronize = true
+        
         try! instance.save(words: allWords)
         
         let result = instance.getAllWords()
         
         let expected = Set(allWords)
         let resultSet = Set(result)
+        XCTAssertEqual(resultSet.count, expected.count)
         XCTAssertTrue(resultSet == expected)
     }
 
