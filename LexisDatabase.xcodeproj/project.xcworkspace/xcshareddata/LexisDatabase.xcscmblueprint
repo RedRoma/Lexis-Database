@@ -7,14 +7,14 @@
     "ECCB8EE6AE2BDB70BBD5500E1F381C6ACBBE5C34" : 9223372036854775807,
     "727464C5DEAA962D1C46D2A8D89A7189891A8E08" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8BE63DF4-E661-4C70-933B-5AB1EA20C688",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3B545A62-67B1-44F8-A1F9-1F28795B5A1A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "ECCB8EE6AE2BDB70BBD5500E1F381C6ACBBE5C34" : "Lexis-Database\/",
     "727464C5DEAA962D1C46D2A8D89A7189891A8E08" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "LexisDatabase",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LexisDatabase.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LexisDatabase.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RedRoma\/Lexis.git",

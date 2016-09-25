@@ -26,7 +26,7 @@ public class LexisDatabase
     fileprivate let persisted: LexisPersistence =
     {
         let instance = UserDefaultsPersistence.instance!
-        instance.synchronize = true
+        instance.synchronize = false
         return instance
     }()
     
