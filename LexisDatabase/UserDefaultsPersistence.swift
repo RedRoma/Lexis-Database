@@ -32,7 +32,7 @@ class UserDefaultsPersistence: LexisPersistence
     {
         key = "\(suite).Persistence"
 
-        self.defaults = UserDefaults.standard
+        self.defaults = UserDefaults(suiteName: suite) ?? UserDefaults.standard
     }
     
     static let instance = UserDefaultsPersistence()
