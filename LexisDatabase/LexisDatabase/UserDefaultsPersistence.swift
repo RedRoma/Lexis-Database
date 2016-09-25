@@ -38,20 +38,15 @@ class UserDefaultsPersistence: LexisPersistence
     
     func save(words: [LexisWord]) throws
     {
-        let jsonArray = words.flatMap() { word in
-            return word.asJSON()
+        LOG.info("Saving \(words.count) words to UserDefaults")
+        
+        let objects = words.flatMap() { word in
+            return word.asJSON() as? NSDictionary
         }
         
-        LOG.info("Persisting \(jsonArray.count) words in UserDefaults")
+        defaults.set(NSArray.init(array: objects), forKey: key)
         
-        guard let json = serializer.toJSON(object: jsonArray)
-        else
-        {
-            LOG.error("Failed to serialize JSON Array to a JSON String")
-            return
-        }
-        
-        defaults.set(json, forKey: key)
+        LOG.info("Saved \(objects.count) words to UserDefaults")
         
         if synchronize
         {
@@ -61,22 +56,14 @@ class UserDefaultsPersistence: LexisPersistence
     
     func getAllWords() -> [LexisWord]
     {
-        guard let json = defaults.object(forKey: key) as? String
+        guard let array = defaults.object(forKey: key) as? NSArray
         else
         {
             LOG.info("Failed to find LexisDatabase in UserDefaults")
             return []
         }
         
-        guard let jsonArray = serializer.fromJSON(jsonString: json) as? NSArray
-        else
-        {
-            LOG.error("Failed to deserialize JSON as an Array")
-            return []
-        }
-        
-        
-        guard let words = jsonArray as? [NSDictionary]
+        guard let words = array as? [NSDictionary]
         else
         {
             LOG.warn("Failed to convert NSArray to [NSDictionary]")
