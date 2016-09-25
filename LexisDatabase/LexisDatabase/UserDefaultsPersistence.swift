@@ -85,7 +85,7 @@ class UserDefaultsPersistence: LexisPersistence
         
         LOG.info("Loaded \(words.count) words from UserDefaults")
         
-        let pieces = words.split(into: 4)
+        let pieces = words.split(into: 6)
         var lexisWords = [LexisWord]()
         
         for words in pieces {
