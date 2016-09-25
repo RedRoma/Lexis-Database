@@ -13,10 +13,18 @@ class FilePersistence: LexisPersistence
 {
     private let filePath = NSHomeDirectory().appending("/Library/Caches/LexisWords.txt")
     
-    
-    private init() {}
-    
     static let instance = FilePersistence()
+    
+    private let parallelism = 6
+    private let async: OperationQueue
+    
+    private init()
+    {
+        async = OperationQueue()
+        async.maxConcurrentOperationCount = parallelism
+    }
+    
+    
     
     func getAllWords() -> [LexisWord]
     {
@@ -38,12 +46,32 @@ class FilePersistence: LexisPersistence
         
         LOG.info("Deserializing \(objects.count) words")
         
-        let words = objects.flatMap() { object in
-            return (LexisWord.fromJSON(json: object) as? LexisWord)
+        let pieces = objects.split(into: parallelism)
+        var lexisWords = [LexisWord]()
+        
+        LOG.debug("Converting objects in \(pieces.count) threads")
+        
+        var completed = 0
+        var stillWorking: Bool { return completed < pieces.count }
+        
+        for words in pieces {
+            
+            async.addOperation() {
+                
+                let convertedWords = words.flatMap() { dictionary in
+                    return (LexisWord.fromJSON(json: dictionary) as? LexisWord)
+                }
+                
+                lexisWords += convertedWords
+                LOG.debug("Converted \(convertedWords.count) words")
+                completed += 1
+            }
         }
         
-        LOG.info("Deserialized \(words.count) words")
-        return words
+        while stillWorking { /* wait */ }
+        
+        LOG.info("Deserialized \(lexisWords.count) words")
+        return lexisWords
     }
     
     func save(words: [LexisWord]) throws
