@@ -100,7 +100,7 @@ public extension LexisDatabase
         return memory.searchForWords(inWordList: term)
     }
     
-    public func seaarchForms(startingWith term: String) -> [LexisWord]
+    public func searchForms(startingWith term: String) -> [LexisWord]
     {
         if !initialized
         {

@@ -62,14 +62,18 @@ class Arrays_Plus_Test: XCTestCase
     func testSplitMoreThoroughly()
     {
         
-        for _ in 1...20
+        for _ in 1...200
         {
-            let splitCount = AlchemyGenerator.integer(from: 2, to: 10)
             let numbers = AlchemyGenerator.array(withCreator: AlchemyGenerator.positiveInteger)
+            let splitCount = AlchemyGenerator.integer(from: 2, to: numbers.count - 1)
             
             let result = numbers.split(into: splitCount)
             XCTAssertFalse(result.isEmpty)
-            XCTAssertTrue(result.count == splitCount)
+            
+            if result.count != splitCount
+            {
+                XCTFail("Expected \(splitCount) in Array. Instead \(result.count)")
+            }
         }
     }
     
