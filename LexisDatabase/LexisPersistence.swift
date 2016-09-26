@@ -12,6 +12,8 @@ import Foundation
 enum LexisPersistenceError: Error
 {
     case InvalidArgument
+    case IOError
+    case ConversionError
 }
 
 /**
