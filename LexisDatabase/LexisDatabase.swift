@@ -27,6 +27,7 @@ public class LexisDatabase
     fileprivate var persisted = FilePersistence.instance
     
     fileprivate var initialized = false
+    private var initializing = false
     
     private init()
     {
@@ -35,7 +36,15 @@ public class LexisDatabase
     public func initialize()
     {
         guard !initialized else { return }
-        initialized = true
+        
+        if initializing
+        {
+            LOG.info("Already initializing. Blocking until done.")
+            waitUntilInitialized()
+            return
+        }
+        
+        initializing = true
         
         LOG.debug("Initializing LexisDatabase")
         
@@ -71,6 +80,8 @@ public class LexisDatabase
             LOG.error("Failed to save words in memory: \(ex)")
         }
         
+        initializing = false
+        initialized = true
     }
 
     public var anyWord: LexisWord
@@ -83,7 +94,10 @@ public class LexisDatabase
         return memory.getAllWords().anyElement!
     }
     
-   
+    private func waitUntilInitialized()
+    {
+        while initializing { }
+    }
     
 }
 

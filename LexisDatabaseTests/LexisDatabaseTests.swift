@@ -24,7 +24,7 @@ class LexisDatabaseTests: LexisTest
         super.tearDown()
     }
     
-    func testGetAllWords()
+    func testGetAnyWord()
     {
         let _ = instance.anyWord
     }
@@ -43,4 +43,18 @@ class LexisDatabaseTests: LexisTest
         }
     }
     
+    func testInitializeInMultipleThreads()
+    {
+        let async = OperationQueue()
+        async.maxConcurrentOperationCount = 5
+        
+        (1...10).flatMap() { _ in
+            
+            async.addOperation {
+                self.instance.initialize()
+            }
+        }
+        
+        async.waitUntilAllOperationsAreFinished()
+    }
 }
