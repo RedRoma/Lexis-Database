@@ -362,7 +362,7 @@ extension LexisEngine
         }
         else
         {
-            LOG.info("Uknown Verb Type: \(line)")
+            LOG.debug("Uknown Verb Type: \(line)")
             return WordType.Verb(conjugation, .Uknown)
         }
     }
