@@ -54,7 +54,10 @@ class LexisDatabaseTests: LexisTest
                 self.instance.initialize()
             }
         }
-        
+
         async.waitUntilAllOperationsAreFinished()
+        print(instance.anyWord)
+        
+        print("Operations done")
     }
 }
