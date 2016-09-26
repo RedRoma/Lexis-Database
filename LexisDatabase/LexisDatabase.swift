@@ -99,15 +99,10 @@ public class LexisDatabase
         
         while !initialized
         {
-            let logEnabled = LOG.isEnabled
-            
-//            LOG.disable()
+            let logLevel = LOG.level
+            LOG.level = .info
             LOG.debug("Waiting")
-            
-//            if logEnabled
-//            {
-//                LOG.enable()
-//            }
+            LOG.level = logLevel
         }
     }
     
