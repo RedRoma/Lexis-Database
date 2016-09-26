@@ -99,7 +99,15 @@ public class LexisDatabase
         
         while !initialized
         {
-            continue
+            let logEnabled = LOG.isEnabled
+            
+//            LOG.disable()
+            LOG.debug("Waiting")
+            
+//            if logEnabled
+//            {
+//                LOG.enable()
+//            }
         }
     }
     
