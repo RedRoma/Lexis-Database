@@ -96,11 +96,10 @@ public class LexisDatabase
     
     private func waitUntilInitialized()
     {
-        func doNothing() {}
         
         while !initialized
         {
-            doNothing()
+            continue
         }
     }
     
