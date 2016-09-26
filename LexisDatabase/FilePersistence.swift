@@ -11,12 +11,13 @@ import Sulcus
 
 class FilePersistence: LexisPersistence
 {
-    private let filePath = NSHomeDirectory().appending("/Library/Caches/LexisWords.txt")
+    private let filePath = NSHomeDirectory().appending("/Library/Caches/LexisWords.json")
     
     static let instance = FilePersistence()
     
     private let parallelism = 6
     private let async: OperationQueue
+    private let serializer = BasicJSONSerializer.instance
     
     private init()
     {
@@ -25,12 +26,18 @@ class FilePersistence: LexisPersistence
     }
     
     
-    
     func getAllWords() -> [LexisWord]
     {
         LOG.info("Reading words from file :\(filePath)")
         
-        guard let array = NSArray(contentsOfFile: filePath)
+        guard let json = try? String(contentsOfFile: filePath)
+        else
+        {
+            LOG.info("Failed to read JSON from file \(filePath)")
+            return []
+        }
+        
+        guard let array = serializer.fromJSON(jsonString: json) as? NSArray
         else
         {
             LOG.info("Words not found in file \(filePath)")
@@ -85,16 +92,24 @@ class FilePersistence: LexisPersistence
         
         let nsArray = NSArray(array: array)
         
-        LOG.info("Writing \(nsArray.count) words to file: \(filePath)")
-        let wasSuccessful = nsArray.write(toFile: filePath, atomically: true)
-        
-        if wasSuccessful
-        {
-            LOG.info("Wrote \(nsArray.count) words to \(filePath)")
-        }
+        guard let jsonString = serializer.toJSON(object: nsArray)
         else
         {
-            LOG.warn("Could not save words to \(filePath)")
+            LOG.warn("Failed to convert array to JSON")
+            throw LexisPersistenceError.ConversionError
+        }
+        
+        LOG.info("Writing \(nsArray.count) words to JSON File: \(filePath)")
+        
+        do
+        {
+            try jsonString.write(toFile: filePath, atomically: true, encoding: .utf8)
+            LOG.info("Wrote words to JSON file")
+        }
+        catch
+        {
+            LOG.error("Failed to write JSON to file \(filePath) : \(error)")
+            throw LexisPersistenceError.IOError
         }
     }
     
