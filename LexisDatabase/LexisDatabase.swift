@@ -96,9 +96,11 @@ public class LexisDatabase
     
     private func waitUntilInitialized()
     {
+        func doNothing() {}
+        
         while !initialized
         {
-            LOG.debug("Waiting")
+            doNothing()
         }
     }
     
