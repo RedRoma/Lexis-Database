@@ -24,6 +24,7 @@ class LexisTest: XCTestCase
     {
         XCTestCase.setUp()
         LOG.enable()
+        LOG.level = .info
         
         AromaClient.TOKEN_ID = "d51c346a-d61e-41b0-9bcd-885572c1256a"
         AromaClient.maxConcurrency = 2
@@ -69,7 +70,7 @@ class LexisTest: XCTestCase
             print("Aroma message was a success")
         }
         
-        for _ in 1...100
+        for _ in 1...25
         {
             AromaClient.beginMessage(withTitle: "Testing")
                 .withPriority(.low)
