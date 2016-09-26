@@ -28,14 +28,16 @@ class FilePersistence: LexisPersistence
     
     func getAllWords() -> [LexisWord]
     {
-        LOG.info("Reading words from file")
+        LOG.info("Reading words from file :\(filePath)")
+        
         guard let array = NSArray(contentsOfFile: filePath)
         else
         {
             LOG.info("Words not found in file \(filePath)")
             return []
         }
-        LOG.info("Read \(array.count) words from file")
+        
+        LOG.info("Read \(array.count) words from file: \(filePath)")
         
         guard let objects = array as? [NSDictionary]
         else
@@ -68,6 +70,7 @@ class FilePersistence: LexisPersistence
             }
         }
         
+        async.waitUntilAllOperationsAreFinished()
         while stillWorking { /* wait */ }
         
         LOG.info("Deserialized \(lexisWords.count) words")
