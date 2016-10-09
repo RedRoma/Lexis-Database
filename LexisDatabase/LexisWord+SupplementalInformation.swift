@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Sulcus
+import Archeota
 
 
 internal typealias SupplementalInformation = LexisWord.SupplementalInformation

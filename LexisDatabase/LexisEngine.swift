@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Sulcus
+import Archeota
 
 /**
      The Lexis Engine is reponsible for reading through the Dictionary text file
@@ -182,12 +182,12 @@ extension LexisEngine
             return []
         }
         
-        return distinctDefinitions
-            .map() { def in
+        return distinctDefinitions.map()
+            { def in
                 
                 if def.doesNotContain(anyOf: ["(", ")"])
                 {
-                    let individualWords = def.components(separatedBy: ",")
+                    let individualWords = def.components(separatedBy: ", ")
                     
                     return LexisDefinition(terms: individualWords)
                 }
@@ -195,7 +195,7 @@ extension LexisEngine
                 {
                    return LexisDefinition(terms: [def])
                 }
-        }
+            }
         
     }
     

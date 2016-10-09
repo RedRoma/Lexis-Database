@@ -8,7 +8,7 @@
 
 import AromaSwiftClient
 import Foundation
-import Sulcus
+import Archeota
 import XCTest
 
 class LexisTest: XCTestCase

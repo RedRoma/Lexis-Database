@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Sulcus
+import Archeota
 
 
 public enum Conjugation: String

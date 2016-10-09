@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Sulcus
+import Archeota
 
 /**
     This is the API to the Lexis Database of Latin Words.

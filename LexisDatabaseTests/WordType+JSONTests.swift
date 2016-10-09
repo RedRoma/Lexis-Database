@@ -8,7 +8,7 @@
 
 import Foundation
 @testable import LexisDatabase
-import Sulcus
+import Archeota
 import XCTest
 
 class WordType_JSONTests: LexisTest
