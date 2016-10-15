@@ -7,6 +7,7 @@
 //
 
 import AlchemyGenerator
+import Archeota
 import AromaSwiftClient
 import Foundation
 @testable import LexisDatabase
@@ -197,12 +198,12 @@ extension LexisWord_WordTypeTests
     
     func testCaseTypeCodes()
     {
-        let caseType = Generators.randomCaseType
         let codes = [ "NOM", "GEN", "ACC", "DAT", "ABL", "VOC", "LOC" ]
         let code = codes.anyElement!
         
         let result = CaseType.from(shortCode: code)
-        XCTAssertTrue(result == caseType)
+        XCTAssertTrue(result != .Unknown)
+        
     }
     
     func testCaseTypeCodesWithUnknown()
