@@ -40,8 +40,14 @@ struct Regex
      for example, "1st", "2nd", etc.
      
      This also matches for a Verb's Conjugation.
+        1. Starting with 'N' (noun) or 'V' (verb)
+        2. Followed by a space
+        3. Followed by an open parenthesis
+        4. Followed by a number from 1-5
+        5. Followed by 2 letters from a-z (eg, 3rd, 2nd, 4th, etc)
+        6. Ending with a closed parenthesis
      */
-    static let declension = "(?<=[NV] \\()([1-4][a-z]{2})(?=\\))"
+    static let declension = "(?<=[NV] \\()([1-5][a-z]{2})(?=\\))"
 }
 
 
