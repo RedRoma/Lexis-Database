@@ -61,7 +61,9 @@ extension LexisPersistence
         
         return words.filter()
         {
-            let match = $0.forms.anyMatch() { form in form.contains(term) }
+            let match = $0.forms.anyMatch() { (form: String) in
+                form.lowercased().contains(term.lowercased())
+            }
             return match
         }
     }
@@ -82,7 +84,7 @@ extension LexisPersistence
                 definitions.terms.anyMatch()
                 { definition in
                     
-                    definition.contains(term)
+                    definition.lowercased().contains(term.lowercased())
                 }
             }
         }
@@ -99,7 +101,9 @@ extension LexisPersistence
         { word in
             
             //Keep words where it's forms begin with the search term.
-            word.forms.anyMatch(shouldMatch: { $0.hasPrefix(term) })
+            word.forms.anyMatch() { (form: String) in
+                return form.lowercased().hasPrefix(term.lowercased())
+            }
         }
     }
 }

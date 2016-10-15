@@ -29,6 +29,14 @@ class LexisDatabaseTests: LexisTest
         let _ = instance.anyWord
     }
     
+    func testSearchForWordsStartingWithTitleCased()
+    {
+        let term = "Amazon"
+        let results = instance.searchForms(startingWith: term)
+        XCTAssertFalse(results.isEmpty)
+        let first = results.first!
+        XCTAssertTrue(first.forms.contains(term))
+    }
 
     func testInitialize()
     {
