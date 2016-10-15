@@ -25,6 +25,8 @@ class SimpleUserDefaultsPersistenceTests: LexisTest
     {
         LOG.enable()
         LOG.level = .debug
+        
+        SimpleUserDefaultsPersistence.instance?.removeAll()
     }
     
     override func setUp()

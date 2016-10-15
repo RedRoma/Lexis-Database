@@ -25,6 +25,8 @@ class FilePersistenceTests: LexisTest
     {
         LOG.enable()
         LOG.level = .debug
+        
+        FilePersistence.instance.removeAll()
     }
     
     override func setUp()
