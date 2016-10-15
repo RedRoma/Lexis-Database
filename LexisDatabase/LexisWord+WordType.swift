@@ -276,8 +276,8 @@ public func ==(lhs: WordType, rhs: WordType) -> Bool
         case (let .Noun(leftDeclension, leftGender), let .Noun(rightDeclension, rightGender)) :
             return leftDeclension == rightDeclension && leftGender == rightGender
             
-        case (let .Preposition(leftDeclension), let .Preposition(rightDeclension)) :
-            return leftDeclension == rightDeclension
+        case (let .Preposition(leftCaseType), let .Preposition(rightCaseType)) :
+            return leftCaseType == rightCaseType
             
         case (.Adjective, .Adjective) : return true
         case (.Adverb, .Adverb) : return true
