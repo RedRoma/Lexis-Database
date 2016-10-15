@@ -307,9 +307,9 @@ extension WordType
             return "Noun-\(declension)-\(gender)".hashValue
         }
         
-        if case let .Preposition(declension) = self
+        if case let .Preposition(caseType) = self
         {
-            return "Preposition-\(declension)".hashValue
+            return "Preposition-\(caseType)".hashValue
         }
         
         let string = String(describing: self)
