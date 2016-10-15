@@ -33,6 +33,19 @@ public enum Conjugation: String
             return nil
         }
     }
+    
+    private static let shortCodes: [String: Conjugation] =
+    [
+        "1st" : .First,
+        "2nd" : .Second,
+        "3rd" : .Third,
+        "4th" : .Fourth
+    ]
+    
+    static func fromShortCode(code: String) -> Conjugation
+    {
+        return shortCodes[code] ?? .Irregular
+    }
 }
 
 public enum VerbType: String
@@ -43,7 +56,7 @@ public enum VerbType: String
     case Deponent
     case SemiDeponent
     case PerfectDefinite
-    case Uknown
+    case Unknown
     
     public var name: String { return self.rawValue }
     
@@ -86,13 +99,11 @@ public enum Gender: String
 
 public enum Declension: String
 {
-    case Nominative
-    case Genitive
-    case Accusative
-    case Dative
-    case Ablative
-    case Vocative
-    case Locative
+    case First
+    case Second
+    case Third
+    case Fourth
+    case Fifth
     case Undeclined
     
     public var name: String { return self.rawValue }
@@ -105,10 +116,85 @@ public enum Declension: String
         }
         else
         {
-            LOG.warn("Failed to decode Declension from name: \(name)")
+            LOG.warn("Failed to decode Declension from: \(name)")
             return nil
         }
     }
+    
+    private static let shortCodes: [String: Declension] =
+    [
+        "1st" : .First,
+        "2nd" : .Second,
+        "3rd" : .Third,
+        "4th" : .Fourth,
+        "5th" : .Fifth
+    ]
+    
+    static func fromShortCode(code: String) -> Declension
+    {
+        return shortCodes[code] ?? .Undeclined
+    }
+    
+    private static let shortForms: [Declension: String] =
+    [
+        .First: "1st",
+        .Second: "2nd",
+        .Third: "3rd",
+        .Fourth: "4th",
+        .Fifth: "5th"
+    ]
+    
+    public var shortForm: String
+    {
+        return Declension.shortForms[self] ?? "Uknwn"
+    }
+}
+
+/**
+    `CaseType` represents the case of a Noun or an Adjective.
+ */
+public enum CaseType: String
+{
+    case Nominative
+    case Genitive
+    case Accusative
+    case Dative
+    case Ablative
+    case Vocative
+    case Locative
+    case Unknown
+    
+    public var name: String { return self.rawValue }
+    
+    public static func from(name: String) -> CaseType?
+    {
+        if let caseType = CaseType(rawValue: name)
+        {
+            return caseType
+        }
+        else
+        {
+            LOG.warn("Failed to decode case from: \(name)")
+            return nil
+        }
+    }
+    
+    static func from(shortCode: String) -> CaseType
+    {
+        return codes[shortCode] ?? .Unknown
+    }
+    
+    private static let codes: [String: CaseType] =
+    [
+        "NOM": .Nominative,
+        "GEN": .Genitive,
+        "ACC": .Accusative,
+        "DAT": .Dative,
+        "ABL": .Ablative,
+        "VOC": .Vocative,
+        "LOC": .Locative
+    ]
+    
 }
 
 public enum PronounType: String
@@ -142,7 +228,7 @@ public enum WordType: Equatable, Hashable
     case Noun(Declension, Gender)
     case Numeral
     case PersonalPronoun
-    case Preposition(Declension)
+    case Preposition(CaseType)
     case Pronoun
     case Verb(Conjugation, VerbType)
     

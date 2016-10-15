@@ -11,6 +11,7 @@ import Archeota
 
 fileprivate class Keys
 {
+    static let caseType = "caseType"
     static let declension = "declension"
     static let gender = "gender"
     static let conjugation = "conjugation"
@@ -52,9 +53,9 @@ extension WordType: JSONConvertible
             case .PersonalPronoun :
                 object[wordTypeKey] = "PersonalPronoun"
                 
-            case let .Preposition(declension) :
+            case let .Preposition(caseType) :
                 object[wordTypeKey] = "Preposition"
-                object[Keys.declension] = declension.name
+                object[Keys.caseType] = caseType.name
                 
             case .Pronoun :
                 object[wordTypeKey] = "Pronoun"
@@ -121,10 +122,10 @@ extension WordType: JSONConvertible
         }
         
         if type == "Preposition",
-            let declensionString = object[Keys.declension] as? String,
-            let declension = Declension.from(name: declensionString)
+            let caseTypeString = object[Keys.caseType] as? String,
+            let caseType = CaseType.from(name: caseTypeString)
         {
-            return WordType.Preposition(declension)
+            return WordType.Preposition(caseType)
         }
         
         if type == "Pronoun"

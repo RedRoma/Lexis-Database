@@ -42,15 +42,74 @@ struct Generators
             case 3:
                 return WordType.Interjection
             case 4:
-                return WordType.Noun(Declension.Vocative, .Neuter)
+                return WordType.Noun(randomDeclension, randomGender)
             case 5:
                 return WordType.Numeral
             case 6:
                 return WordType.PersonalPronoun
             case 7:
-                return WordType.Preposition(Declension.Ablative)
+                return WordType.Preposition(randomCaseType)
             default:
-                return WordType.Verb(Conjugation.First, .Transitive)
+                return WordType.Verb(randomConjugation, randomVerbType)
+        }
+    }
+    
+    static var randomCaseType: CaseType
+    {
+        let index = AlchemyGenerator.integer(from: 0, to: 7)
+        
+        switch index
+        {
+            case 0 : return .Nominative
+            case 1 : return .Genitive
+            case 2 : return .Accusative
+            case 3 : return .Dative
+            case 4 : return .Ablative
+            case 5 : return .Locative
+            case 6 : return .Vocative
+            default : return .Nominative
+        }
+    }
+    
+    static var randomConjugation: Conjugation
+    {
+        let index = AlchemyGenerator.integer(from: 0, to: 7)
+        
+        switch index
+        {
+            case 0 : return .First
+            case 1 : return .Second
+            case 2 : return .Third
+            case 3 : return .Fourth
+            default : return .Irregular
+        }
+    }
+    
+    static var randomDeclension: Declension
+    {
+        let index = AlchemyGenerator.integer(from: 0, to: 7)
+        
+        switch index
+        {
+            case 0 : return .First
+            case 1 : return .Second
+            case 2 : return .Third
+            case 3 : return .Fourth
+            case 4 : return .Fifth
+            default : return .Undeclined
+        }
+    }
+    
+    static var randomGender: Gender
+    {
+        let index = AlchemyGenerator.integer(from: 0, to: 3)
+        
+        switch index
+        {
+            case 0 : return .Male
+            case 1 : return .Female
+            case 2 : return .Neuter
+            default: return .Female
         }
     }
     
@@ -82,6 +141,22 @@ struct Generators
     static var randomSupplementalInformation: SupplementalInformation
     {
         return SupplementalInformation(age: randomAge, subjectArea: randomSubject, geographicalArea: randomGeography, frequency: randomFrequency, source: randomSource)
+    }
+    
+    static var randomVerbType: VerbType
+    {
+        let index = AlchemyGenerator.integer(from: 0, to: 10)
+        
+        switch index
+        {
+        case 0 : return .Deponent
+        case 1 : return .Impersonal
+        case 2 : return .Intransitive
+        case 3 : return .PerfectDefinite
+        case 4 : return .SemiDeponent
+        case 5 : return .Transitive
+        default : return .Unknown
+        }
     }
 }
 

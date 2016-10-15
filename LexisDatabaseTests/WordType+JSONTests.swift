@@ -29,7 +29,7 @@ class WordType_JSONTests: LexisTest
         jsonObject = WordType.Adverb.asJSON()!
         json = serializer.toJSON(object: jsonObject)!
         
-        jsonObject = WordType.Noun(Declension.Accusative, Gender.Female).asJSON()!
+        jsonObject = WordType.Noun(Declension.First, Gender.Female).asJSON()!
         json = serializer.toJSON(object: jsonObject)!
     }
     

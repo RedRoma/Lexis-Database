@@ -221,7 +221,6 @@ extension LexisEngine
             }
         }
 
-        
         //Verbs
         if isVerb(wordModifiers: wordModifiers)
         {
@@ -247,10 +246,10 @@ extension LexisEngine
         
         //Prepositions
         if isPreposition(wordModifiers: wordModifiers),
-           let declensionText = wordModifiers.second
+           let caseText = wordModifiers.second
         {
-            let declension = getDeclensionForNoun(from: declensionText)
-            return WordType.Preposition(declension)
+            let caseType = getCaseForPreposition(from: caseText)
+            return WordType.Preposition(caseType)
         }
         
         //Interjections
@@ -326,7 +325,7 @@ extension LexisEngine
 }
 
 
-//MARK: Word Type Detection
+//MARK: Word Type Extraction
 extension LexisEngine
 {
     
@@ -362,8 +361,8 @@ extension LexisEngine
         }
         else
         {
-            LOG.debug("Uknown Verb Type: \(line)")
-            return WordType.Verb(conjugation, .Uknown)
+            LOG.debug("Unknown Verb Type: \(line)")
+            return WordType.Verb(conjugation, .Unknown)
         }
     }
     
@@ -394,48 +393,31 @@ extension LexisEngine
     
     func getConjugation(from text: String?) -> Conjugation
     {
-        
         guard let text = text else { return Conjugation.Irregular }
         
-        switch text
-        {
-            case "1st" : return Conjugation.First
-            case "2nd" : return Conjugation.Second
-            case "3rd" : return Conjugation.Third
-            case "4th" : return Conjugation.Fourth
-            default:     return Conjugation.Irregular
-        }
+        let shortCode = text
+        return Conjugation.fromShortCode(code: shortCode)
     }
     
     func getDeclensionForNoun(from declensionText: String?) -> Declension
     {
-        guard let declensionText = declensionText else { return .Undeclined }
+        guard let shortCode = declensionText else { return .Undeclined }
         
-        switch declensionText
-        {
-            case "1st" : return .Nominative
-            case "2nd" : return .Genitive
-            case "3rd" : return .Accusative
-            case "4th" : return .Dative
-            case "5th" : return .Ablative
-            case "6th" : return .Vocative
-            case "7th" : return .Locative
-            default :    return .Undeclined
-        }
+        return Declension.fromShortCode(code: shortCode)
     }
     
-    func getDeclensionForPreposition(from preposition: String) -> Declension
+    func getCaseForPreposition(from preposition: String) -> CaseType
     {
-        switch preposition
-        {
-            case "ACC" : return .Accusative
-            case "GEN" : return .Genitive
-            case "ABL" : return .Ablative
-            default :    return .Undeclined
-        }
+        let caseShortCode = preposition
+        
+        return CaseType.from(shortCode: caseShortCode)
     }
-
     
+ }
+
+ //MARK: Word Type Detection
+extension LexisEngine
+{
     
     func isVerb(wordModifiers: [String]) -> Bool
     {
