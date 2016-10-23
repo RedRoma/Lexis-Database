@@ -26,6 +26,9 @@ public class LexisDatabase
     
     fileprivate var persisted = FilePersistence.instance
     
+    fileprivate var realm = RealmPersistence.instance
+    
+    
     fileprivate var initialized = false
     private var initializing = false
     
@@ -48,7 +51,13 @@ public class LexisDatabase
         
         LOG.debug("Initializing LexisDatabase")
         
-        var words = persisted.getAllWords()
+        var words = realm.getAllWords()
+        
+        if words.isEmpty
+        {
+            words = persisted.getAllWords()
+            try? realm.save(words: words)
+        }
         
         if words.isEmpty
         {
@@ -60,6 +69,7 @@ public class LexisDatabase
             do
             {
                 try persisted.save(words: words)
+                try realm.save(words: words)
                 LOG.debug("Persisted \(words.count) words")
             }
             catch
@@ -86,12 +96,23 @@ public class LexisDatabase
 
     public var anyWord: LexisWord
     {
+        
+        if let word = realm.getAnyWord()
+        {
+            return word
+        }
+        
+        if let word = memory.getAnyWord()
+        {
+            return word
+        }
+        
         if !initialized
         {
             initialize()
         }
         
-        return memory.getAllWords().anyElement!
+        return memory.getAnyWord()!
     }
     
     private func waitUntilInitialized()
@@ -119,7 +140,7 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWords(inWordList: term)
+        return realm.searchForWords(inWordList: term)
     }
     
     public func searchForms(startingWith term: String) -> [LexisWord]
@@ -129,7 +150,7 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWords(startingWith: term)
+        return realm.searchForWords(startingWith: term)
     }
     
     public func searchDefinitions(withTerm term: String) -> [LexisWord]
@@ -139,6 +160,6 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWords(inDefinition: term)
+        return realm.searchForWords(inDefinition: term)
     }
 }

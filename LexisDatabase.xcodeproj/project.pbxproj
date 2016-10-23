@@ -42,9 +42,7 @@
 		DE4DF0CB1D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0C91D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift */; };
 		DE4DF0CE1D911EE100C29CF4 /* LexisWord+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0CC1D911EE100C29CF4 /* LexisWord+JSONTests.swift */; };
 		DE56C4D21DBC554E00C40D8B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D01DBC554E00C40D8B /* Realm.framework */; };
-		DE56C4D31DBC554E00C40D8B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D01DBC554E00C40D8B /* Realm.framework */; };
 		DE56C4D41DBC554E00C40D8B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; };
-		DE56C4D51DBC554E00C40D8B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; };
 		DE56C4D61DBC556300C40D8B /* Realm.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D01DBC554E00C40D8B /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE56C4D71DBC556300C40D8B /* RealmSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE56C4D91DBC55AB00C40D8B /* RealmPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4D81DBC55AB00C40D8B /* RealmPersistence.swift */; };
@@ -177,9 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE56C4D31DBC554E00C40D8B /* Realm.framework in Frameworks */,
 				DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */,
-				DE56C4D51DBC554E00C40D8B /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
