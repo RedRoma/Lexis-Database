@@ -90,7 +90,7 @@ extension LexisDefinition
 //This is the primary Data Structure representing a Latin word in Lexis.
 public class LexisWord: NSObject, NSCoding
 {
-    static let emptyWord = LexisWord(forms: [], wordType: .Interjection, definitions: [], supplementalInformation: .unknown)
+    public static let emptyWord = LexisWord(forms: [], wordType: .Interjection, definitions: [], supplementalInformation: .unknown)
     
     /**
         A Word's forms represnts the different parts to a Latin vocabulary entry.
