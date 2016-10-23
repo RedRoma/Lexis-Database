@@ -17,6 +17,8 @@ public extension LexisWord
 {
     public class SupplementalInformation: NSObject, NSCoding
     {
+        static let unknown = SupplementalInformation(age: .X, subjectArea: .X, geographicalArea: .X, frequency: .X, source: .X)
+        
         public let age: Age
         public let subjectArea: SubjectArea
         public let geographicalArea: GeographicalArea
