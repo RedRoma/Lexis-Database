@@ -227,10 +227,10 @@
 			isa = PBXGroup;
 			children = (
 				DEA7E4851D7B4939009CAE25 /* LexisPersistence.swift */,
-				DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */,
-				DE4DA0A91D8D76BC003183F4 /* UserDefaultsPersistence.swift */,
-				DE49A2351D98468F00620411 /* SimpleUserDefaultsPersistence.swift */,
 				DE49A2391D987AD300620411 /* FilePersistence.swift */,
+				DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */,
+				DE49A2351D98468F00620411 /* SimpleUserDefaultsPersistence.swift */,
+				DE4DA0A91D8D76BC003183F4 /* UserDefaultsPersistence.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";

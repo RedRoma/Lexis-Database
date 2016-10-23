@@ -17,8 +17,13 @@ class UserDefaultsPersistenceTests: BasePersistenceTests
     {
         super.setUp()
         
-        let persistence = UserDefaultsPersistence.instance
-        persistence?.synchronize = true
+        
+        guard let persistence = UserDefaultsPersistence.instance else {
+            XCTFail("Could not initialize UserDefaultsPersistence")
+            return
+        }
+        
+        persistence.synchronize = true
         self.instance = persistence
         
     }

@@ -20,25 +20,19 @@ class BasePersistenceTests: LexisTest
     var word = Generators.randomWord
     var words: [LexisWord] = []
     
-    static var instance: LexisPersistence!
-    var instance: LexisPersistence!
+    var instance: LexisPersistence = MemoryPersistence()
     
     override class func setUp()
     {
         LOG.enable()
         LOG.level = .debug
-        instance = MemoryPersistence()
     }
     
     override func setUp()
     {
         word = Generators.randomWord
         words = AlchemyGenerator.array() { Generators.randomWord }
-        
-        instance = BasePersistenceTests.instance
-        instance.removeAll()
     }
-    
     
     override func tearDown()
     {
