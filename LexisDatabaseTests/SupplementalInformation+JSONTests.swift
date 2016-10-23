@@ -16,6 +16,8 @@ class SupplementalInformation_JSONTests: LexisTest
 {
     var instance: SupplementalInformation!
     
+    let serializer = BasicJSONSerializer.instance
+    
     override func setUp()
     {
         instance = Generators.randomSupplementalInformation
@@ -26,6 +28,10 @@ class SupplementalInformation_JSONTests: LexisTest
         let json = instance.asJSON()
         XCTAssertFalse(json == nil)
         XCTAssertTrue(json is NSDictionary)
+        
+        let serialized: String! = instance.asJSONString(serializer: serializer)
+        XCTAssertFalse(serialized == nil)
+        XCTAssertTrue(serialized.notEmpty)
     }
     
     func testFromJSON()
@@ -39,5 +45,21 @@ class SupplementalInformation_JSONTests: LexisTest
         let copy = result as! SupplementalInformation
         XCTAssertTrue(copy == instance)
         
+    }
+    
+    func testJSONDeserialization()
+    {
+        let jsonString: String! = instance.asJSONString(serializer: serializer)
+        XCTAssertFalse(jsonString == nil)
+        XCTAssertTrue(jsonString.notEmpty)
+        
+        let dictionary = serializer.fromJSON(jsonString: jsonString)
+        XCTAssertTrue(dictionary != nil)
+        XCTAssertTrue(dictionary is NSDictionary)
+        
+        let result: SupplementalInformation! = SupplementalInformation.fromJSON(json: dictionary!) as! SupplementalInformation!
+        XCTAssertFalse(result == nil)
+        
+        XCTAssertTrue(result == instance)
     }
 }

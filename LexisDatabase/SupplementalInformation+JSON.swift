@@ -24,7 +24,7 @@ extension SupplementalInformation: JSONConvertible
     
     func asJSON() -> Any?
     {
-        var json = [String: Any]()
+        let json = NSMutableDictionary()
         
         json[Keys.age] = self.age.code
         json[Keys.subjectArea] = self.subjectArea.code
