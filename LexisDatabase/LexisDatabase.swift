@@ -80,15 +80,15 @@ public class LexisDatabase
         
         LOG.info("Loaded \(words.count) words")
         
-        do
-        {
-            try memory.save(words: words)
-            LOG.info("Stored \(words.count) words in memory")
-        }
-        catch let ex
-        {
-            LOG.error("Failed to save words in memory: \(ex)")
-        }
+//        do
+//        {
+//            try memory.save(words: words)
+//            LOG.info("Stored \(words.count) words in memory")
+//        }
+//        catch let ex
+//        {
+//            LOG.error("Failed to save words in memory: \(ex)")
+//        }
         
         initializing = false
         initialized = true
