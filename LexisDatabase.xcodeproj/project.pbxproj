@@ -42,6 +42,8 @@
 		DE4DF0CB1D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0C91D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift */; };
 		DE4DF0CE1D911EE100C29CF4 /* LexisWord+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0CC1D911EE100C29CF4 /* LexisWord+JSONTests.swift */; };
 		DE56C4FA1DBD457E00C40D8B /* BasePersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4F91DBD457E00C40D8B /* BasePersistenceTests.swift */; };
+		DE56C4FC1DBD4AFB00C40D8B /* WebRequestPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4FB1DBD4AFB00C40D8B /* WebRequestPersistence.swift */; };
+		DE56C4FE1DBD4FCE00C40D8B /* WebRequestPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4FD1DBD4FCE00C40D8B /* WebRequestPersistenceTests.swift */; };
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DE7B309F1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */; };
 		DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */; };
@@ -121,6 +123,8 @@
 		DE4DF0C91D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SupplementalInformation+JSONTests.swift"; sourceTree = "<group>"; };
 		DE4DF0CC1D911EE100C29CF4 /* LexisWord+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+JSONTests.swift"; sourceTree = "<group>"; };
 		DE56C4F91DBD457E00C40D8B /* BasePersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePersistenceTests.swift; sourceTree = "<group>"; };
+		DE56C4FB1DBD4AFB00C40D8B /* WebRequestPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRequestPersistence.swift; sourceTree = "<group>"; };
+		DE56C4FD1DBD4FCE00C40D8B /* WebRequestPersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRequestPersistenceTests.swift; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformation.swift"; sourceTree = "<group>"; };
 		DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformationTests.swift"; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 				DEA7E4871D7B4A74009CAE25 /* MemoryPersistence.swift */,
 				DE49A2351D98468F00620411 /* SimpleUserDefaultsPersistence.swift */,
 				DE4DA0A91D8D76BC003183F4 /* UserDefaultsPersistence.swift */,
+				DE56C4FB1DBD4AFB00C40D8B /* WebRequestPersistence.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				DEBD16941D86818D00E5C4DD /* MemoryPersistenceTests.swift */,
 				DE49A2371D9847B900620411 /* SimpleUserDefaultsTests.swift */,
 				DE4DA0A71D8D7655003183F4 /* UserDefaultsPersistenceTests.swift */,
+				DE56C4FD1DBD4FCE00C40D8B /* WebRequestPersistenceTests.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -422,6 +428,7 @@
 			files = (
 				DE4DF09E1D90FFDC00C29CF4 /* WordType+JSON.swift in Sources */,
 				DE4DA0A41D8D642F003183F4 /* LexisWord+WordType.swift in Sources */,
+				DE56C4FC1DBD4AFB00C40D8B /* WebRequestPersistence.swift in Sources */,
 				DE9E9EEA1D902BD7004E4CD3 /* JSON.swift in Sources */,
 				DEA7E4881D7B4A74009CAE25 /* MemoryPersistence.swift in Sources */,
 				DEA7E4861D7B493A009CAE25 /* LexisPersistence.swift in Sources */,
@@ -446,6 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE56C4FE1DBD4FCE00C40D8B /* WebRequestPersistenceTests.swift in Sources */,
 				DE4DF0C81D911D8500C29CF4 /* LexisDefinition+JSONTests.swift in Sources */,
 				DE49A23C1D987C3400620411 /* FilePersistenceTests.swift in Sources */,
 				DE4DF0C41D91185800C29CF4 /* WordType+JSONTests.swift in Sources */,

@@ -26,6 +26,8 @@ internal protocol LexisPersistence
     
     func getAllWords() -> [LexisWord]
     
+    func getAnyWord() -> LexisWord?
+    
     func removeAll()
     
     func remove(word: LexisWord)
@@ -40,6 +42,15 @@ internal protocol LexisPersistence
 //MARK: Default Implementations
 extension LexisPersistence
 {
+    
+    func getAnyWord() -> LexisWord?
+    {
+        let words = getAllWords()
+        
+        return words.anyElement
+        
+    }
+    
     func removeAll()
     {
         try? save(words: [])

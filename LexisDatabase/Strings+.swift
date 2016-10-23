@@ -75,4 +75,9 @@ extension String
             .filter() { self.contains($0) }
             .isEmpty
     }
+    
+    func toURL() -> URL?
+    {
+        return URL(string: self)
+    }
 }
