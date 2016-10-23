@@ -20,7 +20,14 @@ class BasePersistenceTests: LexisTest
     var words: [LexisWord] = []
     
     static var instance: LexisPersistence!
+    
     var instance: LexisPersistence!
+    {
+        didSet
+        {
+            BasePersistenceTests.instance = instance
+        }
+    }
     
     override class func setUp()
     {
