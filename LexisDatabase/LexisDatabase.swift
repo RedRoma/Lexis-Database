@@ -165,6 +165,11 @@ public extension LexisDatabase
             initialize()
         }
         
-        return web.searchForWordsInDefinitions(term: term)
+        if let urlEncodedTerms = term.urlEncoded
+        {
+            return web.searchForWordsInDefinitions(term: urlEncodedTerms)
+        }
+        
+        return memory.searchForWordsInDefinitions(term: term)
     }
 }

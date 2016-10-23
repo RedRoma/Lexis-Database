@@ -16,6 +16,11 @@ extension String
         return !isEmpty
     }
     
+    var urlEncoded: String?
+    {
+        return addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+    }
+    
     static func isNotEmpty(string: String) -> Bool
     {
         return string.notEmpty
