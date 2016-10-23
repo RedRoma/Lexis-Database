@@ -47,6 +47,8 @@
 		DE56C4D51DBC554E00C40D8B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; };
 		DE56C4D61DBC556300C40D8B /* Realm.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D01DBC554E00C40D8B /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE56C4D71DBC556300C40D8B /* RealmSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DE56C4D91DBC55AB00C40D8B /* RealmPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4D81DBC55AB00C40D8B /* RealmPersistence.swift */; };
+		DE56C4DA1DBC55AB00C40D8B /* RealmPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4D81DBC55AB00C40D8B /* RealmPersistence.swift */; };
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DE7B309F1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */; };
 		DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */; };
@@ -129,6 +131,7 @@
 		DE4DF0CC1D911EE100C29CF4 /* LexisWord+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+JSONTests.swift"; sourceTree = "<group>"; };
 		DE56C4D01DBC554E00C40D8B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		DE56C4D81DBC55AB00C40D8B /* RealmPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPersistence.swift; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformation.swift"; sourceTree = "<group>"; };
 		DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformationTests.swift"; sourceTree = "<group>"; };
@@ -245,6 +248,7 @@
 				DE4DA0A91D8D76BC003183F4 /* UserDefaultsPersistence.swift */,
 				DE49A2351D98468F00620411 /* SimpleUserDefaultsPersistence.swift */,
 				DE49A2391D987AD300620411 /* FilePersistence.swift */,
+				DE56C4D81DBC55AB00C40D8B /* RealmPersistence.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -448,6 +452,7 @@
 				DE4DF09C1D90FD1500C29CF4 /* SupplementalInformation+JSON.swift in Sources */,
 				DEDE0DC41D718D8F00965CFD /* LexisEngine.swift in Sources */,
 				DE3129EB1D8BCC040007692F /* LexisWord+DictionaryCodes.swift in Sources */,
+				DE56C4D91DBC55AB00C40D8B /* RealmPersistence.swift in Sources */,
 				DE49A2361D98468F00620411 /* SimpleUserDefaultsPersistence.swift in Sources */,
 				DE1FBC5F1D90F3A300B683ED /* LexisWord+JSON.swift in Sources */,
 				DEDE0DBF1D71758B00965CFD /* LexisWord.swift in Sources */,
@@ -474,6 +479,7 @@
 				DE4DA0A61D8D6518003183F4 /* LexisWord+WordTypeTests.swift in Sources */,
 				DE49A2381D9847B900620411 /* SimpleUserDefaultsTests.swift in Sources */,
 				DE4DA0A81D8D7655003183F4 /* UserDefaultsPersistenceTests.swift in Sources */,
+				DE56C4DA1DBC55AB00C40D8B /* RealmPersistence.swift in Sources */,
 				DEDE0DAF1D7172E900965CFD /* LexisDatabaseTests.swift in Sources */,
 				DE1978571D720269008E46AB /* LexisEngineTests.swift in Sources */,
 				DE4DF0CE1D911EE100C29CF4 /* LexisWord+JSONTests.swift in Sources */,
