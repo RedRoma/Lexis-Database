@@ -21,23 +21,41 @@ class WebRequestPersistence: LexisPersistence
     private let parser = BasicJSONSerializer.instance
     
     
-    internal func getAllWords() -> [LexisWord]
+    func getAllWords() -> [LexisWord]
     {
         guard let url = api.toURL() else { return [] }
         
-        let json: String
-        do
-        {
-            try json = String(contentsOf: url)
-        }
-        catch
-        {
-            LOG.error("Failed to download JSON at \(url): \(error)")
+        return getWords(at: url)
+    }
+    
+    func searchForWordsContaining(term: String) -> [LexisWord]
+    {
+        guard let url = (searchWordsContainingAPI + "/" + term).toURL() else {
+            LOG.warn("Could not create URL for \(searchWordsContainingAPI)")
             return []
         }
         
+        return getWords(at: url)
+    }
+    
+    func searchForWordsStartingWith(term: String) -> [LexisWord]
+    {
+        guard let url = (searchForWordsStartingWithAPI + "/" + term).toURL() else {
+            LOG.warn("Could not create URL for \(searchForWordsStartingWithAPI)")
+            return []
+        }
         
-        return toLexisWords(json: json)
+       return getWords(at: url)
+    }
+    
+    func searchForWordsInDefinitions(term: String) -> [LexisWord]
+    {
+        guard let url = (searchForWordsInDefinitionAPI + "/" + term).toURL() else {
+            LOG.warn("Could not create URL for \(searchForWordsInDefinitionAPI)")
+            return []
+        }
+     
+        return getWords(at: url)
     }
 
     func save(words: [LexisWord]) throws
@@ -55,6 +73,26 @@ class WebRequestPersistence: LexisPersistence
         //Do nothing
     }
     
+    
+    private func getWords(at url: URL) -> [LexisWord]
+    {
+        let json: String
+        
+        do
+        {
+            json = try String(contentsOf: url)
+        }
+        catch
+        {
+            LOG.error("Failed to make request to \(url): \(error)")
+            return []
+        }
+        
+        let results = toLexisWords(json: json)
+        LOG.debug("Found \(results.count) words at \(url)")
+        
+        return results
+    }
     
     private func toLexisWords(json: String) -> [LexisWord]
     {

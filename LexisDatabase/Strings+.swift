@@ -80,4 +80,21 @@ extension String
     {
         return URL(string: self)
     }
+    
+    func substring(from: Int, to: Int) -> String
+    {
+        let start = index(startIndex, offsetBy: from)
+        let end = index(startIndex, offsetBy: to)
+        
+        let range = Range(uncheckedBounds: (lower: start, upper: end))
+        
+        return substring(with: range)
+    }
+    
+    func firstHalf() -> String
+    {
+        let halfPoint = characters.count / 2
+        
+        return substring(from: 0, to: halfPoint)
+    }
 }
