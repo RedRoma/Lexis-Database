@@ -14,6 +14,8 @@ import RealmSwift
 class RealmPersistence: LexisPersistence
 {
 
+    static let instance = RealmPersistence()!
+    
     fileprivate let realm: Realm
     
     init?()

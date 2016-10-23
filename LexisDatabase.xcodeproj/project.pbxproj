@@ -49,6 +49,7 @@
 		DE56C4D71DBC556300C40D8B /* RealmSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE56C4D91DBC55AB00C40D8B /* RealmPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4D81DBC55AB00C40D8B /* RealmPersistence.swift */; };
 		DE56C4DD1DBC56CB00C40D8B /* BasePersitenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4DB1DBC56CB00C40D8B /* BasePersitenceTests.swift */; };
+		DE56C4E01DBC5D8B00C40D8B /* RealmPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56C4DE1DBC5D8B00C40D8B /* RealmPersistenceTests.swift */; };
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DE7B309F1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */; };
 		DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */; };
@@ -133,6 +134,7 @@
 		DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		DE56C4D81DBC55AB00C40D8B /* RealmPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPersistence.swift; sourceTree = "<group>"; };
 		DE56C4DB1DBC56CB00C40D8B /* BasePersitenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePersitenceTests.swift; sourceTree = "<group>"; };
+		DE56C4DE1DBC5D8B00C40D8B /* RealmPersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPersistenceTests.swift; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformation.swift"; sourceTree = "<group>"; };
 		DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformationTests.swift"; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				DEBD16941D86818D00E5C4DD /* MemoryPersistenceTests.swift */,
 				DE4DA0A71D8D7655003183F4 /* UserDefaultsPersistenceTests.swift */,
 				DE49A2371D9847B900620411 /* SimpleUserDefaultsTests.swift */,
+				DE56C4DE1DBC5D8B00C40D8B /* RealmPersistenceTests.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				DE4DF0A01D91098C00C29CF4 /* LexisTest.swift in Sources */,
 				DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */,
 				DEA7E48A1D7B5B6B009CAE25 /* LexisWordTests.swift in Sources */,
+				DE56C4E01DBC5D8B00C40D8B /* RealmPersistenceTests.swift in Sources */,
 				DE4DA0A61D8D6518003183F4 /* LexisWord+WordTypeTests.swift in Sources */,
 				DE49A2381D9847B900620411 /* SimpleUserDefaultsTests.swift in Sources */,
 				DE4DA0A81D8D7655003183F4 /* UserDefaultsPersistenceTests.swift in Sources */,

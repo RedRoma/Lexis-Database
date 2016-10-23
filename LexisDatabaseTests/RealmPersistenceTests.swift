@@ -1,8 +1,8 @@
 //
-//  FilePersistenceTests.swift
+//  RealmPersistenceTests.swift
 //  LexisDatabase
 //
-//  Created by Wellington Moreno on 9/25/16.
+//  Created by Wellington Moreno on 10/22/16.
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
@@ -10,15 +10,13 @@ import Foundation
 @testable import LexisDatabase
 import XCTest
 
-
-class FilePersistenceTests: BasePersistenceTests
+class RealmPersistenceTests: BasePersistenceTests
 {
     
     override func setUp()
     {
         super.setUp()
         
-        self.instance = FilePersistence.instance
+        self.instance = RealmPersistence.instance
     }
-    
 }

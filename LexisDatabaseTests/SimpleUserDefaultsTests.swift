@@ -6,10 +6,8 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
-import AlchemyGenerator
 import Foundation
 @testable import LexisDatabase
-import Archeota
 import XCTest
 
 
