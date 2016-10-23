@@ -17,6 +17,7 @@ class WebRequestPersistence: LexisPersistence
     private var searchWordsContainingAPI: String { return api + "/search/containing" }
     private var searchForWordsStartingWithAPI: String { return api + "/search/starting-with" }
     private var searchForWordsInDefinitionAPI: String { return api + "/search/containing-in-definition" }
+    private var searchForAnyWordAPI: String { return api + "/search/any-word" }
     
     private let parser = BasicJSONSerializer.instance
     
@@ -26,6 +27,30 @@ class WebRequestPersistence: LexisPersistence
         guard let url = api.toURL() else { return [] }
         
         return getWords(at: url)
+    }
+    
+    func getAnyWord() -> LexisWord?
+    {
+        guard let url = searchForAnyWordAPI.toURL() else { return nil }
+        
+        let json: String
+        
+        do
+        {
+            json = try String(contentsOf: url)
+        }
+        catch
+        {
+            LOG.error("Failed to load JSON from \(url): \(error)")
+            return nil
+        }
+        
+        guard let dictionary = parser.fromJSON(jsonString: json) as? NSDictionary else {
+            LOG.error("Failed to load JSON as NSDictionary: \(json)")
+            return nil
+        }
+        
+        return LexisWord.fromJSON(json: dictionary) as? LexisWord
     }
     
     func searchForWordsContaining(term: String) -> [LexisWord]

@@ -73,5 +73,16 @@ class WebRequestPersistenceTests: LexisTest
         }
         
     }
+    
+    func testGetAnyWord()
+    {
+        let iterations = 100
+        
+        for _ in 1...iterations
+        {
+            let word = instance.getAnyWord()
+            XCTAssertFalse(word == nil)
+        }
+    }
    
 }

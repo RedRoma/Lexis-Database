@@ -18,13 +18,9 @@ public class LexisDatabase
    
     public static let instance = LexisDatabase()
     
-    
-    /**
-        The Persistence Layer
-     */
     fileprivate let memory: LexisPersistence = MemoryPersistence()
-    
     fileprivate var persisted = FilePersistence.instance
+    fileprivate var web = WebRequestPersistence()
     
     fileprivate var initialized = false
     private var initializing = false
@@ -48,6 +44,34 @@ public class LexisDatabase
         
         LOG.debug("Initializing LexisDatabase")
         
+        
+        initializing = false
+        initialized = true
+    }
+
+    public var anyWord: LexisWord
+    {
+        if let word = web.getAnyWord()
+        {
+            return word
+        }
+        else
+        {
+            loadPersisted()
+            
+            if let word = memory.getAnyWord()
+            {
+                return word
+            }
+            else
+            {
+                return LexisWord.emptyWord
+            }
+        }
+    }
+    
+    private func loadPersisted()
+    {
         var words = persisted.getAllWords()
         
         if words.isEmpty
@@ -79,19 +103,7 @@ public class LexisDatabase
         {
             LOG.error("Failed to save words in memory: \(ex)")
         }
-        
-        initializing = false
-        initialized = true
-    }
 
-    public var anyWord: LexisWord
-    {
-        if !initialized
-        {
-            initialize()
-        }
-        
-        return memory.getAllWords().anyElement!
     }
     
     private func waitUntilInitialized()
@@ -106,6 +118,20 @@ public class LexisDatabase
         }
     }
     
+    fileprivate func saveWordsInMemory(words: [LexisWord])
+    {
+        var memoryWords = memory.getAllWords()
+        
+        for word in words
+        {
+            if !memoryWords.contains(word)
+            {
+                memoryWords.append(word)
+            }
+        }
+        
+        try? memory.save(words: memoryWords)
+    }
 }
 
 
@@ -119,7 +145,7 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWordsContaining(term: term)
+        return web.searchForWordsContaining(term: term)
     }
     
     public func searchForms(startingWith term: String) -> [LexisWord]
@@ -129,7 +155,7 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWordsStartingWith(term: term)
+        return web.searchForWordsStartingWith(term: term)
     }
     
     public func searchDefinitions(withTerm term: String) -> [LexisWord]
