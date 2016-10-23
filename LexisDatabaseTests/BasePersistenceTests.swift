@@ -84,14 +84,16 @@ class BasePersistenceTests: LexisTest
         
         let anyWord = words.anyElement!
         
-        let results = instance.searchForWords(inWordList: anyWord.forms.anyElement!)
+        let searchTerm = anyWord.forms.anyElement!
+        let results = instance.searchForWordsContaining(term: searchTerm)
         XCTAssertTrue(results.count > 0)
         XCTAssertTrue(results.contains(anyWord))
     }
     
     func testSearchForWordsInTermsWhenEmpty()
     {
-        let result = instance.searchForWords(inWordList: word.forms.anyElement!)
+        let searchTerm =  word.forms.anyElement!
+        let result = instance.searchForWordsContaining(term: searchTerm)
         XCTAssertTrue(result.isEmpty)
     }
     
@@ -101,7 +103,8 @@ class BasePersistenceTests: LexisTest
         
         let anyWord = words.anyElement!
         
-        let results = instance.searchForWords(inDefinition: anyWord.definitions.anyElement!.terms.anyElement!)
+        let searchTerm = anyWord.definitions.anyElement!.terms.anyElement!
+        let results = instance.searchForWordsInDefinitions(term: searchTerm)
         
         XCTAssertFalse(results.isEmpty)
         XCTAssertTrue(results.contains(anyWord))
@@ -109,7 +112,8 @@ class BasePersistenceTests: LexisTest
     
     func testSearchForWordsInDefinitionWhenEmpty()
     {
-        let results = instance.searchForWords(inDefinition: word.definitions.anyElement!.terms.anyElement!)
+        let searchTerm = word.definitions.anyElement!.terms.anyElement!
+        let results = instance.searchForWordsInDefinitions(term: searchTerm)
         
         XCTAssertTrue(results.isEmpty)
     }
@@ -122,7 +126,7 @@ class BasePersistenceTests: LexisTest
         
         let searchTerm = Functions.half(ofString: word.forms.anyElement!)
         
-        let results = instance.searchForWords(startingWith: searchTerm)
+        let results = instance.searchForWordsStartingWith(term: searchTerm)
         
         XCTAssertFalse(results.isEmpty)
         XCTAssertTrue(results.contains(word))

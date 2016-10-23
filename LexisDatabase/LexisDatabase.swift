@@ -119,7 +119,7 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWords(inWordList: term)
+        return memory.searchForWordsContaining(term: term)
     }
     
     public func searchForms(startingWith term: String) -> [LexisWord]
@@ -129,7 +129,7 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWords(startingWith: term)
+        return memory.searchForWordsStartingWith(term: term)
     }
     
     public func searchDefinitions(withTerm term: String) -> [LexisWord]
@@ -139,6 +139,6 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWords(inDefinition: term)
+        return memory.searchForWordsInDefinitions(term: term)
     }
 }

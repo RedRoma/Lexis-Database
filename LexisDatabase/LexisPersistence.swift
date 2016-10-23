@@ -30,9 +30,11 @@ internal protocol LexisPersistence
     
     func remove(word: LexisWord)
     
-    func searchForWords(inWordList terms: String) -> [LexisWord]
+    func searchForWordsStartingWith(term: String) -> [LexisWord]
     
-    func searchForWords(inDefinition terms: String) -> [LexisWord]
+    func searchForWordsContaining(term: String) -> [LexisWord]
+    
+    func searchForWordsInDefinitions(term: String) -> [LexisWord]
 }
 
 //MARK: Default Implementations
@@ -52,7 +54,7 @@ extension LexisPersistence
         try? save(words: words)
     }
     
-    func searchForWords(inWordList term: String) -> [LexisWord]
+    func searchForWordsContaining(term: String) -> [LexisWord]
     {
         guard term.notEmpty else { return [] }
         
@@ -68,7 +70,25 @@ extension LexisPersistence
         }
     }
     
-    func searchForWords(inDefinition term: String) -> [LexisWord]
+   
+    func searchForWordsStartingWith(term: String) -> [LexisWord]
+    {
+        guard term.notEmpty else { return [] }
+        
+        let words = getAllWords()
+        guard words.notEmpty else { return [] }
+        
+        return words.filter()
+        { word in
+            
+            //Keep words where it's forms begin with the search term.
+            word.forms.anyMatch() { (form: String) in
+                return form.lowercased().hasPrefix(term.lowercased())
+            }
+        }
+    }
+    
+     func searchForWordsInDefinitions(term: String) -> [LexisWord]
     {
         guard term.notEmpty else { return [] }
         
@@ -86,23 +106,6 @@ extension LexisPersistence
                     
                     definition.lowercased().contains(term.lowercased())
                 }
-            }
-        }
-    }
-    
-    func searchForWords(startingWith term: String) -> [LexisWord]
-    {
-        guard term.notEmpty else { return [] }
-        
-        let words = getAllWords()
-        guard words.notEmpty else { return [] }
-        
-        return words.filter()
-        { word in
-            
-            //Keep words where it's forms begin with the search term.
-            word.forms.anyMatch() { (form: String) in
-                return form.lowercased().hasPrefix(term.lowercased())
             }
         }
     }

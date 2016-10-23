@@ -241,8 +241,8 @@
 				DE56C4F91DBD457E00C40D8B /* BasePersistenceTests.swift */,
 				DE49A23B1D987C3400620411 /* FilePersistenceTests.swift */,
 				DEBD16941D86818D00E5C4DD /* MemoryPersistenceTests.swift */,
-				DE4DA0A71D8D7655003183F4 /* UserDefaultsPersistenceTests.swift */,
 				DE49A2371D9847B900620411 /* SimpleUserDefaultsTests.swift */,
+				DE4DA0A71D8D7655003183F4 /* UserDefaultsPersistenceTests.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
