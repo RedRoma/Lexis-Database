@@ -17,6 +17,11 @@ public extension LexisWord
 {
     public class SupplementalInformation: NSObject, NSCoding
     {
+        /**
+         This instance represents a situation where nothing is known about a word.
+        */
+        static let unknown = SupplementalInformation(age: .X, subjectArea: .X, geographicalArea: .X, frequency: .X, source: .X)
+        
         public let age: Age
         public let subjectArea: SubjectArea
         public let geographicalArea: GeographicalArea
