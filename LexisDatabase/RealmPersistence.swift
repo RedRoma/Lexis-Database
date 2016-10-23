@@ -119,28 +119,75 @@ class RealmDefinition: Object
 
 class RealmWord: Object
 {
+    
+    private static let json = BasicJSONSerializer.instance
+    
     var forms = List<RealmForm>()
     
     var definitions = List<RealmDefinition>()
+    
+    dynamic var supplementalInformation = ""
     
     dynamic var wordType = ""
     
     static func from(lexisWord: LexisWord) -> RealmWord?
     {
         let forms = lexisWord.forms.map(RealmForm.from)
-        
         let definitions = lexisWord.definitions.map(RealmDefinition.from)
         
-        guard let wordType = lexisWord.wordType.asJSONString(serializer: BasicJSONSerializer.instance) else {
+        guard let wordType = lexisWord.wordType.asJSONString(serializer: RealmWord.json) else {
             return nil
         }
+        
+        let supplementalInformation = RealmWord.json.toJSON(object: lexisWord.supplementalInformation.asJSON()) ?? ""
     
         let realmWord = RealmWord()
         realmWord.forms = List(forms)
         realmWord.definitions = List(definitions)
+        realmWord.supplementalInformation = supplementalInformation
         realmWord.wordType = wordType
         
         return realmWord
     }
     
+    var asLexisWord: LexisWord
+    {
+        let forms: [String] = self.forms.map() { $0.asString }
+        let definitions: [LexisDefinition] = self.definitions.map() { $0.asLexisDefinition }
+
+        let supplementalInfo: SupplementalInformation
+        
+        if let supplementalInfoDictionary = RealmWord.json.fromJSON(jsonString: self.supplementalInformation) as? NSDictionary,
+            let parsedSupplementalInfo = SupplementalInformation.fromJSON(json: supplementalInfoDictionary) as? SupplementalInformation
+        {
+            supplementalInfo = parsedSupplementalInfo
+        }
+        else
+        {
+            supplementalInfo = SupplementalInformation.unknown
+        }
+        
+        
+        let wordType = WordType.fromJSONString(json: self.wordType, serializer: BasicJSONSerializer.instance) as! WordType
+        
+        return LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
+    }
+}
+
+extension Realm
+{
+    static func deleteDatabase()
+    {
+        guard let path = Realm.Configuration.defaultConfiguration.fileURL else { return }
+        
+        let fileManager = FileManager()
+        do
+        {
+            try fileManager.removeItem(at: path)
+        }
+        catch
+        {
+            LOG.error("Failed to delete Realm Database at \(path)")
+        }
+    }
 }
