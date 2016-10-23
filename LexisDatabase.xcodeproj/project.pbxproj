@@ -41,6 +41,12 @@
 		DE4DF0C81D911D8500C29CF4 /* LexisDefinition+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0C51D911BA200C29CF4 /* LexisDefinition+JSONTests.swift */; };
 		DE4DF0CB1D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0C91D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift */; };
 		DE4DF0CE1D911EE100C29CF4 /* LexisWord+JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4DF0CC1D911EE100C29CF4 /* LexisWord+JSONTests.swift */; };
+		DE56C4D21DBC554E00C40D8B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D01DBC554E00C40D8B /* Realm.framework */; };
+		DE56C4D31DBC554E00C40D8B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D01DBC554E00C40D8B /* Realm.framework */; };
+		DE56C4D41DBC554E00C40D8B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; };
+		DE56C4D51DBC554E00C40D8B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; };
+		DE56C4D61DBC556300C40D8B /* Realm.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D01DBC554E00C40D8B /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DE56C4D71DBC556300C40D8B /* RealmSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE652D4B1D723C8B00F1B52A /* Strings+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE652D4A1D723C8B00F1B52A /* Strings+.swift */; };
 		DE7B309F1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */; };
 		DE7B30A11D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */; };
@@ -82,6 +88,8 @@
 				DE49A2311D983C0300620411 /* AromaSwiftClient.framework in Copy Frameworks */,
 				DE49A2321D983C0300620411 /* AromaThrift.framework in Copy Frameworks */,
 				DE7B54111DAB01680006119F /* Archeota.framework in Copy Frameworks */,
+				DE56C4D61DBC556300C40D8B /* Realm.framework in Copy Frameworks */,
+				DE56C4D71DBC556300C40D8B /* RealmSwift.framework in Copy Frameworks */,
 				DE49A2341D983C0300620411 /* SwiftExceptionCatcher.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -119,6 +127,8 @@
 		DE4DF0C51D911BA200C29CF4 /* LexisDefinition+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisDefinition+JSONTests.swift"; sourceTree = "<group>"; };
 		DE4DF0C91D911DBD00C29CF4 /* SupplementalInformation+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SupplementalInformation+JSONTests.swift"; sourceTree = "<group>"; };
 		DE4DF0CC1D911EE100C29CF4 /* LexisWord+JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+JSONTests.swift"; sourceTree = "<group>"; };
+		DE56C4D01DBC554E00C40D8B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		DE652D4A1D723C8B00F1B52A /* Strings+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+.swift"; sourceTree = "<group>"; };
 		DE7B309E1D8D360600AD44C1 /* LexisWord+SupplementalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformation.swift"; sourceTree = "<group>"; };
 		DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LexisWord+SupplementalInformationTests.swift"; sourceTree = "<group>"; };
@@ -147,7 +157,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE56C4D21DBC554E00C40D8B /* Realm.framework in Frameworks */,
 				DE49A22F1D983BEC00620411 /* SwiftExceptionCatcher.framework in Frameworks */,
+				DE56C4D41DBC554E00C40D8B /* RealmSwift.framework in Frameworks */,
 				DE49A22C1D983BEC00620411 /* AromaSwiftClient.framework in Frameworks */,
 				DE49A22B1D983BEC00620411 /* AlchemyGenerator.framework in Frameworks */,
 				DE7B54101DAB015B0006119F /* Archeota.framework in Frameworks */,
@@ -159,7 +171,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE56C4D31DBC554E00C40D8B /* Realm.framework in Frameworks */,
 				DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */,
+				DE56C4D51DBC554E00C40D8B /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +214,8 @@
 		DE8681A21D72052700D9CE74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE56C4D01DBC554E00C40D8B /* Realm.framework */,
+				DE56C4D11DBC554E00C40D8B /* RealmSwift.framework */,
 				DE7B540F1DAB015B0006119F /* Archeota.framework */,
 				DE49A2261D983BEC00620411 /* AlchemyGenerator.framework */,
 				DE49A2271D983BEC00620411 /* AromaSwiftClient.framework */,
