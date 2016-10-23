@@ -245,7 +245,7 @@ public enum GeographicalArea: String
     Frequency is an indication of the relative frequency for a word.
     This code also applies differently to inflections.
     If there were several matches to an input word,
-    this key may be used to sort teh output, or exclude rate interpretations.
+    this key may be used to sort the output, or exclude rate interpretations.
  */
 public enum Frequency: String
 {
