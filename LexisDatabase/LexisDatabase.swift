@@ -165,6 +165,6 @@ public extension LexisDatabase
             initialize()
         }
         
-        return memory.searchForWordsInDefinitions(term: term)
+        return web.searchForWordsInDefinitions(term: term)
     }
 }
