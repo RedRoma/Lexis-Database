@@ -31,35 +31,88 @@ class RealmPersistence: LexisPersistence
         }
     }
     
-    
     func save(words: [LexisWord]) throws
     {
+        let realmWords = words.flatMap(RealmWord.from)
         
+        try realm.write {
+            realmWords.forEach() { word in
+                realm.add(word)
+            }
+        }
+        
+        LOG.info("Saved \(realmWords.count) words in Realm, at \(realm.configuration.fileURL)")
     }
     
     func getAllWords() -> [LexisWord]
     {
-        return []
+        
+        let realmWords = realm.objects(RealmWord.self)
+        
+        LOG.debug("Found \(realmWords.count) words in Realm")
+        
+        return realmWords.map() { $0.asLexisWord }
+            .sorted() { left, right in
+                let leftForm = left.forms.first ?? ""
+                let rightForm = right.forms.first ?? ""
+                return leftForm < rightForm
+            }
+    }
+    
+    func getAnyWord() -> LexisWord?
+    {
+        return realm.objects(RealmWord.self).any?.asLexisWord
     }
     
     func removeAll()
     {
-        
+        try? realm.write {
+            realm.deleteAll()
+//            Realm.deleteDatabase()
+        }
     }
     
     func remove(word: LexisWord)
     {
+        guard let realmWord = RealmWord.from(lexisWord: word) else { return }
         
+        try? realm.write {
+            realm.delete(realmWord)
+            LOG.debug("Deleted word from Realm: \(word)")
+        }
+    }
+    
+    func searchForWords(startingWith term: String) -> [LexisWord]
+    {
+        let predicate = NSPredicate(format: "SUBQUERY(forms, $form, $form.form BEGINSWITH %@) .@count > 0", term)
+        
+        let results = realm.objects(RealmWord.self).filter(predicate)
+        return results.map() { $0.asLexisWord }
     }
     
     func searchForWords(inWordList terms: String) -> [LexisWord]
     {
-        return []
+        let predicate = NSPredicate(format: "SUBQUERY(forms, $form, $form.form CONTAINS %@) .@count > 0", terms)
+        
+        let results = realm.objects(RealmWord.self).filter(predicate)
+        return results.map() { $0.asLexisWord }
     }
     
     func searchForWords(inDefinition terms: String) -> [LexisWord]
     {
-        return []
+        let predicate = NSPredicate(format: "SUBQUERY(definitions, $definition, ANY SUBQUERY($definition.terms, $term, $term CONTAINS %@) .@count > 0) .@count > 0", terms)
+        
+        let results = realm.objects(RealmWord.self).filter() { word in
+            let definitions: [LexisDefinition] = word.definitions.map() { $0.asLexisDefinition }
+            
+            let shouldMatch: (LexisDefinition) -> (Bool) = { definition in
+                
+                return definition.terms.anyMatch(shouldMatch: { $0.contains(terms) })
+            }
+            
+            return definitions.anyMatch(shouldMatch: shouldMatch)
+        }
+        return results.map() { $0.asLexisWord }
     }
     
 }
@@ -139,7 +192,7 @@ class RealmWord: Object
             return nil
         }
         
-        let supplementalInformation = RealmWord.json.toJSON(object: lexisWord.supplementalInformation.asJSON()) ?? ""
+        let supplementalInformation = lexisWord.supplementalInformation.asJSONString(serializer: RealmWord.json) ?? ""
     
         let realmWord = RealmWord()
         realmWord.forms = List(forms)
@@ -157,8 +210,7 @@ class RealmWord: Object
 
         let supplementalInfo: SupplementalInformation
         
-        if let supplementalInfoDictionary = RealmWord.json.fromJSON(jsonString: self.supplementalInformation) as? NSDictionary,
-            let parsedSupplementalInfo = SupplementalInformation.fromJSON(json: supplementalInfoDictionary) as? SupplementalInformation
+        if let parsedSupplementalInfo = SupplementalInformation.fromJSONString(json: self.supplementalInformation, serializer: RealmWord.json) as? SupplementalInformation
         {
             supplementalInfo = parsedSupplementalInfo
         }
@@ -189,5 +241,31 @@ extension Realm
         {
             LOG.error("Failed to delete Realm Database at \(path)")
         }
+    }
+}
+
+extension Results
+{
+    var notEmpty: Bool { return !isEmpty }
+    
+    var any: T?
+    {
+        guard !notEmpty else { return nil }
+        
+        var index = Int(arc4random_uniform(UInt32(count)))
+        
+        //Ensure Index is greater than 0
+        if index < 0
+        {
+            index = 0
+        }
+        
+        if index >= count
+        {
+            index = count - 1
+        }
+        
+        return self[index]
+        
     }
 }

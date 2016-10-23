@@ -30,6 +30,8 @@ internal protocol LexisPersistence
     
     func remove(word: LexisWord)
     
+    func searchForWords(startingWith term: String) -> [LexisWord]
+    
     func searchForWords(inWordList terms: String) -> [LexisWord]
     
     func searchForWords(inDefinition terms: String) -> [LexisWord]

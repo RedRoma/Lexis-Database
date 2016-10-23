@@ -19,7 +19,7 @@ class RealmPersistenceTests: BasePersistenceTests
     {
         super.setUp()
         
-        Realm.deleteDatabase()
+//        Realm.deleteDatabase()
         
     }
     
@@ -29,10 +29,6 @@ class RealmPersistenceTests: BasePersistenceTests
         
         self.instance = RealmPersistence.instance
     }
-}
-
-extension RealmPersistenceTests
-{
     
     func testWordPersistence()
     {

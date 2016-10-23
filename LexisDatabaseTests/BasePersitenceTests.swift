@@ -82,6 +82,7 @@ class BasePersistenceTests: LexisTest
         try! instance.save(words: words)
         let result = instance.getAllWords()
         XCTAssertTrue(result.notEmpty)
+        XCTAssertTrue(result.count == words.count)
     }
     
     func testSearchForWordsInTerms()
