@@ -75,7 +75,12 @@ class WebRequestPersistence: LexisPersistence
     
     func searchForWordsInDefinitions(term: String) -> [LexisWord]
     {
-        guard let url = (searchForWordsInDefinitionAPI + "/" + term).toURL() else {
+        guard let urlEncodedTerm = term.urlEncoded else {
+            LOG.warn("Could not URL encode \(term)")
+            return []
+        }
+        
+        guard let url = (searchForWordsInDefinitionAPI + "/" + urlEncodedTerm).toURL() else {
             LOG.warn("Could not create URL for \(searchForWordsInDefinitionAPI)")
             return []
         }
