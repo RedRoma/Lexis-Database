@@ -6,8 +6,10 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
-import Foundation
 import Archeota
+import AromaSwiftClient
+import Foundation
+
 
 /**
     This is the API to the Lexis Database of Latin Words.
@@ -18,6 +20,9 @@ public class LexisDatabase
    
     public static let instance = LexisDatabase()
     
+    fileprivate let async = OperationQueue()
+    fileprivate let main = OperationQueue.main
+    
     fileprivate let memory: LexisPersistence = MemoryPersistence()
     fileprivate var persisted = FilePersistence.instance
     fileprivate var web = WebRequestPersistence()
@@ -27,44 +32,36 @@ public class LexisDatabase
     
     private init()
     {
+        AromaClient.TOKEN_ID = "8186834c-9140-4323-b678-c780b0fc1600"
     }
     
     public func initialize()
     {
-        guard !initialized else { return }
-        
-        if initializing
-        {
-            LOG.info("Already initializing. Blocking until done.")
-            waitUntilInitialized()
-            return
-        }
-        
-        initializing = true
-        
-        LOG.debug("Initializing LexisDatabase")
-        
-        
-        initializing = false
-        initialized = true
+        LOG.debug("Ignoring depracated initialize() call")
     }
 
     public var anyWord: LexisWord
     {
-        if let word = web.getAnyWord()
+        if let word = memory.getAnyWord()
         {
             return word
         }
         else
         {
-            loadPersisted()
+            startLoadingFromWeb()
             
-            if let word = memory.getAnyWord()
+            let startTime = Date()
+            if let word = web.getAnyWord()
             {
+                let latency = startTime.timeIntervalSinceNow
+                LOG.debug("Operation to load any word from web took \(latency)s")
+                AromaClient.sendLowPriorityMessage(withTitle: "Web Request Complete", withBody: "Operation took \(latency)s")
+                
                 return word
             }
             else
             {
+                AromaClient.sendHighPriorityMessage(withTitle: "Operation Failed", withBody: "Coult not load any word")
                 return LexisWord.emptyWord
             }
         }
@@ -106,6 +103,31 @@ public class LexisDatabase
 
     }
     
+    fileprivate func startLoadingFromWeb()
+    {
+        guard !initializing , !initialized else { return }
+        initializing = true
+        
+        async.addOperation
+        {
+            defer
+            {
+                self.initialized = true
+                self.initializing = false
+            }
+            
+            let start = Date()
+            let words = self.web.getAllWords()
+            let latency = start.timeIntervalSinceNow
+            
+            LOG.debug("Loaded \(words.count) words from the Web in \(latency)s. Saving them in memory.")
+            AromaClient.sendMediumPriorityMessage(withTitle: "Web Request Complete", withBody: "Operation to load all words took \(latency)s")
+            
+            self.memory.removeAll()
+            try? self.memory.save(words: words)
+        }
+    }
+    
     private func waitUntilInitialized()
     {
         
@@ -118,20 +140,6 @@ public class LexisDatabase
         }
     }
     
-    fileprivate func saveWordsInMemory(words: [LexisWord])
-    {
-        var memoryWords = memory.getAllWords()
-        
-        for word in words
-        {
-            if !memoryWords.contains(word)
-            {
-                memoryWords.append(word)
-            }
-        }
-        
-        try? memory.save(words: memoryWords)
-    }
 }
 
 
@@ -140,36 +148,61 @@ public extension LexisDatabase
 {
     public func searchForms(withTerm term: String) -> [LexisWord]
     {
-        if !initialized
+        var results = memory.searchForWordsContaining(term: term)
+        
+        if results.notEmpty
         {
-            initialize()
+            return results
         }
         
-        return web.searchForWordsContaining(term: term)
+        results = web.searchForWordsContaining(term: term)
+        
+        if results.notEmpty
+        {
+            startLoadingFromWeb()
+        }
+        
+        return results
     }
     
     public func searchForms(startingWith term: String) -> [LexisWord]
     {
-        if !initialized
+        var results = memory.searchForWordsStartingWith(term: term)
+        
+        if results.notEmpty
         {
-            initialize()
+            return results
         }
         
-        return web.searchForWordsStartingWith(term: term)
+        results =  web.searchForWordsStartingWith(term: term)
+        
+        
+        if results.notEmpty //This would mean the web had results but we didn't
+        {
+            startLoadingFromWeb()
+        }
+        
+        return results
     }
     
     public func searchDefinitions(withTerm term: String) -> [LexisWord]
     {
-        if !initialized
+        var results = memory.searchForWordsInDefinitions(term: term)
+        
+        if results.notEmpty
         {
-            initialize()
+            return results
         }
         
-        if let urlEncodedTerms = term.urlEncoded
+        guard let urlEncodedTerms = term.urlEncoded else { return [] }
+        
+        results = web.searchForWordsInDefinitions(term: urlEncodedTerms)
+        
+        if results.notEmpty
         {
-            return web.searchForWordsInDefinitions(term: urlEncodedTerms)
+            startLoadingFromWeb()
         }
         
-        return memory.searchForWordsInDefinitions(term: term)
+        return results
     }
 }
