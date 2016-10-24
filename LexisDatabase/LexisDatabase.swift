@@ -53,7 +53,7 @@ public class LexisDatabase
             let startTime = Date()
             if let word = web.getAnyWord()
             {
-                let latency = startTime.timeIntervalSinceNow
+                let latency = abs(startTime.timeIntervalSinceNow)
                 LOG.debug("Operation to load any word from web took \(latency)s")
                 AromaClient.sendLowPriorityMessage(withTitle: "Web Request Complete", withBody: "Operation took \(latency)s")
                 
@@ -118,7 +118,7 @@ public class LexisDatabase
             
             let start = Date()
             let words = self.web.getAllWords()
-            let latency = start.timeIntervalSinceNow
+            let latency = abs(start.timeIntervalSinceNow)
             
             LOG.debug("Loaded \(words.count) words from the Web in \(latency)s. Saving them in memory.")
             AromaClient.sendMediumPriorityMessage(withTitle: "Web Request Complete", withBody: "Operation to load all words took \(latency)s")
