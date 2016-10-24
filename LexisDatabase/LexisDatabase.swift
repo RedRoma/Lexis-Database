@@ -32,7 +32,6 @@ public class LexisDatabase
     
     private init()
     {
-        AromaClient.TOKEN_ID = "8186834c-9140-4323-b678-c780b0fc1600"
     }
     
     public func initialize()
