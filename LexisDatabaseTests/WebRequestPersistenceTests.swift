@@ -65,24 +65,32 @@ class WebRequestPersistenceTests: LexisTest
     {
         let iterations = 100
         
+        let start = Date()
         for _ in 1...iterations
         {
             let searchTerm = AlchemyGenerator.alphabeticString(ofSize: 3)
             
-            let results = instance.searchForWordsContaining(term: searchTerm)
+            instance.searchForWordsContaining(term: searchTerm)
         }
+        
+        let latency = abs(start.timeIntervalSinceNow)
+        LOG.info("\(iterations) searches too \(latency) seconds")
         
     }
     
     func testGetAnyWord()
     {
         let iterations = 100
+        let start = Date()
         
         for _ in 1...iterations
         {
             let word = instance.getAnyWord()
             XCTAssertFalse(word == nil)
         }
+        
+        let latency = abs(start.timeIntervalSinceNow)
+        LOG.info("\(iterations) searches too \(latency) seconds")
     }
    
 }
