@@ -12,7 +12,7 @@ script:
   - carthage build --no-skip-current
   - |
     xcodebuild test \
-    -workspace LexisDatabase.xcworkspace \
+    -project LexisDatabase.xcodeproj \
     -scheme LexisDatabase \
     -sdk iphonesimulator \
     -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
