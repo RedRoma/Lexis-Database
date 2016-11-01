@@ -81,12 +81,18 @@ internal class LexisEngine
 extension LexisEngine
 {
     
+    /**
+        This function returns the Bundle that we are currently in.
+    */
     private func getCurrentBundle() -> Bundle
     {
         let bundle = Bundle(for: LexisEngine.self)
         return bundle
     }
     
+    /**
+        This function reads the LatinDictionary.txt file into a String.
+    */
     func readTextFile() -> String?
     {
         
@@ -113,7 +119,10 @@ extension LexisEngine
         return nil
     }
     
-    
+    /**
+        This function takes each line in the LatinDictionary.txt file (each line is a String)
+        and converts it into a `LexisWord` type.
+    */
     func mapLineToWord(line: String, at lineNumber: Int) -> LexisWord?
     {
         guard line.notEmpty else { return nil }
@@ -139,27 +148,30 @@ extension LexisEngine
         
     }
     
-    func extractWords(from line: String) -> [String]
+    
+    private func extractWords(from line: String) -> [String]
     {
         guard line.notEmpty else { return [] }
         
         let matches = line =~ Regex.wordList
         
         guard let match = matches.first
-        else
+            else
         {
             LOG.warn("No Words found in Line: \(line)")
             return []
         }
         
-       return match.components(separatedBy: ", ")
-
+        return match.components(separatedBy: ", ")
+        
     }
+    
  }
  
  //MARK: Extract Word Definitions
  extension LexisEngine
  {
+    
     func extractDefinitions(from line: String) -> [LexisDefinition]
     {
         let matches = line =~ Regex.definitionTerms
@@ -209,6 +221,8 @@ extension LexisEngine
     {
         return definitions.components(separatedBy: ";")
     }
+    
+    
  }
  
  //MARK: Extract Word Type
