@@ -81,10 +81,16 @@ internal class LexisEngine
 extension LexisEngine
 {
     
+    private func getCurrentBundle() -> Bundle
+    {
+        let bundle = Bundle(for: LexisEngine.self)
+        return bundle
+    }
+    
     func readTextFile() -> String?
     {
         
-        let bundle = Bundle(for: LexisEngine.self)
+        let bundle = getCurrentBundle()
         
         let resourceName = "LatinDictionary"
         
