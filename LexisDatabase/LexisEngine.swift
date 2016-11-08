@@ -149,7 +149,7 @@ extension LexisEngine
     }
     
     
-    private func extractWords(from line: String) -> [String]
+    internal func extractWords(from line: String) -> [String]
     {
         guard line.notEmpty else { return [] }
         
