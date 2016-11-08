@@ -60,8 +60,25 @@ public class LexisDatabase
             }
             else
             {
-                AromaClient.sendHighPriorityMessage(withTitle: "Operation Failed", withBody: "Coult not load any word")
-                return LexisWord.emptyWord
+                AromaClient.sendHighPriorityMessage(withTitle: "Operation Failed", withBody: "Coult not load any word from the Web")
+                
+                let start = Date()
+                self.loadPersisted()
+                let delta = abs(start.timeIntervalSinceNow)
+                
+                AromaClient.sendHighPriorityMessage(withTitle: "Loaded Persisted Dictionary", withBody: "Operation took \(delta)secs")
+                
+                if let word = self.memory.getAnyWord()
+                {
+                    AromaClient.sendMediumPriorityMessage(withTitle: "Loaded Persisted Word", withBody: "Sucessfully loaded persisted word: \n\(word)")
+                    return word
+                }
+                else
+                {
+                    AromaClient.sendHighPriorityMessage(withTitle: "Failed To Load Persisted Word", withBody: "Failed to load a word from the persisted dictionary")
+                    return LexisWord.emptyWord
+                }
+                
             }
         }
     }
