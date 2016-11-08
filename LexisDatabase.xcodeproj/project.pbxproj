@@ -294,19 +294,19 @@
 		DEDE0DAD1D7172E900965CFD /* LexisDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				DEBD16931D86818200E5C4DD /* Persistence */,
 				DE156DC61D7A90EB00123A04 /* Extensions */,
 				DE4DF0C11D91182C00C29CF4 /* JSON */,
+				DEBD16931D86818200E5C4DD /* Persistence */,
+				DEDE0DB01D7172E900965CFD /* Info.plist */,
+				DE0BE96F1D8F01D400872F0B /* Functions.swift */,
+				DE156DCB1D7A9B0B00123A04 /* Generators.swift */,
 				DEDE0DAE1D7172E900965CFD /* LexisDatabaseTests.swift */,
 				DE1978561D720269008E46AB /* LexisEngineTests.swift */,
-				DEDE0DB01D7172E900965CFD /* Info.plist */,
-				DE156DCB1D7A9B0B00123A04 /* Generators.swift */,
-				DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */,
+				DE4DF09F1D91098C00C29CF4 /* LexisTest.swift */,
 				DE3129EC1D8BD27B0007692F /* LexisWord+DictionaryCodesTests.swift */,
 				DE7B30A01D8D365200AD44C1 /* LexisWord+SupplementalInformationTests.swift */,
 				DE4DA0A51D8D6518003183F4 /* LexisWord+WordTypeTests.swift */,
-				DE0BE96F1D8F01D400872F0B /* Functions.swift */,
-				DE4DF09F1D91098C00C29CF4 /* LexisTest.swift */,
+				DEA7E4891D7B5B6B009CAE25 /* LexisWordTests.swift */,
 			);
 			path = LexisDatabaseTests;
 			sourceTree = "<group>";
