@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13160FFB23C11A8800EE3BB8 /* AlchemyTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */; };
+		13160FFC23C127AA00EE3BB8 /* AlchemyTest.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE0BE9701D8F01D400872F0B /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0BE96F1D8F01D400872F0B /* Functions.swift */; };
 		DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC71D7A90FF00123A04 /* Strings+Test.swift */; };
 		DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */; };
@@ -83,6 +84,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				DE49A2301D983C0300620411 /* AlchemyGenerator.framework in Copy Frameworks */,
+				13160FFC23C127AA00EE3BB8 /* AlchemyTest.framework in Copy Frameworks */,
 				DE49A2311D983C0300620411 /* AromaSwiftClient.framework in Copy Frameworks */,
 				DE49A2321D983C0300620411 /* AromaThrift.framework in Copy Frameworks */,
 				DE7B54111DAB01680006119F /* Archeota.framework in Copy Frameworks */,
