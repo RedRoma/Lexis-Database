@@ -10,7 +10,6 @@ import AlchemyGenerator
 import AlchemyTest
 import Foundation
 @testable import LexisDatabase
-import XCTest
 
 class LexisWord_DictionaryCodesTests: LexisTest
 {

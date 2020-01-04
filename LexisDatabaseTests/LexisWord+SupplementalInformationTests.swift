@@ -25,7 +25,7 @@ class LexisWord_SupplementalInformationTests: LexisTest
     func testEncoding()
     {
         let data = NSKeyedArchiver.archivedData(withRootObject: instance)
-        assertNotEmpty(data)
+        assertFalse(data.isEmpty)
         
         let extracted: SupplementalInformation! = NSKeyedUnarchiver.unarchiveObject(with: data) as! LexisWord.SupplementalInformation
         

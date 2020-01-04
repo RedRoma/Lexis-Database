@@ -10,11 +10,9 @@
 
 import AlchemyGenerator
 import AlchemyTest
+import Archeota
 import Foundation
 @testable import LexisDatabase
-import Archeota
-import XCTest
-
 
 class BasePersistenceTests: LexisTest
 {
@@ -22,15 +20,17 @@ class BasePersistenceTests: LexisTest
     var words: [LexisWord] = []
     
     var instance: LexisPersistence = MemoryPersistence()
-    
-    override class func setUp()
+
+    override class func beforeTests()
     {
+        super.beforeTests()
         LOG.enable()
         LOG.level = .debug
     }
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
+        super.beforeEachTest()
         word = Generators.randomWord
         words = AlchemyGenerator.array() { Generators.randomWord }
     }

@@ -7,17 +7,18 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
-@testable import LexisDatabase
 import Archeota
-import XCTest
+@testable import LexisDatabase
 
 class SupplementalInformation_JSONTests: LexisTest
 {
     var instance: SupplementalInformation!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
+        super.beforeEachTest()
         instance = Generators.randomSupplementalInformation
     }
     

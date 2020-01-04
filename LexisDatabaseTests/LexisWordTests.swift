@@ -22,9 +22,10 @@ class LexisDefinitionTests: LexisTest
     }
     
     private var definition: LexisDefinition!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
+        super.beforeEachTest()
         definition = LexisDefinition(terms: terms)
     }
     

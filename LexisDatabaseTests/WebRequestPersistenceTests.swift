@@ -18,11 +18,11 @@ class WebRequestPersistenceTests: LexisTest
     private let instance = WebRequestPersistence()
     
     private var word = Generators.words.anyElement!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
-        super.setUp()
-        
+        super.beforeEachTest()
+
         word = Generators.words.anyElement!
     }
     

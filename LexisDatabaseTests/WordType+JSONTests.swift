@@ -6,10 +6,11 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyTest
+import Archeota
 import Foundation
 @testable import LexisDatabase
-import Archeota
-import XCTest
+
 
 class WordType_JSONTests: LexisTest
 {
@@ -41,10 +42,10 @@ class WordType_JSONTests: LexisTest
         let dictionary = json as! NSDictionary
         
         let object = WordType.fromJSON(json: dictionary)
-        XCTAssertFalse(object == nil)
+        assertNotNil(object)
         assertThat(object is WordType)
         
         let copy = object as! WordType
-        assertThat(copy == instance)
+        assertEquals(copy, instance)
     }
 }

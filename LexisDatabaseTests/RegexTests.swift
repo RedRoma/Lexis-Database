@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyTest
 import Foundation
 import XCTest
 @testable import LexisDatabase
@@ -24,8 +25,7 @@ class RegexTests: XCTestCase
     func testOperator()
     {
         let results = randomLine =~ Regex.dictionaryCode
-    
-        XCTAssert(results.notEmpty)
+        assertNotEmpty(results)
     }
     
 }

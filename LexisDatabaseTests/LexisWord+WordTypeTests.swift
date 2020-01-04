@@ -19,9 +19,10 @@ class LexisWord_WordTypeTests: LexisTest
     
     var left: WordType!
     var right: WordType!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
+        super.beforeEachTest()
         left = Generators.randomWordType
         right = Generators.randomWordType
     }

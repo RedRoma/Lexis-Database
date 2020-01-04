@@ -7,25 +7,25 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
+import Archeota
 import Foundation
 @testable import LexisDatabase
-import Archeota
-import XCTest
 
 class LexisWord_JSONTests: LexisTest
 {
     var word: LexisWord!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
-        super.setUp()
+        super.beforeEachTest()
         word = Generators.randomWord
     }
     
     func testAsJSON()
     {
         let json = word.asJSON()
-        XCTAssertFalse(json == nil)
+        assertNotNil(json)
         assertThat(json is NSDictionary)
     }
     
@@ -34,21 +34,19 @@ class LexisWord_JSONTests: LexisTest
         let json = word.asJSON()!
         
         let result = LexisWord.fromJSON(json: json)
-        XCTAssertFalse(result == nil)
+        assertNotNil(result)
         assertThat(result is LexisWord)
         
         let copy = result as! LexisWord
-        assertThat(copy == word)
-        
+        assertEquals(copy, word)
     }
-
     
     func testCopyInitializer()
     {
         let new = LexisWord(other: word)
         
-        assertThat(new == word)
-        XCTAssertFalse(new === word)
+        assertEquals(new, word)
+        assertFalse(new === word)
     }
     
     func testPublicJSONExport()
@@ -57,7 +55,7 @@ class LexisWord_JSONTests: LexisTest
         
         let expected = word.asJSON() as! NSDictionary
         
-        XCTAssertEqual(json, expected)
+        assertEquals(json, expected)
     }
     
     func testPublicJSONInitializer()
@@ -65,7 +63,7 @@ class LexisWord_JSONTests: LexisTest
         let json = word.asJSON() as! NSDictionary
         
         let copy = LexisWord(json: json)
-        assertThat(copy == word)
+        assertEquals(copy, word)
     }
     
     func testPublicJSONInitializerWithEmptyJSON()
@@ -73,6 +71,7 @@ class LexisWord_JSONTests: LexisTest
         let empty = NSDictionary()
         
         let copy = LexisWord(json: empty)
-        assertThat(copy == nil)
+        assertNil(copy)
     }
+
 }

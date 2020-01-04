@@ -7,37 +7,24 @@
 //
 
 import AlchemyGenerator
-import XCTest
+import AlchemyTest
 @testable import LexisDatabase
 
-class Arrays_Plus_Test: XCTestCase
+class Arrays_Plus_Test: AlchemyTest
 {
     
     let numbers = allIntegers(from: 1, to: 1000)
-    
-    override func setUp()
-    {
-        super.setUp()
-        
-    }
-    
-    override func tearDown()
-    {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
     
     func testSecond()
     {
         let expected = numbers[1]
         let result = numbers.second!
-        XCTAssertEqual(result, expected)
+        assertEquals(result, expected)
     }
     
     func testContainsMultiple()
     {
-        let subArray = AlchemyGenerator.array() { return AlchemyGenerator.integer(from: 10, to: 500) }
+        let subArray = AlchemyGenerator.array() { AlchemyGenerator.integer(from: 10, to: 500) }
         assertThat(numbers.containsMultiple(subArray))
     }
     
@@ -54,26 +41,23 @@ class Arrays_Plus_Test: XCTestCase
         
         let firstResult = result[0]
         let secondResult = result[1]
-        assertThat(firstResult == first)
-        assertThat(secondResult == second)
-        
+        assertEquals(firstResult, first)
+        assertEquals(secondResult, second)
+
     }
     
     func testSplitMoreThoroughly()
     {
         
-        for _ in 1...200
+        repeatTest(200)
         {
             let numbers = AlchemyGenerator.array(withCreator: AlchemyGenerator.positiveInteger)
             let splitCount = AlchemyGenerator.integer(from: 2, to: numbers.count - 1)
             
             let result = numbers.split(into: splitCount)
-            XCTAssertFalse(result.isEmpty)
-            
-            if result.count != splitCount
-            {
-                XCTFail("Expected \(splitCount) in Array. Instead \(result.count)")
-            }
+            assertNotEmpty(result)
+
+            assertEquals(result.count, splitCount)
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
 @testable import LexisDatabase
 import Archeota

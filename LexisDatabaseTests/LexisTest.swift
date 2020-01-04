@@ -14,10 +14,9 @@ import XCTest
 
 class LexisTest: AlchemyTest
 {
-
-    override func setUp()
+    override func beforeEachTest()
     {
-        super.setUp()
+        super.beforeEachTest()
         continueAfterFailure = false
     }
     
