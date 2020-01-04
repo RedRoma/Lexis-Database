@@ -30,7 +30,7 @@ class WebRequestPersistenceTests: LexisTest
         let words = instance.getAllWords()
         
         XCTAssertFalse(words.isEmpty)
-        XCTAssertTrue(words.count > 30_000)
+        assertThat(words.count > 30_000)
     }
     
     func testSearchForWordsContaining()
@@ -39,7 +39,7 @@ class WebRequestPersistenceTests: LexisTest
         
         let results = instance.searchForWordsContaining(term: searchTerm)
         XCTAssertFalse(results.isEmpty)
-        XCTAssertTrue(results.contains(word))
+        assertThat(results.contains(word))
     }
     
     func testSearchForWordsStartingWith()
@@ -48,7 +48,7 @@ class WebRequestPersistenceTests: LexisTest
         
         let results = instance.searchForWordsContaining(term: searchTerm)
         XCTAssertFalse(results.isEmpty)
-        XCTAssertTrue(results.contains(word))
+        assertThat(results.contains(word))
     }
     
     func testSearchForWordsInDefinition()
@@ -58,7 +58,7 @@ class WebRequestPersistenceTests: LexisTest
         let results = instance.searchForWordsInDefinitions(term: searchTerm)
         
         XCTAssertFalse(results.isEmpty)
-        XCTAssertTrue(results.contains(word))
+        assertThat(results.contains(word))
     }
     
     func testSearchInBulk()

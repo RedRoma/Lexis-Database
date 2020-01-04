@@ -83,7 +83,7 @@ class Strings_Plus_Test: XCTestCase
         let words = AlchemyGenerator.Arrays.ofAlphabeticString
         let subWords = Array(words[0...words.count/2])
         
-        XCTAssertTrue(words.containsMultiple(subWords))
+        assertThat(words.containsMultiple(subWords))
     }
     
     func testDoesNotContainsAnyOf()

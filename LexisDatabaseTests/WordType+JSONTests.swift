@@ -37,14 +37,14 @@ class WordType_JSONTests: LexisTest
     func testJsonSerialization()
     {
         let json = instance.asJSON()
-        XCTAssertTrue(json is NSDictionary)
+        assertThat(json is NSDictionary)
         let dictionary = json as! NSDictionary
         
         let object = WordType.fromJSON(json: dictionary)
         XCTAssertFalse(object == nil)
-        XCTAssertTrue(object is WordType)
+        assertThat(object is WordType)
         
         let copy = object as! WordType
-        XCTAssertTrue(copy == instance)
+        assertThat(copy == instance)
     }
 }

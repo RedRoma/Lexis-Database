@@ -26,7 +26,7 @@ class LexisWord_JSONTests: LexisTest
     {
         let json = word.asJSON()
         XCTAssertFalse(json == nil)
-        XCTAssertTrue(json is NSDictionary)
+        assertThat(json is NSDictionary)
     }
     
     func testFromJSON()
@@ -35,10 +35,10 @@ class LexisWord_JSONTests: LexisTest
         
         let result = LexisWord.fromJSON(json: json)
         XCTAssertFalse(result == nil)
-        XCTAssertTrue(result is LexisWord)
+        assertThat(result is LexisWord)
         
         let copy = result as! LexisWord
-        XCTAssertTrue(copy == word)
+        assertThat(copy == word)
         
     }
 
@@ -47,7 +47,7 @@ class LexisWord_JSONTests: LexisTest
     {
         let new = LexisWord(other: word)
         
-        XCTAssertTrue(new == word)
+        assertThat(new == word)
         XCTAssertFalse(new === word)
     }
     
@@ -65,7 +65,7 @@ class LexisWord_JSONTests: LexisTest
         let json = word.asJSON() as! NSDictionary
         
         let copy = LexisWord(json: json)
-        XCTAssertTrue(copy == word)
+        assertThat(copy == word)
     }
     
     func testPublicJSONInitializerWithEmptyJSON()
@@ -73,6 +73,6 @@ class LexisWord_JSONTests: LexisTest
         let empty = NSDictionary()
         
         let copy = LexisWord(json: empty)
-        XCTAssertTrue(copy == nil)
+        assertThat(copy == nil)
     }
 }

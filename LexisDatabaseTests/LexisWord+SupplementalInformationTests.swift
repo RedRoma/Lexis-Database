@@ -28,7 +28,7 @@ class LexisWord_SupplementalInformationTests: LexisTest
         
         let extracted: SupplementalInformation! = NSKeyedUnarchiver.unarchiveObject(with: data) as! LexisWord.SupplementalInformation
         
-        XCTAssertTrue(extracted == instance)
+        assertThat(extracted == instance)
     }
     
     func testDecoding()
@@ -38,7 +38,7 @@ class LexisWord_SupplementalInformationTests: LexisTest
         let result: SupplementalInformation! = NSKeyedUnarchiver.unarchiveObject(with: archive) as? SupplementalInformation
         XCTAssertFalse(result == nil)
     
-        XCTAssertTrue(result == instance)
+        assertThat(result == instance)
     }
     
     func testEqualsFunction()
@@ -47,7 +47,7 @@ class LexisWord_SupplementalInformationTests: LexisTest
         
         let copy = NSKeyedUnarchiver.unarchiveObject(with: archive) as! SupplementalInformation
         
-        XCTAssertTrue(copy == instance)
+        assertThat(copy == instance)
     }
     
     func testEqualsFunctionWhenNotEquals()

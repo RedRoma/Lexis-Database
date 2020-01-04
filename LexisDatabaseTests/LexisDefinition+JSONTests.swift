@@ -27,7 +27,7 @@ class LexisDefinition_JSONTests: LexisTest
     {
         let json = definition.asJSON()
         XCTAssertFalse(json == nil)
-        XCTAssertTrue(json is NSDictionary)
+        assertThat(json is NSDictionary)
     }
     
     func testFromJSON()
@@ -36,10 +36,10 @@ class LexisDefinition_JSONTests: LexisTest
         
         let result = LexisDefinition.fromJSON(json: json)
         XCTAssertFalse(result == nil)
-        XCTAssertTrue(result is LexisDefinition)
+        assertThat(result is LexisDefinition)
         
         let copy = result as! LexisDefinition
-        XCTAssertTrue(copy == definition)
+        assertThat(copy == definition)
         
     }
 }

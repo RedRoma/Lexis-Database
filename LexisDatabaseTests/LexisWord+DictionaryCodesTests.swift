@@ -50,7 +50,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         
         let subject = SubjectArea.from(dictionaryCode: impossibleCode)
         XCTAssertNil(subject)
-        XCTAssertTrue(subject == nil, "Expected subject to be nil with unknown code: \(impossibleCode)")
+        assertThat(subject == nil, "Expected subject to be nil with unknown code: \(impossibleCode)")
     }
     
     func  testGeographicalAreaEnum()
@@ -69,7 +69,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let impossibleCode = stringNotInList(possibleGeographies)
         
         let geographicalArea = GeographicalArea.from(dictionaryCode: impossibleCode)
-        XCTAssertTrue(geographicalArea == nil)
+        assertThat(geographicalArea == nil)
     }
     
     func testFrequencyEnum()
@@ -87,7 +87,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let impossibleCode = stringNotInList(possibleFrequencies)
         
         let frequency = Frequency.from(dictionaryCode: impossibleCode)
-        XCTAssertTrue(frequency == nil)
+        assertThat(frequency == nil)
     }
     
     func testSourceEnum()
@@ -105,7 +105,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let impossibleCode = stringNotInList(possibleSource)
         
         let source = Source.from(dictionaryCode: impossibleCode)
-        XCTAssertTrue(source == nil)
+        assertThat(source == nil)
     }
     
     fileprivate func stringNotInList(_ strings: [String]) -> String

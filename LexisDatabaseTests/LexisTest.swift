@@ -37,8 +37,8 @@ class LexisTest: XCTestCase
                 .send()
         }
     }
-    
-    override func recordFailure(withDescription description: String, inFile filePath: String, atLine lineNumber: UInt, expected: Bool)
+
+    override func recordFailure(withDescription description: String, inFile filePath: String, atLine lineNumber: Int, expected: Bool)
     {
         super.recordFailure(withDescription: description, inFile: filePath, atLine: lineNumber, expected: expected)
         
@@ -58,7 +58,6 @@ class LexisTest: XCTestCase
             }
         
     }
-    
     
     func testAromaMessage()
     {
