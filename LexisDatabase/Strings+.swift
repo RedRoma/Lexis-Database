@@ -63,9 +63,8 @@ extension String
     {
         guard strings.notEmpty else { return false }
         
-        return strings
-            .filter() { self.contains($0) }
-            .count == strings.count
+        return strings.filter() { self.contains($0) }
+                      .count == strings.count
 
     }
     
