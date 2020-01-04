@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13160FFB23C11A8800EE3BB8 /* AlchemyTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */; };
 		DE0BE9701D8F01D400872F0B /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0BE96F1D8F01D400872F0B /* Functions.swift */; };
 		DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC71D7A90FF00123A04 /* Strings+Test.swift */; };
 		DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlchemyTest.framework; path = Carthage/Build/iOS/AlchemyTest.framework; sourceTree = "<group>"; };
 		DE0BE96F1D8F01D400872F0B /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		DE156DC71D7A90FF00123A04 /* Strings+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Test.swift"; sourceTree = "<group>"; };
 		DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Arrays+Test.swift"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13160FFB23C11A8800EE3BB8 /* AlchemyTest.framework in Frameworks */,
 				DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,6 +213,7 @@
 				DE49A2261D983BEC00620411 /* AlchemyGenerator.framework */,
 				DE49A2271D983BEC00620411 /* AromaSwiftClient.framework */,
 				DE49A2281D983BEC00620411 /* AromaThrift.framework */,
+				13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */,
 				DE49A22A1D983BEC00620411 /* SwiftExceptionCatcher.framework */,
 			);
 			name = Frameworks;

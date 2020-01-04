@@ -1,3 +1,4 @@
 github "RedRoma/Archeota"
 github "SirWellington/AlchemyGenerator"
+github "SirWellington/AlchemyTest"
 github "RedRoma/AromaSwiftClient" "develop"
