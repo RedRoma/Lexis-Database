@@ -35,7 +35,7 @@ class LexisDatabaseTests: LexisTest
         let results = instance.searchForms(startingWith: term)
         XCTAssertFalse(results.isEmpty)
         let first = results.first!
-        XCTAssertTrue(first.forms.contains(term))
+        assertThat(first.forms.contains(term))
     }
 
     func testInitialize()

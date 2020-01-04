@@ -38,7 +38,7 @@ class Arrays_Plus_Test: XCTestCase
     func testContainsMultiple()
     {
         let subArray = AlchemyGenerator.array() { return AlchemyGenerator.integer(from: 10, to: 500) }
-        XCTAssertTrue(numbers.containsMultiple(subArray))
+        assertThat(numbers.containsMultiple(subArray))
     }
     
     func testSplit()
@@ -50,12 +50,12 @@ class Arrays_Plus_Test: XCTestCase
         let second = split[1]
         
         let result = array.split(into: 2)
-        XCTAssertTrue(result.count == 2)
+        assertThat(result.count == 2)
         
         let firstResult = result[0]
         let secondResult = result[1]
-        XCTAssertTrue(firstResult == first)
-        XCTAssertTrue(secondResult == second)
+        assertThat(firstResult == first)
+        assertThat(secondResult == second)
         
     }
     
