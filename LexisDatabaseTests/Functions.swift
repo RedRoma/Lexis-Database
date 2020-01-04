@@ -15,7 +15,7 @@ class Functions
     {
         guard string.notEmpty else { return string }
         
-        let count = string.characters.count
+        let count = string.count
         
         let halfwayPoint = count / 2
         
