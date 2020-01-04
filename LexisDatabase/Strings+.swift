@@ -38,10 +38,7 @@ extension String
             expression((number: lineNumber , text: string))
         }
     }
-    
-    /**
-        This functional approach runs
-     */
+
     func processEachLine<T>(mapper: @escaping (String, Int) -> (T?), processor: @escaping (T) -> ())
     {
         var lineNumber = 0
@@ -60,10 +57,8 @@ extension String
     {
         return self.replacingOccurrences(of: "\(character)", with: "")
     }
-    
-    /**
-        Determiens whether the String contains all of the provided substrings.
-    */
+
+    /// Determiens whether the String contains all of the provided substrings.
     func containsAll(_ strings: [String]) -> Bool
     {
         guard strings.notEmpty else { return false }
@@ -98,7 +93,7 @@ extension String
     
     func firstHalf() -> String
     {
-        let halfPoint = characters.count / 2
+        let halfPoint = count / 2
         
         return substring(from: 0, to: halfPoint)
     }

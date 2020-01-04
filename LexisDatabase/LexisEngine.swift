@@ -497,24 +497,20 @@ extension LexisEngine
     {
         let dictionaryCodes = line =~ Regex.dictionaryCode
         
-        guard dictionaryCodes.notEmpty
-        else
+        guard dictionaryCodes.notEmpty else
         {
             LOG.warn("No Dictionary codes found for line: \(line)")
             return nil
         }
         
-        guard let codeString = dictionaryCodes.first
-        else
+        guard let codeString = dictionaryCodes.first else
         {
             LOG.error("Dictionary Codes Regex turned up empty response: \(dictionaryCodes)")
             return nil
         }
         
-        let codes = Array(codeString.characters).map() { String.init($0) }
-        
-        guard codes.count == 5
-        else
+        let codes: [String] = Array(codeString).map() { String($0) }
+        guard codes.count == 5 else
         {
             LOG.warn("Unepected number of dictionary codes: \(codes)")
             return nil
@@ -568,7 +564,9 @@ extension LexisEngine
  }
  
 
-//MARK: Dictionary keywords
+ //=========================================
+ //MARK: Dictionary Keywords
+ //=========================================
 private class Keywords
 {
     static let verb = "V"

@@ -71,15 +71,11 @@ public func !=(left: LexisDefinition, right: LexisDefinition) -> Bool
 
 extension LexisDefinition
 {
-    override public var hashValue: Int
+    override public var hash: Int
     {
         return terms.joined().hashValue
     }
-    
-    public override var hash: Int
-    {
-        return hashValue
-    }
+
 }
 
 
@@ -223,13 +219,8 @@ public func !=(left: [LexisDefinition], right: [LexisDefinition]) -> Bool
 
 extension LexisWord
 {
-    override public var hashValue: Int
+    override public var hash: Int
     {
         return forms.joined().hashValue
-    }
-    
-    public override var hash: Int
-    {
-        return hashValue
     }
 }

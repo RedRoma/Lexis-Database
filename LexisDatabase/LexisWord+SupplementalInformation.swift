@@ -15,7 +15,9 @@ internal typealias SupplementalInformation = LexisWord.SupplementalInformation
 //MARK: Supplemental Information and Functions for extracting descriptions from dictionary codes.
 public extension LexisWord
 {
-    public class SupplementalInformation: NSObject, NSCoding
+
+    @objc(_TtCC13LexisDatabase9LexisWord23SupplementalInformation)
+    class SupplementalInformation: NSObject, NSCoding
     {
         /**
          This instance represents a situation where nothing is known about a word.
@@ -40,16 +42,16 @@ public extension LexisWord
         public convenience required init?(coder decoder: NSCoder)
         {
             guard let ageString = decoder.decodeObject(forKey: Keys.age) as? String,
-                let age = Age.from(dictionaryCode: ageString),
-                let subjectAreaString = decoder.decodeObject(forKey: Keys.subjectArea) as? String,
-                let subjectArea = SubjectArea.from(dictionaryCode: subjectAreaString),
-                let geographicalAreaString = decoder.decodeObject(forKey: Keys.geopgraphicalArea) as? String,
-                let geographicalArea = GeographicalArea.from(dictionaryCode: geographicalAreaString),
-                let frequencyString = decoder.decodeObject(forKey: Keys.frequency) as? String,
-                let frequency = Frequency.from(dictionaryCode: frequencyString),
-                let sourceString = decoder.decodeObject(forKey: Keys.source) as? String,
-                let source = Source.from(dictionaryCode: sourceString)
-                else
+                  let age = Age.from(dictionaryCode: ageString),
+                  let subjectAreaString = decoder.decodeObject(forKey: Keys.subjectArea) as? String,
+                  let subjectArea = SubjectArea.from(dictionaryCode: subjectAreaString),
+                  let geographicalAreaString = decoder.decodeObject(forKey: Keys.geopgraphicalArea) as? String,
+                  let geographicalArea = GeographicalArea.from(dictionaryCode: geographicalAreaString),
+                  let frequencyString = decoder.decodeObject(forKey: Keys.frequency) as? String,
+                  let frequency = Frequency.from(dictionaryCode: frequencyString),
+                  let sourceString = decoder.decodeObject(forKey: Keys.source) as? String,
+                  let source = Source.from(dictionaryCode: sourceString)
+            else
             {
                 LOG.warn("Failed to decode Supplemental information")
                 return nil
@@ -79,7 +81,7 @@ public extension LexisWord
             return "[\(age.code)\(subjectArea.code)\(geographicalArea.code)\(frequency.code)\(source.code)]"
         }
         
-        public override var hashValue: Int
+        public override var hash: Int
         {
             return description.hashValue
         }
@@ -130,21 +132,22 @@ public func ==(left: LexisWord.SupplementalInformation, right: LexisWord.Supplem
 }
 
 
-//MARK: Strin manipulations
+//=========================================
+//MARK: String Manipulations
+//=========================================
 fileprivate extension String
 {
     func lowercasedFirstLetter() -> String
     {
         guard self.notEmpty else { return self }
         
-        guard self.characters.count != 1 else { return self.lowercased() }
-        
-        let characters = Array(self.characters)
-        guard let firstCharacter = characters.first else { return self }
+        guard self.count != 1 else { return self.lowercased() }
+
+        guard let firstCharacter = self.first else { return self }
         
         let firstLetterLowercased = "\(firstCharacter)".lowercased()
         
-        let substring = self.substring(from: self.index(after: startIndex))
+        let substring =  self.substring(from: 1, to: count)
         
         return firstLetterLowercased + substring
     }
