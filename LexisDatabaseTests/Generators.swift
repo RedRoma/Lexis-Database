@@ -18,7 +18,7 @@ struct Generators
     
     static var randomWord: LexisWord
     {
-        return words.anyElement!
+        words.anyElement!
     }
     
     static var randomLine: String
@@ -115,47 +115,47 @@ struct Generators
     
     static var randomAge: Age
     {
-        return Age.ages.anyElement!
+        Age.ages.anyElement!
     }
     
     static var randomSubject: SubjectArea
     {
-        return SubjectArea.areas.anyElement!
+        SubjectArea.areas.anyElement!
     }
     
     static var randomGeography: GeographicalArea
     {
-        return GeographicalArea.geophraphies.anyElement!
+        GeographicalArea.geophraphies.anyElement!
     }
     
     static var randomFrequency: Frequency
     {
-        return Frequency.frequencies.anyElement!
+        Frequency.frequencies.anyElement!
     }
     
     static var randomSource: Source
     {
-        return Source.sources.anyElement!
+        Source.sources.anyElement!
     }
     
     static var randomSupplementalInformation: SupplementalInformation
     {
-        return SupplementalInformation(age: randomAge, subjectArea: randomSubject, geographicalArea: randomGeography, frequency: randomFrequency, source: randomSource)
+        SupplementalInformation(age: randomAge, subjectArea: randomSubject, geographicalArea: randomGeography, frequency: randomFrequency, source: randomSource)
     }
     
     static var randomVerbType: VerbType
     {
         let index = AlchemyGenerator.integer(from: 0, to: 10)
-        
+
         switch index
         {
-        case 0 : return .Deponent
-        case 1 : return .Impersonal
-        case 2 : return .Intransitive
-        case 3 : return .PerfectDefinite
-        case 4 : return .SemiDeponent
-        case 5 : return .Transitive
-        default : return .Unknown
+            case 0:  return .Deponent
+            case 1:  return .Impersonal
+            case 2:  return .Intransitive
+            case 3:  return .PerfectDefinite
+            case 4:  return .SemiDeponent
+            case 5:  return .Transitive
+            default: return .Unknown
         }
     }
 }
