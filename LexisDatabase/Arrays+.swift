@@ -70,7 +70,6 @@ extension Array
     
     func split(into numberOfPieces: Int) -> [[Element]]
     {
-        
         guard numberOfPieces > 1 else { return [self] }
         guard numberOfPieces < self.count else { return [self] }
         
@@ -107,7 +106,6 @@ extension Array
             start = end
             end += sizeOfEach
         }
-        
         
         return pieces
     }
