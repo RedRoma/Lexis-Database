@@ -241,8 +241,7 @@ public enum WordType: Equatable, Hashable
     
     public var asData: Data?
     {
-        guard let jsonString = self.asJSONString(serializer: WordType.serializer)
-        else
+        guard let jsonString = self.asJSONString(serializer: WordType.serializer) else
         {
             return nil
         }
@@ -253,7 +252,7 @@ public enum WordType: Equatable, Hashable
     public static func from(data: Data) -> WordType?
     {
         guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
-            let dictionary = jsonObject as? NSDictionary
+              let dictionary = jsonObject as? NSDictionary
         else
         {
             LOG.warn("Failed to deserialize object from JSON")
@@ -262,7 +261,7 @@ public enum WordType: Equatable, Hashable
         
         return WordType.fromJSON(json: dictionary) as? WordType
     }
-    
+
 }
 
 public func ==(lhs: WordType, rhs: WordType) -> Bool
@@ -295,6 +294,7 @@ public func ==(lhs: WordType, rhs: WordType) -> Bool
 
 extension WordType
 {
+
     public var hashValue: Int
     {
         if case let .Verb(conjugation, verbType) = self
