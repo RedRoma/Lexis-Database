@@ -67,7 +67,7 @@ class FilePersistence: LexisPersistence
             
             async.addOperation() {
                 
-                let convertedWords = words.flatMap() { dictionary in
+                let convertedWords = words.compactMap() { dictionary in
                     return (LexisWord.fromJSON(json: dictionary) as? LexisWord)
                 }
                 
@@ -87,7 +87,7 @@ class FilePersistence: LexisPersistence
     func save(words: [LexisWord]) throws
     {
         LOG.info("Serializing \(words.count)")
-        let array = words.flatMap() { $0.asJSON() as? NSDictionary }
+        let array = words.compactMap() { $0.asJSON() as? NSDictionary }
         LOG.info("Serialized \(array.count) words from \(words.count)")
         
         let nsArray = NSArray(array: array)
