@@ -16,12 +16,9 @@ class Functions
         guard string.notEmpty else { return string }
         
         let count = string.count
-        
         let halfwayPoint = count / 2
-        
         let index = string.index(string.startIndex, offsetBy: halfwayPoint)
-        
-        let substring = string.substring(to: index)
+        let substring = String(string[..<index])
         return substring
     }
 }

@@ -8,6 +8,7 @@
 
 import Archeota
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
 @testable import LexisDatabase
 import XCTest
@@ -28,8 +29,7 @@ class WebRequestPersistenceTests: LexisTest
     func testGetAllWords()
     {
         let words = instance.getAllWords()
-        
-        XCTAssertFalse(words.isEmpty)
+        assertNotEmpty(words)
         assertThat(words.count > 30_000)
     }
     
@@ -38,7 +38,7 @@ class WebRequestPersistenceTests: LexisTest
         let searchTerm = word.forms.anyElement!
         
         let results = instance.searchForWordsContaining(term: searchTerm)
-        XCTAssertFalse(results.isEmpty)
+        assertNotEmpty(results)
         assertThat(results.contains(word))
     }
     
@@ -47,7 +47,7 @@ class WebRequestPersistenceTests: LexisTest
         let searchTerm = word.forms.anyElement!.firstHalf()
         
         let results = instance.searchForWordsContaining(term: searchTerm)
-        XCTAssertFalse(results.isEmpty)
+        assertNotEmpty(results)
         assertThat(results.contains(word))
     }
     
@@ -57,20 +57,18 @@ class WebRequestPersistenceTests: LexisTest
         let searchTerm = word.definitions.anyElement!.terms.anyElement!
         let results = instance.searchForWordsInDefinitions(term: searchTerm)
         
-        XCTAssertFalse(results.isEmpty)
+        assertNotEmpty(results)
         assertThat(results.contains(word))
     }
     
     func testSearchInBulk()
     {
-        let iterations = 100
-        
         let start = Date()
-        for _ in 1...iterations
+        repeatTest(100)
         {
             let searchTerm = AlchemyGenerator.alphabeticString(ofSize: 3)
             
-            instance.searchForWordsContaining(term: searchTerm)
+            _ = instance.searchForWordsContaining(term: searchTerm)
         }
         
         let latency = abs(start.timeIntervalSinceNow)
@@ -80,13 +78,11 @@ class WebRequestPersistenceTests: LexisTest
     
     func testGetAnyWord()
     {
-        let iterations = 100
         let start = Date()
-        
-        for _ in 1...iterations
+        repeatTest(100)
         {
             let word = instance.getAnyWord()
-            XCTAssertFalse(word == nil)
+            assertNotNil(word)
         }
         
         let latency = abs(start.timeIntervalSinceNow)

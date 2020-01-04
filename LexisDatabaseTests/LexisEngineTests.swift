@@ -7,6 +7,7 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Archeota
 import XCTest
 @testable import LexisDatabase
@@ -15,44 +16,38 @@ class LexisEngineTests: LexisTest
 {
     
     let instance = LexisEngine.instance
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
-        super.setUp()
+        super.beforeEachTest()
         LOG.enable()
         LOG.level = .warn
-    }
-    
-    override func tearDown()
-    {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
 
     func testReadDictionaryFile()
     {
         let text = LexisEngine.instance.readTextFile()
-        XCTAssertNotNil(text)
-        XCTAssertFalse(text!.isEmpty)
+        assertNotNil(text)
+        assertNotEmpty(text)
     }
     
     func testInitialize()
     {
-        XCTAssertNotNil(LexisEngine.instance)
+        assertNotNil(LexisEngine.instance)
     }
     
     func testGetAllWords()
     {
         let words = instance.getAllWords()
-        XCTAssert(words.notEmpty)
-        XCTAssert(words.count > 10_000)
+        assertNotEmpty(words)
+        assertThat(words.count > 10_000)
     }
     
     func testReadAllWords()
     {
         let words = instance.readAllWords(fromDictionary: Generators.dictionary)
-        XCTAssert(words.notEmpty)
-        XCTAssert(words.count > 10_000)
+        assertNotEmpty(words)
+        assertThat(words.count > 10_000)
     }
     
     
@@ -62,10 +57,9 @@ class LexisEngineTests: LexisTest
         let lineNumber = AlchemyGenerator.integer(from: 10, to: 1000)
         
         let result = instance.mapLineToWord(line: line, at: lineNumber)
-        XCTAssertNotNil(result)
-        XCTAssert(result!.definitions.notEmpty)
-        XCTAssert(result!.forms.notEmpty)
-        
+        assertNotNil(result)
+        assertNotEmpty(result!.definitions)
+        assertNotEmpty(result!.forms)
     }
     
     func testExtractWords()
@@ -75,12 +69,12 @@ class LexisEngineTests: LexisTest
         let words = AlchemyGenerator.array(ofSize: totalWords) { AlchemyGenerator.Strings.alphabetic }
         
         var testWord = words.joined(separator: ", ")
-        //These extra additionas are necessary to match the dictionary format.
+        //These extra additions are necessary to match the dictionary format.
         //Otherwise the regex won't match.
         testWord = "#" + testWord + "   "
         
         let result = instance.extractWords(from: testWord)
-        XCTAssertEqual(result, words)
-        
+        assertEquals(result, words)
     }
+
 }

@@ -7,22 +7,22 @@
 //
 
 import AromaSwiftClient
+import AlchemyTest
 import Foundation
 import Archeota
 import XCTest
 
-class LexisTest: XCTestCase
+class LexisTest: AlchemyTest
 {
- 
+
     override func setUp()
     {
         super.setUp()
         continueAfterFailure = false
     }
     
-    override class func setUp()
+    override class func beforeTests()
     {
-        XCTestCase.setUp()
         LOG.enable()
         LOG.level = .info
         

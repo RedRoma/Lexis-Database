@@ -7,6 +7,7 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Archeota
 import AromaSwiftClient
 import Foundation
@@ -28,7 +29,7 @@ class LexisWord_WordTypeTests: LexisTest
     func testEquals()
     {
         right = left
-        assertThat(right == left)
+        assertEquals(right, left)
     }
     
     
@@ -39,14 +40,14 @@ class LexisWord_WordTypeTests: LexisTest
             right = Generators.randomWordType
         }
         
-        XCTAssertFalse(right == left)
+        assertNotEquals(right, left)
     }
     
     
     func testHashCode()
     {
         right = left
-        XCTAssertEqual(left.hashValue, right.hashValue)
+        assertEquals(left.hashValue, right.hashValue)
     }
     
     func testHashCodeWhenDifferent()
@@ -57,16 +58,16 @@ class LexisWord_WordTypeTests: LexisTest
         }
         
         //Technically, two values can have the same hash code, but this should not happen on a small enum
-        XCTAssertNotEqual(right.hashValue, left.hashValue)
+        assertNotEquals(right.hashValue, left.hashValue)
     }
     
     func testDataSerialization()
     {
         let data: Data! = left.asData
-        XCTAssertFalse(data == nil)
+        assertNotNil(data)
         let copy = WordType.from(data: data)
         
-        assertThat(copy == left)
+        assertEquals(copy, left)
     }
 
     
@@ -76,6 +77,7 @@ class LexisWord_WordTypeTests: LexisTest
 //MARK: Enum Tests
 extension LexisWord_WordTypeTests
 {
+
     func testConjugationNames()
     {
         let conjugation = Generators.randomConjugation
@@ -83,15 +85,15 @@ extension LexisWord_WordTypeTests
         
         let result = Conjugation.from(name: name)
         
-        XCTAssertFalse(result == nil)
-        assertThat(result == conjugation)
+        assertNotNil(result)
+        assertEquals(result, conjugation)
     }
     
     func testConjugationNamesWithUnknown()
     {
         let randomName = AlchemyGenerator.alphanumericString()
         let result = Conjugation.from(name: randomName)
-        assertThat(result == nil)
+        assertNil(result)
     }
     
     func testConjugationShortCodes()
@@ -117,15 +119,15 @@ extension LexisWord_WordTypeTests
         let name = verbType.name
         
         let result = VerbType.from(name: name)
-        XCTAssertFalse(result == nil)
-        assertThat(result == verbType)
+        assertNotNil(result)
+        assertEquals(result, verbType)
     }
     
     func testVerbTypeNamesWithUnknown()
     {
         let randomName = AlchemyGenerator.alphabeticString()
         let result = VerbType.from(name: randomName)
-        assertThat(result == nil)
+        assertNil(result)
     }
     
     func testGenderNames()
@@ -134,15 +136,15 @@ extension LexisWord_WordTypeTests
         let name = gender.name
         
         let result = Gender.from(name: name)
-        XCTAssertFalse(result == nil)
-        assertThat(result == gender)
+        assertNotNil(result)
+        assertEquals(result, gender)
     }
     
     func testGenderNamesWithUnknown()
     {
         let randomName = AlchemyGenerator.alphabeticString()
         let result = Gender.from(name: randomName)
-        assertThat(result == nil)
+        assertNil(result)
     }
     
     func testDeclensionName()
@@ -151,15 +153,15 @@ extension LexisWord_WordTypeTests
         let name = declension.name
         
         let result = Declension.from(name: name)
-        XCTAssertFalse(result == nil)
-        assertThat(result == declension)
+        assertNotNil(result)
+        assertEquals(result, declension)
     }
     
     func testDeclensionNameWithUnknown()
     {
         let randomName = AlchemyGenerator.alphabeticString()
         let result = Declension.from(name: randomName)
-        assertThat(result == nil)
+        assertNil(result)
     }
     
     func testDeclensionShortForms()
@@ -169,9 +171,9 @@ extension LexisWord_WordTypeTests
         
         let result = Declension.fromShortCode(code: shortForm)
         
-        assertThat(result == declension)
+        assertEquals(result, declension)
     }
-    
+
     func testDeclensionShortFormsWithUnknown()
     {
         let randomShortForm = AlchemyGenerator.alphabeticString()
@@ -185,15 +187,15 @@ extension LexisWord_WordTypeTests
         let name = caseType.name
         
         let result = CaseType.from(name: name)
-        XCTAssertFalse(result == nil)
-        assertThat(result == caseType)
+        assertNotNil(result)
+        assertEquals(result, caseType)
     }
     
     func testCaseTypeNamesWithUnknown()
     {
         let randomName = AlchemyGenerator.alphanumericString()
         let result = CaseType.from(name: randomName)
-        assertThat(result == nil)
+        assertNil(result)
     }
     
     func testCaseTypeCodes()
@@ -212,4 +214,5 @@ extension LexisWord_WordTypeTests
         let result = CaseType.from(shortCode: randomCode)
         assertThat(result == .Unknown)
     }
+
 }

@@ -83,11 +83,9 @@ extension String
     func substring(from: Int, to: Int) -> String
     {
         let start = index(startIndex, offsetBy: from)
-        let end = index(startIndex, offsetBy: to)
+        let end = index(start, offsetBy: to)
         
-        let range = Range(uncheckedBounds: (lower: start, upper: end))
-        
-        return substring(with: range)
+        return String(self[start...end])
     }
     
     func firstHalf() -> String

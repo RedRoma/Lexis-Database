@@ -7,6 +7,7 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
 @testable import LexisDatabase
 import XCTest
@@ -24,11 +25,11 @@ class LexisWord_SupplementalInformationTests: LexisTest
     func testEncoding()
     {
         let data = NSKeyedArchiver.archivedData(withRootObject: instance)
-        XCTAssertFalse(data.isEmpty)
+        assertNotEmpty(data)
         
         let extracted: SupplementalInformation! = NSKeyedUnarchiver.unarchiveObject(with: data) as! LexisWord.SupplementalInformation
         
-        assertThat(extracted == instance)
+        assertEquals(extracted, instance)
     }
     
     func testDecoding()
@@ -36,9 +37,9 @@ class LexisWord_SupplementalInformationTests: LexisTest
         let archive = NSKeyedArchiver.archivedData(withRootObject: instance)
         
         let result: SupplementalInformation! = NSKeyedUnarchiver.unarchiveObject(with: archive) as? SupplementalInformation
-        XCTAssertFalse(result == nil)
+        assertNotNil(result)
     
-        assertThat(result == instance)
+        assertEquals(result, instance)
     }
     
     func testEqualsFunction()
@@ -54,16 +55,16 @@ class LexisWord_SupplementalInformationTests: LexisTest
     {
         let other = Generators.randomSupplementalInformation
         
-        XCTAssertFalse(other == instance)
+        assertNotEquals(other, instance)
     }
     
     func testHumanReadableDescription()
     {
-        for _ in 1...10
+        repeatTest(10)
         {
             instance = Generators.randomSupplementalInformation
             let description = instance.humanReadableDescription
-            XCTAssertFalse(description.isEmpty)
+            assertNotEmpty(description)
             print(description)
             print()
             

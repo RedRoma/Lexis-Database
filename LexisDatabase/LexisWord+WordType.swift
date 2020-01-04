@@ -153,7 +153,7 @@ public enum Declension: String
 /**
     `CaseType` represents the case of a Noun or an Adjective.
  */
-public enum CaseType: String
+public enum CaseType: String, CaseIterable
 {
     case Nominative
     case Genitive
@@ -163,8 +163,10 @@ public enum CaseType: String
     case Vocative
     case Locative
     case Unknown
+
+    static let all = allCases
     
-    public var name: String { return self.rawValue }
+    public var name: String { self.rawValue }
     
     public static func from(name: String) -> CaseType?
     {
@@ -181,7 +183,7 @@ public enum CaseType: String
     
     static func from(shortCode: String) -> CaseType
     {
-        return codes[shortCode] ?? .Unknown
+        codes[shortCode] ?? .Unknown
     }
     
     private static let codes: [String: CaseType] =
@@ -202,7 +204,7 @@ public enum PronounType: String
     case Reflexive
     case Personal
     
-    public var name: String { return self.rawValue }
+    public var name: String { self.rawValue }
     
     public static func from(name: String) -> PronounType?
     {
@@ -236,7 +238,7 @@ public enum WordType: Equatable, Hashable
     
     public var description: String
     {
-        return self.asJSONString(serializer: WordType.serializer) ?? ""
+        self.asJSONString(serializer: WordType.serializer) ?? ""
     }
     
     public var asData: Data?
