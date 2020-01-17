@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		13160FFB23C11A8800EE3BB8 /* AlchemyTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */; };
 		13160FFC23C127AA00EE3BB8 /* AlchemyTest.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		132CDFB523D1431C00B67D2A /* AlchemySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132CDFB423D1431C00B67D2A /* AlchemySwift.framework */; };
 		132CDFB623D1431C00B67D2A /* AlchemySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132CDFB423D1431C00B67D2A /* AlchemySwift.framework */; };
 		132CDFB723D168AD00B67D2A /* AlchemySwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 132CDFB423D1431C00B67D2A /* AlchemySwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE0BE9701D8F01D400872F0B /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0BE96F1D8F01D400872F0B /* Functions.swift */; };
