@@ -165,9 +165,11 @@ class LexisWordTests: XCTestCase
 
     func testWordTypeHash()
     {
-        let copy = word
         let type = word.wordType
+        let copy = type
+        let first: Int = copy.hashValue
+        let second: Int = type.hashValue
         
-        assertEquals(copy.hashValue, type.hashValue)
+        assertEquals(first, second)
     }
 }
