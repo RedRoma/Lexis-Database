@@ -22,7 +22,6 @@ class WebRequestPersistenceTests: LexisTest
     override func beforeEachTest()
     {
         super.beforeEachTest()
-
         word = Generators.words.anyElement!
     }
     

@@ -22,6 +22,7 @@ public enum Number
 
 public class LexisDefinition: NSObject, NSCoding
 {
+
     public let terms: [String]
     
     public override var description: String
@@ -36,8 +37,7 @@ public class LexisDefinition: NSObject, NSCoding
     
     public required convenience init?(coder decoder: NSCoder)
     {
-        guard let terms = decoder.decodeObject(forKey: "terms") as? [String]
-        else
+        guard let terms = decoder.decodeObject(forKey: "terms") as? [String] else
         {
             LOG.warn("Failed to decode terms from NSCoder")
             return nil
@@ -57,6 +57,12 @@ public class LexisDefinition: NSObject, NSCoding
         
         return self == other
     }
+
+    public override var hash: Int
+    {
+        return terms.joined().hash
+    }
+    
 }
 
 public func ==(left: LexisDefinition, right: LexisDefinition) -> Bool
@@ -68,16 +74,6 @@ public func !=(left: LexisDefinition, right: LexisDefinition) -> Bool
 {
     return !(left == right)
 }
-
-extension LexisDefinition
-{
-    override public var hash: Int
-    {
-        return terms.joined().hashValue
-    }
-
-}
-
 
 //===================================
 //MARK: LexisWord

@@ -61,13 +61,13 @@ class LexisWord_DictionaryCodesTests: LexisTest
         assertNotNil(geographicalArea)
     }
     
-    func testGeographicalAreaAnumWithInvalidValue()
+    func testGeographicalAreaEnumWithInvalidValue()
     {
         let possibleGeographies = GeographicalArea.codes
         let impossibleCode = stringNotInList(possibleGeographies)
         
         let geographicalArea = GeographicalArea.from(dictionaryCode: impossibleCode)
-        assertNotNil(geographicalArea)
+        assertNil(geographicalArea)
     }
     
     func testFrequencyEnum()

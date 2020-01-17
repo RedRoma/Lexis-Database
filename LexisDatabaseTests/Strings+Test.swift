@@ -19,7 +19,7 @@ class Strings_Plus_Test: AlchemyTest
     override func beforeEachTest()
     {
         super.beforeEachTest()
-        dictionary = LexisEngine.instance.readTextFile()!
+        dictionary = LexisEngine.shared.readTextFile()!
         testString = createString(withNumberOfLines: 20)
     }
     

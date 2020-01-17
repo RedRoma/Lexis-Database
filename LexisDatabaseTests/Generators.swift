@@ -12,8 +12,8 @@ import Foundation
 
 struct Generators
 {
-    static let dictionary = LexisEngine.instance.readTextFile()!
-    static let words = LexisEngine.instance.getAllWords()
+    static let dictionary = LexisEngine.shared.readTextFile()!
+    static let words = LexisEngine.shared.getAllWords()
     static let lines = Generators.dictionary.components(separatedBy: "\n").filter(String.isNotEmpty)
     
     static var randomWord: LexisWord

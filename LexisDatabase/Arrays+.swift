@@ -7,12 +7,12 @@
 //
 
 import AlchemyGenerator
+import AlchemySwift
 import Foundation
 import Archeota
 
 extension Array
 {
-    
     var second: Element?
     {
         if count >= 2
@@ -22,20 +22,6 @@ extension Array
         
         return nil
     }
-    
-    var notEmpty: Bool
-    {
-        return !isEmpty
-    }
-    
-    var anyElement: Element?
-    {
-        guard notEmpty else { return nil }
-        
-        let randomIndex = AlchemyGenerator.integer(from: 0, to: count - 1)
-        return self[randomIndex]
-    }
-    
 }
 
 extension Array where Element: Equatable

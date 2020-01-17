@@ -15,7 +15,7 @@ import XCTest
 class LexisEngineTests: LexisTest
 {
     
-    let instance = LexisEngine.instance
+    let instance = LexisEngine.shared
 
     override func beforeEachTest()
     {
@@ -26,14 +26,14 @@ class LexisEngineTests: LexisTest
 
     func testReadDictionaryFile()
     {
-        let text = LexisEngine.instance.readTextFile()
+        let text = LexisEngine.shared.readTextFile()
         assertNotNil(text)
         assertNotEmpty(text)
     }
     
     func testInitialize()
     {
-        assertNotNil(LexisEngine.instance)
+        assertNotNil(LexisEngine.shared)
     }
     
     func testGetAllWords()

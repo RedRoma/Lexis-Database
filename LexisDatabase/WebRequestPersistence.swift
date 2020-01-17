@@ -6,6 +6,7 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemySwift
 import Archeota
 import Foundation
 
@@ -24,14 +25,14 @@ class WebRequestPersistence: LexisPersistence
     
     func getAllWords() -> [LexisWord]
     {
-        guard let url = api.toURL() else { return [] }
+        guard let url = api.asURL else { return [] }
         
         return getWords(at: url)
     }
     
     func getAnyWord() -> LexisWord?
     {
-        guard let url = searchForAnyWordAPI.toURL() else { return nil }
+        guard let url = searchForAnyWordAPI.asURL else { return nil }
         
         let json: String
         
@@ -55,7 +56,7 @@ class WebRequestPersistence: LexisPersistence
     
     func searchForWordsContaining(term: String) -> [LexisWord]
     {
-        guard let url = (searchWordsContainingAPI + "/" + term).toURL() else {
+        guard let url = (searchWordsContainingAPI + "/" + term).asURL else {
             LOG.warn("Could not create URL for \(searchWordsContainingAPI)")
             return []
         }
@@ -65,7 +66,7 @@ class WebRequestPersistence: LexisPersistence
     
     func searchForWordsStartingWith(term: String) -> [LexisWord]
     {
-        guard let url = (searchForWordsStartingWithAPI + "/" + term).toURL() else {
+        guard let url = (searchForWordsStartingWithAPI + "/" + term).asURL else {
             LOG.warn("Could not create URL for \(searchForWordsStartingWithAPI)")
             return []
         }
@@ -80,7 +81,7 @@ class WebRequestPersistence: LexisPersistence
             return []
         }
         
-        guard let url = (searchForWordsInDefinitionAPI + "/" + urlEncodedTerm).toURL() else {
+        guard let url = (searchForWordsInDefinitionAPI + "/" + urlEncodedTerm).asURL else {
             LOG.warn("Could not create URL for \(searchForWordsInDefinitionAPI)")
             return []
         }
@@ -137,10 +138,10 @@ class WebRequestPersistence: LexisPersistence
         }
         
         let result = dictionaryArray
-            .flatMap(LexisWord.fromJSON)
-            .flatMap() { word in return word as? LexisWord }
+                        .compactMap(LexisWord.fromJSON)
+                        .compactMap { $0 as? LexisWord }
         
-        LOG.debug("Parsed \(result.count) words from \(array.count)")
+        LOG.debug("Parsed [\(result.size)] words from [\(array.count)]")
         
         return result
     }

@@ -64,14 +64,14 @@ class LexisDefinitionTests: LexisTest
     {
         let copy = LexisDefinition(terms: terms)
         
-        let first = definition.hashValue
-        let second = copy.hashValue
+        let first: Int = definition.hash
+        let second: Int = copy.hash
         assertEquals(first, second)
     }
     
     func testCoding()
     {
-        let data = NSKeyedArchiver.archivedData(withRootObject: definition)
+        let data = NSKeyedArchiver.archivedData(withRootObject: definition!)
         
         let extracted: LexisDefinition! = NSKeyedUnarchiver.unarchiveObject(with: data) as? LexisDefinition
         assertEquals(extracted, definition)
@@ -109,7 +109,6 @@ class LexisWordTests: XCTestCase
         supplementalInfo = word.supplementalInformation
     }
     
-    
     func testEquality()
     {
         let shallowCopy = word
@@ -117,7 +116,6 @@ class LexisWordTests: XCTestCase
         
         let deepCopy = LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
         assertThat(deepCopy == word)
-        
     }
     
     func testEqualityWhenDifferent()
@@ -141,8 +139,8 @@ class LexisWordTests: XCTestCase
     func testHashCodeWhenSame()
     {
         let copy = LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
-        let first = word.hashValue
-        let second = copy.hashValue
+        let first: Int = word.hash
+        let second: Int = copy.hash
         assertEquals(first, second)
     }
     

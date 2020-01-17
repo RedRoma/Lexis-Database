@@ -91,7 +91,7 @@ public class LexisDatabase
         {
             LOG.warn("No words found persisted. Recreating cache.")
             
-            words = LexisEngine.instance.getAllWords()
+            words = LexisEngine.shared.getAllWords()
             
             LOG.debug("Retrieved \(words.count) words")
             do

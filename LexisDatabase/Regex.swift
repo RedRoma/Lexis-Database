@@ -71,5 +71,7 @@ func =~ (string: String, pattern: String) -> [String]
     let nsString = string as NSString
     let results = regex.matches(in: string, options: [], range: NSMakeRange(0, nsString.length))
     
-    return results.map() { return nsString.substring(with: $0.range) }
+    return results.map() {
+        nsString.substring(with: $0.range)
+    }
 }
