@@ -6,11 +6,11 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
-import Foundation
+import AlchemySwift
 import Archeota
+import Foundation
 
-
-public enum Conjugation: String
+public enum Conjugation: String, CaseIterable
 {
     case First
     case Second
@@ -18,6 +18,8 @@ public enum Conjugation: String
     case Fourth
     case Irregular
     case Unconjugated
+
+    public static let all = allCases
     
     public var name: String { return self.rawValue }
     
@@ -48,7 +50,7 @@ public enum Conjugation: String
     }
 }
 
-public enum VerbType: String
+public enum VerbType: String, CaseIterable
 {
     case Transitive
     case Intransitive
@@ -57,6 +59,8 @@ public enum VerbType: String
     case SemiDeponent
     case PerfectDefinite
     case Unknown
+
+    public static let all = allCases
     
     public var name: String { return self.rawValue }
     
@@ -74,13 +78,15 @@ public enum VerbType: String
     }
 }
 
-public enum Gender: String
+public enum Gender: String, CaseIterable
 {
     case Male
     case Female
     case Neuter
     case Unknown
-    
+
+    public static let all = allCases
+
     public var name: String { return self.rawValue }
     
     public static func from(name: String) -> Gender?
@@ -95,9 +101,10 @@ public enum Gender: String
             return nil
         }
     }
+
 }
 
-public enum Declension: String
+public enum Declension: String, CaseIterable
 {
     case First
     case Second
@@ -105,6 +112,8 @@ public enum Declension: String
     case Fourth
     case Fifth
     case Undeclined
+
+    public static let all = allCases
     
     public var name: String { return self.rawValue }
     
@@ -199,10 +208,12 @@ public enum CaseType: String, CaseIterable
     
 }
 
-public enum PronounType: String
+public enum PronounType: String, CaseIterable
 {
     case Reflexive
     case Personal
+
+    public static let all = allCases
     
     public var name: String { self.rawValue }
     
@@ -221,7 +232,7 @@ public enum PronounType: String
 }
 
 
-public enum WordType: Equatable, Hashable
+public enum WordType: Equatable
 {
     case Adjective
     case Adverb
@@ -294,27 +305,30 @@ public func ==(lhs: WordType, rhs: WordType) -> Bool
     
 }
 
-extension WordType
+extension WordType: Hashable
 {
 
-    public var hashValue: Int
+    public func hash(into hasher: inout Hasher)
     {
+        let string: String
         if case let .Verb(conjugation, verbType) = self
         {
-            return ("\(conjugation)-\(verbType)").hashValue
+            string = "Verb-\(conjugation)-\(verbType)"
         }
-        
-        if case let .Noun(declension, gender) = self
+        else if case let .Noun(declension, gender) = self
         {
-            return "Noun-\(declension)-\(gender)".hashValue
+            string = "Noun-\(declension)-\(gender)"
         }
-        
-        if case let .Preposition(caseType) = self
+        else if case let .Preposition(caseType) = self
         {
-            return "Preposition-\(caseType)".hashValue
+            string = "Preposition-\(caseType)"
         }
-        
-        let string = String(describing: self)
-        return string.hashValue
+        else
+        {
+            string = String(describing: self)
+        }
+
+        hasher.combine(string)
     }
+
 }

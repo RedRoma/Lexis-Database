@@ -163,4 +163,11 @@ class LexisWordTests: XCTestCase
         assertEquals(extracted, word)
     }
 
+    func testWordTypeHash()
+    {
+        let copy = word
+        let type = word.wordType
+        
+        assertEquals(copy.hashValue, type.hashValue)
+    }
 }
