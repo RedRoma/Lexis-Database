@@ -24,7 +24,7 @@ class SimpleUserDefaultsPersistence: LexisPersistence
         self.defaults = UserDefaults(suiteName: suite) ?? UserDefaults.standard
     }
     
-    static let instance = SimpleUserDefaultsPersistence()
+    static let shared = SimpleUserDefaultsPersistence()
     
     func save(words: [LexisWord]) throws
     {

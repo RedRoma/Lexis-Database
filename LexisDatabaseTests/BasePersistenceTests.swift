@@ -9,6 +9,7 @@
 
 
 import AlchemyGenerator
+import AlchemySwift
 import AlchemyTest
 import Archeota
 import Foundation

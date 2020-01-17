@@ -16,7 +16,7 @@ class SimpleUserDefaultsPersistenceTests: BasePersistenceTests
     {
         super.beforeEachTest()
 
-        guard let persistence = SimpleUserDefaultsPersistence.instance else
+        guard let persistence = SimpleUserDefaultsPersistence.shared else
         {
             XCTFail("Could not initialize SimpleUserDefaultsPersistence")
             return
