@@ -162,7 +162,7 @@ public enum SubjectArea: String
 /**
     The Geographical Area represents where in the world the word was commonly used.
  */
-public enum GeographicalArea: String
+public enum GeographicalArea: String, CaseIterable
 {
     case X
     case A
@@ -212,7 +212,7 @@ public enum GeographicalArea: String
         return geophraphies.map() { $0.code }
     }
     
-    public static let geophraphies: [GeographicalArea] = [.X, .A, .B, .C, .D, .E, .F, .G, .H, .I, .J, .K, .N, .P, .Q, .R, .S, .U]
+    public static let geophraphies: [GeographicalArea] = allCases
     
     public var code: String { return self.rawValue }
     

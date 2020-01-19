@@ -24,13 +24,13 @@ class SimpleUserDefaultsPersistence: LexisPersistence
         self.defaults = UserDefaults(suiteName: suite) ?? UserDefaults.standard
     }
     
-    static let instance = SimpleUserDefaultsPersistence()
+    static let shared = SimpleUserDefaultsPersistence()
     
     func save(words: [LexisWord]) throws
     {
         LOG.info("Saving \(words.count) words to UserDefaults")
         
-        let convertedWords = words.flatMap() { word in
+        let convertedWords = words.compactMap { word in
             return word.asJSON() as? NSDictionary
         }
         
@@ -60,12 +60,12 @@ class SimpleUserDefaultsPersistence: LexisPersistence
             return []
         }
         
-        let lexisWords = words.flatMap() { json in
+        let lexisWords = words.compactMap { json in
             return (LexisWord.fromJSON(json: json)) as? LexisWord
         }
         
         LOG.info("Converted \(lexisWords.count) words from \(words.count) in JSON Array")
-        return (lexisWords as? [LexisWord]) ?? []
+        return lexisWords
     }
     
     func removeAll()

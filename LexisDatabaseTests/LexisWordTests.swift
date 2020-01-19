@@ -7,6 +7,7 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
 import XCTest
 @testable import LexisDatabase
@@ -15,19 +16,23 @@ import XCTest
 class LexisDefinitionTests: LexisTest
 {
     
-    private var terms: [String] = AlchemyGenerator.array() { return AlchemyGenerator.Strings.alphabetic }
+    private var terms: [String] = AlchemyGenerator.array()
+    {
+        AlchemyGenerator.Strings.alphabetic
+    }
     
     private var definition: LexisDefinition!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
+        super.beforeEachTest()
         definition = LexisDefinition(terms: terms)
     }
     
     func testEquatable()
     {
         let secondDefinition = LexisDefinition(terms: terms)
-        XCTAssertTrue(secondDefinition == definition)
+        assertEquals(secondDefinition, definition)
     }
     
     func testEquatableWhenDifferent()
@@ -35,14 +40,14 @@ class LexisDefinitionTests: LexisTest
         let otherTerms = AlchemyGenerator.Arrays.ofString
         let otherDefinition = LexisDefinition(terms: otherTerms)
         
-        XCTAssertFalse(otherDefinition == definition)
+        assertNotEquals(otherDefinition, definition)
     }
     
     func testHashCodeOfSameObject()
     {
         let first = definition.hashValue
         let second = definition.hashValue
-        XCTAssertTrue(first == second)
+        assertEquals(first, second)
     }
     
     func testHashCodeOfDifferentDefinitions()
@@ -52,25 +57,24 @@ class LexisDefinitionTests: LexisTest
         
         let first = definition.hashValue
         let second = otherDefinition.hashValue
-        XCTAssertFalse(first == second)
+        assertNotEquals(first, second)
     }
     
     func testHashCodeOfDifferentInstanceButSameObject()
     {
         let copy = LexisDefinition(terms: terms)
         
-        let first = definition.hashValue
-        let second = copy.hashValue
-        XCTAssertTrue(first == second)
+        let first: Int = definition.hash
+        let second: Int = copy.hash
+        assertEquals(first, second)
     }
     
     func testCoding()
     {
-        let data = NSKeyedArchiver.archivedData(withRootObject: definition)
+        let data = NSKeyedArchiver.archivedData(withRootObject: definition!)
         
         let extracted: LexisDefinition! = NSKeyedUnarchiver.unarchiveObject(with: data) as? LexisDefinition
-        
-        XCTAssertTrue(extracted == definition)
+        assertEquals(extracted, definition)
     }
 }
 
@@ -82,8 +86,8 @@ class LexisWordTests: XCTestCase
     private var definitions: [LexisDefinition] = []
     private var supplementalInfo: SupplementalInformation!
     
-    private var randomForms: [String] { return AlchemyGenerator.Arrays.ofAlphabeticString }
-    private var randomDefintions: [LexisDefinition]
+    private var randomForms: [String] { AlchemyGenerator.Arrays.ofAlphabeticString }
+    private var randomDefinitions: [LexisDefinition]
     {
         let generator: () -> (LexisDefinition) =
         {
@@ -105,21 +109,19 @@ class LexisWordTests: XCTestCase
         supplementalInfo = word.supplementalInformation
     }
     
-    
     func testEquality()
     {
         let shallowCopy = word
-        XCTAssertTrue(shallowCopy == word)
+        assertEquals(shallowCopy, word)
         
         let deepCopy = LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
-        XCTAssertTrue(deepCopy == word)
-        
+        assertThat(deepCopy == word)
     }
     
     func testEqualityWhenDifferent()
     {
         let differentForms = LexisWord(forms: randomForms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
-        XCTAssertTrue(differentForms != word)
+        assertThat(differentForms != word)
         
         var differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions, supplementalInformation: supplementalInfo)
         
@@ -128,38 +130,46 @@ class LexisWordTests: XCTestCase
             differentWordType = LexisWord(forms: forms, wordType: Generators.randomWordType, definitions: definitions, supplementalInformation: supplementalInfo)
         }
         
-        XCTAssertTrue(differentWordType != word)
+        assertNotEquals(differentWordType, word)
         
-        let differentDefinitions = LexisWord(forms: forms, wordType: wordType, definitions: randomDefintions, supplementalInformation: supplementalInfo)
-        XCTAssertTrue(differentDefinitions != word)
-        
+        let differentDefinitions = LexisWord(forms: forms, wordType: wordType, definitions: randomDefinitions, supplementalInformation: supplementalInfo)
+        assertNotEquals(differentDefinitions, word)
     }
     
     func testHashCodeWhenSame()
     {
         let copy = LexisWord(forms: forms, wordType: wordType, definitions: definitions, supplementalInformation: supplementalInfo)
-        let first = word.hashValue
-        let second = copy.hashValue
-        XCTAssertTrue(first == second)
+        let first: Int = word.hash
+        let second: Int = copy.hash
+        assertEquals(first, second)
     }
     
     func testHashCodeWhenDifferent()
     {
-        let other = LexisWord(forms: randomForms, wordType: Generators.randomWordType, definitions: randomDefintions, supplementalInformation: supplementalInfo)
+        let other = LexisWord(forms: randomForms, wordType: Generators.randomWordType, definitions: randomDefinitions, supplementalInformation: supplementalInfo)
         let first = word.hashValue
         let second = other.hashValue
         
-        XCTAssertFalse(first == second)
+        assertNotEquals(first, second)
     }
-    
-    
+
     func testNSCoding()
     {
         let data = NSKeyedArchiver.archivedData(withRootObject: word)
         XCTAssertFalse(data.isEmpty)
         
         let extracted: LexisWord! = NSKeyedUnarchiver.unarchiveObject(with: data) as? LexisWord
+
+        assertEquals(extracted, word)
+    }
+
+    func testWordTypeHash()
+    {
+        let type = word.wordType
+        let copy = type
+        let first: Int = copy.hashValue
+        let second: Int = type.hashValue
         
-        XCTAssertTrue(extracted == word)
+        assertEquals(first, second)
     }
 }

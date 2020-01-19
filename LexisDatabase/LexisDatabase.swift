@@ -91,7 +91,7 @@ public class LexisDatabase
         {
             LOG.warn("No words found persisted. Recreating cache.")
             
-            words = LexisEngine.instance.getAllWords()
+            words = LexisEngine.shared.getAllWords()
             
             LOG.debug("Retrieved \(words.count) words")
             do
@@ -162,7 +162,7 @@ public class LexisDatabase
 //MARK: Searching
 public extension LexisDatabase
 {
-    public func searchForms(withTerm term: String) -> [LexisWord]
+    func searchForms(withTerm term: String) -> [LexisWord]
     {
         var results = memory.searchForWordsContaining(term: term)
         
@@ -181,7 +181,7 @@ public extension LexisDatabase
         return results
     }
     
-    public func searchForms(startingWith term: String) -> [LexisWord]
+    func searchForms(startingWith term: String) -> [LexisWord]
     {
         var results = memory.searchForWordsStartingWith(term: term)
         
@@ -201,7 +201,7 @@ public extension LexisDatabase
         return results
     }
     
-    public func searchDefinitions(withTerm term: String) -> [LexisWord]
+    func searchDefinitions(withTerm term: String) -> [LexisWord]
     {
         var results = memory.searchForWordsInDefinitions(term: term)
         

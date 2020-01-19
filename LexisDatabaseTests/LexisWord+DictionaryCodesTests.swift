@@ -7,9 +7,9 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
 @testable import LexisDatabase
-import XCTest
 
 class LexisWord_DictionaryCodesTests: LexisTest
 {
@@ -20,7 +20,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         
         let age = Age.from(dictionaryCode: randomCode)
         
-        XCTAssertNotNil(age)
+        assertNotNil(age)
         print(age!)
     }
     
@@ -30,7 +30,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let impossibleCode = stringNotInList(possibleAges)
         
         let age = Age.from(dictionaryCode: impossibleCode)
-        XCTAssert(age == nil, "Expected nil Age")
+        assertNil(age)
     }
     
     func testSubjectAreaEnum()
@@ -39,7 +39,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let randomCode = AlchemyGenerator.stringFromList(possibleAreas)
         
         let subjectArea = SubjectArea.from(dictionaryCode: randomCode)
-        XCTAssertNotNil(subjectArea)
+        assertNotNil(subjectArea)
         print(subjectArea!)
     }
     
@@ -49,8 +49,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let impossibleCode = stringNotInList(possibleAreas)
         
         let subject = SubjectArea.from(dictionaryCode: impossibleCode)
-        XCTAssertNil(subject)
-        XCTAssertTrue(subject == nil, "Expected subject to be nil with unknown code: \(impossibleCode)")
+        assertNil(subject)
     }
     
     func  testGeographicalAreaEnum()
@@ -59,17 +58,16 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let randomCode = AlchemyGenerator.stringFromList(possibleGeographies)
         
         let geographicalArea = GeographicalArea.from(dictionaryCode: randomCode)
-        
-        XCTAssertFalse(geographicalArea == nil)
+        assertNotNil(geographicalArea)
     }
     
-    func testGeographicalAreaAnumWithInvalidValue()
+    func testGeographicalAreaEnumWithInvalidValue()
     {
         let possibleGeographies = GeographicalArea.codes
         let impossibleCode = stringNotInList(possibleGeographies)
         
         let geographicalArea = GeographicalArea.from(dictionaryCode: impossibleCode)
-        XCTAssertTrue(geographicalArea == nil)
+        assertNil(geographicalArea)
     }
     
     func testFrequencyEnum()
@@ -78,7 +76,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let randomCode = AlchemyGenerator.stringFromList(possibleFrequencies)
         
         let frequency = Frequency.from(dictionaryCode: randomCode)
-        XCTAssertFalse(frequency == nil)
+        assertNotNil(frequency)
     }
     
     func testFrequencyEnumWithInvalidCode()
@@ -87,7 +85,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let impossibleCode = stringNotInList(possibleFrequencies)
         
         let frequency = Frequency.from(dictionaryCode: impossibleCode)
-        XCTAssertTrue(frequency == nil)
+        assertNil(frequency)
     }
     
     func testSourceEnum()
@@ -96,7 +94,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let randomSource = AlchemyGenerator.stringFromList(possibleSources)
         
         let source = Source.from(dictionaryCode: randomSource)
-        XCTAssertFalse(source == nil)
+        assertNotNil(source)
     }
     
     func testSourceEnumWithInvalidCode()
@@ -105,7 +103,7 @@ class LexisWord_DictionaryCodesTests: LexisTest
         let impossibleCode = stringNotInList(possibleSource)
         
         let source = Source.from(dictionaryCode: impossibleCode)
-        XCTAssertTrue(source == nil)
+        assertNil(source)
     }
     
     fileprivate func stringNotInList(_ strings: [String]) -> String

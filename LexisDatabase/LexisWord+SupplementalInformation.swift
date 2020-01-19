@@ -6,9 +6,9 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
-import Foundation
+import AlchemySwift
 import Archeota
-
+import Foundation
 
 internal typealias SupplementalInformation = LexisWord.SupplementalInformation
 
@@ -131,7 +131,6 @@ public func ==(left: LexisWord.SupplementalInformation, right: LexisWord.Supplem
     return left.description == right.description
 }
 
-
 //=========================================
 //MARK: String Manipulations
 //=========================================
@@ -139,16 +138,6 @@ fileprivate extension String
 {
     func lowercasedFirstLetter() -> String
     {
-        guard self.notEmpty else { return self }
-        
-        guard self.count != 1 else { return self.lowercased() }
-
-        guard let firstCharacter = self.first else { return self }
-        
-        let firstLetterLowercased = "\(firstCharacter)".lowercased()
-        
-        let substring =  self.substring(from: 1, to: count)
-        
-        return firstLetterLowercased + substring
+        return self.firstLetter?.lowercased() ?? ""
     }
 }

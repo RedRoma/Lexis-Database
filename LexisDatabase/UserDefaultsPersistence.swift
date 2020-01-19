@@ -6,8 +6,9 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
-import Foundation
+import AlchemySwift
 import Archeota
+import Foundation
 
 class UserDefaultsPersistence: LexisPersistence
 {
@@ -47,25 +48,28 @@ class UserDefaultsPersistence: LexisPersistence
         LOG.debug("Serializing \(words.count) in \(UserDefaultsPersistence.parallelism) threads")
         
         
-        var complete = 0
-        var stillWorking: Bool { return complete < pieces.count }
+        let semaphore = DispatchSemaphore(value: 1)
+        let group = DispatchGroup()
         
         for piece in pieces {
-            
+
+            group.enter()
             async.addOperation() {
                 
-                let convertedWords = piece.flatMap() { word in
+                let convertedWords = piece.compactMap { word in
                     return word.asJSON() as? NSDictionary
                 }
                 
                 LOG.debug("Converted \(convertedWords.count) words")
+                semaphore.wait()
                 serializedWords.addObjects(from: convertedWords)
-                complete += 1
+                semaphore.signal()
+                group.leave()
             }
             
         }
         
-        while stillWorking { }
+        group.wait()
         
         defaults.set(serializedWords, forKey: key)
         
@@ -101,28 +105,31 @@ class UserDefaultsPersistence: LexisPersistence
         var lexisWords = [LexisWord]()
         
         LOG.debug("Converting objects in \(pieces.count) threads")
-        
-        var completed = 0
-        var stillWorking: Bool { return completed < pieces.count }
+
+        let semaphore = DispatchSemaphore(value: 1)
+        let group = DispatchGroup()
         
         for words in pieces {
-            
+
+            group.enter()
             async.addOperation() {
-                let convertedWords = words.flatMap() { dictionary in
+                let convertedWords = words.compactMap { dictionary in
                     return (LexisWord.fromJSON(json: dictionary) as? LexisWord)
                 }
-                
+
+                semaphore.wait()
                 lexisWords += convertedWords
-                LOG.debug("Converted \(convertedWords.count) words")
-                completed += 1
+                LOG.debug("Converted \(convertedWords.size) words")
+                semaphore.signal()
+                group.leave()
             }
             
         }
         
-        while stillWorking {}
+        group.wait()
         
-        LOG.info("Converted \(lexisWords.count) words from \(words.count) in JSON Array")
-        return (lexisWords as? [LexisWord]) ?? []
+        LOG.info("Converted [\(lexisWords.size)] words from [\(words.size)] in JSON Array")
+        return lexisWords
     }
 
     func removeAll()

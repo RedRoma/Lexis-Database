@@ -6,25 +6,24 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
+import AlchemyTest
 import Foundation
 @testable import LexisDatabase
-import XCTest
-
 
 class SimpleUserDefaultsPersistenceTests: BasePersistenceTests
 {
-    
-    override func setUp()
+    override func beforeEachTest()
     {
-        super.setUp()
-        
-        guard let persistence = SimpleUserDefaultsPersistence.instance else {
+        super.beforeEachTest()
+
+        guard let persistence = SimpleUserDefaultsPersistence.shared else
+        {
             XCTFail("Could not initialize SimpleUserDefaultsPersistence")
             return
         }
         
         persistence.synchronize = true
         self.instance = persistence
-        
     }
+
 }

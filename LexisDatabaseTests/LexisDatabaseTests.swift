@@ -6,24 +6,14 @@
 //  Copyright © 2016 RedRoma, Inc. All rights reserved.
 //
 
-import XCTest
+import AlchemyTest
 @testable import LexisDatabase
 
 class LexisDatabaseTests: LexisTest
 {
     
     fileprivate let instance = LexisDatabase.instance
-    
-    override func setUp()
-    {
-        super.setUp()
-    }
-    
-    override func tearDown()
-    {
-        super.tearDown()
-    }
-    
+
     func testGetAnyWord()
     {
         let _ = instance.anyWord
@@ -33,9 +23,9 @@ class LexisDatabaseTests: LexisTest
     {
         let term = "Amazon"
         let results = instance.searchForms(startingWith: term)
-        XCTAssertFalse(results.isEmpty)
+        assertNotEmpty(results)
         let first = results.first!
-        XCTAssertTrue(first.forms.contains(term))
+        assertThat(first.forms.contains(term))
     }
 
     func testInitialize()
@@ -45,7 +35,7 @@ class LexisDatabaseTests: LexisTest
     
     func testInitializeMultipleTimes()
     {
-        for _ in 1...100
+        repeatTest(Int.random(in: 10...100))
         {
             instance.initialize()
         }
@@ -56,9 +46,10 @@ class LexisDatabaseTests: LexisTest
         let async = OperationQueue()
         async.maxConcurrentOperationCount = 5
         
-        (1...10).flatMap() { _ in
-            
-            async.addOperation {
+        repeatTest(Int.random(in: 2...10))
+        {
+            async.addOperation
+            {
                 self.instance.initialize()
             }
         }

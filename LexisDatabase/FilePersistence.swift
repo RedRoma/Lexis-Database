@@ -25,20 +25,17 @@ class FilePersistence: LexisPersistence
         async.maxConcurrentOperationCount = parallelism
     }
     
-    
     func getAllWords() -> [LexisWord]
     {
         LOG.info("Reading words from file :\(filePath)")
         
-        guard let json = try? String(contentsOfFile: filePath)
-        else
+        guard let json = try? String(contentsOfFile: filePath) else
         {
             LOG.info("Failed to read JSON from file \(filePath)")
             return []
         }
         
-        guard let array = serializer.fromJSON(jsonString: json) as? NSArray
-        else
+        guard let array = serializer.fromJSON(jsonString: json) as? NSArray else
         {
             LOG.info("Words not found in file \(filePath)")
             return []
@@ -46,8 +43,7 @@ class FilePersistence: LexisPersistence
         
         LOG.info("Read \(array.count) words from file: \(filePath)")
         
-        guard let objects = array as? [NSDictionary]
-        else
+        guard let objects = array as? [NSDictionary] else
         {
             LOG.info("Words found in incorrect format")
             return []
@@ -62,23 +58,29 @@ class FilePersistence: LexisPersistence
         
         var completed = 0
         var stillWorking: Bool { return completed < pieces.count }
-        
+
+        let group = DispatchGroup()
+        let semaphore = DispatchSemaphore(value: 1)
         for words in pieces {
-            
-            async.addOperation() {
-                
-                let convertedWords = words.flatMap() { dictionary in
+
+            group.enter()
+            async.addOperation {
+
+                let convertedWords = words.compactMap() { dictionary in
                     return (LexisWord.fromJSON(json: dictionary) as? LexisWord)
                 }
-                
+
+                semaphore.wait()
                 lexisWords += convertedWords
+                semaphore.signal()
                 LOG.debug("Converted \(convertedWords.count) words")
                 completed += 1
+
+                group.leave()
             }
         }
-        
-        async.waitUntilAllOperationsAreFinished()
-        while stillWorking { /* wait */ }
+
+        group.wait()
         
         LOG.info("Deserialized \(lexisWords.count) words")
         return lexisWords
@@ -87,13 +89,12 @@ class FilePersistence: LexisPersistence
     func save(words: [LexisWord]) throws
     {
         LOG.info("Serializing \(words.count)")
-        let array = words.flatMap() { $0.asJSON() as? NSDictionary }
+        let array = words.compactMap() { $0.asJSON() as? NSDictionary }
         LOG.info("Serialized \(array.count) words from \(words.count)")
         
         let nsArray = NSArray(array: array)
         
-        guard let jsonString = serializer.toJSON(object: nsArray)
-        else
+        guard let jsonString = serializer.toJSON(object: nsArray) else
         {
             LOG.warn("Failed to convert array to JSON")
             throw LexisPersistenceError.ConversionError
@@ -117,8 +118,7 @@ class FilePersistence: LexisPersistence
     {
         let fileManager = FileManager()
         
-        guard fileManager.fileExists(atPath: filePath)
-        else
+        guard fileManager.fileExists(atPath: filePath) else
         {
             LOG.info("Skipping delete of file \(filePath) since it does not exist")
             return
@@ -133,6 +133,6 @@ class FilePersistence: LexisPersistence
         {
             LOG.error("Failed to delete file at \(filePath): \(error)")
         }
-        
     }
+
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13160FFB23C11A8800EE3BB8 /* AlchemyTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */; };
+		13160FFC23C127AA00EE3BB8 /* AlchemyTest.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		132CDFB623D1431C00B67D2A /* AlchemySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132CDFB423D1431C00B67D2A /* AlchemySwift.framework */; };
+		132CDFB723D168AD00B67D2A /* AlchemySwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 132CDFB423D1431C00B67D2A /* AlchemySwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE0BE9701D8F01D400872F0B /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0BE96F1D8F01D400872F0B /* Functions.swift */; };
 		DE156DC81D7A90FF00123A04 /* Strings+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC71D7A90FF00123A04 /* Strings+Test.swift */; };
 		DE156DCA1D7A9ADC00123A04 /* Arrays+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */; };
@@ -82,6 +86,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				DE49A2301D983C0300620411 /* AlchemyGenerator.framework in Copy Frameworks */,
+				132CDFB723D168AD00B67D2A /* AlchemySwift.framework in Copy Frameworks */,
+				13160FFC23C127AA00EE3BB8 /* AlchemyTest.framework in Copy Frameworks */,
 				DE49A2311D983C0300620411 /* AromaSwiftClient.framework in Copy Frameworks */,
 				DE49A2321D983C0300620411 /* AromaThrift.framework in Copy Frameworks */,
 				DE7B54111DAB01680006119F /* Archeota.framework in Copy Frameworks */,
@@ -93,6 +99,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlchemyTest.framework; path = Carthage/Build/iOS/AlchemyTest.framework; sourceTree = "<group>"; };
+		132CDFB423D1431C00B67D2A /* AlchemySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlchemySwift.framework; path = Carthage/Build/iOS/AlchemySwift.framework; sourceTree = "<group>"; };
 		DE0BE96F1D8F01D400872F0B /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		DE156DC71D7A90FF00123A04 /* Strings+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Test.swift"; sourceTree = "<group>"; };
 		DE156DC91D7A9ADC00123A04 /* Arrays+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Arrays+Test.swift"; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				132CDFB523D1431C00B67D2A /* AlchemySwift.framework in Frameworks */,
 				DE49A22F1D983BEC00620411 /* SwiftExceptionCatcher.framework in Frameworks */,
 				DE49A22C1D983BEC00620411 /* AromaSwiftClient.framework in Frameworks */,
 				DE49A22B1D983BEC00620411 /* AlchemyGenerator.framework in Frameworks */,
@@ -165,6 +174,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				132CDFB623D1431C00B67D2A /* AlchemySwift.framework in Frameworks */,
+				13160FFB23C11A8800EE3BB8 /* AlchemyTest.framework in Frameworks */,
 				DEDE0DAA1D7172E900965CFD /* LexisDatabase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,9 +207,9 @@
 		DE652D491D723C7400F1B52A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DE652D4A1D723C8B00F1B52A /* Strings+.swift */,
-				DE405ACE1D76494100C16B46 /* Regex.swift */,
 				DEBEFE7A1D76BBF0008A525D /* Arrays+.swift */,
+				DE405ACE1D76494100C16B46 /* Regex.swift */,
+				DE652D4A1D723C8B00F1B52A /* Strings+.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -206,8 +217,10 @@
 		DE8681A21D72052700D9CE74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DE7B540F1DAB015B0006119F /* Archeota.framework */,
 				DE49A2261D983BEC00620411 /* AlchemyGenerator.framework */,
+				132CDFB423D1431C00B67D2A /* AlchemySwift.framework */,
+				13160FFA23C11A8800EE3BB8 /* AlchemyTest.framework */,
+				DE7B540F1DAB015B0006119F /* Archeota.framework */,
 				DE49A2271D983BEC00620411 /* AromaSwiftClient.framework */,
 				DE49A2281D983BEC00620411 /* AromaThrift.framework */,
 				DE49A22A1D983BEC00620411 /* SwiftExceptionCatcher.framework */,
@@ -394,11 +407,11 @@
 			};
 			buildConfigurationList = DEDE0D9A1D7172E900965CFD /* Build configuration list for PBXProject "LexisDatabase" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = DEDE0D961D7172E900965CFD;
 			productRefGroup = DEDE0DA11D7172E900965CFD /* Products */;
@@ -676,7 +689,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.redroma.LexisDatabaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -695,7 +708,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.redroma.LexisDatabaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

@@ -7,17 +7,18 @@
 //
 
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
-@testable import LexisDatabase
 import Archeota
-import XCTest
+@testable import LexisDatabase
 
 class SupplementalInformation_JSONTests: LexisTest
 {
     var instance: SupplementalInformation!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
+        super.beforeEachTest()
         instance = Generators.randomSupplementalInformation
     }
     
@@ -25,7 +26,7 @@ class SupplementalInformation_JSONTests: LexisTest
     {
         let json = instance.asJSON()
         XCTAssertFalse(json == nil)
-        XCTAssertTrue(json is NSDictionary)
+        assertThat(json is NSDictionary)
     }
     
     func testFromJSON()
@@ -34,10 +35,10 @@ class SupplementalInformation_JSONTests: LexisTest
         
         let result = SupplementalInformation.fromJSON(json: json)
         XCTAssertFalse(result == nil)
-        XCTAssertTrue(result is SupplementalInformation)
+        assertThat(result is SupplementalInformation)
         
         let copy = result as! SupplementalInformation
-        XCTAssertTrue(copy == instance)
+        assertThat(copy == instance)
         
     }
 }

@@ -7,29 +7,21 @@
 //
 
 import AlchemyGenerator
-import XCTest
+import AlchemyTest
 @testable import LexisDatabase
 
-class Strings_Plus_Test: XCTestCase
+class Strings_Plus_Test: AlchemyTest
 {
 
     private var dictionary: String!
     private var testString: String!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
-        super.setUp()
-        dictionary = LexisEngine.instance.readTextFile()!
+        super.beforeEachTest()
+        dictionary = LexisEngine.shared.readTextFile()!
         testString = createString(withNumberOfLines: 20)
-        
     }
-    
-    override func tearDown()
-    {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
     
     func testForEachLine()
     {
@@ -41,10 +33,10 @@ class Strings_Plus_Test: XCTestCase
         testString.forEachLine() { lineNumber, line in
             
             count += 1
-            XCTAssert(lineNumber == count)
+            assertEquals(lineNumber, count)
         }
         
-        XCTAssert(count == totalLines)
+        assertEquals(count, totalLines)
     }
     
     func testProcessEachLine()
@@ -65,7 +57,7 @@ class Strings_Plus_Test: XCTestCase
         }
         
         testString.processEachLine(mapper: mapper, processor: processor)
-        XCTAssertEqual(result, expected)
+        assertEquals(result, expected)
         
     }
     
@@ -75,7 +67,7 @@ class Strings_Plus_Test: XCTestCase
         let testString = self.testString + "\(randomCharacter)"
         
         let result = testString.withCharacterRemoved(character: randomCharacter)
-        XCTAssertEqual(result, self.testString)
+        assertEquals(result, self.testString)
     }
     
     func testContainsAll()
@@ -83,16 +75,16 @@ class Strings_Plus_Test: XCTestCase
         let words = AlchemyGenerator.Arrays.ofAlphabeticString
         let subWords = Array(words[0...words.count/2])
         
-        XCTAssertTrue(words.containsMultiple(subWords))
+        assertThat(words.containsMultiple(subWords))
     }
     
     func testDoesNotContainsAnyOf()
     {
-        let numbers = AlchemyGenerator.array() { return AlchemyGenerator.integer(from: 1, to: 9) }
+        let numbers = AlchemyGenerator.array() { AlchemyGenerator.integer(from: 1, to: 9) }
         let numbersAsString = numbers.map(String.init).joined()
         let modifiedString = numbersAsString + testString + numbersAsString
         
-        XCTAssertFalse(modifiedString.doesNotContain(anyOf: numbers.map(String.init)))
+        assertFalse(modifiedString.doesNotContain(anyOf: numbers.map(String.init)))
     }
     
     private func createString(withNumberOfLines lines: Int) -> String

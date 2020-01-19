@@ -18,7 +18,7 @@ import Archeota
 internal class LexisEngine
 {
     
-    public static let instance = LexisEngine()
+    public static let shared = LexisEngine()
     
     private var dictionary: String? = nil
     

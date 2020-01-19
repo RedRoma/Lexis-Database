@@ -8,6 +8,7 @@
 
 import Archeota
 import AlchemyGenerator
+import AlchemyTest
 import Foundation
 @testable import LexisDatabase
 import XCTest
@@ -17,20 +18,18 @@ class WebRequestPersistenceTests: LexisTest
     private let instance = WebRequestPersistence()
     
     private var word = Generators.words.anyElement!
-    
-    override func setUp()
+
+    override func beforeEachTest()
     {
-        super.setUp()
-        
+        super.beforeEachTest()
         word = Generators.words.anyElement!
     }
     
     func testGetAllWords()
     {
         let words = instance.getAllWords()
-        
-        XCTAssertFalse(words.isEmpty)
-        XCTAssertTrue(words.count > 30_000)
+        assertNotEmpty(words)
+        assertThat(words.count > 30_000)
     }
     
     func testSearchForWordsContaining()
@@ -38,8 +37,8 @@ class WebRequestPersistenceTests: LexisTest
         let searchTerm = word.forms.anyElement!
         
         let results = instance.searchForWordsContaining(term: searchTerm)
-        XCTAssertFalse(results.isEmpty)
-        XCTAssertTrue(results.contains(word))
+        assertNotEmpty(results)
+        assertThat(results.contains(word))
     }
     
     func testSearchForWordsStartingWith()
@@ -47,8 +46,8 @@ class WebRequestPersistenceTests: LexisTest
         let searchTerm = word.forms.anyElement!.firstHalf()
         
         let results = instance.searchForWordsContaining(term: searchTerm)
-        XCTAssertFalse(results.isEmpty)
-        XCTAssertTrue(results.contains(word))
+        assertNotEmpty(results)
+        assertThat(results.contains(word))
     }
     
     func testSearchForWordsInDefinition()
@@ -57,20 +56,18 @@ class WebRequestPersistenceTests: LexisTest
         let searchTerm = word.definitions.anyElement!.terms.anyElement!
         let results = instance.searchForWordsInDefinitions(term: searchTerm)
         
-        XCTAssertFalse(results.isEmpty)
-        XCTAssertTrue(results.contains(word))
+        assertNotEmpty(results)
+        assertThat(results.contains(word))
     }
     
     func testSearchInBulk()
     {
-        let iterations = 100
-        
         let start = Date()
-        for _ in 1...iterations
+        repeatTest(100)
         {
             let searchTerm = AlchemyGenerator.alphabeticString(ofSize: 3)
             
-            instance.searchForWordsContaining(term: searchTerm)
+            _ = instance.searchForWordsContaining(term: searchTerm)
         }
         
         let latency = abs(start.timeIntervalSinceNow)
@@ -80,13 +77,11 @@ class WebRequestPersistenceTests: LexisTest
     
     func testGetAnyWord()
     {
-        let iterations = 100
         let start = Date()
-        
-        for _ in 1...iterations
+        repeatTest(100)
         {
             let word = instance.getAnyWord()
-            XCTAssertFalse(word == nil)
+            assertNotNil(word)
         }
         
         let latency = abs(start.timeIntervalSinceNow)

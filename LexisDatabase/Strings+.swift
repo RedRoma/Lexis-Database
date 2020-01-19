@@ -8,13 +8,8 @@
 
 import Foundation
 
-extension String
+internal extension String
 {
-    
-    var notEmpty: Bool
-    {
-        return !isEmpty
-    }
     
     var urlEncoded: String?
     {
@@ -25,10 +20,8 @@ extension String
     {
         return string.notEmpty
     }
-    
+
     typealias Expression = ((number: Int, text: String)) -> ()
-    
-    
     func forEachLine(_ expression: @escaping Expression)
     {
         var lineNumber = 0
@@ -58,14 +51,13 @@ extension String
         return self.replacingOccurrences(of: "\(character)", with: "")
     }
 
-    /// Determiens whether the String contains all of the provided substrings.
+    /// Determines whether the String contains all of the provided substrings.
     func containsAll(_ strings: [String]) -> Bool
     {
         guard strings.notEmpty else { return false }
         
-        return strings
-            .filter() { self.contains($0) }
-            .count == strings.count
+        return strings.filter() { self.contains($0) }
+                      .count == strings.count
 
     }
     
@@ -75,20 +67,13 @@ extension String
             .filter() { self.contains($0) }
             .isEmpty
     }
-    
-    func toURL() -> URL?
-    {
-        return URL(string: self)
-    }
-    
+
     func substring(from: Int, to: Int) -> String
     {
         let start = index(startIndex, offsetBy: from)
         let end = index(startIndex, offsetBy: to)
         
-        let range = Range(uncheckedBounds: (lower: start, upper: end))
-        
-        return substring(with: range)
+        return String(self[start...end])
     }
     
     func firstHalf() -> String
